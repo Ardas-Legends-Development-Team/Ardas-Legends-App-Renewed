@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -40,5 +41,27 @@ public final class UnitType extends AbstractDomainObject {
         this.unitName = unitName;
         this.tokenCost = tokenCost;
         this.isMounted = isMounted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UnitType unitType = (UnitType) o;
+
+        if (!unitName.equals(unitType.unitName)) return false;
+        if (!tokenCost.equals(unitType.tokenCost)) return false;
+        if (!isMounted.equals(unitType.isMounted)) return false;
+        return Objects.equals(usableBy, unitType.usableBy);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = unitName.hashCode();
+        result = 31 * result + tokenCost.hashCode();
+        result = 31 * result + isMounted.hashCode();
+        result = 31 * result + (usableBy != null ? usableBy.hashCode() : 0);
+        return result;
     }
 }
