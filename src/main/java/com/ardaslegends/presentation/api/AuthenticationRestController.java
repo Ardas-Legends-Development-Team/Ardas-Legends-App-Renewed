@@ -3,6 +3,7 @@ package com.ardaslegends.presentation.api;
 import com.ardaslegends.presentation.api.response.authentication.AuthenticateResponse;
 import com.ardaslegends.service.authentication.AuthenticationService;
 import com.ardaslegends.service.authentication.DiscordTokenResponse;
+import com.ardaslegends.service.authentication.JwtUtil;
 import com.ardaslegends.service.dto.authentication.AuthenticateDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -25,6 +26,7 @@ public class AuthenticationRestController {
     public static final String BASE_URL = "/api/auth";
 
     private final AuthenticationService authenticationService;
+    private final JwtUtil jwtUtil;
 
     @Operation(summary = "Authenticate", description = "Receives a discord access code and generates a discord token by calling the discord API. Returns a generated JWT to access the API.")
     @PostMapping
@@ -34,8 +36,18 @@ public class AuthenticationRestController {
         log.debug("Calling authenticationService.generateDiscordTokenFromCode");
         DiscordTokenResponse accessToken = authenticationService.generateDiscordTokenFromCode(dto.accessCode());
 
+        log.debug("Fetch user discord ID");
+        // query discord API for user info
+        // verify user is in the guild
+        // fetch user ID from DB
+        // if user is not in the DB, inform user to register
+
+        log.debug("Generating JWT and storing in DB");
+        String jwt = jwtUtil.generateToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+        // store in DB
+
         log.debug("Building response");
-        val authenticateResponse = new AuthenticateResponse();
+        val authenticateResponse = new AuthenticateResponse(jwt);
 
         log.info("Sending successful authenticate response [{}]", authenticateResponse);
         return ResponseEntity.ok(authenticateResponse);

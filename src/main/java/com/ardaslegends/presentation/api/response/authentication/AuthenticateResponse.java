@@ -1,4 +1,4 @@
 package com.ardaslegends.presentation.api.response.authentication;
 
-public record AuthenticateResponse() {
+public record AuthenticateResponse(String jwt, String discordId) {
 }
