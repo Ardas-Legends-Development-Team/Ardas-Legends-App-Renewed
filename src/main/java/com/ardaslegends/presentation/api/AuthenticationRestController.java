@@ -23,13 +23,14 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authentication Controller", description = "REST endpoints concerning Authentication")
 @RequestMapping(AuthenticationRestController.BASE_URL)
 public class AuthenticationRestController {
-    public static final String BASE_URL = "/api/auth";
+    public static final String BASE_URL = "/auth";
+    public static final String REGISTER_URL = "/register";
 
     private final AuthenticationService authenticationService;
     private final JwtUtil jwtUtil;
 
     @Operation(summary = "Authenticate", description = "Receives a discord access code and generates a discord token by calling the discord API. Returns a generated JWT to access the API.")
-    @PostMapping
+    @PostMapping(REGISTER_URL)
     public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticateDto dto) {
         log.debug("Incoming authenticate Request, dto [{}]", dto);
 
