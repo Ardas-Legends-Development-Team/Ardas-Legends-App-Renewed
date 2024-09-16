@@ -47,7 +47,7 @@ public class AuthenticationService {
         body.add("code", discordAccessCode);
         body.add("grant_type", "authorization_code");
         body.add("redirect_uri", redirectUri);
-        body.add("scope", "identify");
+        body.add("scope", "identify guilds");
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
 

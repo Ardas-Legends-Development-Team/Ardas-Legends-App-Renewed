@@ -28,8 +28,7 @@ public class AuthenticationRestController {
     @Operation(summary = "Authenticate", description = "Receives a discord access code and generates a discord token by calling the discord API. Returns a generated JWT to access the API.")
     @PostMapping
     public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticateDto dto) {
-        log.debug("Incoming authenticate Request, dto [{}]", dto);
-
+        log.debug("Incoming authenticate Request, accessCode [{}]", dto);
         log.debug("Calling authenticationService.generateDiscordTokenFromCode");
         DiscordTokenResponse accessToken = authenticationService.generateDiscordTokenFromCode(dto.accessCode());
 
