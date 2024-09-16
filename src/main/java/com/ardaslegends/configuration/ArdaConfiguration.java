@@ -2,6 +2,7 @@ package com.ardaslegends.configuration;
 
 
 import com.ardaslegends.repository.player.PlayerRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.validator.routines.UrlValidator;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@RequiredArgsConstructor
 @Slf4j
 @Configuration
 public class ArdaConfiguration {

@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (userDiscordId != null && authentication == null) {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
 
-                if (jwtUtil.isTokenValid(jwt, userDetails)) {
+                if (jwtUtil.isTokenValid(jwt)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
                             null,
