@@ -38,9 +38,9 @@ public class AuthenticationRestController {
         DiscordTokenResponse accessToken = authenticationService.generateDiscordTokenFromCode(dto.accessCode());
 
         log.debug("Fetch user discord ID");
-        // query discord API for user info
+        String discordId = authenticationService.getDiscordIdFromAccessToken(accessToken.getAccessToken());
         // verify user is in the guild
-        // fetch user ID from DB
+        // fetch user ID from DB to see if he's registered
         // if user is not in the DB, inform user to register
 
         log.debug("Generating JWT and storing in DB");
@@ -48,7 +48,7 @@ public class AuthenticationRestController {
         // store in DB
 
         log.debug("Building response");
-        val authenticateResponse = new AuthenticateResponse(jwt);
+        val authenticateResponse = new AuthenticateResponse(jwt, discordId);
 
         log.info("Sending successful authenticate response [{}]", authenticateResponse);
         return ResponseEntity.ok(authenticateResponse);

@@ -50,7 +50,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             final String jwt = authHeader.substring(7);
-            final String userDiscordId = jwtUtil.extractUsername(jwt);
+            final String userDiscordId = jwtUtil.extractDiscordAccessTokenFromJWT(jwt);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 

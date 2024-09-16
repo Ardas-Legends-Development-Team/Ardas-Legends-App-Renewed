@@ -58,4 +58,24 @@ public class AuthenticationService {
 
         return response.getBody();
     }
+
+    /**
+     * This method takes a discord access token and queries the discord API for the user's discord ID.
+     *
+     * @param discordAccessToken The access token received from the authentication service, when user authenticates via Discord and we get the access token.
+     * @return The discord ID of the user.
+     */
+    public String getDiscordIdFromAccessToken(String discordAccessToken) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + discordAccessToken);
+
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange("https://discord.com/api/users/@me", HttpMethod.GET, requestEntity, String.class);
+        log.debug("Discord user response: {}", response);
+        log.debug("Discord user status code: {}", response.getStatusCode());
+        log.debug("Discord user response body: {}", response.getBody());
+
+        return response.getBody();
+    }
 }
