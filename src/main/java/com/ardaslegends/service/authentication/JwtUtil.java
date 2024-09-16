@@ -2,17 +2,21 @@ package com.ardaslegends.service.authentication;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
+@Slf4j
 @Service
 public class JwtUtil {
     @Value("${ardaslegends.auth.jwt.secret}")
-    private static String secretKey;
+    private String secretKey;
 
     public String generateToken(String discordAccessToken, long expiresIn) {
+        log.info("Generating token for discordAccessToken: {}", discordAccessToken);
+        log.info("Secret key: {}", secretKey);
         return Jwts.builder()
                 .setSubject(discordAccessToken)
                 .setExpiration(new Date(System.currentTimeMillis() + expiresIn))
