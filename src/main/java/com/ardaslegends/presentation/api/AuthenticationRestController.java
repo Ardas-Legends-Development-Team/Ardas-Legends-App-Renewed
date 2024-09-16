@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 
@@ -24,13 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(AuthenticationRestController.BASE_URL)
 public class AuthenticationRestController {
     public static final String BASE_URL = "/auth";
-    public static final String REGISTER_URL = "/register";
 
     private final AuthenticationService authenticationService;
     private final JwtUtil jwtUtil;
 
     @Operation(summary = "Authenticate", description = "Receives a discord access code and generates a discord token by calling the discord API. Returns a generated JWT to access the API.")
-    @PostMapping(REGISTER_URL)
+    @PostMapping
     public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticateDto dto) {
         log.debug("Incoming authenticate Request, dto [{}]", dto);
 
