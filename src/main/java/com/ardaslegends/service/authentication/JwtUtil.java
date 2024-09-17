@@ -14,16 +14,17 @@ public class JwtUtil {
     @Value("${ardaslegends.auth.jwt.secret}")
     private String secretKey;
 
-    public String generateToken(String discordAccessToken, long expiresIn) {
-        log.info("Generating token for discordAccessToken: {}", discordAccessToken);
+    public String generateToken(String discordId, long expiresIn) {
+        log.info("Generating token for discordAccessToken: {}", discordId);
         log.info("Secret key: {}", secretKey);
         return Jwts.builder()
-                .setSubject(discordAccessToken)
+                .setSubject(discordId)
                 .setExpiration(new Date(System.currentTimeMillis() + expiresIn))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
     }
-    public String extractDiscordAccessTokenFromJWT(String token) {
+
+    public String extractDiscordIdFromJWT(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)

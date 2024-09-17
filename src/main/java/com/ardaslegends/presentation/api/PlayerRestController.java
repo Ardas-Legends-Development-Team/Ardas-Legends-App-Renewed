@@ -51,7 +51,7 @@ public class PlayerRestController extends AbstractRestController {
     public static final String PATH_INJURE = "/rpchar/injure";
     public static final String PATH_HEAL_START = "/rpchar/heal-start";
     public static final String PATH_HEAL_STOP = "/rpchar/heal-stop";
-    public static final String PATH_GET_BY_IGN =  PATH_IGN + "/{ign}";
+    public static final String PATH_GET_BY_IGN = PATH_IGN + "/{ign}";
     public static final String PATH_GET_BY_DISCORD_ID = PATH_DISCORDID + "/{discId}";
 
     private final PlayerService playerService;
@@ -85,7 +85,7 @@ public class PlayerRestController extends AbstractRestController {
     @Operation(summary = "Get by Discord ID", description = "Get a player by their Discord ID")
     @GetMapping(PATH_GET_BY_DISCORD_ID)
     public HttpEntity<PlayerRpCharResponse> getByDiscordId(@PathVariable String discId) {
-        log.debug("Incoming getByDiscordId Request. DiscordId: {}", discId);
+        log.info("Incoming getByDiscordId Request. DiscordId: {}", discId);
 
         log.debug("Calling PlayerService.getPlayerByDiscordId, DiscordId: {}", discId);
         val playerFound = playerService.getPlayerByDiscordId(discId);
@@ -100,7 +100,7 @@ public class PlayerRestController extends AbstractRestController {
     public HttpEntity<PlayerResponse> createPlayer(@RequestBody CreatePlayerDto createPlayerDto) {
         log.debug("Incoming createPlayer Request. Data [{}]", createPlayerDto);
 
-        log.debug("Calling PlayerService.createPlayer. Data {}" ,createPlayerDto);
+        log.debug("Calling PlayerService.createPlayer. Data {}", createPlayerDto);
         Player createdPlayer = playerService.createPlayer(createPlayerDto);
         var response = new PlayerResponse(createdPlayer);
 

@@ -11,7 +11,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 
@@ -39,7 +42,7 @@ public class AuthenticationRestController {
         // if user is not in the DB, inform user to register
 
         log.info("Generating JWT and storing in DB");
-        String jwt = jwtUtil.generateToken(accessToken.getAccessToken(), accessToken.getExpiresIn());
+        String jwt = jwtUtil.generateToken(discordId, accessToken.getExpiresIn());
         // store in DB
 
         log.info("Building response");

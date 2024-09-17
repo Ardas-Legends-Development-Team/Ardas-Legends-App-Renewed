@@ -47,6 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            log.info("No JWT token found in request headers");
             filterChain.doFilter(request, response);
             return;
         }
@@ -54,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         try {
             final String jwt = authHeader.substring(7);
             log.info("JWT: {}", jwt);
-            final String userDiscordId = jwtUtil.extractDiscordAccessTokenFromJWT(jwt);
+            final String userDiscordId = jwtUtil.extractDiscordIdFromJWT(jwt);
             log.info("User Discord ID: {}", userDiscordId);
 
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
