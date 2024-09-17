@@ -1,5 +1,6 @@
 package com.ardaslegends.service.authentication;
 
+import com.ardaslegends.service.dto.authentication.DiscordUserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -104,11 +106,11 @@ public class AuthenticationService {
 
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> response = restTemplate.exchange("https://discord.com/api/users/@me", HttpMethod.GET, requestEntity, String.class);
+        ResponseEntity<DiscordUserDto> response = restTemplate.exchange("https://discord.com/api/users/@me", HttpMethod.GET, requestEntity, DiscordUserDto.class);
         log.debug("Discord user response: {}", response);
         log.debug("Discord user status code: {}", response.getStatusCode());
         log.debug("Discord user response body: {}", response.getBody());
 
-        return response.getBody();
+        return Objects.requireNonNull(response.getBody()).id();
     }
 }
