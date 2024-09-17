@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.function.Function;
 
 @Slf4j
 @Service
@@ -14,22 +15,40 @@ public class JwtUtil {
     @Value("${ardaslegends.auth.jwt.secret}")
     private String secretKey;
 
-    public String generateToken(String discordId, long expiresIn) {
+    public String generateToken(String discordId, String discordAccessToken, long expiresIn) {
         log.debug("Generating token for discordAccessToken: {}", discordId);
         log.debug("Secret key: {}", secretKey);
         return Jwts.builder()
-                .setSubject(discordId)
+                .claim("discordId", discordId)
+                .setId(discordAccessToken)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiresIn * 1000))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
     }
 
-    public String extractDiscordIdFromJWT(String token) {
+    public String extractDiscordAccessTokenFromJWT(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
                 .parseClaimsJws(token)
                 .getBody()
-                .getSubject();
+                .getId();
+    }
+
+    public String extractDiscordIdFromJWT(String token) {
+        return extractClaim(token, claims -> claims.get("discordId", String.class));
+    }
+
+    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+        final Claims claims = extractAllClaims(token);
+        return claimsResolver.apply(claims);
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     public boolean isTokenValid(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {

@@ -42,7 +42,7 @@ public class AuthenticationRestController {
         // if user is not in the DB, inform user to register
 
         log.debug("Generating JWT and storing in DB");
-        String jwt = jwtUtil.generateToken(discordId, accessToken.getExpiresIn());
+        String jwt = jwtUtil.generateToken(discordId, accessToken.getAccessToken(), accessToken.getExpiresIn());
         // store in DB
 
         log.debug("Building response");
