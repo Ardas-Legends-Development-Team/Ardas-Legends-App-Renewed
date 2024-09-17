@@ -28,6 +28,7 @@ public class SecurityConfiguration {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/api/player/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider)

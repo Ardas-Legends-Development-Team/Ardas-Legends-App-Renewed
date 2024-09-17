@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
@@ -17,7 +18,6 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Slf4j
 @Entity
 @Table(name = "players")
@@ -55,6 +55,12 @@ public final class Player extends AbstractDomainObject implements UserDetails {
     private List<ClaimBuild> builtClaimbuilds;
 
     private Boolean isStaff;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "player_roles", joinColumns = @JoinColumn(name = "player_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Set<Role> roles = new HashSet<>();
 
     public Player(String ign, String uuid, String discordID, Faction faction, RPChar rpChar) {
         Objects.requireNonNull(rpChar);
@@ -139,7 +145,13 @@ public final class Player extends AbstractDomainObject implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return roles.stream()
+                .map(role -> new SimpleGrantedAuthority(role.name()))
+                .toList();
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
     }
 
     @Override
