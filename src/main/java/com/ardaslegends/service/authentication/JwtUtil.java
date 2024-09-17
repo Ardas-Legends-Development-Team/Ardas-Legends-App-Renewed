@@ -32,7 +32,7 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    public boolean isTokenValid(String token) {
+    public boolean isTokenValid(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;

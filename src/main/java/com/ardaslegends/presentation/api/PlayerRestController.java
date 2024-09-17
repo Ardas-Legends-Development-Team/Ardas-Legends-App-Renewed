@@ -98,16 +98,16 @@ public class PlayerRestController extends AbstractRestController {
     @Operation(summary = "Creates a player", description = "Create a new player in the database.")
     @PostMapping("")
     public HttpEntity<PlayerResponse> createPlayer(@RequestBody CreatePlayerDto createPlayerDto) {
-        log.debug("Incoming createPlayer Request. Data [{}]", createPlayerDto);
+        log.info("Incoming createPlayer Request. Data [{}]", createPlayerDto);
 
-        log.debug("Calling PlayerService.createPlayer. Data {}", createPlayerDto);
+        log.info("Calling PlayerService.createPlayer. Data {}", createPlayerDto);
         Player createdPlayer = playerService.createPlayer(createPlayerDto);
         var response = new PlayerResponse(createdPlayer);
 
         URI self = UriComponentsBuilder.fromPath(BASE_URL + PATH_GET_BY_IGN)
                 .uriVariables(Map.of("ign", response.ign()))
                 .build().toUri();
-        log.debug("URI built. Data {}, URI {}", response, self);
+        log.info("URI built. Data {}, URI {}", response, self);
 
         log.info("Sending HttpResponse with successfully created Player {}", createdPlayer);
         return ResponseEntity.created(self).body(response);

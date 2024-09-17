@@ -7,12 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -58,25 +53,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             final String userDiscordId = jwtUtil.extractDiscordIdFromJWT(jwt);
             log.info("User Discord ID: {}", userDiscordId);
 
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (userDiscordId != null && authentication == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
+            //if (userDiscordId != null && authentication == null) {
+            if (userDiscordId != null) {
+                //UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
+                try {
+                    boolean isTokenValid = jwtUtil.isTokenValid(jwt);
+                    log.info("Token is valid: {}", isTokenValid);
+                    //if (jwtUtil.isTokenValid(jwt)) {
+                    // UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                    //       userDetails,
+                    //     null,
+                    //   userDetails.getAuthorities()
+                    //);
 
-                if (jwtUtil.isTokenValid(jwt)) {
-                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                            userDetails,
-                            null,
-                            userDetails.getAuthorities()
-                    );
-
-                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                    //authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    //SecurityContextHolder.getContext().setAuthentication(authToken);
+                    //}
+                } catch (Exception e) {
+                    log.error("Token is invalid", e);
+                    throw new Exception("Token is invalid");
                 }
             }
-
+            log.info("Authentication successful for '{}'", request.getRequestURL());
             filterChain.doFilter(request, response);
         } catch (Exception exception) {
+            log.error("Authentication failed for '{}'", request.getRequestURL(), exception);
             handlerExceptionResolver.resolveException(request, response, null, exception);
         }
     }
