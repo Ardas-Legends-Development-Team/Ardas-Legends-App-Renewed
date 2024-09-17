@@ -32,21 +32,21 @@ public class AuthenticationRestController {
     @PostMapping
     public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticateDto dto) {
         log.info("Incoming authenticate Request, accessCode [{}]", dto);
-        log.info("Calling authenticationService.generateDiscordTokenFromCode");
+        log.debug("Calling authenticationService.generateDiscordTokenFromCode");
         DiscordTokenResponse accessToken = authenticationService.generateDiscordTokenFromCode(dto.accessCode());
 
-        log.info("Fetch user discord ID");
+        log.debug("Fetch user discord ID");
         String discordId = authenticationService.getDiscordIdFromAccessToken(accessToken.getAccessToken());
         // verify user is in the guild
         // fetch user ID from DB to see if he's registered
         // if user is not in the DB, inform user to register
 
-        log.info("Generating JWT and storing in DB");
+        log.debug("Generating JWT and storing in DB");
         String jwt = jwtUtil.generateToken(discordId, accessToken.getExpiresIn());
         // store in DB
 
-        log.info("Building response");
-        val authenticateResponse = new AuthenticateResponse(jwt, discordId);
+        log.debug("Building response");
+        val authenticateResponse = new AuthenticateResponse(jwt, discordId, accessToken.getExpiresIn());
 
         log.info("Sending successful authenticate response [{}]", authenticateResponse);
         return ResponseEntity.ok(authenticateResponse);

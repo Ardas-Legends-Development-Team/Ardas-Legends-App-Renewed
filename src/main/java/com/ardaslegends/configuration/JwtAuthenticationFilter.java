@@ -7,29 +7,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
 
 @Slf4j
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final HandlerExceptionResolver handlerExceptionResolver;
+    //private final HandlerExceptionResolver handlerExceptionResolver;
 
     private final JwtUtil jwtUtil;
-    private final UserDetailsService userDetailsService;
+    //private final UserDetailsService userDetailsService;
 
     public JwtAuthenticationFilter(
-            JwtUtil jwtUtil,
-            UserDetailsService userDetailsService,
-            HandlerExceptionResolver handlerExceptionResolver
+            JwtUtil jwtUtil
+            //UserDetailsService userDetailsService,
+            //HandlerExceptionResolver handlerExceptionResolver
     ) {
         this.jwtUtil = jwtUtil;
-        this.userDetailsService = userDetailsService;
-        this.handlerExceptionResolver = handlerExceptionResolver;
+        //this.userDetailsService = userDetailsService;
+        //this.handlerExceptionResolver = handlerExceptionResolver;
     }
 
     @Override
@@ -42,16 +40,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            log.info("No JWT token found in request headers");
+            log.debug("No JWT token found in request headers");
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
             final String jwt = authHeader.substring(7);
-            log.info("JWT: {}", jwt);
+            log.debug("JWT: {}", jwt);
             final String userDiscordId = jwtUtil.extractDiscordIdFromJWT(jwt);
-            log.info("User Discord ID: {}", userDiscordId);
+            log.debug("User Discord ID: {}", userDiscordId);
 
             //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -60,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 //UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
                 try {
                     boolean isTokenValid = jwtUtil.isTokenValid(jwt);
-                    log.info("Token is valid: {}", isTokenValid);
+                    log.debug("Token is valid: {}", isTokenValid);
                     //if (jwtUtil.isTokenValid(jwt)) {
                     // UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                     //       userDetails,
@@ -72,15 +70,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     //SecurityContextHolder.getContext().setAuthentication(authToken);
                     //}
                 } catch (Exception e) {
-                    log.error("Token is invalid", e);
-                    throw new Exception("Token is invalid");
+                    log.debug("Token is invalid", e);
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    return;
                 }
             }
             log.info("Authentication successful for '{}'", request.getRequestURL());
             filterChain.doFilter(request, response);
         } catch (Exception exception) {
             log.error("Authentication failed for '{}'", request.getRequestURL(), exception);
-            handlerExceptionResolver.resolveException(request, response, null, exception);
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         }
     }
 }

@@ -84,7 +84,7 @@ public class AuthenticationService {
                     response.append(inputLine);
                 }
                 // Parsing the response
-                log.info("DISCORD Response: {}", response);
+                log.debug("DISCORD Response: {}", response);
                 return new ObjectMapper().readValue(response.toString(), DiscordTokenResponse.class);
             }
 

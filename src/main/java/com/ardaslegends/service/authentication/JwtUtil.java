@@ -15,11 +15,11 @@ public class JwtUtil {
     private String secretKey;
 
     public String generateToken(String discordId, long expiresIn) {
-        log.info("Generating token for discordAccessToken: {}", discordId);
-        log.info("Secret key: {}", secretKey);
+        log.debug("Generating token for discordAccessToken: {}", discordId);
+        log.debug("Secret key: {}", secretKey);
         return Jwts.builder()
                 .setSubject(discordId)
-                .setExpiration(new Date(System.currentTimeMillis() + expiresIn))
+                .setExpiration(new Date(System.currentTimeMillis() + expiresIn * 1000))
                 .signWith(SignatureAlgorithm.HS512, secretKey)
                 .compact();
     }
