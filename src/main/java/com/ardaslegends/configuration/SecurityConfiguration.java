@@ -1,10 +1,12 @@
 package com.ardaslegends.configuration;
 
+import com.ardaslegends.domain.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -27,22 +29,18 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     // Public routes
                     securityProperties.getRoles().get("public").forEach(route -> auth.requestMatchers(route).permitAll());
-                    // User routes
-                    securityProperties.getRoles().get("user").forEach(route -> auth.requestMatchers(route).hasRole("USER"));
-                    // Staff routes
-                    securityProperties.getRoles().get("staff").forEach(route -> auth.requestMatchers(route).hasRole("STAFF"));
-                    // Admin routes
-                    securityProperties.getRoles().get("admin").forEach(route -> auth.requestMatchers(route).hasRole("ADMIN"));
-                    // Commander routes
-                    securityProperties.getRoles().get("commander").forEach(route -> auth.requestMatchers(route).hasRole("COMMANDER"));
-                    // Lord routes
-                    securityProperties.getRoles().get("lord").forEach(route -> auth.requestMatchers(route).hasRole("LORD"));
-                    // Faction Leader routes
-                    securityProperties.getRoles().get("faction_leader").forEach(route -> auth.requestMatchers(route).hasRole("FACTION_LEADER"));
+                    // Dynamic role-based routes
+                    for (Role role : Role.values()) {
+                        // Convert role name to lowercase and remove the 'ROLE_' prefix
+                        String roleName = role.name().substring(5).toLowerCase();
+                        if (securityProperties.getRoles().containsKey(roleName)) {
+                            securityProperties.getRoles().get(roleName).forEach(route -> auth.requestMatchers(route).hasAuthority(role.name()));
+                        }
+                    }
                     // Any request must be authenticated
                     auth.anyRequest().authenticated();
                 })
