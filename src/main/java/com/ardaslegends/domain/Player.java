@@ -54,8 +54,6 @@ public final class Player extends AbstractDomainObject implements UserDetails {
     @ManyToMany(mappedBy = "builtBy", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<ClaimBuild> builtClaimbuilds;
 
-    private Boolean isStaff;
-
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "player_roles", joinColumns = @JoinColumn(name = "player_id"))
     @Enumerated(EnumType.STRING)
@@ -71,7 +69,6 @@ public final class Player extends AbstractDomainObject implements UserDetails {
         this.faction = faction;
         this.rpChars = new HashSet<>(Set.of(rpChar));
         this.builtClaimbuilds = new ArrayList<>(1);
-        this.isStaff = false;
     }
 
 
@@ -83,7 +80,6 @@ public final class Player extends AbstractDomainObject implements UserDetails {
         this.faction = faction;
         this.rpChars = new HashSet<>(1);
         this.builtClaimbuilds = new ArrayList<>(1);
-        this.isStaff = false;
     }
 
     public Optional<RPChar> getActiveCharacter() {

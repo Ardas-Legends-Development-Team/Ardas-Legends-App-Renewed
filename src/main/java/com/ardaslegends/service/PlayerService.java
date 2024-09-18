@@ -625,15 +625,4 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         log.debug("Saving players [{}]", players);
         return secureSaveAll(players, playerRepository);
     }
-
-    public boolean checkIsStaff(String discordId) {
-        Objects.requireNonNull(discordId);
-
-        val user = api.getUserById(discordId).join();
-        val staffRoles = properties.getDiscordStaffRoles();
-
-        return user.getRoles(properties.getDiscordServer())
-                .stream()
-                .anyMatch(staffRoles::contains);
-    }
 }

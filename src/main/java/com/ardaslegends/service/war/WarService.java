@@ -1,6 +1,7 @@
 package com.ardaslegends.service.war;
 
 import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.Role;
 import com.ardaslegends.domain.war.War;
 import com.ardaslegends.repository.exceptions.NotFoundException;
 import com.ardaslegends.repository.faction.FactionRepository;
@@ -55,7 +56,7 @@ public class WarService extends AbstractService<War, WarRepository> {
         Objects.requireNonNull(createWarDto.defendingFactionName(), "Defending Faction Name must not be null");
 
         val activeWarWithName = warRepository.queryActiveWarByName(createWarDto.nameOfWar());
-        if(activeWarWithName.isPresent()) {
+        if (activeWarWithName.isPresent()) {
             log.warn("Cannot create war because active war with name [{}] already exists!", createWarDto.nameOfWar());
             throw WarServiceException.activeWarAlreadyExists(createWarDto.nameOfWar());
         }
@@ -67,7 +68,7 @@ public class WarService extends AbstractService<War, WarRepository> {
         log.trace("Attacking faction is [{}]", attackingFaction.getName());
 
         // TODO: This should include lords who also can declare wars
-        if(!attackingFaction.getLeader().equals(executorPlayer)) {
+        if (!attackingFaction.getLeader().equals(executorPlayer)) {
             log.warn("Player [{}] does not have the permission to declare war!", executorPlayer.getIgn());
             throw WarServiceException.noWarDeclarationPermissions();
         }
@@ -75,17 +76,17 @@ public class WarService extends AbstractService<War, WarRepository> {
         log.trace("Fetching defending Faction with name [{}]", createWarDto.defendingFactionName());
         var fetchedDefendingFaction = secureFind(createWarDto.defendingFactionName(), factionRepository::findFactionByName);
 
-        if(fetchedDefendingFaction.isEmpty()) {
+        if (fetchedDefendingFaction.isEmpty()) {
             log.warn("No defending faction found with name [{}]", createWarDto.defendingFactionName());
             // TODO: This is stupid as fuck, find other solution
             List<Faction> allFactions = secureFind(factionRepository::findAll);
             String allFactionString = allFactions.stream().map(Faction::getName).collect(Collectors.joining(", "));
-            throw FactionServiceException.noFactionWithNameFoundAndAll(createWarDto.defendingFactionName(),allFactionString);
+            throw FactionServiceException.noFactionWithNameFoundAndAll(createWarDto.defendingFactionName(), allFactionString);
         }
 
         var defendingFaction = fetchedDefendingFaction.get();
 
-        if(attackingFaction.equals(defendingFaction)) {
+        if (attackingFaction.equals(defendingFaction)) {
             log.warn("Player [{}] tried to declare war on his faction", executorPlayer.getIgn());
             throw WarServiceException.cannotDeclareWarOnYourFaction();
         }
@@ -129,8 +130,8 @@ public class WarService extends AbstractService<War, WarRepository> {
 
         log.debug("DiscordId [{}] belongs to player [{}]", dto.executorDiscordId(), player.getIgn());
 
-        log.debug("Player [{}] is staff: {}", player.getIgn(), player.getIsStaff());
-        if(!player.getIsStaff()) {
+        log.debug("Player [{}] is staff: {}", player.getIgn(), player.getRoles().contains(Role.ROLE_STAFF));
+        if (!player.getRoles().contains(Role.ROLE_STAFF)) {
             log.warn("Player [{}] is not a staff member and does not have the permission to force end wars!", player.getIgn());
             throw StaffPermissionException.noStaffPermission();
         }
@@ -156,7 +157,7 @@ public class WarService extends AbstractService<War, WarRepository> {
         log.debug("Fetching wars with name [{}]", name);
         val foundWars = secureFind(name, warRepository::findByName);
 
-        if(foundWars.isEmpty()) {
+        if (foundWars.isEmpty()) {
             log.warn("Found no wars with name [{}]", name);
             throw NotFoundException.noWarWithNameFound(name);
         }
@@ -171,7 +172,7 @@ public class WarService extends AbstractService<War, WarRepository> {
         log.debug("Getting active war with name [{}]", name);
         val foundWar = warRepository.queryActiveWarByName(name);
 
-        if(foundWar.isEmpty()) {
+        if (foundWar.isEmpty()) {
             log.warn("Found no war with name [{}]!", name);
             throw NotFoundException.noActiveWarWithNameFound(name);
         }
