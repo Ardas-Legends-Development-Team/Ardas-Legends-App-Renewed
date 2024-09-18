@@ -20,7 +20,7 @@ public record PlayerRpCharResponse(
         String faction,
         @Schema(description = "Player's Roleplay Character")
         RpCharResponse rpChar,
-        @Schema(description = "Roles of the player", example = "ROLE_USER")
+        @Schema(description = "Roles of the player", example = "[ROLE_USER, ROLE_COMMANDER]")
         Set<Role> roles
 ) {
 

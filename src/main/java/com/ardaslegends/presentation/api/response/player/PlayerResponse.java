@@ -17,7 +17,7 @@ public record PlayerResponse(
         String ign,
         @Schema(description = "Faction name of new player", example = "Gondor")
         String faction,
-        @Schema(description = "Roles of the player", example = "ROLE_USER")
+        @Schema(description = "Roles of the player", example = "[ROLE_USER, ROLE_COMMANDER]")
         Set<Role> roles
 ) {
 
