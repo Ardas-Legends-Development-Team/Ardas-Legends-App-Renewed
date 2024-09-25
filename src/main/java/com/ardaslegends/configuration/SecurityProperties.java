@@ -21,4 +21,12 @@ import java.util.Map;
 })
 public class SecurityProperties {
     private Map<String, List<String>> roles;
+    private PluginAccess pluginAccess;
+
+    @Setter
+    @Getter
+    public static class PluginAccess {
+        private String headerName;
+        private String secret;
+    }
 }

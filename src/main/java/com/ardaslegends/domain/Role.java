@@ -6,5 +6,6 @@ public enum Role {
     ROLE_STAFF,
     ROLE_COMMANDER,
     ROLE_LORD,
-    ROLE_FACTION_LEADER
+    ROLE_FACTION_LEADER,
+    ROLE_PLUGIN
 }
