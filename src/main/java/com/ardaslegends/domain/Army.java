@@ -1,10 +1,12 @@
 package com.ardaslegends.domain;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,11 +52,13 @@ public final class Army extends AbstractDomainObject {
     private RPChar boundTo; //rp character the army is currently bound to
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "army")
+    @Builder.Default
     private List<Unit> units = new ArrayList<>(); //the units in this army contains
 
     @ElementCollection
     @CollectionTable(name = "army_sieges",
-                joinColumns = @JoinColumn(name = "army_id", foreignKey = @ForeignKey(name = "fk_army_sieges_army_id")))
+            joinColumns = @JoinColumn(name = "army_id", foreignKey = @ForeignKey(name = "fk_army_sieges_army_id")))
+    @Builder.Default
     private List<String> sieges = new ArrayList<>(); //list of siege equipment this
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "stationed_at", foreignKey = @ForeignKey(name = "fk_armies_stationed_at"))
@@ -63,6 +67,7 @@ public final class Army extends AbstractDomainObject {
     @NotNull(message = "Army: freeTokens must not be null")
     private Double freeTokens; //how many free unit tokens this army has left
 
+    @Builder.Default
     private Boolean isHealing = false;
     private OffsetDateTime healStart;
     private OffsetDateTime healEnd;
@@ -77,6 +82,7 @@ public final class Army extends AbstractDomainObject {
 
     @JsonIgnore
     @OneToMany(mappedBy = "army", cascade = {CascadeType.REMOVE})
+    @Builder.Default
     private List<Movement> movements = new ArrayList<>();
 
     private Boolean isPaid;
@@ -117,14 +123,16 @@ public final class Army extends AbstractDomainObject {
 
     @Override
     public int hashCode() {
-        return name != null ? Objects.hash(name):0;
+        return name != null ? Objects.hash(name) : 0;
     }
 
     public boolean allUnitsAlive() {
         return this.units.stream().allMatch(unit -> Objects.equals(unit.getAmountAlive(), unit.getCount()));
     }
 
-    public boolean hasUnitsLeft() { return units.stream().anyMatch(unit -> unit.getAmountAlive() > 0); }
+    public boolean hasUnitsLeft() {
+        return units.stream().anyMatch(unit -> unit.getAmountAlive() > 0);
+    }
 
     public Optional<Movement> getActiveMovement() {
         return this.getMovements().stream().filter(Movement::getIsCurrentlyActive).findFirst();
@@ -133,11 +141,11 @@ public final class Army extends AbstractDomainObject {
     @JsonIgnore
     public int getAmountOfHealHours() {
         double tokensMissing = units.stream()
-                .map(unit -> ((unit.getCount()-unit.getAmountAlive())) * unit.getCost())
+                .map(unit -> ((unit.getCount() - unit.getAmountAlive())) * unit.getCost())
                 .reduce(0.0, Double::sum);
         double hoursHeal = tokensMissing * 24 / 6;
         int divisor = 24;
-        if(this.stationedAt.getType().equals(ClaimBuildType.STRONGHOLD)) {
+        if (this.stationedAt.getType().equals(ClaimBuildType.STRONGHOLD)) {
             hoursHeal /= 2;
             divisor = 12;
         }

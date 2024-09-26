@@ -1,12 +1,17 @@
 package com.ardaslegends.domain;
 
 import com.ardaslegends.service.utils.ServiceUtils;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import jakarta.persistence.*;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -32,24 +37,28 @@ public final class Region extends AbstractDomainObject {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "faction_claimed_regions",
-            joinColumns = { @JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_region"))},
-            inverseJoinColumns = { @JoinColumn(name = "faction", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_faction")) })
+            joinColumns = {@JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_region"))},
+            inverseJoinColumns = {@JoinColumn(name = "faction", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_faction"))})
+    @Builder.Default
     private Set<Faction> claimedBy = new HashSet<>(); //the list of factions which the region is claimed by
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "region")
+    @Builder.Default
     private Set<ClaimBuild> claimBuilds = new HashSet<>(); //list of claimbuilds in this region
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "region_neighbours",
-            joinColumns = { @JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_region_neighbours_region"))},
-            inverseJoinColumns = { @JoinColumn(name = "neighbour", foreignKey = @ForeignKey(name = "fk_region_neighbours_neighbour")) })
+            joinColumns = {@JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_region_neighbours_region"))},
+            inverseJoinColumns = {@JoinColumn(name = "neighbour", foreignKey = @ForeignKey(name = "fk_region_neighbours_neighbour"))})
+    @Builder.Default
     private Set<Region> neighboringRegions = new HashSet<>(); //list of neighboring regions
 
     @Column(name = "has_ownership_changed_since_last_claimmap_update")
     private boolean hasOwnershipChanged;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "currentRegion")
+    @Builder.Default
     private Set<RPChar> charsInRegion = new HashSet<>(1);
 
     @JsonIgnore
@@ -72,7 +81,7 @@ public final class Region extends AbstractDomainObject {
      */
     public boolean addNeighbour(@NonNull Region possibleNeighbour) {
 
-        if(neighboringRegions.contains(possibleNeighbour))
+        if (neighboringRegions.contains(possibleNeighbour))
             return false;
 
         neighboringRegions.add(possibleNeighbour);
@@ -85,9 +94,9 @@ public final class Region extends AbstractDomainObject {
         log.debug("Add claiming faction [{}] to region [{}]", faction, this.id);
 
         Objects.requireNonNull(faction, "Faction must not be nulL!");
-        ServiceUtils.checkBlankString(faction.getName(),"faction name");
+        ServiceUtils.checkBlankString(faction.getName(), "faction name");
 
-        if(!this.claimedBy.contains(faction)) {
+        if (!this.claimedBy.contains(faction)) {
             log.debug("Faction [{}] is not in region [{}]'s claimedBy Set, adding it", faction, this.id);
             this.claimedBy.add(faction);
             faction.getRegions().add(this);
@@ -104,9 +113,9 @@ public final class Region extends AbstractDomainObject {
         log.debug("Remove claiming faction [{}] from region [{}]", faction, this.id);
 
         Objects.requireNonNull(faction, "Faction must not be nulL!");
-        ServiceUtils.checkBlankString(faction.getName(),"faction name");
+        ServiceUtils.checkBlankString(faction.getName(), "faction name");
 
-        if(this.getClaimedBy().contains(faction)) {
+        if (this.getClaimedBy().contains(faction)) {
             log.debug("Faction [{}] is in region [{}]'s claimedBy Set, removing it", faction, this.id);
             this.claimedBy.remove(faction);
             faction.getRegions().remove(this);
@@ -117,6 +126,7 @@ public final class Region extends AbstractDomainObject {
 
         log.debug("Faction [{}] is not in region [{}]'s claimedBy Set", faction, this.id);
     }
+
     public Set<Region> getNeighboringRegions() {
         return Collections.unmodifiableSet(neighboringRegions);
     }

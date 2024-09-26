@@ -1,14 +1,19 @@
 package com.ardaslegends.domain;
 
 import com.ardaslegends.service.exceptions.logic.faction.FactionServiceException;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.Length;
-import org.javacord.api.entity.permission.Role;
 
-import jakarta.persistence.*;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -37,7 +42,7 @@ public final class Faction extends AbstractDomainObject {
     private Player leader; //the player who leads this faction
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "faction")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Army> armies; //all current armies of this faction
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "faction")
     private List<Player> players; //all current players of this faction
@@ -48,8 +53,8 @@ public final class Faction extends AbstractDomainObject {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "faction_allies",
-            joinColumns = { @JoinColumn(name = "faction", foreignKey = @ForeignKey(name = "fk_faction_allies_faction"))},
-            inverseJoinColumns = { @JoinColumn(name = "ally_faction", foreignKey = @ForeignKey(name = "fk_faction_allies_ally_faction")) })
+            joinColumns = {@JoinColumn(name = "faction", foreignKey = @ForeignKey(name = "fk_faction_allies_faction"))},
+            inverseJoinColumns = {@JoinColumn(name = "ally_faction", foreignKey = @ForeignKey(name = "fk_faction_allies_ally_faction"))})
     private List<Faction> allies; //allies of this faction
     private String colorcode; //the faction's colorcode, used for painting the map
 
@@ -63,10 +68,12 @@ public final class Faction extends AbstractDomainObject {
     private String factionBuffDescr; //The description of this faction's buff
 
     @Column(name = "food_stockpile")
+    @Builder.Default
     private Integer foodStockpile = 0; // Food stacks in a factions stockpile, these are used for army movements
 
     @ElementCollection
     @CollectionTable(name = "faction_aliases", joinColumns = @JoinColumn(name = "faction_id", foreignKey = @ForeignKey(name = "fk_faction_aliases_faction_id")))
+    @Builder.Default
     private Set<String> aliases = new HashSet<>();
 
     public Faction(String name, Player leader, List<Army> armies, List<Player> players, Set<Region> regions, List<ClaimBuild> claimBuilds, List<Faction> allies, String colorcode, Region homeRegion, String factionBuffDescr) {
@@ -86,7 +93,7 @@ public final class Faction extends AbstractDomainObject {
     @JsonIgnore
     public void addFoodToStockpile(int amount) {
         log.debug("Adding food [amount:{}] to stockpile of faction [{}]", amount, this.name);
-        if(amount < 0) {
+        if (amount < 0) {
             log.warn("Amount to add is below 0 [{}]", amount);
             throw FactionServiceException.negativeStockpileAddNotSupported();
         }
@@ -96,12 +103,12 @@ public final class Faction extends AbstractDomainObject {
     @JsonIgnore
     public void subtractFoodFromStockpile(int amount) {
         log.debug("Removing food [amount: {}] from stockpile of faction [{}]", amount, this.name);
-        if(amount < 0) {
+        if (amount < 0) {
             log.warn("Amount to remove is above 0 [{}]", amount);
             throw FactionServiceException.negativeStockpileSubtractNotSupported();
         }
 
-        if(this.foodStockpile - amount < 0) {
+        if (this.foodStockpile - amount < 0) {
             log.warn("Subtract would set the stockpile of faction [{}] to below zero!", this.name);
             throw FactionServiceException.notEnoughFoodInStockpile(this.name, this.foodStockpile, amount);
         }

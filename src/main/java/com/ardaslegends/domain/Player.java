@@ -49,6 +49,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @Builder.Default
     private Set<RPChar> rpChars = new HashSet<>(); //the player's rp character
 
     @ManyToMany(mappedBy = "builtBy", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -58,6 +59,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
     @CollectionTable(name = "player_roles", joinColumns = @JoinColumn(name = "player_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
+    @Builder.Default
     private Set<Role> roles = new HashSet<>();
 
     public Player(String ign, String uuid, String discordID, Faction faction, RPChar rpChar) {
