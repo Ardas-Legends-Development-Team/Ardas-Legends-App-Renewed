@@ -6,8 +6,8 @@ import com.ardaslegends.repository.player.PlayerRepository;
 import com.ardaslegends.service.dto.player.*;
 import com.ardaslegends.service.dto.player.rpchar.CreateRPCharDto;
 import com.ardaslegends.service.dto.player.rpchar.UpdateRpCharDto;
-import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.exceptions.ServiceException;
+import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.external.MojangApiService;
 import com.ardaslegends.service.utils.ServiceUtils;
 import lombok.RequiredArgsConstructor;
@@ -90,7 +90,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
 
         log.debug("Trying to create and save entity");
         Player player = new Player(dto.ign(), uuidConverterDto.id(), dto.discordID(), queriedFaction);
-
+        player.addRole(Role.ROLE_USER);
         log.debug("Persisting player entity with ign {}, discordId {} into the database", dto.ign(), dto.discordID());
         player = secureSave(player, playerRepository);
 
@@ -113,7 +113,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
                 .map(field -> field.getName())
                 .collect(Collectors.toList()));
 
-        if(dto.title().length() > 25) {
+        if (dto.title().length() > 25) {
             log.warn("CreateRPChar title is too long");
             throw new IllegalArgumentException("Title exceeds maximum length of 25 Characters [%s, Length %s]".formatted(dto.title(), dto.title().length()));
         }
@@ -126,7 +126,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         log.debug("Fetched Player by DiscordId [{}]", actualPlayer);
 
         log.debug("Checking if the player has a faction");
-        if(actualPlayer.getFaction() == null) {
+        if (actualPlayer.getFaction() == null) {
             log.warn("Player [{}] is not in a faction - cannot create new RpChar!", actualPlayer);
             throw ServiceException.createRpCharNoFaction(actualPlayer.getIgn());
         }
@@ -268,7 +268,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         // Check if somebody already has this IGN
         Optional<Player> playerByIgn = secureFind(dto.ign(), playerRepository::findPlayerByIgn);
 
-        if(playerByIgn.isPresent()) {
+        if (playerByIgn.isPresent()) {
             log.warn("Player with ign [{}] already existing!", dto.ign());
             throw new IllegalArgumentException("A player with the IGN [%s] [%s] already exists".formatted(dto.ign(), playerByIgn.get()));
         }
@@ -312,7 +312,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         log.debug("Fetching player with new to DiscordId to see if a player already exists");
         Optional<Player> fetchedPlayer = secureFind(dto.newDiscordId(), playerRepository::findByDiscordID);
 
-        if(fetchedPlayer.isPresent()) {
+        if (fetchedPlayer.isPresent()) {
             log.warn("Player found that is registered with the same discordId [{}] [{}]", dto.newDiscordId(), fetchedPlayer.get());
             throw new IllegalArgumentException("A Player with the new discordId already exists! [%s]".formatted(fetchedPlayer.get()));
         }
@@ -374,7 +374,7 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         ServiceUtils.checkNulls(dto, List.of("discordId", "title"));
         ServiceUtils.checkBlanks(dto, List.of("discordId", "title"));
 
-        if(dto.title().length() > 25) {
+        if (dto.title().length() > 25) {
             log.warn("updateCharacterTitle - title is too long");
             throw new IllegalArgumentException("Title exceeds maximum length of 25 Characters [%s, Length %s]".formatted(dto.title(), dto.title().length()));
         }
@@ -557,10 +557,10 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
             return PlayerServiceException.noRpChar();
         });
 
-        log.debug("Player [{}] has an rpchar called [{}]", player , rpchar);
+        log.debug("Player [{}] has an rpchar called [{}]", player, rpchar);
 
         log.debug("Checking if the character is injured");
-        if(!rpchar.getInjured()) {
+        if (!rpchar.getInjured()) {
             log.warn("Character [{}] of player [{}] is not injured and therefore cannot be healed!", rpchar, player);
             throw PlayerServiceException.cannotHealNotInjured(rpchar.getName());
         }
@@ -600,10 +600,10 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
             log.warn("Player [{}] has no roleplay character and therefore cannot heal it!", player);
             return PlayerServiceException.noRpChar();
         });
-        log.debug("Player [{}] has an rpchar called [{}]", player , rpchar);
+        log.debug("Player [{}] has an rpchar called [{}]", player, rpchar);
 
         log.debug("Checking if rpchar is healing. Current healing flag: [{}]", rpchar.getIsHealing());
-        if(!rpchar.getIsHealing()) {
+        if (!rpchar.getIsHealing()) {
             log.warn("Character [{}] of player [{}] is not currently healing and therefore cannot stop healing!", rpchar, player);
             throw PlayerServiceException.cannotStopHealBecauseCharNotHealing(rpchar.getName());
         }
@@ -624,16 +624,5 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
     public List<Player> savePlayers(List<Player> players) {
         log.debug("Saving players [{}]", players);
         return secureSaveAll(players, playerRepository);
-    }
-
-    public boolean checkIsStaff(String discordId) {
-        Objects.requireNonNull(discordId);
-
-        val user = api.getUserById(discordId).join();
-        val staffRoles = properties.getDiscordStaffRoles();
-
-        return user.getRoles(properties.getDiscordServer())
-                .stream()
-                .anyMatch(staffRoles::contains);
     }
 }

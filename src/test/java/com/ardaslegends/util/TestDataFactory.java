@@ -16,7 +16,7 @@ public class TestDataFactory {
                 .ign("Luktronic")
                 .discordID("261173268365443074")
                 .uuid("cefabe13fda44d378c5d7292724f1514")
-                .isStaff(true)
+                .roles(new HashSet<>(Set.of(Role.ROLE_USER, Role.ROLE_STAFF)))
                 .build();
         luktronic.setFaction(factionGondor(luktronic));
         luktronic.addActiveRpChar(rpcharBelegorn(luktronic));
@@ -29,7 +29,7 @@ public class TestDataFactory {
                 .ign("Luktronic")
                 .discordID("261173268365443074")
                 .uuid("cefabe13fda44d378c5d7292724f1514")
-                .isStaff(true)
+                .roles(new HashSet<>(Set.of(Role.ROLE_USER, Role.ROLE_STAFF)))
                 .build();
         luktronic.setFaction(factionGondor(luktronic));
         luktronic.addActiveRpChar(rpChar);
@@ -42,7 +42,7 @@ public class TestDataFactory {
                 .ign("Luktronic")
                 .discordID("261173268365443074")
                 .uuid("cefabe13fda44d378c5d7292724f1514")
-                .isStaff(true)
+                .roles(new HashSet<>(Set.of(Role.ROLE_USER, Role.ROLE_STAFF)))
                 .faction(faction)
                 .build();
     }
@@ -53,7 +53,7 @@ public class TestDataFactory {
                 .ign("mirak441")
                 .discordID("244463773052567553")
                 .uuid("4cd6b222b3894fd59d85ac90aa2c2c46")
-                .isStaff(true)
+                .roles(new HashSet<>(Set.of(Role.ROLE_USER, Role.ROLE_STAFF)))
                 .faction(faction)
                 .build();
     }
@@ -64,7 +64,7 @@ public class TestDataFactory {
                 .ign("HabKeinTeammate")
                 .discordID("323522559096258582")
                 .uuid("84b6a14958ec4b2bb9b479328526651d")
-                .isStaff(false)
+                .roles(new HashSet<>(Set.of(Role.ROLE_USER, Role.ROLE_STAFF)))
                 .faction(faction)
                 .build();
 
@@ -124,7 +124,7 @@ public class TestDataFactory {
                 .build();
         gondor.setLeader(leader);
         val players = new ArrayList<Player>();
-        if(leader != null)
+        if (leader != null)
             players.add(leader);
         gondor.setPlayers(players);
         return gondor;
@@ -142,7 +142,7 @@ public class TestDataFactory {
                 .build();
         mordor.setLeader(leader);
         val players = new ArrayList<Player>();
-        if(leader != null)
+        if (leader != null)
             players.add(leader);
         mordor.setPlayers(players);
         return mordor;
@@ -151,6 +151,7 @@ public class TestDataFactory {
     public static Region region263() {
         return Region.builder().id("263").regionType(RegionType.LAND).build();
     }
+
     public static Region region267() {
         return Region.builder().id("267").regionType(RegionType.LAND).build();
     }
