@@ -48,7 +48,6 @@ public class PlayerRestControllerTest {
     private PlayerResponse expectedPlayerResponse;
     private RpCharResponse expectedRpCharResponse;
     private PlayerRpCharResponse expectedPlayerRpCharResponse;
-    private CreateRPCharDto createRPCharDto;
     private DiscordIdDto discordIdDto;
 
 
@@ -101,7 +100,7 @@ public class PlayerRestControllerTest {
     void ensureCreateRpCharWorksProperly() throws Exception {
         val newRpChar = new RPChar(player3, "Canathir", "Master of Coin", "Gondor gear", true, "someLink");
         expectedRpCharResponse = new RpCharResponse(newRpChar);
-        createRPCharDto = new CreateRPCharDto(newRpChar.getOwner().getDiscordID(), newRpChar.getName(), newRpChar.getTitle(), newRpChar.getGear(), newRpChar.getPvp());
+        CreateRPCharDto createRPCharDto = new CreateRPCharDto(newRpChar.getOwner().getDiscordID(), newRpChar.getName(), newRpChar.getTitle(), newRpChar.getGear(), newRpChar.getPvp());
 
         when(mockPlayerService.createRoleplayCharacter(createRPCharDto)).thenReturn(newRpChar);
 
