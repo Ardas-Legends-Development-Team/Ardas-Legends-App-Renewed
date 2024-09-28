@@ -3,9 +3,8 @@ package com.ardaslegends.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.*;
-
 import jakarta.persistence.*;
+import lombok.*;
 
 @Getter
 @Setter
@@ -32,14 +31,13 @@ public final class Unit extends AbstractDomainObject {
     @JoinColumn(name = "army", foreignKey = @ForeignKey(name = "fk_unit_army"))
     private Army army; // The army in which these units are
 
-    private Integer count; //maximum aamount of those units that are in the army
+    private Integer count; //maximum amount of those units that are in the army
 
     private Integer amountAlive; //current alive soldiers
-    private Boolean isMounted;
 
     @JsonIgnore
     public Double getCost() {
-        return isMounted ? unitType.getTokenCost() + 1 : unitType.getTokenCost();
+        return unitType.getTokenCost();
     }
 
 }
