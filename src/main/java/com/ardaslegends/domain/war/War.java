@@ -20,7 +20,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-
 @Entity
 @Table(name = "wars")
 public class War extends AbstractDomainObject {
@@ -73,6 +72,8 @@ public class War extends AbstractDomainObject {
         WarParticipant defenderWarParticipant = new WarParticipant(defender, true, warDeclarationDate);
 
         this.name = name;
+        this.aggressors = new HashSet<>(2);
+        this.defenders = new HashSet<>(2);
         this.aggressors.add(aggressorWarParticipant);
         this.defenders.add(defenderWarParticipant);
 
