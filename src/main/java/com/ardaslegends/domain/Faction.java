@@ -50,6 +50,9 @@ public final class Faction extends AbstractDomainObject {
     private Set<Region> regions; //all regions this faction claims
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "ownedBy")
     private List<ClaimBuild> claimBuilds; //all claimbuilds of this faction
+    @ManyToMany(mappedBy = "usableBy")
+    private Set<UnitType> availableUnits = new HashSet<>(15);
+
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "faction_allies",
