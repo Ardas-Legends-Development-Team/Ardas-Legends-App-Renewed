@@ -6,13 +6,15 @@ import com.ardaslegends.domain.Unit;
 public record UnitResponse(
         String unitName,
         Integer count,
-        Integer amountAlive
+        Integer amountAlive,
+        Boolean isMounted
 ) {
     public UnitResponse(Unit unit) {
         this(
                 unit.getUnitType().getUnitName(),
                 unit.getCount(),
-                unit.getAmountAlive()
+                unit.getAmountAlive(),
+                unit.isMounted()
         );
     }
 }

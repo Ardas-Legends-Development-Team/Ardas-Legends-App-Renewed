@@ -40,4 +40,9 @@ public final class Unit extends AbstractDomainObject {
         return unitType.getTokenCost();
     }
 
+    public boolean isMounted() {
+        return unitType.getIsMounted();
+    }
+
+
 }
