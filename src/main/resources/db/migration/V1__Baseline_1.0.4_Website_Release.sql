@@ -95,7 +95,7 @@ CREATE TABLE application_user
     id                  VARCHAR(255) NOT NULL,
     hashed_password     VARCHAR(255),
     name                VARCHAR(255),
-    profile_picture_url OID,
+    profile_picture_url TEXT,
     username            VARCHAR(255),
     CONSTRAINT application_user_pkey PRIMARY KEY (id)
 );

@@ -48,13 +48,19 @@ DROP TABLE sample_person CASCADE;
 
 DROP TABLE user_roles CASCADE;
 
-DROP TABLE war_participants CASCADE;
+DROP TABLE IF EXISTS war_participants CASCADE;
+
+ALTER TABLE claimbuild_apps_built_by
+    DROP CONSTRAINT claimbuild_apps_built_by_pkey;
 
 ALTER TABLE claimbuild_apps_built_by
     DROP COLUMN claimbuild_application_id;
 
 ALTER TABLE production_sites
     ALTER COLUMN produced_resource TYPE VARCHAR USING (produced_resource::VARCHAR);
+
+ALTER TABLE claimbuild_apps_built_by
+    ALTER COLUMN built_claimbuilds_id SET NOT NULL;
 
 ALTER TABLE claimbuild_apps_built_by
     ADD CONSTRAINT pk_claimbuild_apps_builtby PRIMARY KEY (built_by_id, built_claimbuilds_id);

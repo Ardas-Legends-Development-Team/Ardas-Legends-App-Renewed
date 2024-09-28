@@ -28,8 +28,10 @@ public final class Army extends AbstractDomainObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -65,19 +67,26 @@ public final class Army extends AbstractDomainObject {
     private ClaimBuild stationedAt; //claimbuild where this army is stationed
 
     @NotNull(message = "Army: freeTokens must not be null")
+    @Column(name = "free_tokens")
     private Double freeTokens; //how many free unit tokens this army has left
 
     @Builder.Default
+    @Column(name = "is_healing")
     private Boolean isHealing = false;
+    @Column(name = "heal_start")
     private OffsetDateTime healStart;
+    @Column(name = "heal_end")
     private OffsetDateTime healEnd;
+    @Column(name = "hours_healed")
     private Integer hoursHealed;
+    @Column(name = "hours_left_healing")
     private Integer hoursLeftHealing;
+    @Column(name = "heal_last_updated_at")
     private OffsetDateTime healLastUpdatedAt;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "origin_claimbuild", foreignKey = @ForeignKey(name = "fk_armies_origin_claimbuild"))
     private ClaimBuild originalClaimbuild; //claimbuild where this army was created from
-
+    @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
     @JsonIgnore
@@ -85,6 +94,7 @@ public final class Army extends AbstractDomainObject {
     @Builder.Default
     private List<Movement> movements = new ArrayList<>();
 
+    @Column(name = "is_paid")
     private Boolean isPaid;
 
     public Army(String name, ArmyType armyType, Faction faction, Region currentRegion, RPChar boundTo, List<Unit> units, List<String> sieges, ClaimBuild stationedAt, Double freeTokens, boolean isHealing, OffsetDateTime healStart, OffsetDateTime healEnd,
