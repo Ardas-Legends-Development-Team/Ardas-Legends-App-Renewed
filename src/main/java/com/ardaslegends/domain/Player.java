@@ -60,7 +60,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     @Builder.Default
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles = new HashSet<>(1);
 
     public Player(String ign, String uuid, String discordID, Faction faction, RPChar rpChar) {
         Objects.requireNonNull(rpChar);
@@ -82,6 +82,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
         this.faction = faction;
         this.rpChars = new HashSet<>(1);
         this.builtClaimbuilds = new ArrayList<>(1);
+        this.roles = new HashSet<>(1);
     }
 
     public Optional<RPChar> getActiveCharacter() {
