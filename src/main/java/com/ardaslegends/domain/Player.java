@@ -49,6 +49,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @Builder.Default
     private Set<RPChar> rpChars = new HashSet<>(); //the player's rp character
 
     @ManyToMany(mappedBy = "builtBy", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -58,7 +59,8 @@ public final class Player extends AbstractDomainObject implements UserDetails {
     @CollectionTable(name = "player_roles", joinColumns = @JoinColumn(name = "player_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private Set<Role> roles = new HashSet<>();
+    @Builder.Default
+    private Set<Role> roles = new HashSet<>(1);
 
     public Player(String ign, String uuid, String discordID, Faction faction, RPChar rpChar) {
         Objects.requireNonNull(rpChar);
@@ -80,6 +82,7 @@ public final class Player extends AbstractDomainObject implements UserDetails {
         this.faction = faction;
         this.rpChars = new HashSet<>(1);
         this.builtClaimbuilds = new ArrayList<>(1);
+        this.roles = new HashSet<>(1);
     }
 
     public Optional<RPChar> getActiveCharacter() {

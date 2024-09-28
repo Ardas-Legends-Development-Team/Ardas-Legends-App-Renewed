@@ -4,11 +4,11 @@ import com.ardaslegends.domain.AbstractDomainObject;
 import com.ardaslegends.domain.Faction;
 import com.ardaslegends.domain.war.battle.Battle;
 import com.ardaslegends.service.exceptions.logic.war.WarServiceException;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,7 +20,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Slf4j
-
 @Entity
 @Table(name = "wars")
 public class War extends AbstractDomainObject {
@@ -35,11 +34,13 @@ public class War extends AbstractDomainObject {
     @ElementCollection
     @CollectionTable(name = "war_aggressors",
             joinColumns = @JoinColumn(name = "war_id", foreignKey = @ForeignKey(name = "fk_war_aggressors_war_id")))
+    @Builder.Default
     private Set<WarParticipant> aggressors = new HashSet<>(2);
 
     @ElementCollection
     @CollectionTable(name = "war_defenders",
             joinColumns = @JoinColumn(name = "war_id", foreignKey = @ForeignKey(name = "fk_war_defenders_war_id")))
+    @Builder.Default
     private Set<WarParticipant> defenders = new HashSet<>(2);
 
     @NotNull
@@ -53,6 +54,7 @@ public class War extends AbstractDomainObject {
     private Boolean isActive;
 
     @ManyToMany(mappedBy = "wars", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @Builder.Default
     private Set<Battle> battles = new HashSet<>(4);
 
     // TODO: Test worthy
@@ -70,6 +72,8 @@ public class War extends AbstractDomainObject {
         WarParticipant defenderWarParticipant = new WarParticipant(defender, true, warDeclarationDate);
 
         this.name = name;
+        this.aggressors = new HashSet<>(2);
+        this.defenders = new HashSet<>(2);
         this.aggressors.add(aggressorWarParticipant);
         this.defenders.add(defenderWarParticipant);
 
@@ -92,7 +96,7 @@ public class War extends AbstractDomainObject {
                 .anyMatch(defender -> defender.equals(faction));
 
         // If the faction is in defenders -> return aggressors
-        if(containsDefenders)
+        if (containsDefenders)
             return this.aggressors;
 
         return new HashSet<WarParticipant>();
@@ -116,7 +120,7 @@ public class War extends AbstractDomainObject {
     private <T> void addToSet(Set<T> set, T object, WarServiceException exception) {
         var successfullyAdded = set.add(object);
 
-        if(!successfullyAdded) {
+        if (!successfullyAdded) {
             log.warn("Could not add {} [{}] because it is already present in Set", object.getClass().getSimpleName(), object.toString());
             throw exception;
         }
@@ -146,7 +150,7 @@ public class War extends AbstractDomainObject {
         setIsActive(false);
 
         val endDate = OffsetDateTime.now();
-        log.debug("Setting war [{}] end date to [{}]",name, endDate);
+        log.debug("Setting war [{}] end date to [{}]", name, endDate);
         setEndDate(endDate);
     }
 

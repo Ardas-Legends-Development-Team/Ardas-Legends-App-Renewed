@@ -1,10 +1,12 @@
 package com.ardaslegends.domain;
 
-import com.fasterxml.jackson.annotation.*;
-import lombok.*;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +28,10 @@ public final class Army extends AbstractDomainObject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -50,35 +54,47 @@ public final class Army extends AbstractDomainObject {
     private RPChar boundTo; //rp character the army is currently bound to
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "army")
+    @Builder.Default
     private List<Unit> units = new ArrayList<>(); //the units in this army contains
 
     @ElementCollection
     @CollectionTable(name = "army_sieges",
-                joinColumns = @JoinColumn(name = "army_id", foreignKey = @ForeignKey(name = "fk_army_sieges_army_id")))
+            joinColumns = @JoinColumn(name = "army_id", foreignKey = @ForeignKey(name = "fk_army_sieges_army_id")))
+    @Builder.Default
     private List<String> sieges = new ArrayList<>(); //list of siege equipment this
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "stationed_at", foreignKey = @ForeignKey(name = "fk_armies_stationed_at"))
     private ClaimBuild stationedAt; //claimbuild where this army is stationed
 
     @NotNull(message = "Army: freeTokens must not be null")
+    @Column(name = "free_tokens")
     private Double freeTokens; //how many free unit tokens this army has left
 
+    @Builder.Default
+    @Column(name = "is_healing")
     private Boolean isHealing = false;
+    @Column(name = "heal_start")
     private OffsetDateTime healStart;
+    @Column(name = "heal_end")
     private OffsetDateTime healEnd;
+    @Column(name = "hours_healed")
     private Integer hoursHealed;
+    @Column(name = "hours_left_healing")
     private Integer hoursLeftHealing;
+    @Column(name = "heal_last_updated_at")
     private OffsetDateTime healLastUpdatedAt;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "origin_claimbuild", foreignKey = @ForeignKey(name = "fk_armies_origin_claimbuild"))
     private ClaimBuild originalClaimbuild; //claimbuild where this army was created from
-
+    @Column(name = "created_at")
     private OffsetDateTime createdAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "army", cascade = {CascadeType.REMOVE})
+    @Builder.Default
     private List<Movement> movements = new ArrayList<>();
 
+    @Column(name = "is_paid")
     private Boolean isPaid;
 
     public Army(String name, ArmyType armyType, Faction faction, Region currentRegion, RPChar boundTo, List<Unit> units, List<String> sieges, ClaimBuild stationedAt, Double freeTokens, boolean isHealing, OffsetDateTime healStart, OffsetDateTime healEnd,
@@ -96,6 +112,7 @@ public final class Army extends AbstractDomainObject {
         this.healStart = healStart;
         this.healEnd = healEnd;
         this.hoursHealed = hoursHealed;
+        this.healLastUpdatedAt = healStart;
         this.hoursLeftHealing = hoursLeftHealing;
         this.originalClaimbuild = originalClaimbuild;
         this.createdAt = createdAt;
@@ -117,14 +134,16 @@ public final class Army extends AbstractDomainObject {
 
     @Override
     public int hashCode() {
-        return name != null ? Objects.hash(name):0;
+        return name != null ? Objects.hash(name) : 0;
     }
 
     public boolean allUnitsAlive() {
         return this.units.stream().allMatch(unit -> Objects.equals(unit.getAmountAlive(), unit.getCount()));
     }
 
-    public boolean hasUnitsLeft() { return units.stream().anyMatch(unit -> unit.getAmountAlive() > 0); }
+    public boolean hasUnitsLeft() {
+        return units.stream().anyMatch(unit -> unit.getAmountAlive() > 0);
+    }
 
     public Optional<Movement> getActiveMovement() {
         return this.getMovements().stream().filter(Movement::getIsCurrentlyActive).findFirst();
@@ -133,11 +152,11 @@ public final class Army extends AbstractDomainObject {
     @JsonIgnore
     public int getAmountOfHealHours() {
         double tokensMissing = units.stream()
-                .map(unit -> ((unit.getCount()-unit.getAmountAlive())) * unit.getCost())
+                .map(unit -> ((unit.getCount() - unit.getAmountAlive())) * unit.getCost())
                 .reduce(0.0, Double::sum);
         double hoursHeal = tokensMissing * 24 / 6;
         int divisor = 24;
-        if(this.stationedAt.getType().equals(ClaimBuildType.STRONGHOLD)) {
+        if (this.stationedAt.getType().equals(ClaimBuildType.STRONGHOLD)) {
             hoursHeal /= 2;
             divisor = 12;
         }

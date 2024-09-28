@@ -10,8 +10,10 @@ import lombok.val;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -24,7 +26,7 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
     public ClaimBuild queryByNameIgnoreCase(String claimbuildName) {
         val fetchedClaimbuild = queryByNameIgnoreCaseOptional(claimbuildName);
 
-        if(fetchedClaimbuild.isEmpty()) {
+        if (fetchedClaimbuild.isEmpty()) {
             throw ClaimbuildRepositoryException.entityNotFound("claimbuildName", claimbuildName);
         }
 
@@ -51,7 +53,7 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
 
     @Override
     public List<ClaimBuild> queryByNames(String[] names) {
-        log.debug("Querying claimbuilds by names: {}", names);
+        log.debug("Querying claimbuilds by names: {}", Arrays.toString(names));
         Objects.requireNonNull(names, "Names must not be null");
         QClaimBuild qClaimBuild = QClaimBuild.claimBuild;
 
@@ -68,7 +70,7 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
     @Override
     public List<ClaimBuild> queryByFaction(Faction faction) {
         log.debug("Querying claimbuilds of faction [{}]", faction);
-        if(faction == null) {
+        if (faction == null) {
             log.warn("Faction was null in findClaimBuildsByFaction!");
             throw RepositoryNullPointerException.queryMethodParameterWasNull("faction", "findClaimBuildsByFaction");
         }

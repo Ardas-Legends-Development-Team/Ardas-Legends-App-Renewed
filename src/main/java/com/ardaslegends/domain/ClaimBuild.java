@@ -1,12 +1,18 @@
 package com.ardaslegends.domain;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -44,14 +50,17 @@ public final class ClaimBuild extends AbstractEntity {
     private Coordinate coordinates; //coordinate locations
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "stationedAt")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
+    @Builder.Default
     private List<Army> stationedArmies = new ArrayList<>(); //armies which are stationed in this CB
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "originalClaimbuild")
-    @JsonIdentityReference(alwaysAsId=true)
+    @JsonIdentityReference(alwaysAsId = true)
+    @Builder.Default
     private List<Army> createdArmies = new ArrayList<>(); //armies which were created from this CB. Usually only 1 army, but capitals can create 2
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, mappedBy = "claimbuild")
+    @Builder.Default
     private List<ProductionClaimbuild> productionSites = new ArrayList<>(); //the production sites in this cb
 
     @ElementCollection(targetClass = SpecialBuilding.class)
@@ -59,6 +68,7 @@ public final class ClaimBuild extends AbstractEntity {
             joinColumns = @JoinColumn(name = "claimbuild_id", foreignKey = @ForeignKey(name = "fk_claimbuild_special_buildings_claimbuild_id")))
     @Column(name = "special_buildings")
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private List<SpecialBuilding> specialBuildings = new ArrayList<>(); //special buildings in this cb, e.g. House of Healing
 
     private String traders; //traders in this CB. e.g. Dwarven Smith. Only relevant for staff so they know which traders need to be added
@@ -68,8 +78,9 @@ public final class ClaimBuild extends AbstractEntity {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "claimbuild_builders",
-            joinColumns = { @JoinColumn(name = "claimbuild_id", foreignKey = @ForeignKey(name = "fk_claimbuild_builders_claimbuild_id"))},
-            inverseJoinColumns = { @JoinColumn(name = "player_id", foreignKey = @ForeignKey(name = "fk_claimbuild_builders_player_id")) })
+            joinColumns = {@JoinColumn(name = "claimbuild_id", foreignKey = @ForeignKey(name = "fk_claimbuild_builders_claimbuild_id"))},
+            inverseJoinColumns = {@JoinColumn(name = "player_id", foreignKey = @ForeignKey(name = "fk_claimbuild_builders_player_id"))})
+    @Builder.Default
     private Set<Player> builtBy = new HashSet<>(); //the player who built the CB
 
     private int freeArmiesRemaining; // Every new army decrements this attribute until its at 0
@@ -94,6 +105,7 @@ public final class ClaimBuild extends AbstractEntity {
         this.freeArmiesRemaining = type.getFreeArmies();
         this.freeTradingCompaniesRemaining = type.getFreeTradingCompanies();
     }
+
     public ClaimBuild(String name, Region region, ClaimBuildType type, Faction ownedBy, Coordinate coordinates, List<ProductionClaimbuild> productionSites, List<SpecialBuilding> specialBuildings, String traders, String siege, String numberOfHouses, Set<Player> builtBy) {
         this(name, region, type, ownedBy, coordinates, specialBuildings, traders, siege, numberOfHouses, builtBy);
         this.productionSites = productionSites;
@@ -117,11 +129,12 @@ public final class ClaimBuild extends AbstractEntity {
         log.debug("Claimbuild [{}] has created [{}] trading companies", this.name, count);
         return count;
     }
+
     public boolean atMaxArmies() {
         int countOfArmies = getCountOfArmies();
         int maxArmies = getType().getMaxArmies();
 
-        if(countOfArmies >= maxArmies) {
+        if (countOfArmies >= maxArmies) {
             log.debug("Claimbuild [{}] is at max armies, max armies [{}] - armies created [{}]", this.name, maxArmies, countOfArmies);
             return true;
         }
@@ -134,7 +147,7 @@ public final class ClaimBuild extends AbstractEntity {
         int countOfTradingCompanies = getCountOfTradingCompanies();
         int maxTradingCompanies = getType().getMaxTradingCompanies();
 
-        if(countOfTradingCompanies >= maxTradingCompanies) {
+        if (countOfTradingCompanies >= maxTradingCompanies) {
             log.debug("Claimbuild [{}] is at max trading companies, max companies[{}] - companies created [{}]", this.name, maxTradingCompanies, countOfTradingCompanies);
             return true;
         }
