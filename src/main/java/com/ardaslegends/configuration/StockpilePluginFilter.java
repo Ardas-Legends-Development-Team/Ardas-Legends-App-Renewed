@@ -33,14 +33,14 @@ public class StockpilePluginFilter extends OncePerRequestFilter {
                 throw new Exception();
             }
             if (secretValue.equals(secret)) {
-                logger.info("Request is from the plugin");
+                logger.debug("Request is from the plugin");
                 // Bypass security checks
                 SecurityContextHolder.getContext().setAuthentication(
                         new StockpilePluginAuthenticationToken(new WebAuthenticationDetailsSource().buildDetails(request))
                 );
             }
         } catch (Exception e) {
-            logger.info("Request is not from the plugin");
+            logger.debug("Request is not from the plugin");
         } finally {
             filterChain.doFilter(request, response);
         }

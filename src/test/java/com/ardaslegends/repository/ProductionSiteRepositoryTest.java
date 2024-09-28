@@ -28,7 +28,7 @@ public class ProductionSiteRepositoryTest {
     @BeforeEach
     void setup() {
 
-        Resource resource = Resource.builder().resourceName("Oak").resourceType(ResourceType.MINERAL).minecraftItemId("3423").build();
+        Resource resource = Resource.builder().resourceName("Oak").resourceType(ResourceType.WOOD).minecraftItemId("3423").build();
 
         log.info("Saving resource");
         resource = resourceRepository.save(resource);
@@ -45,7 +45,7 @@ public class ProductionSiteRepositoryTest {
         val prodSite = productionSiteRepository.queryByTypeAndResourceOptional(ProductionSiteType.LUMBER_CAMP, "Oak");
         assertThat(prodSite).isPresent();
         assertThat(prodSite.get().getProducedResource().getResourceName()).isEqualTo("Oak");
-        assertThat(prodSite.get().getProducedResource().getResourceType()).isEqualTo(ResourceType.MINERAL);
+        assertThat(prodSite.get().getProducedResource().getResourceType()).isEqualTo(ResourceType.WOOD);
     }
 
 }
