@@ -112,6 +112,7 @@ public final class Army extends AbstractDomainObject {
         this.healStart = healStart;
         this.healEnd = healEnd;
         this.hoursHealed = hoursHealed;
+        this.healLastUpdatedAt = healStart;
         this.hoursLeftHealing = hoursLeftHealing;
         this.originalClaimbuild = originalClaimbuild;
         this.createdAt = createdAt;
