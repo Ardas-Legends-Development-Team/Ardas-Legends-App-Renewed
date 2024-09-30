@@ -5,13 +5,11 @@ import com.ardaslegends.domain.AbstractDomainObject;
 import com.ardaslegends.domain.Army;
 import com.ardaslegends.domain.Faction;
 import com.ardaslegends.domain.war.War;
-import jakarta.annotation.Nullable;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.*;
 import lombok.Setter;
 
 import java.time.OffsetDateTime;
@@ -34,16 +32,16 @@ public class Battle extends AbstractDomainObject {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "wars_battles",
-            joinColumns = { @JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_wars_battles_battle_id"))},
-            inverseJoinColumns = { @JoinColumn(name = "war_id", foreignKey = @ForeignKey(name = "fk_wars_battles_war_id")) })
+            joinColumns = {@JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_wars_battles_battle_id"))},
+            inverseJoinColumns = {@JoinColumn(name = "war_id", foreignKey = @ForeignKey(name = "fk_wars_battles_war_id"))})
     private Set<War> wars;
 
     private String name;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "battle_attackingArmies",
-            joinColumns = { @JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_battle_attackingArmies_battle"))},
-            inverseJoinColumns = { @JoinColumn(name = "atackingArmy_id", foreignKey = @ForeignKey(name = "fk_battle_attackingArmies_attackingArmy")) })
+            joinColumns = {@JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_battle_attackingArmies_battle"))},
+            inverseJoinColumns = {@JoinColumn(name = "atackingArmy_id", foreignKey = @ForeignKey(name = "fk_battle_attackingArmies_attackingArmy"))})
     private Set<Army> attackingArmies = new HashSet<>(1);
 
     @NotNull
@@ -57,11 +55,12 @@ public class Battle extends AbstractDomainObject {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "battle_defendingArmies",
-            joinColumns = { @JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_battle_defendingArmies_battle"))},
-            inverseJoinColumns = { @JoinColumn(name = "defendingArmy_id", foreignKey = @ForeignKey(name = "fk_battle_defendingArmies_defendingArmy")) })
+            joinColumns = {@JoinColumn(name = "battle_id", foreignKey = @ForeignKey(name = "fk_battle_defendingArmies_battle"))},
+            inverseJoinColumns = {@JoinColumn(name = "defendingArmy_id", foreignKey = @ForeignKey(name = "fk_battle_defendingArmies_defendingArmy"))})
     private Set<Army> defendingArmies = new HashSet<>();
 
     @Setter
+    @Enumerated(EnumType.STRING)
     private BattlePhase battlePhase;
 
     private OffsetDateTime declaredDate;
@@ -93,7 +92,7 @@ public class Battle extends AbstractDomainObject {
         this.agreedBattleDate = agreedBattleDate;
         this.battleLocation = battleLocation;
         this.initialAttacker = attackingArmies.stream().findFirst().orElseThrow(() -> new IllegalArgumentException("CONTACT DEVS: No initial attacker in Battle %s!".formatted(name)));
-        if(battleLocation.getFieldBattle())
+        if (battleLocation.getFieldBattle())
             this.initialDefender = defendingArmies.stream().findFirst().orElseThrow(() -> new IllegalArgumentException("CONTACT DEVS: No initial defender in Battle %s!".formatted(name))).getFaction();
         else
             this.initialDefender = battleLocation.getClaimBuild().getOwnedBy();
@@ -110,6 +109,12 @@ public class Battle extends AbstractDomainObject {
         return defendingArmies.stream().findFirst()
                 .orElseThrow(() -> new NullPointerException("Found no defending armies in battle at location %s".formatted(battleLocation.toString())));
     }
-    public boolean isOver() { return BattlePhase.CONCLUDED.equals(this.battlePhase); }
-    public boolean isFieldBattle() {return battleLocation.getFieldBattle();}
+
+    public boolean isOver() {
+        return BattlePhase.CONCLUDED.equals(this.battlePhase);
+    }
+
+    public boolean isFieldBattle() {
+        return battleLocation.getFieldBattle();
+    }
 }

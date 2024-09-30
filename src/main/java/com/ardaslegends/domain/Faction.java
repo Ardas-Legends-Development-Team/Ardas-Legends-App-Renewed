@@ -51,6 +51,7 @@ public final class Faction extends AbstractDomainObject {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "ownedBy")
     private List<ClaimBuild> claimBuilds; //all claimbuilds of this faction
     @ManyToMany(mappedBy = "usableBy")
+    @Builder.Default
     private Set<UnitType> availableUnits = new HashSet<>(15);
 
 
@@ -91,6 +92,7 @@ public final class Faction extends AbstractDomainObject {
         this.homeRegion = homeRegion;
         this.factionBuffDescr = factionBuffDescr;
         this.foodStockpile = 0;
+        this.availableUnits = new HashSet<>(15);
     }
 
     @JsonIgnore
