@@ -1,5 +1,6 @@
 package com.ardaslegends.domain;
 
+import com.ardaslegends.domain.war.battle.Battle;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -96,6 +97,9 @@ public final class Army extends AbstractDomainObject {
 
     @Column(name = "is_paid")
     private Boolean isPaid;
+
+    @Column(name = "current_battle")
+    private Battle currentBattle;
 
     public Army(String name, ArmyType armyType, Faction faction, Region currentRegion, RPChar boundTo, List<Unit> units, List<String> sieges, ClaimBuild stationedAt, Double freeTokens, boolean isHealing, OffsetDateTime healStart, OffsetDateTime healEnd,
                 Integer hoursHealed, Integer hoursLeftHealing, ClaimBuild originalClaimbuild, OffsetDateTime createdAt, boolean isPaid) {
