@@ -88,7 +88,7 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         }
 
         log.debug("Checking if attacking army is currently in a battle or has already declared a battle");
-        if (attackingArmy.getCurrentBattle() != null) {
+        if (this.isArmyInActiveBattle(attackingArmy.getId())) {
             log.warn("Attacking army is currently in a battle, cannot declare battle!");
             throw BattleServiceException.armyAlreadyInBattle(attackingArmy.getName());
         }
@@ -207,7 +207,6 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         createdBattle.setTimeFrozenFrom(timer.finishesAt());
 
         Battle battle;
-        log.debug("Trying to persist the battle object");
         try {
             battle = secureSave(createdBattle, battleRepository);
         } catch (Exception e) {
@@ -309,9 +308,7 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
                 .toList();
         log.debug("Armies not mentioned in unitCasualties: [{}]", StringUtils.join(armiesNotMentioned, ", "));
         log.debug("Killing all units of armies: [{}]", StringUtils.join(armiesNotMentioned, ", "));
-        armiesNotMentioned.forEach(army -> {
-            unitCasualties.addAll(killAllUnitsOfArmy(army, battle));
-        });
+        armiesNotMentioned.forEach(army -> unitCasualties.addAll(killAllUnitsOfArmy(army)));
 
         log.debug("Updating all player casualties");
         val rpCharCasualties = updateKilledPlayers(concludeBattleDto.playersKilled());
@@ -444,11 +441,10 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
     /**
      * Kills all the units in the army and returns a set of UnitCasualties for all the units
      *
-     * @param army   Army which units should be killed
-     * @param battle The battle which the casualties happened in
+     * @param army Army which units should be killed
      * @return A set of UnitCasualty objects of the units that died in the battle.
      */
-    private Set<UnitCasualty> killAllUnitsOfArmy(Army army, Battle battle) {
+    private Set<UnitCasualty> killAllUnitsOfArmy(Army army) {
         log.debug("Killing all units of army [{}]", army.getName());
 
         val unitCasualties = new HashSet<UnitCasualty>();
@@ -526,5 +522,29 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         log.debug("Created [{}] casualties", allCasualties.size());
 
         return allCasualties;
+    }
+
+    /**
+     * Checks if the army with the given ID is currently involved in any active battles.
+     *
+     * @param armyId the ID of the army to check
+     * @return true if the army is in an active battle, false otherwise
+     */
+    @Transactional(readOnly = true)
+    public boolean isArmyInActiveBattle(Long armyId) {
+        Battle activeBattle = battleRepository.findActiveBattleByArmyId(armyId);
+        log.info("Active battle: {}", activeBattle);
+        return activeBattle != null;
+    }
+
+    /**
+     * Retrieves the past battles involving the specified army.
+     *
+     * @param armyId the ID of the army to retrieve past battles for
+     * @return a set of past battles involving the specified army
+     */
+    @Transactional(readOnly = true)
+    public Set<Battle> getPastBattlesByArmyId(Long armyId) {
+        return battleRepository.findPastBattlesByArmyId(armyId);
     }
 }

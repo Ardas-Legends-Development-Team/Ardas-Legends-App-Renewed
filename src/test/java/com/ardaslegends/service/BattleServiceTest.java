@@ -1,14 +1,14 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
-import com.ardaslegends.domain.war.battle.Battle;
-import com.ardaslegends.domain.war.battle.BattleLocation;
 import com.ardaslegends.domain.war.War;
 import com.ardaslegends.domain.war.WarParticipant;
-import com.ardaslegends.repository.war.battle.BattleRepository;
+import com.ardaslegends.domain.war.battle.Battle;
+import com.ardaslegends.domain.war.battle.BattleLocation;
 import com.ardaslegends.repository.war.WarRepository;
-import com.ardaslegends.service.dto.war.battle.CreateBattleDto;
+import com.ardaslegends.repository.war.battle.BattleRepository;
 import com.ardaslegends.service.discord.DiscordService;
+import com.ardaslegends.service.dto.war.battle.CreateBattleDto;
 import com.ardaslegends.service.exceptions.logic.army.ArmyServiceException;
 import com.ardaslegends.service.exceptions.logic.war.BattleServiceException;
 import com.ardaslegends.service.time.TimeFreezeService;
@@ -29,43 +29,38 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @Slf4j
 public class BattleServiceTest {
+    Set<Army> attackingArmies;
+    Set<Army> defendingArmies;
+    CreateBattleDto createBattleDto;
     private WarRepository mockWarRepository;
+    private BattleRepository mockBattleRepository;
     private BattleService battleService;
-
     private Faction faction1;
     private Faction faction2;
-
     private RPChar rpchar2;
-
     private Player player1;
-
     private Army army1;
     private Army army2;
-
     private War war;
-    private  WarParticipant warParticipant2;
-
+    private WarParticipant warParticipant2;
     private BattleLocation battleLocation;
-
     private Region region1;
     private Region region2;
     private ClaimBuild claimBuild2;
     private Movement movement;
+    private Battle battle;
 
-    Set<Army> attackingArmies;
-    Set<Army> defendingArmies;
-
-    CreateBattleDto createBattleDto;
     @BeforeEach
-    void setup(){
-        BattleRepository mockBattleRepository = mock(BattleRepository.class);
+    void setup() {
         mockWarRepository = mock(WarRepository.class);
+        mockBattleRepository = mock(BattleRepository.class);
         Pathfinder pathfinder = mock(Pathfinder.class);
         ArmyService mockArmyService = mock(ArmyService.class);
         PlayerService mockPlayerService = mock(PlayerService.class);
@@ -77,8 +72,7 @@ public class BattleServiceTest {
         User mockUser1 = mock(User.class);
         User mockUser2 = mock(User.class);
         Role mockRole = mock(Role.class);
-        battleService = new BattleService(mockBattleRepository, mockArmyService, mockPlayerService, mockRpCharService, mockClaimBuildService,mockWarRepository, pathfinder, mockFactionService, mockTimeFreezeService, mockDiscordService);
-
+        battleService = new BattleService(mockBattleRepository, mockArmyService, mockPlayerService, mockRpCharService, mockClaimBuildService, mockWarRepository, pathfinder, mockFactionService, mockTimeFreezeService, mockDiscordService);
         region1 = Region.builder().id("90").neighboringRegions(new HashSet<>()).regionType(RegionType.LAND).build();
         region2 = Region.builder().id("91").neighboringRegions(new HashSet<>()).regionType(RegionType.HILL).build();
         Region region3 = Region.builder().id("92").neighboringRegions(new HashSet<>()).regionType(RegionType.LAND).build();
@@ -134,9 +128,9 @@ public class BattleServiceTest {
         defendingArmies = new HashSet<>();
         defendingArmies.add(army2);
 
-        battleLocation = new BattleLocation(region2,true, null);
+        battleLocation = new BattleLocation(region2, true, null);
 
-        Battle battle = new Battle(new HashSet<>(Set.of(war)), "Battle of Gondor", attackingArmies, defendingArmies, OffsetDateTime.now(), OffsetDateTime.of(2023, 9, 20, 0, 0, 0, 0, ZoneOffset.UTC), OffsetDateTime.of(2023, 9, 30, 0, 0, 0, 0, ZoneOffset.UTC), OffsetDateTime.of(2023, 9, 20, 0, 0, 0, 0, ZoneOffset.UTC), battleLocation);
+        battle = new Battle(new HashSet<>(Set.of(war)), "Battle of Gondor", attackingArmies, defendingArmies, OffsetDateTime.now(), OffsetDateTime.of(2023, 9, 20, 0, 0, 0, 0, ZoneOffset.UTC), OffsetDateTime.of(2023, 9, 30, 0, 0, 0, 0, ZoneOffset.UTC), OffsetDateTime.of(2023, 9, 20, 0, 0, 0, 0, ZoneOffset.UTC), battleLocation);
 
         PathElement pathElement1 = PathElement.builder().region(region1).baseCost(region1.getCost()).actualCost(0).build();
         PathElement pathElement2 = PathElement.builder().region(region2).baseCost(region2.getCost()).actualCost(region2.getCost()).build();
@@ -144,10 +138,10 @@ public class BattleServiceTest {
         List<PathElement> path = List.of(pathElement2, pathElement1);
 
         val now = OffsetDateTime.now();
-        movement =  Movement.builder().isCharMovement(false).startTime(now.minusHours(2)).reachesNextRegionAt(now.plusHours(46)).endTime(now.plusHours(46)).isCurrentlyActive(true).army(army1).path(path).build();
+        movement = Movement.builder().isCharMovement(false).startTime(now.minusHours(2)).reachesNextRegionAt(now.plusHours(46)).endTime(now.plusHours(46)).isCurrentlyActive(true).army(army1).path(path).build();
 
-        createBattleDto = new CreateBattleDto("1234","Battle of Gondor","Knights of Gondor",
-                "Knights of Isengard",true,null);
+        createBattleDto = new CreateBattleDto("1234", "Battle of Gondor", "Knights of Gondor",
+                "Knights of Isengard", true, null);
 
         when(mockPlayerService.getPlayerByDiscordId(any())).thenReturn(player1);
         when(mockArmyService.getArmyByName(any())).thenReturn(army1);
@@ -159,12 +153,12 @@ public class BattleServiceTest {
         when(mockUser1.getMentionTag()).thenReturn(player1.getIgn());
         when(mockUser2.getMentionTag()).thenReturn(player2.getIgn());
         when(mockRole.getMentionTag()).thenReturn("RoleMentionTag");
-        when(pathfinder.findShortestWay(army1.getCurrentRegion(), region2,player1,false)).thenReturn(movement.getPath());
+        when(pathfinder.findShortestWay(army1.getCurrentRegion(), region2, player1, false)).thenReturn(movement.getPath());
         when(mockClaimBuildService.getClaimBuildByName(claimBuild1.getName())).thenReturn(claimBuild1);
         when(mockClaimBuildService.getClaimBuildByName(claimBuild2.getName())).thenReturn(claimBuild2);
         when(mockClaimBuildService.getClaimBuildByName(claimBuild3.getName())).thenReturn(claimBuild3);
-        when(mockWarRepository.queryActiveInitialWarBetween(any(),any())).thenReturn(Optional.of(war));
-        when(mockWarRepository.queryWarsBetweenFactions(any(),any(), any())).thenReturn(Set.of(war));
+        when(mockWarRepository.queryActiveInitialWarBetween(any(), any())).thenReturn(Optional.of(war));
+        when(mockWarRepository.queryWarsBetweenFactions(any(), any(), any())).thenReturn(Set.of(war));
         when(mockBattleRepository.save(any())).thenAnswer(i -> i.getArguments()[0]);
         when(mockArmyService.getArmyByName("Knights of Gondor")).thenReturn(army1);
         when(mockArmyService.getArmyByName("Knights of Isengard")).thenReturn(army2);
@@ -172,12 +166,12 @@ public class BattleServiceTest {
     }
 
     @Test
-    void ensureCreateBattleWorksWhenPlayerBoundToArmy(){
+    void ensureCreateBattleWorksWhenPlayerBoundToArmy() {
         log.debug("Testing if createBattle works when player is not leader but bound to the army!");
 
         // Assign
         log.trace("Initializing player, rpchar, regions, army");
-        CreateBattleDto createBattleDto = new CreateBattleDto("1234","Battle of Gondor","Knights of Gondor","Knights of Isengard",true, null);
+        CreateBattleDto createBattleDto = new CreateBattleDto("1234", "Battle of Gondor", "Knights of Gondor", "Knights of Isengard", true, null);
 
         Battle newBattle = battleService.createBattle(createBattleDto);
         log.debug(newBattle.getName());
@@ -190,7 +184,7 @@ public class BattleServiceTest {
     }
 
     @Test
-    void ensureCreateBattleWorksWithClaimBuildBattle(){
+    void ensureCreateBattleWorksWithClaimBuildBattle() {
         log.debug("Testing if createBattle works when player is not leader but bound to the army!");
 
         // Assign
@@ -198,7 +192,7 @@ public class BattleServiceTest {
         claimBuild2.setStationedArmies(List.of(army2));
         army2.setStationedAt(claimBuild2);
         battleLocation = new BattleLocation(claimBuild2.getRegion(), false, claimBuild2);
-        CreateBattleDto createBattleDto = new CreateBattleDto("1234","Battle of Gondor","Knights of Gondor",null,false, claimBuild2.getName());
+        CreateBattleDto createBattleDto = new CreateBattleDto("1234", "Battle of Gondor", "Knights of Gondor", null, false, claimBuild2.getName());
 
         Battle newBattle = battleService.createBattle(createBattleDto);
         log.debug(newBattle.getName());
@@ -210,7 +204,7 @@ public class BattleServiceTest {
     }
 
     @Test
-    void ensureCreateBattleWorksWhenPlayerIsLeader(){
+    void ensureCreateBattleWorksWhenPlayerIsLeader() {
         log.debug("Testing if createBattle works when player is the faction leader but not bound to the army!");
         army1.setBoundTo(rpchar2);
         faction1.setLeader(player1);
@@ -225,12 +219,12 @@ public class BattleServiceTest {
     }
 
     @Test
-    void ensureCreateBattleWorksWhenDefendingArmyIsMovingButCanBeCaught(){
+    void ensureCreateBattleWorksWhenDefendingArmyIsMovingButCanBeCaught() {
         log.debug("Testing if createBattle works when defending army is moving but can be caught!");
 
         // Assign
         log.trace("Initializing player, rpchar, regions, army");
-        CreateBattleDto createBattleDto = new CreateBattleDto("1234","Battle of Gondor","Knights of Gondor","Knights of Isengard",true,"Aira");
+        CreateBattleDto createBattleDto = new CreateBattleDto("1234", "Battle of Gondor", "Knights of Gondor", "Knights of Isengard", true, "Aira");
 
         Battle newBattle = battleService.createBattle(createBattleDto);
         log.debug(newBattle.getName());
@@ -242,55 +236,55 @@ public class BattleServiceTest {
     }
 
     @Test
-    void ensureCreateBattleThrowsExceptionWhenPlayerNotBound(){
+    void ensureCreateBattleThrowsExceptionWhenPlayerNotBound() {
         //Player1 is not bound to attacking army, so they have no permission to create a battle
-        CreateBattleDto createBattleDto = new CreateBattleDto(player1.getDiscordID(),"Battle of Gondor",
-                "Knights of Isengard","Knights of Gondor",true,"Aira");
+        CreateBattleDto createBattleDto = new CreateBattleDto(player1.getDiscordID(), "Battle of Gondor",
+                "Knights of Isengard", "Knights of Gondor", true, "Aira");
 
-        var exception = assertThrows(ArmyServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(ArmyServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).isEqualTo(ArmyServiceException.noPermissionToPerformThisAction().getMessage());
     }
 
     @Test
-    void ensureCreateBattleThrowsNotEnoughHealthException(){
+    void ensureCreateBattleThrowsNotEnoughHealthException() {
         army1.setFreeTokens(0.0);
 
-        CreateBattleDto createBattleDto = new CreateBattleDto("1234","Battle of Gondor","Knights of Gondor","Knights of Isengard",true,"Aira");
+        CreateBattleDto createBattleDto = new CreateBattleDto("1234", "Battle of Gondor", "Knights of Gondor", "Knights of Isengard", true, "Aira");
 
-        var exception = assertThrows(BattleServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).contains("Army does not have enough health");
     }
 
     @Test
-    void ensureCreateBattleThrowsExceptionWhenDefendingArmyIsMovingAway(){
+    void ensureCreateBattleThrowsExceptionWhenDefendingArmyIsMovingAway() {
         log.debug("Testing if createBattle throws exception when defending army is moving away and cannot be caught!");
-        
+
         movement.setEndTime(movement.getStartTime().plusHours(22));
         movement.setReachesNextRegionAt(movement.getStartTime().plusHours(22));
         army2.getMovements().add(movement);
 
-        var exception = assertThrows(BattleServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).isEqualTo(BattleServiceException.defendingArmyIsMovingAway(army2).getMessage());
     }
 
     @Test
-    void ensureCreateBattleThrowsExceptionWhenFactionsNotAtWar(){
+    void ensureCreateBattleThrowsExceptionWhenFactionsNotAtWar() {
         log.debug("Testing if createBattle throws exception when factions are not at war!");
 
         war = null;
-        when(mockWarRepository.queryWarsBetweenFactions(any(),any(),any())).thenReturn(new HashSet<>());
+        when(mockWarRepository.queryWarsBetweenFactions(any(), any(), any())).thenReturn(new HashSet<>());
 
 
-        var exception = assertThrows(BattleServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).isEqualTo(BattleServiceException.factionsNotAtWar(faction1.getName(), faction2.getName()).getMessage());
     }
 
     @Test
-    void ensureCreateBattleThrowsExceptionWhenAttackingArmyIsMoving(){
+    void ensureCreateBattleThrowsExceptionWhenAttackingArmyIsMoving() {
         log.debug("Testing if createBattle throws exception when attacking army is moving!");
 
         movement.setArmy(army1);
@@ -298,20 +292,55 @@ public class BattleServiceTest {
         movements.add(movement);
         army1.setMovements(movements);
 
-        var exception = assertThrows(BattleServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).isEqualTo(BattleServiceException.attackingArmyHasAnotherMovement().getMessage());
     }
 
     @Test
-    void ensureCreateBattleThrowsExceptionWhenArmiesNotInSameRegion(){
+    void ensureCreateBattleThrowsExceptionWhenArmiesNotInSameRegion() {
         log.debug("Testing if createBattle throws exception when armies not in same region!");
 
         army1.setCurrentRegion(region1);
 
-        var exception = assertThrows(BattleServiceException.class, ()-> battleService.createBattle(createBattleDto));
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
 
         assertThat(exception.getMessage()).isEqualTo(BattleServiceException.notInSameRegion(army1, army2).getMessage());
+    }
+
+    @Test
+    void ensureIsArmyInBattleReturnsTrueWhenArmyIsInBattle() {
+        log.debug("Testing if isArmyInBattle returns true when army is in battle!");
+
+        // Mock findActiveBattleByArmyId to return a battle
+        Long armyId = army1.getId();
+        when(mockBattleRepository.findActiveBattleByArmyId(armyId)).thenReturn(battle);
+
+        assertThat(battleService.isArmyInActiveBattle(army1.getId())).isTrue();
+    }
+
+    @Test
+    void ensureIsArmyInBattleReturnsFalseWhenArmyIsNotInBattle() {
+        log.debug("Testing if isArmyInBattle returns false when army is not in battle!");
+
+        // Mock findActiveBattleByArmyId to return null
+        Long armyId = army1.getId();
+        when(mockBattleRepository.findActiveBattleByArmyId(armyId)).thenReturn(null);
+
+        assertThat(battleService.isArmyInActiveBattle(army1.getId())).isFalse();
+    }
+
+    @Test
+    void ensureCreateBattleThrowsExceptionWhenArmyIsAlreadyInBattle() {
+        log.debug("Testing if createBattle throws exception when army is already in battle!");
+
+        // Mock findActiveBattleByArmyId to return a non-null Battle object
+        Long armyId = army1.getId();
+        when(mockBattleRepository.findActiveBattleByArmyId(armyId)).thenReturn(battle);
+
+        var exception = assertThrows(BattleServiceException.class, () -> battleService.createBattle(createBattleDto));
+
+        assertThat(exception.getMessage()).isEqualTo(BattleServiceException.armyAlreadyInBattle(army1.getName()).getMessage());
     }
 
 }
