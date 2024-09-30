@@ -3697,112 +3697,149 @@ begin
 
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (1, 'Angmar', '#b72d04',
-            'Attacking armies can force battles into 1v1 with no allies on either side being able to aid.', 0, 68);
+            'Angmar mines and quarries produce twice as much stone and iron. When Angmar sacks an enemy claim build, that region will count as an ice region (except if they need more movement time) for non Angmar characters, armies, and trade companies regardless of the region’s actual terrain until the sacked claimbuild is repaired.',
+            0, 68);
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (2, 'Bree', '#4d4f20',
-            'Every inn generates 100 coins. Can use hobbit and ranger units. 2x trading company speed.', 0, 128);
+            'Trade companies move at double speed, factions trading access to their weapons with Bree do not need to pay materials to maintain that access. Villages can have palisades in order to force an enemy army to bring siege gear. The gate will always count as wooden quality and cannot be bigger than 4x4, The wall must be a palisade and cannot be made of stone.',
+            0, 128);
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (3, 'Dale', '#17515a',
-            '2 extra traders in towns. Every trade agreement that Dale has set up generates 250 coins monthly for both factions.',
+            'Double movements for ships on rivers. Fleets of large warships can sail up and down rivers. Armies made up entirely of archers pay no upkeep while stationed in claimbuilds.',
             0, 148);
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (4, 'Dol Amroth', '#c1ffff',
-            'The Faction Leader and Lords of Dol Amroth are granted one Lindon weapon of their choice and 1 swiftness potion per battle. This potion do not count towards the 1 brew rule.',
+            'Double movement speed in sea regions. When Dol Amroth Navies and Armies only consisting of Swan Knight Cavalry attack an enemy force, the enemy force is unable to retreat.',
             0, 332);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (5, 'Dol Guldur', '#52397c',
-            'Can type out an incantation in three separate messages in /me to break down a gate. The incantation is: Gaakh Pluhun, Gaakh Asgaja, Thrak Za Doraz Ghaamul.',
+            'After winning a battle, ½ of dead troops are immediately resurrected and added back to the army. If a Dol Guldur army with a character attached is defeated in a region with any claimbuilds under the control of Dol Guldur, the character detaches from the destroyed army rather than becoming injured. Double movement speed in forest.',
             0, 165);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (6, 'Dorwinion', '#cd00cd',
-            'Army upkeep can be paid with 10 barrels of wine monthly instead of coins. In wars, all players must drink 1 cup of potent wine when the battle starts. 2x production for Grape orchards.',
+            'Double production for farms, orchards, and vineyards. When defending a claim build, double the amount of time required for rams to breach the gate and for trebuchets to create breaches. Trade companies can move through other faction lands without needing open border agreements or an alliance.',
             0, 211);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (7, 'Dunland', '#7e6a61',
-            'Can raid 2 claimbuild once a month with an army. They will fight a battle to determine if the raid is successful  (empty builds are an auto win) if sucessful, the army will loot up to 3 production sites from the build which will be taken from the next month of CB rewards. If not successful the army is destroyed. 2x movement speed in forests.',
+            'Double movement in forests. When doing a raid, can steal resources from 2 claimbuilds instead of 1. Double resources from forester’s lodges. Armies containing cavalry take twice as much time to move through forest tiles owned by Dunland. The stables requirement for all builds can be ignored.',
             0, 174);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (8, 'Durin''s Folk', '#0000cd',
-            'Villages+ are able to build 1 extra production site that doesn''t require 4 houses to activate. Shops aren''t effected by this. 2x mountain movement.',
+            'Double movement in mountains and hills. Double mine production in hills or mountain regions.',
             0, 102);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (9, 'Ered Luin', '#a6c1f4',
-            '2x trader company movement speed. If a smithy is built as a production site in residential builds, the faction can get 1 scroll of their choice per month from the forge. A max of 1 forge is allowed per village and a max of 2 forges is allowed per town or in your capital.',
+            'Blue Dwarven trade companies can move through mountains and hills as if they are flat land. Armies stationed in Blue Dwarven military claimbuilds receive an additional 2 Blue Dwarven Warriors when besieged.',
             0, 52);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
-    VALUES (10, 'Gondor', '#e9e9e9', '2x movement in Gondor owned regions.', 0, 263);
+    VALUES (10, 'Gondor', '#e9e9e9',
+            'Gondor’s armies have different buffs depending on the fiefdom’s units that make up the army itself. See fiefdom-specific buffs for Anorien, Pelargir, Ithilien, Lossarnach, Lamedon, Blackroot Vale, and Pinnath Gelin.',
+            0, 263);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (11, 'Gulf of Harad', '#eecfa9',
-            'All armies come with a oliphant as siege (can be used as a siege tower or a ram). Still can have 3 extra siege from workshops, Oliphants are not effected by siege slowdown.',
+            'All armies come with an oliphant as siege (can be used as a siege tower or a ram). However, they can still have 3 extra siege equipment from workshops, Oliphants are not affected by siege slowdown.',
             0, 440);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (12, 'Gundabad', '#5a4132',
-            '2x movement in mountain regions and 16 ladders provided per player in a battle.', 0, 41);
+            'Gundabad armies, characters, and trade companies treat mountain tiles as flat land tiles.',
+            0, 41);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (13, 'Half-Trolls', '#9f6c60',
-            'Can use rhinos in wars. Half-Troll armies cannot retreat. While at war, Half-Trolls do not have to pay upkeep.',
+            'Can use rhinos in wars. Half-Troll armies cannot retreat. Instead of having a ram, Half-Troll Players can use Rhino mounts as rams. As long as Rhino Mounts are available, Half-Trolls do not need siege gear to besiege claimbuilds.',
             0, 494);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (14, 'Harnennor', '#800000',
-            'Can build slave pits that generate 100 coins per month, these do not generate man-flesh. Trading companies have a default army that moves with them. This army cannot be bound to or attack, but may be used to defend the trading company.',
+            'Double movement in desert regions. When Harnennor wins a skirmish, they destroy the enemy army involved and the character tied to it is injured.',
             0, 391);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
-    VALUES (15, 'Hobbits', '#7cfc00', 'Can use Huorns as units. 2x production for farms.', 0, 184);
+    VALUES (15, 'Hobbits', '#7cfc00',
+            'Can use huorns as units. Double production for farms and orchards. All Hobbit claimbuilds can have an additional free food production site.',
+            0, 184);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (16, 'Isengard', '#262626',
-            'Can use orc bombs to blow up walls in sieges. To set a bomb off run up and set it off. All armies can carry a max of 4 types of siege.',
+            'Can use orc bombs to blow up walls in sieges. Isengard Armies can forgo siege equipment, instead the bombs will create breaches in the wall. However, Isengard still needs to construct war camps. Iron and Coal mines, as well as charred lumber yards produce twice as much resources.',
             0, 197);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
-    VALUES (17, 'Lindon', '#2964d2', '2x sailing speed. Does not have to spend 1 day boarding or disembarking a ship.',
+    VALUES (17, 'Lindon', '#2964d2',
+            'Double movement speed in sea regions. When injured outside their territory, Lindon characters respawn back in the faction''s starting region fully healed.',
             0, 121);
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (18, 'Lothlórien', '#ffff00',
-            'Hedges can be built for any build and force attackers to use siege to take the build. Hedge walls also reduce the trebuchet/catapult brush size staff use to break the wall thus, making the walls take longer to break.',
+            'Double movement in forest regions. Double healing speed. Lorien Citadels and the Capital cannot be sieged out and must be attacked in order to be conquered.',
             0, 168);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (19, 'Mordor', '#ff0000',
-            'The Faction Leader''s army can build "Grond" which is a ram that instantly breaks gates instead of taking 3 hits. Does not need players nearby to move it. Enemy armies that enter geographical Mordor regions have their time to move through regions doubled.',
+            'Double movement speed in wasteland regions. Enemy armies take twice as long to move through Mordor mountain regions. Mordor rams breach gates twice as quickly.',
             0, 267);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (20, 'Morwaith', '#f4a460',
-            '6 spears in combat and 6 termites allowed in PvP. 2x speed in grassland regions.', 0, 461);
+            'Double speed in flatland regions. Double hunting lodge production. Get all produced resources when sacking a claimbuild. Claimbuilds that the Morwaith have sacked cost double to repair. Gain 20 coins per enemy unit killed in battle. Gain 500 coins per enemy player killed in battle.',
+            0, 461);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (21, 'Nomads', '#ffec8b',
-            'Can use other Southron faction units. For each trading company that Nomads have alive, they will gain 1 Southron trader spawn eggs per month. 2x movement in desert regions.',
+            'Can use other Southron faction units. 2x movement in desert regions. Factions allied to the Nomads receive 2x movement in deserts.',
             0, 400);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (22, 'Rangers of the North', '#335e48',
-            'Can build athelas farms. The farms provide 12 athelas per month. Must show some athelas in the farm build. 2x movement in forest and hill regions.',
+            'Double movement speed in forest and hill regions. When attacking another faction, can force a 1v1 battle with the other army, without other friendly or enemy armies participating in the battle.',
             0, 131);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (23, 'Rhúdel', '#c27c0e',
-            'Can use khamul''s fire in battles. Gold mines built in their capital provide double resources. (A max of 5 are doubled.)',
+            'Gold mines provide double production. When Easterling catapults and trebuchets are present in the leader’s army, that army can siege out settlements twice as fast, but Khamul’s Fire bombs must be present in the war camp.',
             0, 215);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (24, 'Rivendell', '#49688b',
-            '2x healing speed. Can build athelas farms. The farms provide 12 athelas per month. Must show some athelas in the farm build.',
+            'Double healing speed. Double house of lore production. Rivendell armies, when attached to a player, move through forest and hill tiles as if they were flat land tiles.',
             0, 110);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
-    VALUES (25, 'Rohan', '#30ca30', 'Horsemen units do not cost an extra unit. 2x movement in grassland regions.', 0,
-            245);
+    VALUES (25, 'Rohan', '#30ca30',
+            'Double movement in flatland regions. When an army has only cavalry units, the mounted units cost the same as their non-mounted counterpart. When attacking hamlets or villages, Rohirric armies ignore the post-battle movement cooldown, so Rohirric Armies can move immediately after winning these battles.',
+            0, 245);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (26, 'Southron Coast', '#ffda00',
-            '2x coin production from builds. Neither Southron armies nor their enemies can retreat from battles.', 0,
-            426);
+            'Double movement in Sea Regions. If a Southron Army has at least 1 Southron Champion AND it survives an offensive battle, that Southron army can ignore the post-battle movement cooldown and has double movement speed for the next 24 hours.',
+            0, 426);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (27, 'Taurethrim', '#007c23',
-            '2x movement in forest and jungle regions. Can use an additional 2 traps per build.', 0, 546);
+            'Double movement in forest and jungle regions. When the Taurethrim win a raid, Taurethrim armies regenerate 20 tokens worth of units. In addition, when the Taurethrim raid enemy claimbuilds, they can choose not to take the resources from the raided claimbuild, opting to instead choose one of their own claimbuilds to produce half of their production sites’ resources on top of their monthly produced resources.',
+            0, 546);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (28, 'Umbar', '#ff7f50',
-            'Can raid 2 claimbuild once a month with an army when on the sea. They will fight a battle to determine if the raid is successful  (empty builds are an auto win) if successful, the army will loot up to 5 production sites from the build which will be taken from the next month of CB rewards. If not successful the army is destroyed.',
+            'Double movement in sea regions. Warship fleets consisting entirely of Corsair units can, after successfully raiding a claimbuild, steal resources from twice the amount of production sites than normal. Umbar armies instantly embark and disembark.',
             0, 395);
+
     INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
     VALUES (29, 'Woodland Realm', '#002e00',
-            '1 ender pearl and one speed potion are provided to each WLR elf at the start of each battle. 2x movement speed in forest regions.',
+            'Double movement in forest regions. Wood-Elven armies can declare a skirmish while they are moving into a region.',
             0, 146);
-    INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
-    VALUES (30, 'Wanderer', '#002e00', 'Can aid any faction!', 0, 195);
 
+    INSERT INTO factions(id, name, colorcode, faction_buff_descr, food_stockpile, home_region_id)
+    VALUES (30, 'Wanderer', '#002e00',
+            'Can aid any faction!',
+            0, 195);
 -------------------------------------------- Resources
     INSERT INTO resources(id, resource_name, resource_type) VALUES (1, 'Larch Wood', 'WOOD');
     INSERT INTO resources(id, resource_name, resource_type) VALUES (2, 'Pear Wood', 'WOOD');
