@@ -3981,6 +3981,56 @@ begin
     INSERT INTO resources(id, resource_name, resource_type) VALUES (138, 'Coin', 'COIN');
     INSERT INTO resources(id, resource_name, resource_type) VALUES (139, 'Siege', 'SIEGE');
     INSERT INTO resources(id, resource_name, resource_type) VALUES (140, 'Pearl', 'GEM');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (141, 'Purple Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (142, 'Cyan Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (143, 'Light Gray Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (144, 'Gray Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (145, 'Pink Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (146, 'Lime Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (147, 'Light Blue Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (148, 'Magenta Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (149, 'Orange Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (150, 'Yellow Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (151, 'White Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (152, 'Brown Dye', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (153, 'Charcoal Dust', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (154, 'Striking Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (155, 'Punching Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (156, 'Fierce Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (157, 'Powerful Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (158, 'Strong Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (159, 'Eolean Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (160, 'Deflecting Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (161, 'Glancing Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (162, 'Blessed Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (163, 'Tough Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (164, 'Steadfast Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (165, 'Cooling Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (166, 'Unwithering Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (167, 'Belegostian Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (168, 'Thicksoled Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (169, 'Strongshod Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (170, 'Lightfooted Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (171, 'Fortunate Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (172, 'Lucky Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (173, 'Silken Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (174, 'Masterful Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (175, 'Hasty Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (176, 'Nimble Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (177, 'Handy Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (178, 'Hulking Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (179, 'Hefty Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (180, 'Sharp Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (181, 'Keen Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (182, 'Mighty Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (183, 'Legendary Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (184, 'Hardy Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (185, 'Lasting Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (186, 'Enduring Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (187, 'Swift Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (188, 'Long Scroll', 'OTHER');
+    INSERT INTO resources(id, resource_name, resource_type) VALUES (189, 'Sand', 'SHOVELABLE');
+
 
     -------------------------------------------- Production Sites
 
