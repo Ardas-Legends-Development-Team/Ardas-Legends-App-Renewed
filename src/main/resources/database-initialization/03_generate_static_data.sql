@@ -1,18 +1,22 @@
 DELETE
-from region_neighbours cascade;
+from region_neighbours;
 DELETE
-from factions_units cascade;
+from factions_units;
 DELETE
-from factions cascade;
+from factions;
 DELETE
-from regions cascade;
+from regions;
 DELETE
-from production_sites cascade;
+from production_sites;
 DELETE
-from resources cascade;
+from resources;
 DELETE
-from unit_types cascade;
+from unit_types;
 
+-- Reset id counters
+ALTER SEQUENCE factions_id_seq RESTART WITH 1;
+ALTER SEQUENCE production_sites_id_seq RESTART WITH 1;
+ALTER SEQUENCE resources_id_seq RESTART WITH 1;
 
 -- Regions
 

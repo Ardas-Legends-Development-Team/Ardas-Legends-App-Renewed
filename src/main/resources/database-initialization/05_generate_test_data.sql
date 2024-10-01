@@ -1,211 +1,122 @@
 -- Delete previous data
 DELETE
-FROM player_roles cascade;
+FROM player_roles;
 DELETE
-FROM rpchars cascade;
+FROM rpchars;
 DELETE
-FROM players cascade;
+FROM players;
 DELETE
-FROM faction_claimed_regions cascade;
+FROM faction_claimed_regions;
 DELETE
-FROM claimbuild_special_buildings cascade;
+FROM claimbuild_special_buildings;
 DELETE
-FROM production_claimbuild cascade;
+FROM production_claimbuild;
 DELETE
-FROM claimbuilds cascade;
+FROM claimbuilds;
+
+-- Reset id counters
+ALTER SEQUENCE players_id_seq RESTART WITH 1;
+ALTER SEQUENCE rpchars_id_seq RESTART WITH 1;
+ALTER SEQUENCE claimbuilds_id_seq RESTART WITH 1;
 
 -- Players
+INSERT INTO players (discord_id, ign, uuid, faction)
+VALUES ('261173268365443074', 'Luktronic', 'cefabe13fda44d378c5d7292724f1514', 21),
+       ('244463773052567553', 'mirak441', '4cd6b222b3894fd59d85ac90aa2c2c46', 21),
+       ('117447972710514693', 'Glupe1', '52a396a38b92412f88b43c00c56d833f', 22),
+       ('187040691564576768', 'Hamvogar', '211f84977011456c8609b4ccd4cdfcc1', 24),
+       ('386234827319410691', 'AnoJedt', '2bf56f1b870742dbb0025706a667d8c3', 21),
+       ('223821939972636682', 'jvanhierden', '8368dcfe90184d39abca98f8f1cdbeef', 21),
+       ('219498915236413441', 'WaffleEcsDee', '6dc9ac6e79fb41ef87687e448e9993bf', 27),
+       ('326492361460809729', 'SebThePro200', '1c685bc10097492aa5bce90514f64d98', 23),
+       ('465945325815988246', 'Halt03', '7956eba887af4c0795cd4e926c35498b', 19),
+       ('302411752463663104', 'SilberElb', '69be1bd412114edeb296a1209cd4b869', 21),
+       ('253505646190657537', 'VernonRoche', '866830b12e944a97918439282412c487', 8),
+       ('305738671603056640', 'MrClasster', 'd63e33bb7d3b484a88388de63e4d58fb', 28),
+       ('619647911810039819', 'OP_apples', '6cb74cbeb08f4a56b05aa03d74cef045', 2),
+       ('576542325409579009', 'Actor_chan', 'c76275119358409082693213d1a5db42', 5),
+       ('287652368538140672', 'bakbar', '83c5b1294daa4497baafeb582288e214', 7),
+       ('356314507439636490', 'Not_Pokerino', '2fff454e80c848b7890c88e2ceebe823', 22),
+       ('653941599566430229', 'ElectricSolar', '3e9c1f883af042659b201aa90f2a04e5', 19),
+       ('332800094808178688', 'Anedhel', 'ae7219bf4e444bc4b7fc3c74e95786f0', 21),
+       ('238713618982633472', 'nodas1995', '880eff8947ce4c5eb89fc0daa80a25d0', 15),
+       ('199960180585136128', 'AustriaBear', '80bbc8990987467aab40d111831e7d5f', 21),
+       ('323522559096258582', 'HabKeinTeammate', '84b6a14958ec4b2bb9b479328526651d', 21),
+       ('541263026490179594', 'bogifighter', '7c6dda4edea34deba125050b81875e70', 21),
+       ('256693291301601280', 'Estionese', 'a3590a4fd7fc40248fb6f27fcc7168f3', 18),
+       ('451378765885472768', 'DaMoffe', '899880c229ec48259a83442c3e7bb4e9', 23),
+       ('614043370838425616', 'Wer_ist_das_mp4', '9f3eea03676744a188405174c93a0e9e', 21),
+       ('131641969523949568', 'brackman', 'bfbff2d2bb72496197b3b0e5cf447795', 17),
+       ('506759496916533269', 'VO_Kop', '5cc9d6505cfb4b20a87e6d4f61a6e523', 30),
+       ('615768113933320215', 'Ilyra_', 'c2fec28a14f14ec1a05e92d2f425b946', 19),
+       ('107902800804982784', 'PenguLV', 'cb288fc014d94a8b91c756d8c86fb674', 20),
+       ('239805577906094081', 'Vaquinux_', '8b3d1fdce0f94cc19b18d14d2cec4b34', 19),
+       ('694970298738540624', 'Fidnas', '0c5730ee40d64b3d85163e013f7908b1', 2),
+       ('257132043895308288', 'Brego_16', '26f2912fabaf41169ffdd731733e8f2b', 29),
+       ('329658238566137867', 'PersephoNeko', '26a909c030084ac192a68ff40a3891ab', 17),
+       ('290251857928912898', 'ShadowsEmissary1', '6c67b630882746faad33cc445728d6a1', 27),
+       ('530482795126980608', 'ten7u', 'f1c417c0d43049478a99b6c8bf21d991', 20),
+       ('242342469339971584', 'EpicKiller113', '8aae1dfde284403c88fc50e72c08e5a2', 20),
+       ('404564519579418634', 'HellSpawn75', '91ffd49997b8467b81bc6ff45a69374a', 12),
+       ('230027896805130240', 'incorrectkiwi', 'e2ca1869a78042f09d28dc3d377bf6fc', 14),
+       ('358320428122505217', 'Linnis33', '5a3d51bcfb9445de8847102c4663a079', 25),
+       ('321680076422905856', 'SirKai', '7fdeee481a1540b2aa015c5b6a29f005', 15),
+       ('573932552742764569', 'TheMarshMan131', '89997528b20c441ba0ae0b516c34a9fd', 19),
+       ('893622681155559425', 'Anummindor', '65697ce197da4fc9b675b055eac31928', 27),
+       ('510633380136615956', 'Micro_Tiny', '7a1043cadf544c9d897824a3dffe3dcd', 20),
+       ('787072288817807360', 'Duckygamer86', 'fa6afd7cb7f545409b0c74009e526a1a', 16),
+       ('241070228312817666', 'SirMath', 'fe6bdb2a180948bb89c09ed24d9ca072', 21),
+       ('249581174161145857', 'Juststan147', 'ec5ee63695ce49e28caed44eba877915', 21),
+       ('266951038014193667', 'PrinzAtago', '5519d591cb1f497a87c9df44306624b9', 6),
+       ('1029843811330965544', 'NanoMCraft', '82a70d42f1f14599ba7c1f310b1aeb99', 28),
+       ('184287052655755264', 'NietMaxim', '43763c53ea1648d0a7e91372b8548fe9', 21),
+       ('906332631724081172', 'Jesteur', '4769352bb56043b783f6e44f05af1c88', 27),
+       ('249986430892376065', 'me_is_hidden', '939c062bbb22492a9ec5edb450d1708f', 23),
+       ('518780310071148554', 'TutsMaNix', '687a491e72794731aefd288920b9fe43', 9),
+       ('234035066227916800', 'Thallahhh', '6051bd52baf3495483da0f3c7653fcbc', 14),
+       ('750411451298218094', 'jadencad', '0d397008851249eb8986e8105a287261', 16),
+       ('611388827201830912', 'Ultatrog', '3692197228c84eb7a28a8f4446ed37cb', 3),
+       ('271437853639049216', 'NineteenLetters', 'ef6ff8a4d66f4982b66851e255a39291', 4),
+       ('657627745253064724', 'TheSm1ler', 'c8fea02402044dfda938584b6475230f', 17),
+       ('233686550477537280', 'enlists', 'c56fcc22888e4982b904e30e55f97ca9', 19),
+       ('391662269962125328', 'HanslaRoi', '370de6d975404eae967d0edddb2dee7f', 19),
+       ('692830733428850710', 'Xnoodledoodle', '77d1843db7af4c3aaf9967e2f6e6588a', 17),
+       ('332577121920745472', 'kismucek', 'd160f49bd9de4f7187953808fa4bb29e', 27),
+       ('349248375763370004', 'LordAmarok', 'bb1593fed018438986e5cfe6420c33fa', 30),
+       ('440212838368411648', 'DangoR12', '8b5ca1f46b1c4dad91d7b3ecbde196a0', 25),
+       ('680103992227004470', 'tomynick', '6da7c58c04d940fe9bcda4ce1d533ea8', 25),
+       ('286477683997671424', 'MartijnH2001', 'c861b31616494b85af800bf68b83bc57', 26),
+       ('333592886148857857', 'TheBozmeister', 'bfbd8b7cc0584787a830865551186fa6', 20),
+       ('866400719598780437', 'Dewesto', 'bfaf8b3e166d448593b8500edb93af02', 5),
+       ('187286736664002561', 'Mikaelix', 'f8bcda2c2c4b4d859a3f04768973ebdf', 11),
+       ('607152840309342209', 'NuclearGuy101', 'b0f6f3124d854e71b64935a4f2569ff3', 21),
+       ('612706637983121423', 'D4RK_CAKE', 'cdf0c90695cf4bdf9cffabbd685335b8', 30),
+       ('881101535747117086', 'Narkr3', 'caf45bc06ed54d1482995ae5cdf38d73', 26),
+       ('778293873360764948', 'gemeinerschatten', 'ea46f882bef04b4f90a974caf27d2ec9', 25),
+       ('579650565571608603', 'Nazouvak', 'f251ce7d43664353aa46382a9e566ce4', 23),
+       ('463054258980388874', 'Carovny_fila_01', '8df32ed1d4b24491ac9b4037ed260155', 25),
+       ('393523067135197185', 'xanyy_', '086d907c7a5e445694224cfd47a0964d', 25),
+       ('997192744407674890', 'MacIsCheesy', '751401cc9f3d46758a2dd6efd061d1c0', 10),
+       ('340075954980519936', 'aggiroo', '83a28db0fc7b4fdcb8c24af896c1bda5', 17),
+       ('201031579370258432', 'Bornholmeren', '54b0ffa42c744796957a87a6a76037de', 27),
+       ('323992487116931074', 'Joruin', 'a26c0a00676249e9858a22915403c1d1', 24),
+       ('724306879320424449', 'TheTrueBlueBot', 'db9522e85d79439d9990cdfb3aacaeb8', 19),
+       ('524394862074920960', 'Divination_Magic', '9a6b82810b534a0b99575410ee1c0b80', 2),
+       ('660016967113244683', 'Pilzwigder17te', '87a14c654a8143dbb1ac9bff38c34eef', 21),
+       ('1048267036746330123', 'DDRC', '69a93fd07fe44cbeb8d62aed13da7108', 26),
+       ('1028986087768596500', 'XxLegendOYASUOxX', '9f53ef4b22844ef8adaff9da1999c7c9', 24),
+       ('351279368930197505', 'Gyml', '7f9042aeb51f47bd82a76afa494a9dcc', 2),
+       ('332516348112535560', 'Jqlo', '7e15950f8087424c9d86ccc7235cac46', 27),
+       ('342980227120496640', 'BartOV', 'e8ee45e0b4f246bf8654ddc6ce8a31da', 19),
+       ('526787243420155905', 'BasilCrystalfig', '4e5c1100e6ee489d9894144a5d56cc45', 19),
+       ('287598789626167316', 'joestoen', '79f173b9bedb4792afcc75a30e6de835', 28),
+       ('546775912499118080', 'ZukiPhantasmal', 'a946b3cbd36d444494ad39af740b6573', 3),
+       ('763680695495163954', 'AinsOaaGown', '2d7ea7fa395949d182e357e440150aaf', 30),
+       ('1073882499865915452', 'DaemonTruefyre', 'cd5c399f8ece484f85a9d8157ad6da3f', 27),
+       ('231741217417723904', 'Jukoz', 'd3edcfa0dc004449b218f70bafd62e8b', 27),
+       ('378608926444224515', 'ag3ntcrab', '7355a9e51c704b7f9e29b8c5d92e0999', 27),
+       ('314708489576382464', 'xHenkka', 'b09133e908f24071b2d9535247b1c7a6', 27);
 
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (1, '261173268365443074', 'Luktronic', 'cefabe13fda44d378c5d7292724f1514', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (2, '244463773052567553', 'mirak441', '4cd6b222b3894fd59d85ac90aa2c2c46', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (3, '117447972710514693', 'Glupe1', '52a396a38b92412f88b43c00c56d833f', 22);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (4, '187040691564576768', 'Hamvogar', '211f84977011456c8609b4ccd4cdfcc1', 24);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (5, '386234827319410691', 'AnoJedt', '2bf56f1b870742dbb0025706a667d8c3', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (6, '223821939972636682', 'jvanhierden', '8368dcfe90184d39abca98f8f1cdbeef', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (7, '219498915236413441', 'WaffleEcsDee', '6dc9ac6e79fb41ef87687e448e9993bf', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (8, '326492361460809729', 'SebThePro200', '1c685bc10097492aa5bce90514f64d98', 23);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (9, '465945325815988246', 'Halt03', '7956eba887af4c0795cd4e926c35498b', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (10, '302411752463663104', 'SilberElb', '69be1bd412114edeb296a1209cd4b869', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (11, '253505646190657537', 'VernonRoche', '866830b12e944a97918439282412c487', 8);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (12, '305738671603056640', 'MrClasster', 'd63e33bb7d3b484a88388de63e4d58fb', 28);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (13, '619647911810039819', 'OP_apples', '6cb74cbeb08f4a56b05aa03d74cef045', 2);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (14, '576542325409579009', 'Actor_chan', 'c76275119358409082693213d1a5db42', 5);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (15, '287652368538140672', 'bakbar', '83c5b1294daa4497baafeb582288e214', 7);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (16, '356314507439636490', 'Not_Pokerino', '2fff454e80c848b7890c88e2ceebe823', 22);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (17, '653941599566430229', 'ElectricSolar', '3e9c1f883af042659b201aa90f2a04e5', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (18, '332800094808178688', 'Anedhel', 'ae7219bf4e444bc4b7fc3c74e95786f0', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (19, '238713618982633472', 'nodas1995', '880eff8947ce4c5eb89fc0daa80a25d0', 15);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (20, '199960180585136128', 'AustriaBear', '80bbc8990987467aab40d111831e7d5f', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (21, '323522559096258582', 'HabKeinTeammate', '84b6a14958ec4b2bb9b479328526651d', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (22, '541263026490179594', 'bogifighter', '7c6dda4edea34deba125050b81875e70', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (23, '256693291301601280', 'Estionese', 'a3590a4fd7fc40248fb6f27fcc7168f3', 18);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (24, '451378765885472768', 'DaMoffe', '899880c229ec48259a83442c3e7bb4e9', 23);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (25, '614043370838425616', 'Wer_ist_das_mp4', '9f3eea03676744a188405174c93a0e9e', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (26, '131641969523949568', 'brackman', 'bfbff2d2bb72496197b3b0e5cf447795', 17);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (27, '506759496916533269', 'VO_Kop', '5cc9d6505cfb4b20a87e6d4f61a6e523', 30);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (28, '615768113933320215', 'Ilyra_', 'c2fec28a14f14ec1a05e92d2f425b946', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (29, '107902800804982784', 'PenguLV', 'cb288fc014d94a8b91c756d8c86fb674', 20);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (30, '239805577906094081', 'Vaquinux_', '8b3d1fdce0f94cc19b18d14d2cec4b34', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (31, '694970298738540624', 'Fidnas', '0c5730ee40d64b3d85163e013f7908b1', 2);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (32, '257132043895308288', 'Brego_16', '26f2912fabaf41169ffdd731733e8f2b', 29);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (33, '329658238566137867', 'PersephoNeko', '26a909c030084ac192a68ff40a3891ab', 17);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (34, '290251857928912898', 'ShadowsEmissary1', '6c67b630882746faad33cc445728d6a1', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (35, '530482795126980608', 'ten7u', 'f1c417c0d43049478a99b6c8bf21d991', 20);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (36, '242342469339971584', 'EpicKiller113', '8aae1dfde284403c88fc50e72c08e5a2', 20);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (37, '404564519579418634', 'HellSpawn75', '91ffd49997b8467b81bc6ff45a69374a', 12);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (38, '230027896805130240', 'incorrectkiwi', 'e2ca1869a78042f09d28dc3d377bf6fc', 14);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (39, '358320428122505217', 'Linnis33', '5a3d51bcfb9445de8847102c4663a079', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (40, '321680076422905856', 'SirKai', '7fdeee481a1540b2aa015c5b6a29f005', 15);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (41, '573932552742764569', 'TheMarshMan131', '89997528b20c441ba0ae0b516c34a9fd', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (42, '893622681155559425', 'Anummindor', '65697ce197da4fc9b675b055eac31928', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (43, '510633380136615956', 'Micro_Tiny', '7a1043cadf544c9d897824a3dffe3dcd', 20);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (44, '787072288817807360', 'Duckygamer86', 'fa6afd7cb7f545409b0c74009e526a1a', 16);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (45, '241070228312817666', 'SirMath', 'fe6bdb2a180948bb89c09ed24d9ca072', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (46, '249581174161145857', 'Juststan147', 'ec5ee63695ce49e28caed44eba877915', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (47, '266951038014193667', 'PrinzAtago', '5519d591cb1f497a87c9df44306624b9', 6);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (48, '1029843811330965544', 'NanoMCraft', '82a70d42f1f14599ba7c1f310b1aeb99', 28);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (49, '184287052655755264', 'NietMaxim', '43763c53ea1648d0a7e91372b8548fe9', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (50, '906332631724081172', 'Jesteur', '4769352bb56043b783f6e44f05af1c88', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (51, '249986430892376065', 'me_is_hidden', '939c062bbb22492a9ec5edb450d1708f', 23);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (52, '518780310071148554', 'TutsMaNix', '687a491e72794731aefd288920b9fe43', 9);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (53, '234035066227916800', 'Thallahhh', '6051bd52baf3495483da0f3c7653fcbc', 14);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (54, '750411451298218094', 'jadencad', '0d397008851249eb8986e8105a287261', 16);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (55, '611388827201830912', 'Ultatrog', '3692197228c84eb7a28a8f4446ed37cb', 3);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (56, '271437853639049216', 'NineteenLetters', 'ef6ff8a4d66f4982b66851e255a39291', 4);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (57, '657627745253064724', 'TheSm1ler', 'c8fea02402044dfda938584b6475230f', 17);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (58, '233686550477537280', 'enlists', 'c56fcc22888e4982b904e30e55f97ca9', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (59, '391662269962125328', 'HanslaRoi', '370de6d975404eae967d0edddb2dee7f', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (60, '692830733428850710', 'Xnoodledoodle', '77d1843db7af4c3aaf9967e2f6e6588a', 17);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (61, '332577121920745472', 'kismucek', 'd160f49bd9de4f7187953808fa4bb29e', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (62, '349248375763370004', 'LordAmarok', 'bb1593fed018438986e5cfe6420c33fa', 30);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (63, '440212838368411648', 'DangoR12', '8b5ca1f46b1c4dad91d7b3ecbde196a0', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (64, '680103992227004470', 'tomynick', '6da7c58c04d940fe9bcda4ce1d533ea8', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (65, '286477683997671424', 'MartijnH2001', 'c861b31616494b85af800bf68b83bc57', 26);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (66, '333592886148857857', 'TheBozmeister', 'bfbd8b7cc0584787a830865551186fa6', 20);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (67, '866400719598780437', 'Dewesto', 'bfaf8b3e166d448593b8500edb93af02', 5);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (68, '187286736664002561', 'Mikaelix', 'f8bcda2c2c4b4d859a3f04768973ebdf', 11);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (69, '607152840309342209', 'NuclearGuy101', 'b0f6f3124d854e71b64935a4f2569ff3', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (70, '612706637983121423', 'D4RK_CAKE', 'cdf0c90695cf4bdf9cffabbd685335b8', 30);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (71, '881101535747117086', 'Narkr3', 'caf45bc06ed54d1482995ae5cdf38d73', 26);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (72, '778293873360764948', 'gemeinerschatten', 'ea46f882bef04b4f90a974caf27d2ec9', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (73, '579650565571608603', 'Nazouvak', 'f251ce7d43664353aa46382a9e566ce4', 23);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (74, '463054258980388874', 'Carovny_fila_01', '8df32ed1d4b24491ac9b4037ed260155', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (75, '393523067135197185', 'xanyy_', '086d907c7a5e445694224cfd47a0964d', 25);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (76, '997192744407674890', 'MacIsCheesy', '751401cc9f3d46758a2dd6efd061d1c0', 10);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (77, '340075954980519936', 'aggiroo', '83a28db0fc7b4fdcb8c24af896c1bda5', 17);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (78, '201031579370258432', 'Bornholmeren', '54b0ffa42c744796957a87a6a76037de', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (79, '323992487116931074', 'Joruin', 'a26c0a00676249e9858a22915403c1d1', 24);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (80, '724306879320424449', 'TheTrueBlueBot', 'db9522e85d79439d9990cdfb3aacaeb8', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (81, '524394862074920960', 'Divination_Magic', '9a6b82810b534a0b99575410ee1c0b80', 2);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (82, '660016967113244683', 'Pilzwigder17te', '87a14c654a8143dbb1ac9bff38c34eef', 21);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (83, '1048267036746330123', 'DDRC', '69a93fd07fe44cbeb8d62aed13da7108', 26);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (84, '1028986087768596500', 'XxLegendOYASUOxX', '9f53ef4b22844ef8adaff9da1999c7c9', 24);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (85, '351279368930197505', 'Gyml', '7f9042aeb51f47bd82a76afa494a9dcc', 2);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (86, '332516348112535560', 'Jqlo', '7e15950f8087424c9d86ccc7235cac46', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (87, '342980227120496640', 'BartOV', 'e8ee45e0b4f246bf8654ddc6ce8a31da', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (88, '526787243420155905', 'BasilCrystalfig', '4e5c1100e6ee489d9894144a5d56cc45', 19);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (89, '287598789626167316', 'joestoen', '79f173b9bedb4792afcc75a30e6de835', 28);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (90, '546775912499118080', 'ZukiPhantasmal', 'a946b3cbd36d444494ad39af740b6573', 3);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (91, '763680695495163954', 'AinsOaaGown', '2d7ea7fa395949d182e357e440150aaf', 30);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (92, '1073882499865915452', 'DaemonTruefyre', 'cd5c399f8ece484f85a9d8157ad6da3f', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (93, '231741217417723904', 'Jukoz', 'd3edcfa0dc004449b218f70bafd62e8b', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (94, '378608926444224515', 'ag3ntcrab', '7355a9e51c704b7f9e29b8c5d92e0999', 27);
-INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (95, '314708489576382464', 'xHenkka', 'b09133e908f24071b2d9535247b1c7a6', 27);
 
 
 -- Add player roles
