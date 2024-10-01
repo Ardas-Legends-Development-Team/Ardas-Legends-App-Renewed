@@ -1,5 +1,20 @@
+-- Delete previous data
+DELETE
+FROM player_roles cascade;
+DELETE
+FROM rpchars cascade;
+DELETE
+FROM players cascade;
+DELETE
+FROM faction_claimed_regions cascade;
+DELETE
+FROM claimbuild_special_buildings cascade;
+DELETE
+FROM production_claimbuild cascade;
+DELETE
+FROM claimbuilds cascade;
+
 -- Players
--- Test data insertions for the 'players' table
 
 INSERT INTO players (id, discord_id, ign, uuid, faction)
 VALUES (1, '261173268365443074', 'Luktronic', 'cefabe13fda44d378c5d7292724f1514', 21);
@@ -22,7 +37,7 @@ VALUES (9, '465945325815988246', 'Halt03', '7956eba887af4c0795cd4e926c35498b', 1
 INSERT INTO players (id, discord_id, ign, uuid, faction)
 VALUES (10, '302411752463663104', 'SilberElb', '69be1bd412114edeb296a1209cd4b869', 21);
 INSERT INTO players (id, discord_id, ign, uuid, faction)
-VALUES (11, '253505646190657537', 'VernonRoche', '866830b12e944a97918439282412c487', 19);
+VALUES (11, '253505646190657537', 'VernonRoche', '866830b12e944a97918439282412c487', 8);
 INSERT INTO players (id, discord_id, ign, uuid, faction)
 VALUES (12, '305738671603056640', 'MrClasster', 'd63e33bb7d3b484a88388de63e4d58fb', 28);
 INSERT INTO players (id, discord_id, ign, uuid, faction)
