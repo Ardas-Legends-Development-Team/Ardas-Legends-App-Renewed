@@ -4313,270 +4313,215 @@ begin
     -------------------------------------------- Unit Types
 
 -- Tier 1
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Civilians', 0.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Orc', 0.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Banner Bearer', 0.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Hobbits', 0.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Nomads', 0.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Spiders', 0.5);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Hobbit Bounder', 2, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Hillmen', 2, false);
+
 
 -- Tier 2
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Mordor Orc', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Nomad Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Mordor Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Nan Ungol Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Minas Morgul Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Angmar Orc Orc', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Guldur Orc', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Guldur Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lebennin Levymen', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Easterling Clansman', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Easterling Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gondor Levymen', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gondor Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Amroth Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lossarnach Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lebennin Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Pelargir Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blackroot Vale Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Pinnath Gelin Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lamedon Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dalish Levymen', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dalish Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Esgaroth Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Bree Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gondor Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Umbar Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Umbar Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dalish Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Pinnath Gelin Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blackroot Vale Soldier', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lamedon Warrior', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Amroth Men-At-Arms', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Orc Bombers Tier 1', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Taurethrim Blowgunner', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Taurethrim Warrior', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Taurethrim Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Easterling Firethrower', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Half Troll', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Half Troll Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Mordor Warg', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Warg', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Angmar Warg', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Isengard Warg', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rhudaur Warrior', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rhudaur Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rohirrim Banner Bearer', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rohirrim Warrior', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Morwaith Warrior', 1);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Morwaith Banner Bearer', 1);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Orc', 3, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lamedon Hillmen', 3, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Wargs', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Wargs', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Wargs', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Isengard Wargs', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Clansman', 3, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Isengard Snaga', 3, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Spiders', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mirkwood Spiders', 3, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mounted Hobbit Bounder', 3, true);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Banner Bearer', 3, false);
+
 
 -- Tier 3
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Mordor Orc Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gondor Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rohirrim Bowman', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dunlending Bowman', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dunlending Banner Bearer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Angmar Orc Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Orc Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Coast Southron Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Coast Southron Banner Bearer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Guldur Orc Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Isengard Snaga Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dalish Longbowman', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blackroot Vale Bowman', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dol Amroth Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lamedon Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Easterling Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Archer of Bladorthin', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dorwionion Banner Bearer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Harnennor Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Harnennor Banner Bearer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Umbar Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gulfing Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gulfing Banner Bearer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Nomad Archer', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Hillman Axe Thrower', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dunlending Axe Thrower', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lossarnach Axemen', 1.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rhudaur Axe Thrower', 1.5);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Orc', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Orc', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Guldur Orc', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Levymen', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Clansmen', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Nomad Guard', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Bree Guard', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Orc Archers', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rhudaur Axethrowers', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dunlending Axethrowers', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Amroth Men-at-arms', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Pelargir Marine', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lamedon Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rhudaur Warriors', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dunlending Warriors', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Coast Southron Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Vintner Guard', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondorian Renegades', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Harnenor Soldier', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gulfing Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Fire-thrower', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Southron Coast Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Snaga Orc Archers', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Taurethrim Warrior', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Morwaith Warrior', 4, false);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Nomad Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Nan Ungol Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Minas Morgul Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Guldur Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Amroth Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lossarnach Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lebennin Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Pelargir Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Blackroot Vale Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Pinnath Gelin Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lamedon Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Taurethrim Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rhudaur Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Morwaith Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dunlending Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Coast Southron Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dorwinion Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Harnennor Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gulfing Banner Bearer', 4, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Banner Bearer', 4, false);
+
 
 -- Tier 4
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Half Troll Warrior', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dunland Berserker', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gondor Tower Guard', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Swan Knight', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Golden Easterling', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Ithilien Ranger', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Ithilien Banner Bearer', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Ranger of the North', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Ranger Banner Bearer', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Wood-Elf Scout', 2);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Wood-Elf Banner Bearer', 2);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rohirrim Warriors', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondor Soldier', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Orc Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Orc Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Guldur Orc Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Taurethrim Blowgunners', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Umbar Corsairs', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Umbar Soldiers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dunlending Bowmen', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lossarnach Axemen', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Pinnath Gelin Soldiers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rohirrim Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Half-Trolls', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Harnenor Archer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dalish Soldier', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Coast Southron Archers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gulfing Archer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Blackroot Vale Soldiers', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Harnennor Warrior', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondor Tower Guard', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Warg Riders', 6, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Isengard Snaga Warg Riders', 6, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dol Amroth Men-at-arms Cavalry', 6, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lamedon Horseman', 6, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Easterling Horseman', 6, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Morwaith Zebra Rider', 6, true);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondor Banner Bearer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dalish Banner Bearer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Esgaroth Banner Bearer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Umbar Banner Bearer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Half Troll Banner Bearer', 6, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rohirrim Banner Bearer', 6, false);
+
 
 -- Tier 5
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Uruk', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Uruk Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Uruk Crossbower', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Black Uruk', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Black Uruk Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Uruk', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Gundabad Uruk Archer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Black Uruk Archer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dwarf Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dwarf Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Dwarf Axe Thrower', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blue Mountain Dwarf Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blue Mountain Dwarf Axe Thrower', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Blue Mountains Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Troll', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Angmar Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Galadhrim Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Galadhrim Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Wood-Elf Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lindon Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Lindon Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rivendell Banner Bearer', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Rivendell Warrior', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Warrior of Bladorthin', 2.5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Corsair of Umbar', 2.5);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gundabad Warg Rider Archers', 7, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Isengard Snaga Warg Rider Archers', 7, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Golden Easterling', 7, false);
+
 
 -- Tier 6
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Orc Bomber Tier 2', 3);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Uruk Berserker', 3);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rangers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Ithilien Rangers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondor Archers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Umbar Archers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lamedon Archers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Wood Elf Scouts', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dunlending Berserkers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Uruk Berserkers', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Gondor Cavalrymen', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Umbar Cavalrymen', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Blackroot Vale Cavalry', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Pinnath Gelin Cavalry', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rohirrim Cavalry', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Ranger Outrider', 8, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Southron Champions', 8, false);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Ithilien Banner Bearer', 8, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Ranger Banner Bearer', 8, false);
+
 
 -- Tier 7
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Olog', 5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Orc Bomber Tier 3', 5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Mirk Troll', 5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Hill Troll', 5);
-    INSERT INTO unit_types(unit_name, token_cost)
-    VALUES ('Huorn', 5);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Spider Archers', 9, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mirkwood Spider Archers', 9, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Warg Archers', 9, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mordor Warg Archers', 9, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mounted Golden Easterlings', 9, true);
+
+-- Tier 8
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Blackroot Vale Bowmen', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dwarf Warriors', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Uruks', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Half-Troll Warrior', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Wood-Elf Warriors', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Elf Warriors', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Vintner Guard Crossbowmen', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Bladorthin Warriors', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Swan Knight', 10, false);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Wood-Elf Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Uruk Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dwarf Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Blue Mountains Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Galadhrim Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lindon Banner Bearer', 10, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rivendell Banner Bearer', 10, false);
+
+
+-- Tier 9
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Black Uruks', 11, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Lindon Cavalry', 11, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Rivendell Cavalry', 11, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Galadhrim Cavalry', 11, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Wood-Elf Elk Rider', 11, true);
+
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Black Uruk Banner Bearer', 11, false);
+
+
+-- Tier 10
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dwarf Axe Throwers', 12, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Uruk Archers', 12, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Black Uruk Archer', 12, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Bladorthin Archers', 12, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mounted Swan Knight', 12, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dwarven Boar Riders', 12, true);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Dwarven Axe Thrower Boar Riders', 12, true);
+
+-- Tier 11
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Angmar Troll', 16, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Uruk Crossbowers', 16, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Half-Troll Rhino Riders', 16, true);
+
+-- Tier 12
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Mirk Trolls', 20, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Hill Trolls', 20, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Huorn', 20, false);
+
+-- Tier 13
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Two-headed Angmar Trolls', 24, false);
+
+-- Tier 14
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Two-headed Mirk Trolls', 30, false);
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Two-headed Hill Trolls', 30, false);
+
+-- Tier 15
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Ologs', 50, false);
+
+-- Tier 16
+    INSERT INTO unit_types(unit_name, token_cost, is_mounted) VALUES ('Two-Headed Ologs', 90, false);
+
+
+-- Add units to their corresponding faction
+    INSERT INTO factions_units (unit_name, faction_id) VALUES ('Swan Knight', 1);
+
 
 end;
 $BODY$;
