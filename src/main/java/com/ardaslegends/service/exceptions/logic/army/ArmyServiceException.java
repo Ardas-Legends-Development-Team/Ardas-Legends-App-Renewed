@@ -218,6 +218,6 @@ public class ArmyServiceException extends LogicException {
 
     //station
     public static ArmyServiceException armyNotInSameRegion(String armyName, String claimbuildName) {
-        return new ArmyServiceException(NOT_IN_SAME_REGION.formatted(armyName, claimbuildName));
+        return new ArmyServiceException(NOT_IN_SAME_REGION.formatted(armyName, armyName, claimbuildName));
     }
 }

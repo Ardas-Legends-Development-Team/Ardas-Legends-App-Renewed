@@ -19,6 +19,7 @@ import java.time.ZoneOffset;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -67,7 +68,7 @@ public class ArmyServiceTest {
         rpchar = RPChar.builder().name("Belegorn").isHealing(false).injured(false).currentRegion(region1).build();
         player = Player.builder().discordID("1234").faction(faction).build();
         player.addActiveRpChar(rpchar);
-        army = Army.builder().name("Knights of Gondor").armyType(ArmyType.ARMY).faction(faction).units(List.of(unit)).freeTokens(30 - unit.getCount() * unitType.getTokenCost()).currentRegion(region2).stationedAt(claimBuild).sieges(new ArrayList<>()).build();
+        army = Army.builder().name("Knights of Gondor").armyType(ArmyType.ARMY).faction(faction).units(List.of(unit)).freeTokens(30 - unit.getCount() * unitType.getTokenCost()).currentRegion(region1).stationedAt(claimBuild).sieges(new ArrayList<>()).build();
         movement = Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army).path(List.of(PathElement.builder().region(region1).build())).build();
 
         dto = new BindArmyDto(player.getDiscordID(), player.getDiscordID(), army.getName());
@@ -418,6 +419,35 @@ public class ArmyServiceTest {
         log.info("Test passed: station throws Se when claimbuild is not in the same or allied faction");
 
 
+    }
+
+    @Test
+    void ensureStationThrowsWhenClaimbuildIsNotInTheSameRegionAsArmy() {
+        log.debug("Testing if station throws Se when claimbuild is not in the same region as army");
+
+        claimBuild.setRegion(region2);
+        army.setStationedAt(null);
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+
+        log.debug("Calling station(), expecting Se");
+        var result = assertThrows(ArmyServiceException.class, () -> armyService.station(dto));
+
+        assertThat(result.getMessage()).contains("is not in the same region as");
+        log.info("Test passed: station throws Se when claimbuild is not in the same region as army");
+    }
+
+    @Test
+    void ensureStationWorksWhenClaimbuildIsInTheSameRegionAsArmy() {
+        log.debug("Testing if station throws Se when claimbuild is not in the same region as army");
+
+        army.setBoundTo(player.getActiveCharacter().get());
+        army.setStationedAt(null);
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+
+        log.debug("Calling station(), expecting no errors");
+        var result = assertDoesNotThrow(() -> armyService.station(dto));
+
+        log.info("Test passed: station throws Se when claimbuild is not in the same region as army");
     }
 
     @Test
