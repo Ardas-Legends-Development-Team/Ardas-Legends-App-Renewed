@@ -8,7 +8,7 @@ import com.ardaslegends.presentation.discord.config.BotProperties;
 import com.ardaslegends.presentation.discord.utils.ALColor;
 import com.ardaslegends.presentation.discord.utils.Thumbnails;
 import com.ardaslegends.service.ArmyService;
-import com.ardaslegends.service.dto.army.UnstationDto;
+import com.ardaslegends.service.dto.army.UnstationArmyDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.entity.message.embed.EmbedBuilder;
@@ -37,7 +37,7 @@ public class UnstationArmyOrCompanyCommand implements ALCommandExecutor {
         log.debug("armyName: [{}]", armyName);
 
         log.trace("Building dto");
-        UnstationDto dto = new UnstationDto(user.getIdAsString(), armyName);
+        UnstationArmyDto dto = new UnstationArmyDto(user.getIdAsString(), armyName);
         log.debug("Built dto with data [{}]", dto);
 
         log.trace("Calling armyService");

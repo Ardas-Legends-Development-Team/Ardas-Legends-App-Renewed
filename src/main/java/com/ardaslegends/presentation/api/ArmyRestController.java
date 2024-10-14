@@ -131,7 +131,7 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful start healing Request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful start healing Request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
@@ -144,7 +144,7 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful stop healing Request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful stop healing Request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
@@ -157,12 +157,12 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful station request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful station request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping(PATH_UNSTATION)
-    public HttpEntity<ArmyResponse> unstation(@RequestBody UnstationDto dto) {
+    public HttpEntity<ArmyResponse> unstation(@RequestBody UnstationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
 
         log.debug("Calling unstation()");
@@ -170,7 +170,7 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful unstation request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful unstation request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 

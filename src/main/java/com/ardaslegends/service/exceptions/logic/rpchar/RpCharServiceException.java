@@ -10,6 +10,7 @@ public class RpCharServiceException extends LogicException {
     private final static String NO_RPCHARS_FOUND = "No RP Chars found with names '%s'";
     private final static String CHARACTER_ALREADY_STATIONED = "Character '%s' is already stationed at '%s'";
     private final static String CLAIMBUILD_NOT_IN_THE_SAME_OR_ALLIED_FACTION = "Character '%s' is not in the same or allied faction as claimbuild '%s'";
+    private final static String CHARACTER_NOT_STATIONED = "Character '%s' is not stationed at any claimbuild";
 
     protected RpCharServiceException(String message) {
         super(message);
@@ -33,5 +34,9 @@ public class RpCharServiceException extends LogicException {
 
     public static RpCharServiceException claimbuildNotInTheSameOrAlliedFaction(String characterName, String claimBuildName) {
         return new RpCharServiceException(CLAIMBUILD_NOT_IN_THE_SAME_OR_ALLIED_FACTION.formatted(characterName, claimBuildName));
+    }
+
+    public static RpCharServiceException characterNotStationed(String characterName) {
+        return new RpCharServiceException(CHARACTER_NOT_STATIONED.formatted(characterName));
     }
 }

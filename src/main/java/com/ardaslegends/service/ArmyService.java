@@ -490,7 +490,7 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
     }
 
     @Transactional(readOnly = false)
-    public Army unstation(UnstationDto dto) {
+    public Army unstation(UnstationArmyDto dto) {
         log.debug("Trying to unstation army with data: [{}]", dto);
 
         ServiceUtils.checkNulls(dto, List.of("executorDiscordId", "armyName"));

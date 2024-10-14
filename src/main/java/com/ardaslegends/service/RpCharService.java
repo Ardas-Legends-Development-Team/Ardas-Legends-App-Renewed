@@ -1,14 +1,12 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.Army;
 import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Player;
 import com.ardaslegends.domain.RPChar;
 import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.rpchar.RpcharRepository;
-import com.ardaslegends.service.dto.army.UnstationDto;
-import com.ardaslegends.service.dto.player.rpchar.StationRpcharDto;
-import com.ardaslegends.service.exceptions.logic.army.ArmyServiceException;
+import com.ardaslegends.service.dto.player.rpchar.StationRpCharDto;
+import com.ardaslegends.service.dto.player.rpchar.UnstationRpCharDto;
 import com.ardaslegends.service.exceptions.logic.claimbuild.ClaimBuildServiceException;
 import com.ardaslegends.service.exceptions.logic.rpchar.RpCharServiceException;
 import com.ardaslegends.service.utils.ServiceUtils;
@@ -80,7 +78,7 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
     }
 
     @Transactional(readOnly = false)
-    public RPChar station(StationRpcharDto dto) {
+    public RPChar station(StationRpCharDto dto) {
         log.debug("Trying to station rpchar [{}] at [{}]", dto.characterName(), dto.claimbuildName());
 
         log.trace("Validating data");
@@ -126,38 +124,26 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
     }
 
     @Transactional(readOnly = false)
-    public Army unstation(UnstationDto dto) {
-        log.debug("Trying to unstation army with data: [{}]", dto);
+    public RPChar unstation(UnstationRpCharDto dto) {
+        log.debug("Trying to unstation character with data: [{}]", dto);
 
-        ServiceUtils.checkNulls(dto, List.of("executorDiscordId", "armyName"));
-        ServiceUtils.checkBlanks(dto, List.of("executorDiscordId", "armyName"));
+        ServiceUtils.checkNulls(dto, List.of("executorDiscordId", "characterName"));
+        ServiceUtils.checkBlanks(dto, List.of("executorDiscordId", "characterName"));
 
-        log.trace("Fetching army instance");
-        Army army = getArmyByName(dto.armyName());
+        log.trace("Fetching character instance");
+        RPChar character = getRpCharByName(dto.characterName());
 
-        log.trace("Fetching player instance");
-        Player player = playerService.getPlayerByDiscordId(dto.executorDiscordId());
-
-        if (army.getStationedAt() == null) {
-            log.warn("Army [{}] is not stationed at a cb, so cannot be unstationed!", army.toString());
-            throw ArmyServiceException.armyNotStationed(army.getArmyType(), army.toString());
+        if (character.getStationedAt() == null) {
+            log.warn("Army [{}] is not stationed at a cb, so cannot be unstationed!", character);
+            throw RpCharServiceException.characterNotStationed(character.getName());
         }
 
-        boolean isAllowed = ServiceUtils.boundLordLeaderPermission(player, army);
+        character.setStationedAt(null);
 
-        if (!isAllowed) {
-            log.warn("Player not does not have permission to perform unstation");
-            throw ArmyServiceException.noPermissionToPerformThisAction();
-        }
+        log.debug("Unstationed character [{}], persisting");
+        secureSave(character, rpcharRepository);
 
-        log.debug("Player [{}] is allowed to perform unstation");
-
-        army.setStationedAt(null);
-
-        log.debug("Unstationed army [{}], persisting");
-        secureSave(army, armyRepository);
-
-        log.info("Unstation Army Service Method for Army [{}] completed successfully");
-        return army;
+        log.info("Unstation Character Service Method for Character [{}] completed successfully");
+        return character;
     }
 }

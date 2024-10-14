@@ -241,7 +241,7 @@ public class ArmyRestControllerTest {
         log.debug("Testing if ArmyRestController unstation works properly with correct values");
 
         // Assign
-        UnstationDto dto = new UnstationDto("Kek", "kek");
+        UnstationArmyDto dto = new UnstationArmyDto("Kek", "kek");
 
         when(mockArmyService.unstation(dto)).thenReturn(army);
 

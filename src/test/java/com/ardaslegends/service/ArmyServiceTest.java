@@ -444,7 +444,7 @@ public class ArmyServiceTest {
 
         army.setBoundTo(player.getActiveCharacter().get());
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("Calling unstation, expecting no errors");
         var result = armyService.unstation(dto);
@@ -459,7 +459,7 @@ public class ArmyServiceTest {
 
         army.setStationedAt(null);
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("calling unstation(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.unstation(dto));
@@ -474,7 +474,7 @@ public class ArmyServiceTest {
 
         army.setBoundTo(null);
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("Calling unstation(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.unstation(dto));
