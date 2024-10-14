@@ -1,22 +1,21 @@
 package com.ardaslegends.presentation.api;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.RPChar;
 import com.ardaslegends.presentation.AbstractRestController;
-import com.ardaslegends.presentation.api.response.claimbuild.ClaimbuildResponse;
 import com.ardaslegends.presentation.api.response.player.rpchar.RpCharOwnerResponse;
+import com.ardaslegends.presentation.api.response.player.rpchar.RpCharResponse;
 import com.ardaslegends.service.RpCharService;
+import com.ardaslegends.service.dto.player.rpchar.StationRpCharDto;
+import com.ardaslegends.service.dto.player.rpchar.UnstationRpCharDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,6 +29,8 @@ public class RpCharRestController extends AbstractRestController {
 
     public final static String BASE_URL = "/api/rpchars";
     public final static String NAME = "/name";
+    public final static String PATH_STATION = "/station";
+    public final static String PATH_UNSTATION = "/unstation";
 
     private final RpCharService rpCharService;
 
@@ -63,4 +64,29 @@ public class RpCharRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    @PatchMapping(PATH_STATION)
+    public HttpEntity<RpCharResponse> station(@RequestBody StationRpCharDto dto) {
+        log.debug("Incoming station request: Data [{}]", dto);
+
+        log.debug("Calling station()");
+        RPChar modifiedCharacter = rpCharService.station(dto);
+        log.debug("Converting to RpCharResponse");
+        RpCharResponse response = new RpCharResponse(modifiedCharacter);
+
+        log.info("Sending successful station request for [{}]", modifiedCharacter);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping(PATH_UNSTATION)
+    public HttpEntity<RpCharResponse> unstation(@RequestBody UnstationRpCharDto dto) {
+        log.debug("Incoming station request: Data [{}]", dto);
+
+        log.debug("Calling unstation()");
+        RPChar modifiedCharacter = rpCharService.unstation(dto);
+        log.debug("Converting to RpCharResponse");
+        RpCharResponse response = new RpCharResponse(modifiedCharacter);
+
+        log.info("Sending successful unstation request for [{}]", modifiedCharacter);
+        return ResponseEntity.ok(response);
+    }
 }
