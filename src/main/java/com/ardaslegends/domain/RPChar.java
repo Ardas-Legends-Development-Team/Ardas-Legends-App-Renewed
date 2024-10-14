@@ -1,13 +1,16 @@
 package com.ardaslegends.domain;
 
 import com.ardaslegends.domain.applications.RoleplayApplication;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +44,10 @@ public class RPChar extends AbstractEntity {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "bound_to", foreignKey = @ForeignKey(name = "fk_rpchar_bound_to"))
     private Army boundTo; //the army that is bound to this character
+
+    @ManyToOne
+    @JoinColumn(name = "stationed_at", foreignKey = @ForeignKey(name = "fk_rpchar_stationed_at"))
+    private ClaimBuild stationedAt; // the claimbuild where the character is stationed
 
     @OneToMany(mappedBy = "rpChar")
     private Set<Movement> movements;
@@ -108,6 +115,7 @@ public class RPChar extends AbstractEntity {
         setStartedHeal(now);
         setHealEnds(now.plusDays(2));
     }
+
     public Set<Movement> getMovements() {
         return Collections.unmodifiableSet(movements);
     }

@@ -37,7 +37,7 @@ public class ArmyRestController extends AbstractRestController {
     private static final String PATH_UPKEEP = "/upkeep";
     private static final String PATH_UPKEEP_PER_FACTION = "/upkeep/{faction}";
     private static final String PATH_SET_IS_PAID = "/setPaid";
-    private static final String PATH_GET_UNPAID =  "/unpaid";
+    private static final String PATH_GET_UNPAID = "/unpaid";
 
     private final ArmyService armyService;
 
@@ -51,11 +51,12 @@ public class ArmyRestController extends AbstractRestController {
 
         return ResponseEntity.ok(pageResponse);
     }
+
     @PostMapping(PATH_CREATE_ARMY)
     public HttpEntity<ArmyResponse> createArmy(@RequestBody CreateArmyDto dto) {
         log.debug("Incoming createArmy Request: Data [{}]", dto);
 
-        if(dto.unitString() != null) {
+        if (dto.unitString() != null) {
             log.debug("Found unitString in CreateArmyDto, building units from string");
             var units = armyService.convertUnitInputIntoUnits(dto.unitString());
             dto = new CreateArmyDto(dto.executorDiscordId(), dto.name(), dto.armyType(), dto.claimBuildName(), units);
@@ -148,7 +149,7 @@ public class ArmyRestController extends AbstractRestController {
     }
 
     @PatchMapping(PATH_STATION)
-    public HttpEntity<ArmyResponse> station(@RequestBody StationDto dto) {
+    public HttpEntity<ArmyResponse> station(@RequestBody StationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
 
         log.debug("Calling station()");

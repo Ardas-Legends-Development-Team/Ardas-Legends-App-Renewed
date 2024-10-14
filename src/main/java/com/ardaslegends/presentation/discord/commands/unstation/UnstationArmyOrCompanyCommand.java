@@ -8,7 +8,6 @@ import com.ardaslegends.presentation.discord.config.BotProperties;
 import com.ardaslegends.presentation.discord.utils.ALColor;
 import com.ardaslegends.presentation.discord.utils.Thumbnails;
 import com.ardaslegends.service.ArmyService;
-import com.ardaslegends.service.dto.army.StationDto;
 import com.ardaslegends.service.dto.army.UnstationDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

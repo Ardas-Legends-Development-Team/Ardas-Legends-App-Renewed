@@ -86,6 +86,12 @@ public final class ClaimBuild extends AbstractEntity {
     private int freeArmiesRemaining; // Every new army decrements this attribute until its at 0
     private int freeTradingCompaniesRemaining; // Every new trading decrements this attribute until its at 0
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "stationedAt")
+    @JsonIdentityReference(alwaysAsId = true)
+    @Builder.Default
+    private Set<RPChar> stationedChars = new HashSet<>(); // characters stationed in this claimbuild
+
+
     public ClaimBuild(String name, Region region, ClaimBuildType type, Faction ownedBy, Coordinate coordinates, List<SpecialBuilding> specialBuildings, String traders, String siege, String numberOfHouses, Set<Player> builtBy) {
         this.name = name;
         this.region = region;
