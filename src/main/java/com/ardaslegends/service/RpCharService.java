@@ -4,9 +4,10 @@ import com.ardaslegends.domain.Army;
 import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Player;
 import com.ardaslegends.domain.RPChar;
+import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.rpchar.RpcharRepository;
-import com.ardaslegends.service.dto.army.StationArmyDto;
 import com.ardaslegends.service.dto.army.UnstationDto;
+import com.ardaslegends.service.dto.player.rpchar.StationRpcharDto;
 import com.ardaslegends.service.exceptions.logic.army.ArmyServiceException;
 import com.ardaslegends.service.exceptions.logic.claimbuild.ClaimBuildServiceException;
 import com.ardaslegends.service.exceptions.logic.rpchar.RpCharServiceException;
@@ -32,6 +33,8 @@ import java.util.Optional;
 public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
 
     private final RpcharRepository rpcharRepository;
+    private final PlayerService playerService;
+    private final ClaimbuildRepository claimBuildRepository;
 
     public Slice<RPChar> getAll(Pageable pageable) {
         log.info("Getting slice of rpchars with data [{}]", pageable);
@@ -77,15 +80,15 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
     }
 
     @Transactional(readOnly = false)
-    public RPChar station(StationArmyDto dto) {
-        log.debug("Trying to station rpchar [{}] at [{}]", dto.armyName(), dto.claimbuildName());
+    public RPChar station(StationRpcharDto dto) {
+        log.debug("Trying to station rpchar [{}] at [{}]", dto.characterName(), dto.claimbuildName());
 
         log.trace("Validating data");
         ServiceUtils.checkAllNulls(dto);
         ServiceUtils.checkAllBlanks(dto);
 
-        log.trace("Fetching army instance");
-        Army army = getArmyByName(dto.armyName());
+        log.trace("Fetching character instance");
+        RPChar character = getRpCharByName(dto.characterName());
 
         log.trace("Fetching player instance");
         Player player = playerService.getPlayerByDiscordId(dto.executorDiscordId());
@@ -100,35 +103,26 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
 
         ClaimBuild claimBuild = optionalClaimBuild.get();
 
-        log.debug("Check if army is already stationed");
-        if (army.getStationedAt() != null) {
-            log.warn("Army [{}] is already stationed at Claimbuild [{}]", army.getName(), claimBuild.getName());
-            throw ArmyServiceException.armyAlreadyStationed(army.getArmyType(), army.getName(), army.getStationedAt().getName());
+        log.debug("Check if character is already stationed");
+        if (character.getStationedAt() != null) {
+            log.warn("Character [{}] is already stationed at Claimbuild [{}]", character.getName(), claimBuild.getName());
+            throw RpCharServiceException.characterAlreadyStationed(character.getName(), character.getStationedAt().getName());
         }
 
         // TODO: Check ally system
-        log.debug("Checking if Claimbuild is in the same or an allied faction of the army");
-        if (!claimBuild.getOwnedBy().equals(army.getFaction()) && !army.getFaction().getAllies().contains(claimBuild.getOwnedBy())) {
+        log.debug("Checking if Claimbuild is in the same or an allied faction of the character");
+        if (!claimBuild.getOwnedBy().equals(player.getFaction()) && !player.getFaction().getAllies().contains(claimBuild.getOwnedBy())) {
             log.warn("Claimbuild is not in the same or allied faction of the army");
-            throw ArmyServiceException.claimbuildNotInTheSameOrAlliedFaction(army.getArmyType(), claimBuild.getName());
+            throw RpCharServiceException.claimbuildNotInTheSameOrAlliedFaction(character.getName(), claimBuild.getName());
         }
 
-        log.debug("Checking if executor is allowed to perform the movement");
-        boolean isAllowed = ServiceUtils.boundLordLeaderPermission(player, army);
-
-        log.debug("Is player [{}] allowed to perform station?: {}", player.getIgn(), isAllowed);
-        if (!isAllowed) {
-            log.warn("Player [{}] is not allowed to perform station", player.getIgn());
-            throw ArmyServiceException.noPermissionToPerformThisAction();
-        }
-
-        army.setStationedAt(claimBuild);
+        character.setStationedAt(claimBuild);
 
         log.debug("Set stationed, performing persist");
-        secureSave(army, armyRepository);
+        secureSave(character, rpcharRepository);
 
-        log.info("Station Army Service Method for Army [{}] completed successfully");
-        return army;
+        log.info("Station Character Service Method for Character [{}] completed successfully");
+        return character;
     }
 
     @Transactional(readOnly = false)
