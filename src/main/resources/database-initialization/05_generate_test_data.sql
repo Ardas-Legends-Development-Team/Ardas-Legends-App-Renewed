@@ -118,7 +118,6 @@ VALUES ('261173268365443074', 'Luktronic', 'cefabe13fda44d378c5d7292724f1514', 2
        ('314708489576382464', 'xHenkka', 'b09133e908f24071b2d9535247b1c7a6', 27);
 
 
-
 -- Add player roles
 INSERT INTO player_roles(player_id, role)
 VALUES (1, 'ROLE_USER'),
@@ -220,2355 +219,1030 @@ VALUES (1, 'ROLE_USER'),
 
 -- Add faction claimed regions
 INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('148', 1);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('332', 2);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('331', 2);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('333', 2);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('165', 3);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('211', 4);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('135', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('136', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('200', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('196', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('173', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('176', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('174', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('192', 5);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('440', 6);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('41', 7);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('17', 7);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('391', 8);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('184', 9);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('121', 10);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('119', 10);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('57', 10);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('168', 11);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('460', 12);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('441', 12);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('459', 12);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('461', 12);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('110', 13);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('426', 14);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('430', 14);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('431', 14);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('447', 14);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('557', 15);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('546', 15);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('146', 16);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('495', 18);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('494', 18);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('151', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('74', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('38', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('77', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('102', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('150', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('76', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('40', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('101', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('103', 19);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('346', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('395', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('397', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('398', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('392', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('390', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('425', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('341', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('342', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('424', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('443', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('343', 20);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('336', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('313', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('325', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('263', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('335', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('261', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('311', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('330', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('339', 21);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('407', 22);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('420', 22);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('400', 22);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('408', 22);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('51', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('50', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('61', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('60', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('63', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('53', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('62', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('52', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('44', 23);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('201', 24);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('246', 24);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('245', 24);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('111', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('71', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('113', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('134', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('126', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('72', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('178', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('69', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('109', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('114', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('68', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('70', 25);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('171', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('197', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('198', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('199', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('172', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('202', 26);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('266', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('240', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('239', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('265', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('345', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('269', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('295', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('209', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('235', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('237', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('236', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('267', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('205', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('309', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('305', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('264', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('302', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('203', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('303', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('310', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('298', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('297', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('206', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('301', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('204', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('306', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('241', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('307', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('207', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('238', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('208', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('242', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('300', 27);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('214', 28);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('215', 28);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('128', 29);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('130', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('180', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('129', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('175', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('132', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('131', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('133', 30);
-INSERT INTO faction_claimed_regions (region, faction)
-VALUES ('177', 30);
+VALUES ('148', 1),
+       ('332', 2),
+       ('331', 2),
+       ('333', 2),
+       ('165', 3),
+       ('211', 4),
+       ('135', 5),
+       ('136', 5),
+       ('200', 5),
+       ('196', 5),
+       ('173', 5),
+       ('176', 5),
+       ('174', 5),
+       ('192', 5),
+       ('440', 6),
+       ('41', 7),
+       ('17', 7),
+       ('391', 8),
+       ('184', 9),
+       ('121', 10),
+       ('119', 10),
+       ('57', 10),
+       ('168', 11),
+       ('460', 12),
+       ('441', 12),
+       ('459', 12),
+       ('461', 12),
+       ('110', 13),
+       ('426', 14),
+       ('430', 14),
+       ('431', 14),
+       ('447', 14),
+       ('557', 15),
+       ('546', 15),
+       ('146', 16),
+       ('495', 18),
+       ('494', 18),
+       ('151', 19),
+       ('74', 19),
+       ('38', 19),
+       ('77', 19),
+       ('102', 19),
+       ('150', 19),
+       ('76', 19),
+       ('40', 19),
+       ('101', 19),
+       ('103', 19),
+       ('346', 20),
+       ('395', 20),
+       ('397', 20),
+       ('398', 20),
+       ('392', 20),
+       ('390', 20),
+       ('425', 20),
+       ('341', 20),
+       ('342', 20),
+       ('424', 20),
+       ('443', 20),
+       ('343', 20),
+       ('336', 21),
+       ('313', 21),
+       ('325', 21),
+       ('263', 21),
+       ('335', 21),
+       ('261', 21),
+       ('311', 21),
+       ('330', 21),
+       ('339', 21),
+       ('407', 22),
+       ('420', 22),
+       ('400', 22),
+       ('408', 22),
+       ('51', 23),
+       ('50', 23),
+       ('61', 23),
+       ('60', 23),
+       ('63', 23),
+       ('53', 23),
+       ('62', 23),
+       ('52', 23),
+       ('44', 23),
+       ('201', 24),
+       ('246', 24),
+       ('245', 24),
+       ('111', 25),
+       ('71', 25),
+       ('113', 25),
+       ('134', 25),
+       ('126', 25),
+       ('72', 25),
+       ('178', 25),
+       ('69', 25),
+       ('109', 25),
+       ('114', 25),
+       ('68', 25),
+       ('70', 25),
+       ('171', 26),
+       ('197', 26),
+       ('198', 26),
+       ('199', 26),
+       ('172', 26),
+       ('202', 26),
+       ('266', 27),
+       ('240', 27),
+       ('239', 27),
+       ('265', 27),
+       ('345', 27),
+       ('269', 27),
+       ('295', 27),
+       ('209', 27),
+       ('235', 27),
+       ('237', 27),
+       ('236', 27),
+       ('267', 27),
+       ('205', 27),
+       ('309', 27),
+       ('305', 27),
+       ('264', 27),
+       ('302', 27),
+       ('203', 27),
+       ('303', 27),
+       ('310', 27),
+       ('298', 27),
+       ('297', 27),
+       ('206', 27),
+       ('301', 27),
+       ('204', 27),
+       ('306', 27),
+       ('241', 27),
+       ('307', 27),
+       ('207', 27),
+       ('238', 27),
+       ('208', 27),
+       ('242', 27),
+       ('300', 27),
+       ('214', 28),
+       ('215', 28),
+       ('128', 29),
+       ('130', 30),
+       ('180', 30),
+       ('129', 30),
+       ('175', 30),
+       ('132', 30),
+       ('131', 30),
+       ('133', 30),
+       ('177', 30);
 
 
 -- Add claimbuilds
 INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
                          siege, traders, type, region, id, owned_by, version)
-VALUES ('Bree Starter Hamlet', 16785, 100, 1685, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 128, 1, 29, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rohan Starter Hamlet', 49956, 100, 54807, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 245, 2, 24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Southron Coast Starter Hamlet', 47174, 100, 138338, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 426, 3,
-        14, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dale Starter Hamlet', 92019, 100, -9707, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 148, 4, 1, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rangers Starter Hamlet', 14340, 100, 11942, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 131, 5, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dorwinion Starter Hamlet', 119362, 100, 25384, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 211, 6, 4, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dol Guldur Starter Hamlet', 66585, 100, 66649, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 165, 7, 3, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dunland Starter Hamlet', 34520, 100, 27885, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 174, 8, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gondor Starter Hamlet', 78324, 100, 66198, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 263, 9, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gulf Starter Hamlet', 107540, 100, 153283, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 440, 10, 6, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gundabad Starter Hamlet', 49745, 100, -13638, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 41, 11, 7, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Half-Troll Starter Hamlet', 139551, 100, 217831, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 494, 12, 18,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Harnennor Starter Hamlet', 92896, 100, 106142, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 391, 13, 8,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lindon Starter Hamlet', -17337, 100, -17251, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 121, 14, 10, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lothlórien Starter Hamlet', 50419, 100, 19242, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 168, 15, 11,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Mordor Starter Hamlet', 95071, 100, 59469, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 267, 16, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Morwaith Starter Hamlet', 130761, 100, 187284, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 461, 17, 12,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Nomad Starter Hamlet', 84768, 100, 130849, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 400, 18, 22, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rhúdel Starter Hamlet', 136907, 100, 31557, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 215, 19, 28, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Angmar Starter Hamlet', 25489, 100, -27917, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 68, 20, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Woodland Realm Starter Hamlet', 77708, 100, -11631, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 146, 21,
-        16, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rhunur-Khanur', 140179, 78, 74529, 0, 0, '4 small houses', 'none', 'Bartender', 'VILLAGE', 235, 22, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Tharnost', 78318, 100, 69024, 2, 1, '75 small Houses, 8 large houses, 2 Mansions', 'none', 'Missing',
-        'CAPITAL', 311, 23, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Durins Folk Starter Hamlet', 101914, 100, -13903, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 102, 24,
-        19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ered Luin Starter Hamlet', -27107, 100, -24996, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 52, 25, 23,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dol Amroth Starter Hamlet', 44901, 100, 77168, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 332, 26, 2,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Taurethrim Starter Hamlet', 67117, 100, 269417, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 546, 27, 15,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rivendell Starter Hamlet', 46266, 100, -2291, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 110, 28, 13,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Hobbit Starter Hamlet', -738, 100, 558, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 184, 29, 9, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Arvee', 49118, 69, 75460, 0, 0, '8 Small Houses', 'none', 'Gondor Bartender', 'VILLAGE', 331, 30, 2, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Isengard Starter Hamlet', 37542, 100, 42608, 0, 0, '4', 'None', 'None', 'HAMLET', 197, 31, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Umbar Starter Hamlet', 37542, 100, 42608, 0, 0, '4', 'None', 'None', 'HAMLET', 395, 32, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Varsa', 68680, 150, 20440, 1, 1, '16 Small Houses, 4 Large Houses', 'none',
-        'Bartender:1-Smith:1-Dol Guldur Trader:1-Dol Guldur Commander:1-Oddmant collector:1', 'TOWN', 165, 33, 3, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ost Apa Ruin', 37450, 150, 2861, 1, 1, '18 Small Houses, 4 Large Houses', 'none', 'Bartender', 'TOWN', 131, 34,
-        30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dragonic Castle', 106013, 150, 184896, 1, 0, 'none', 'none', 'Blacksmith', 'CASTLE', 460, 35, 12, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fána Ondo', 48048, 200, -1770, 0, 0, '12', 'None', 'Bartender', 'VILLAGE', 110, 36, 13, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Thingarholm', 103666, 150, -13566, 1, 1, '120 Small Houses, 4 Large Houses', 'none', 'Bartender:1-Market:4',
-        'TOWN', 102, 37, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Cesu Castle', 49458, 82, 123487, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 397, 38, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Anfalindros', 46830, 70, 72186, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 325, 39, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Carach Morgul', 120693, 117, 54285, 1, 0, '4 small', 'none', 'Blacksmith', 'STRONGHOLD', 236, 40, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kala Garman', 94250, 157, 56155, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 237, 41, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Urdin-Bar', 93176, 82, 51600, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 209, 42, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Urdin-Dun', 128587, 123, 79956, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 295, 43, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Irdin Udun', 121099, 72, 54789, 1, 0, 'none', 'none', 'Blacksmith', 'CASTLE', 269, 44, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Priye-kuli', 57864, 71, 128826, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 398, 45, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Swanster Village', 44843, 69, 76900, 0, 0, '8 small houses', 'none', 'Bartender, Blacksmith', 'VILLAGE', 332,
-        46, 2, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Magh Vadok', 87498, 70, 56408, 1, 0, '4', 'none', 'Blacksmith', 'STRONGHOLD', 266, 47, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Val-Myera', 68223, 64, 106126, 0, 0, '8small', 'none', 'Bartender', 'VILLAGE', 392, 48, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Sheepstroke Village', 104762, 77, 136734, 0, 0, '8small', 'none', 'Bartender', 'VILLAGE', 408, 49, 22, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Sarahan', 106268, 100, 137918, 1, 1, '16 small houses, 8 large houses', 'none', 'Bartender, oddment collector',
-        'TOWN', 420, 50, 22, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gimog-Um', 84701, 78, 64778, 0, 0, '8 small', 'None', 'Dunlending Bartender', 'VILLAGE', 265, 51, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Cee Gulda', 99010, 69, 110511, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 390, 52, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Altak', 139073, 104, 23804, 1, 1, '24', 'none', 'Oddment collector', 'TOWN', 215, 53, 28, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Polis Hermanis', 49148, 75, 76784, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 333, 54, 2, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Potlood', 101332, 85, -12830, 0, 0, '12', 'none', 'Bartender', 'VILLAGE', 103, 55, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Knurlnien', -26357, 89, -21002, 1, 1, '21', 'none', 'Bartender, Oddment Collector', 'TOWN', 61, 56, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Anarthel', 73210, 72, 67176, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 313, 57, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lebenamath', 61697, 71, 78518, 0, 0, '8', 'None', 'Bartender', 'VILLAGE', 335, 58, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rithel', 56354, 72, 71867, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 330, 59, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Laktam Pahkah', 56850, 70, 264950, 0, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 557, 60, 15, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Shiverclank', 49749, 134, -23902, 0, 0, '8', 'none', 'Bartender', 'VILLAGE', 17, 61, 7, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Domrum', -27811, 80, -13169, 0, 0, '8 small Houses', 'none', 'Bartender, Blacksmith', 'VILLAGE', 60, 62, 23,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Hogh Turum', -22805, 80, -25261, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 63, 63, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kor Dorul', -28353, 80, -21337, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 53, 64, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Balbuldor', -20421, 80, -7558, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 62, 65, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kála-murg', 134366, 84, 230375, 1, 1, '16 small Houses, 4 large Houses', 'none',
-        'Bartender, Oddment Collector', 'TOWN', 495, 66, 18, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Dur', 37575, 79, -15740, 0, 0, '8 small', 'None', 'Bartender', 'VILLAGE', 69, 67, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ethirië', 59618, 64, 81675, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 339, 68, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Castle Eron da Nikaer', 81900, 100, -19101, 1, 0, 'none', 'none', 'commander, smith', 'CASTLE', 76, 69, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kazlokroz', 84827, 80, 46224, 1, 1, '16 small Houses, 4 large Houses', 'none', 'Bartender, Oddment Collector',
-        'TOWN', 239, 70, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Wulfs Deep', 34920, 80, 46224, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 196, 71, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gazān nAtunârī', 104327, 87, 134382, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 407, 72, 22, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Castle Nir Mountainth', 57459, 76, -21004, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 74, 73, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dav-Gav Castle', 46136, 76, 141751, 1, 1, '16 small 4 large', 'none', 'Bartender, Oddment collector', 'TOWN',
-        425, 74, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('See Gulda', 67349, 70, 105253, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 341, 75, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('gaave ro fundup', 37440, 70, 43458, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 197, 76, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Carn Gorthaur', 35524, 71, -1823, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 113, 77, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Oo gre', 78728, 85, 84300, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 342, 78, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ravenville', 41541, 64, 35399, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 173, 79, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Strav-Upe', 99124, 72, 110546, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 346, 80, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('A Morgul Ships Rest', 82816, 66, 64681, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 240, 81, 27,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Liepāja', 49312, 64, 161269, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 424, 82, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lashkarg', 67718, 70, 37987, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 208, 83, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Drutot', 86990, 69, 54745, 1, 1, '16 small Houses, 4 large Houses', 'none',
-        'Bartender, Oddment Collector, Commander', 'TOWN', 238, 84, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kehlgate', 46268, 72, 16346, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 136, 85, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Jhaun', 36000, 72, -1955, 0, 0, '8 small House', 'none', 'Bartender', 'VILLAGE', 111, 86, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('City of Shadows', 100465, 150, 60946, 2, 1, '194 Small Houses, 8 Large Houses, 2 Mansions', 'none',
+VALUES ('Bree Starter Hamlet', 16785, 100, 1685, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 128, 1, 29, 0),
+       ('Rohan Starter Hamlet', 49956, 100, 54807, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 245, 2, 24, 0),
+       ('Southron Coast Starter Hamlet', 47174, 100, 138338, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 426, 3,
+        14, 0),
+       ('Dale Starter Hamlet', 92019, 100, -9707, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 148, 4, 1, 0),
+       ('Rangers Starter Hamlet', 14340, 100, 11942, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 131, 5, 30, 0),
+       ('Dorwinion Starter Hamlet', 119362, 100, 25384, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 211, 6, 4, 0),
+       ('Dol Guldur Starter Hamlet', 66585, 100, 66649, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 165, 7, 3, 0),
+       ('Dunland Starter Hamlet', 34520, 100, 27885, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 174, 8, 5, 0),
+       ('Gondor Starter Hamlet', 78324, 100, 66198, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 263, 9, 21, 0),
+       ('Gulf Starter Hamlet', 107540, 100, 153283, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 440, 10, 6, 0),
+       ('Gundabad Starter Hamlet', 49745, 100, -13638, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 41, 11, 7, 0),
+       ('Half-Troll Starter Hamlet', 139551, 100, 217831, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 494, 12, 18,
+        0),
+       ('Harnennor Starter Hamlet', 92896, 100, 106142, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 391, 13, 8,
+        0),
+       ('Lindon Starter Hamlet', -17337, 100, -17251, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 121, 14, 10, 0),
+       ('Lothlórien Starter Hamlet', 50419, 100, 19242, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 168, 15, 11,
+        0),
+       ('Mordor Starter Hamlet', 95071, 100, 59469, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 267, 16, 27, 0),
+       ('Morwaith Starter Hamlet', 130761, 100, 187284, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 461, 17, 12,
+        0),
+       ('Nomad Starter Hamlet', 84768, 100, 130849, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 400, 18, 22, 0),
+       ('Rhúdel Starter Hamlet', 136907, 100, 31557, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 215, 19, 28, 0),
+       ('Angmar Starter Hamlet', 25489, 100, -27917, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 68, 20, 25, 0),
+       ('Woodland Realm Starter Hamlet', 77708, 100, -11631, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 146, 21,
+        16, 0),
+       ('Rhunur-Khanur', 140179, 78, 74529, 0, 0, '4 small houses', 'none', 'Bartender', 'VILLAGE', 235, 22, 27, 0),
+       ('Tharnost', 78318, 100, 69024, 2, 1, '75 small Houses, 8 large houses, 2 Mansions', 'none', 'Missing',
+        'CAPITAL', 311, 23, 21, 0),
+       ('Durins Folk Starter Hamlet', 101914, 100, -13903, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 102, 24,
+        19, 0),
+       ('Ered Luin Starter Hamlet', -27107, 100, -24996, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 52, 25, 23,
+        0),
+       ('Dol Amroth Starter Hamlet', 44901, 100, 77168, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 332, 26, 2,
+        0),
+       ('Taurethrim Starter Hamlet', 67117, 100, 269417, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 546, 27, 15,
+        0),
+       ('Rivendell Starter Hamlet', 46266, 100, -2291, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 110, 28, 13,
+        0),
+       ('Hobbit Starter Hamlet', -738, 100, 558, 0, 0, '4 Small Houses', 'None', 'None', 'HAMLET', 184, 29, 9, 0),
+       ('Arvee', 49118, 69, 75460, 0, 0, '8 Small Houses', 'none', 'Gondor Bartender', 'VILLAGE', 331, 30, 2, 0),
+       ('Isengard Starter Hamlet', 37542, 100, 42608, 0, 0, '4', 'None', 'None', 'HAMLET', 197, 31, 26, 0),
+       ('Umbar Starter Hamlet', 37542, 100, 42608, 0, 0, '4', 'None', 'None', 'HAMLET', 395, 32, 20, 0),
+       ('Varsa', 68680, 150, 20440, 1, 1, '16 Small Houses, 4 Large Houses', 'none',
+        'Bartender:1-Smith:1-Dol Guldur Trader:1-Dol Guldur Commander:1-Oddmant collector:1', 'TOWN', 165, 33, 3, 0),
+       ('Ost Apa Ruin', 37450, 150, 2861, 1, 1, '18 Small Houses, 4 Large Houses', 'none', 'Bartender', 'TOWN', 131, 34,
+        30, 0),
+       ('Dragonic Castle', 106013, 150, 184896, 1, 0, 'none', 'none', 'Blacksmith', 'CASTLE', 460, 35, 12, 0),
+       ('Fána Ondo', 48048, 200, -1770, 0, 0, '12', 'None', 'Bartender', 'VILLAGE', 110, 36, 13, 0),
+       ('Thingarholm', 103666, 150, -13566, 1, 1, '120 Small Houses, 4 Large Houses', 'none', 'Bartender:1-Market:4',
+        'TOWN', 102, 37, 19, 0),
+       ('Cesu Castle', 49458, 82, 123487, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 397, 38, 20, 0),
+       ('Anfalindros', 46830, 70, 72186, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 325, 39, 21, 0),
+       ('Carach Morgul', 120693, 117, 54285, 1, 0, '4 small', 'none', 'Blacksmith', 'STRONGHOLD', 236, 40, 27, 0),
+       ('Kala Garman', 94250, 157, 56155, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 237, 41, 27, 0),
+       ('Urdin-Bar', 93176, 82, 51600, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 209, 42, 27, 0),
+       ('Urdin-Dun', 128587, 123, 79956, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 295, 43, 27, 0),
+       ('Irdin Udun', 121099, 72, 54789, 1, 0, 'none', 'none', 'Blacksmith', 'CASTLE', 269, 44, 27, 0),
+       ('Priye-kuli', 57864, 71, 128826, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 398, 45, 20, 0),
+       ('Swanster Village', 44843, 69, 76900, 0, 0, '8 small houses', 'none', 'Bartender, Blacksmith', 'VILLAGE', 332,
+        46, 2, 0),
+       ('Magh Vadok', 87498, 70, 56408, 1, 0, '4', 'none', 'Blacksmith', 'STRONGHOLD', 266, 47, 27, 0),
+       ('Val-Myera', 68223, 64, 106126, 0, 0, '8small', 'none', 'Bartender', 'VILLAGE', 392, 48, 20, 0),
+       ('Sheepstroke Village', 104762, 77, 136734, 0, 0, '8small', 'none', 'Bartender', 'VILLAGE', 408, 49, 22, 0),
+       ('Sarahan', 106268, 100, 137918, 1, 1, '16 small houses, 8 large houses', 'none', 'Bartender, oddment collector',
+        'TOWN', 420, 50, 22, 0),
+       ('Gimog-Um', 84701, 78, 64778, 0, 0, '8 small', 'None', 'Dunlending Bartender', 'VILLAGE', 265, 51, 27, 0),
+       ('Cee Gulda', 99010, 69, 110511, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 390, 52, 20, 0),
+       ('Altak', 139073, 104, 23804, 1, 1, '24', 'none', 'Oddment collector', 'TOWN', 215, 53, 28, 0),
+       ('Polis Hermanis', 49148, 75, 76784, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 333, 54, 2, 0),
+       ('Potlood', 101332, 85, -12830, 0, 0, '12', 'none', 'Bartender', 'VILLAGE', 103, 55, 19, 0),
+       ('Knurlnien', -26357, 89, -21002, 1, 1, '21', 'none', 'Bartender, Oddment Collector', 'TOWN', 61, 56, 23, 0),
+       ('Anarthel', 73210, 72, 67176, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 313, 57, 21, 0),
+       ('Lebenamath', 61697, 71, 78518, 0, 0, '8', 'None', 'Bartender', 'VILLAGE', 335, 58, 21, 0),
+       ('Rithel', 56354, 72, 71867, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 330, 59, 21, 0),
+       ('Laktam Pahkah', 56850, 70, 264950, 0, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 557, 60, 15, 0),
+       ('Shiverclank', 49749, 134, -23902, 0, 0, '8', 'none', 'Bartender', 'VILLAGE', 17, 61, 7, 0),
+       ('Domrum', -27811, 80, -13169, 0, 0, '8 small Houses', 'none', 'Bartender, Blacksmith', 'VILLAGE', 60, 62, 23,
+        0),
+       ('Hogh Turum', -22805, 80, -25261, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 63, 63, 23, 0),
+       ('Kor Dorul', -28353, 80, -21337, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 53, 64, 23, 0),
+       ('Balbuldor', -20421, 80, -7558, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 62, 65, 23, 0),
+       ('Kála-murg', 134366, 84, 230375, 1, 1, '16 small Houses, 4 large Houses', 'none',
+        'Bartender, Oddment Collector', 'TOWN', 495, 66, 18, 0),
+       ('Andos-Dur', 37575, 79, -15740, 0, 0, '8 small', 'None', 'Bartender', 'VILLAGE', 69, 67, 25, 0),
+       ('Ethirië', 59618, 64, 81675, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 339, 68, 21, 0),
+       ('Castle Eron da Nikaer', 81900, 100, -19101, 1, 0, 'none', 'none', 'commander, smith', 'CASTLE', 76, 69, 19, 0),
+       ('Kazlokroz', 84827, 80, 46224, 1, 1, '16 small Houses, 4 large Houses', 'none', 'Bartender, Oddment Collector',
+        'TOWN', 239, 70, 27, 0),
+       ('Wulfs Deep', 34920, 80, 46224, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 196, 71, 5, 0),
+       ('Gazān nAtunârī', 104327, 87, 134382, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 407, 72, 22, 0),
+       ('Castle Nir Mountainth', 57459, 76, -21004, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 74, 73, 19, 0),
+       ('Dav-Gav Castle', 46136, 76, 141751, 1, 1, '16 small 4 large', 'none', 'Bartender, Oddment collector', 'TOWN',
+        425, 74, 20, 0),
+       ('See Gulda', 67349, 70, 105253, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 341, 75, 20, 0),
+       ('gaave ro fundup', 37440, 70, 43458, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 197, 76, 26, 0),
+       ('Carn Gorthaur', 35524, 71, -1823, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 113, 77, 25, 0),
+       ('Oo gre', 78728, 85, 84300, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 342, 78, 20, 0),
+       ('Ravenville', 41541, 64, 35399, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 173, 79, 5, 0),
+       ('Strav-Upe', 99124, 72, 110546, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 346, 80, 20, 0),
+       ('A Morgul Ships Rest', 82816, 66, 64681, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 240, 81, 27,
+        0),
+       ('Liepāja', 49312, 64, 161269, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 424, 82, 20, 0),
+       ('Lashkarg', 67718, 70, 37987, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 208, 83, 27, 0),
+       ('Drutot', 86990, 69, 54745, 1, 1, '16 small Houses, 4 large Houses', 'none',
+        'Bartender, Oddment Collector, Commander', 'TOWN', 238, 84, 27, 0),
+       ('Kehlgate', 46268, 72, 16346, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 136, 85, 5, 0),
+       ('Andos-Jhaun', 36000, 72, -1955, 0, 0, '8 small House', 'none', 'Bartender', 'VILLAGE', 111, 86, 25, 0),
+       ('City of Shadows', 100465, 150, 60946, 2, 1, '194 Small Houses, 8 Large Houses, 2 Mansions', 'none',
         'Mordor Orc Trader:2-Wicked Dwarf Traders:2-Eastling Fishmonger:1-Eastling Goldsmith:1-Bartender:1', 'CAPITAL',
-        267, 87, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dâr Mauzur', 71943, 72, 49623, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 204, 88, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Búrz Duglub', 77355, 64, 51171, 1, 0, 'none', 'none', 'commander, smith', 'CASTLE', 206, 89, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Agarth', 49900, 83, -3190, 0, 0, '8 small', 'none', 'bartender', 'VILLAGE', 109, 90, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fruit & Wood village', 121541, 71, 74527, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 297, 91, 27,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ijukukelukavein', 40958, 98, 42147, 0, 0, '8 small Houses', 'None', 'Bartender', 'VILLAGE', 198, 92, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andros Watch', 79837, 66, 61782, 1, 0, 'none', 'None', 'Smith, Commander', 'CASTLE', 264, 93, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Urdun-Idun', 101559, 88, -16662, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 77, 94, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Mon Eki', 67387, 69, 167852, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 443, 95, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Algharbiat rid', 44398, 71, 142091, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 431, 96, 14, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Nurkrom', 107221, 124, 88424, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 305, 97, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Tower of guld-mazar', 46800, 70, -10850, 1, 0, '8 small Houses', 'none', 'Smith, Commander', 'STRONGHOLD', 70,
-        98, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('ignis fire of the forest', 43718, 71, 39810, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 199, 99,
-        26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Althanc', 52900, 90, -4900, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 71, 100, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Rauros Bane', 68710, 88, 51304, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 205, 101, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Khasbab al arz', 27924, 82, 145170, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 430, 102, 14, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Harnacla', 35837, 72, 11330, 0, 0, '8 small Houses', 'none', 'Bardenter', 'VILLAGE', 132, 103, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos Jaldar', 16850, 70, -18525, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 114, 104, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('qimat aljabal', 19070, 105, 150076, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 447, 105, 14, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Denerond', 31373, 64, 4672, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 130, 106, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Thuin Boid', 36162, 71, 5922, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 131, 107, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Village of Nootus Noot', 44161, 120, 17855, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 135, 108,
-        5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Hiriath Village', 21146, 71, 18039, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 192, 109, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Village of Ene', 33937, 79, 20680, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 176, 110, 5, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Workshop of Doom', 45110, 57, 37655, 0, 0, '12 small Houses', 'Bombs, Catapult, Ram', 'Bartender', 'VILLAGE',
-        172, 111, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Maldar', 12150, 64, -4600, 0, 0, '8 small Houses', 'None', 'Bartender', 'VILLAGE', 126, 112, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Vrulgol', 56185, 90, -5790, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 72, 113, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gwaelin', 19981, 71, 13789, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 180, 114, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Edras', 41491, 70, 12959, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 133, 115, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Glad Ereg', 44934, 83, 1484, 0, 0, '0', 'None', 'Smith,Commander', 'KEEP', 132, 116, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Azulmor', 84274, 72, 103598, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 343, 117, 20, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Minas Malloth', 30391, 64, 2769, 1, 0, '4 small', 'none', 'Commander, smith', 'STRONGHOLD', 130, 118, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Marishburh', 23284, 70, 18842, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 177, 119, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Black- Mouth Castle', 75090, 90, 80040, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 309, 120, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Ló Near', 18340, 64, 642, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 129, 121, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dol Orme', 36560, 72, 11394, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 132, 122, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fel Cosit', 41229, 82, 20995, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 175, 123, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Laldir', 19995, 71, 13939, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 180, 124, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Metriath', 19839, 71, 13907, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 180, 125, 30, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Apple town', -17679, 77, 1241, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 121, 126, 10, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fornurnen Peace', 113281, 68, 76310, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 302, 127, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Trumarg Camp', 81292, 100, 62097, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 264, 128, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Agrafzahar', -23152, 77, -25050, 1, 1, '17 small Houses-4 large Houses', 'none', 'smith-commander-Bartender',
-        'TOWN', 63, 129, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Gûl-lug', 67105, 63, 48499, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 203, 130, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Veysun', 78150, 70, 71559, 1, 1, '28 small Houses, 4 large Houses', 'none',
-        'Bartender, Oddment-collector, Commander', 'TOWN', 336, 131, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Minas Pilinoth', 71699, 70, 62340, 0, 0, '32 small houses, 4 Large houses', 'None',
-        'Bartender, Smith, Commander', 'TOWN', 261, 132, 21, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Destroyed Hope Castle', 79267, 96, 68530, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 310, 133, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dusty Ford', 121641, 68, 60310, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 298, 134, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Village of Westford', 42100, 80, 48297, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 200, 135, 5,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Markhu Faham', -14324, 70, -35589, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 44, 136, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Crying Spirit Mine', 104312, 82, 72939, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 301, 137, 27,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Amon Eotheod', 63425, 88, 49050, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 201, 138, 24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Atalak-Grom', 86972, 148, 86803, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 306, 139, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Anduins Bane', 69711, 68, 52106, 1, 0, '8 small Houses', 'none', 'Smith-Commander', 'STRONGHOLD', 241, 140, 27,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Spiders Forest Village', 89439, 68, 83968, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 307, 141,
-        27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dagorlads Ruin', 84426, 66, 48093, 1, 0, 'None', 'None', 'Smith, Commander', 'CASTLE', 207, 142, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('roavaverdam', 60876, 85, 36813, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 202, 143, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dul-Zargad', 23600, 76, -1955, 1, 0, '8 (12) small Houses', 'Ladder, Catapult, Siege Tower', 'Smith-Commander',
-        'STRONGHOLD', 178, 144, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Dhul Voldir', 117067, 77, -14923, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 101, 145, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Screaming Bog Castle', 69867, 68, 52561, 1, 0, 'none', 'none', 'Smithy, Commander', 'CASTLE', 242, 146, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Between the two', 102327, 76, 67756, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 300, 147, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Assagay', 125914, 68, 176537, 0, 0, '9 small Houses', 'none', 'Bartender, Hutmaker', 'VILLAGE', 441, 148, 12,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Armenos', -18738, 70, -1844, 1, 0, 'none', 'none', 'Smith-Lord', 'CASTLE', 119, 149, 10, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lingwirin', -37947, 770, 2106, 0, 0, '8 small Houses', 'none', 'Vintner Elf', 'VILLAGE', 57, 150, 10, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Goth-Fushaum', 107883, 68, 80803, 0, 0, '16 small Houses, 4 large Houses', 'none',
-        'Bartender, Commander, Oddment', 'TOWN', 303, 151, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Lostladen', 102319, 72, 90011, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 345, 152, 27, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fort Golden Prime', 131047, 63, 27574, 1, 0, 'None', 'None', 'Commander', 'CASTLE', 214, 153, 28, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Eshowe war kraal', 95205, 73, 185851, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 459, 154, 12, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fortress of the First Marshal', 53288, 69, 55558, 1, 0, '0', 'none', 'Commander, Smith', 'CASTLE', 245, 155,
-        24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Riders Rest', 54867, 72, 39357, 1, 0, '0', 'None', 'Commander, Smith', 'CASTLE', 201, 156, 24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Fortress of Flowers', 96938, 69, -6996, 1, 0, '0', 'none', 'Smith, Commander', 'CASTLE', 150, 157, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Emyn Ortheiad', 77715, 71, -13054, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 146, 158, 16, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Anduins Horse', 67998, 72, 39471, 0, 0, '8', 'none', 'Bartender', 'VILLAGE', 201, 159, 24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Bonoldur', -18887, 72, -33962, 0, 0, '8', 'None', 'Barkeeper', 'VILLAGE', 50, 160, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Keldaruhm', -19058, 91, -31459, 0, 0, 'none', 'None', 'Smith, Commander', 'KEEP', 52, 161, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Thulgolir', -22028, 87, -7948, 2, 1, '2 mansions, 8 large houses, 192 small houses', 'none',
-        'Bartender, Commander, Oddment collector, Wandering trader', 'CAPITAL', 61, 162, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Bimoldur', -18047, 76, -34996, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 50, 163, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Kegrigh', -15862, 127, -31558, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 63, 164, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Bhurngalor', -21414, 126, -16619, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 62, 165, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Nildirth', -28608, 77, -24875, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 53, 166, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Nalgrin', -23463, 93, -33117, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 51, 167, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Haggalir', -25774, 87, -10133, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 60, 168, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Delyur', -26086, 72, -33101, 0, 0, '16 small houses, 4 large houses', 'none',
-        'Bartender, Commander, Oddment-collector', 'TOWN', 51, 169, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Vol Dural', -2206, 75, -35986, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 44, 170, 23, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Hurph', 81118, 64, -22143, 0, 0, '12 small houses', 'none', 'Bartender', 'VILLAGE', 38, 171, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Underharrow', 46628, 76, 53024, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 246, 172, 24, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Desolations Frontier', 102210, 200, -11654, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 151, 173, 19,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Bree', 13676, 68, 583, 2, 1, '2 mansions, 8 large houses, 70 small houses', 'none',
+        267, 87, 27, 0),
+       ('Dâr Mauzur', 71943, 72, 49623, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 204, 88, 27, 0),
+       ('Búrz Duglub', 77355, 64, 51171, 1, 0, 'none', 'none', 'commander, smith', 'CASTLE', 206, 89, 27, 0),
+       ('Andos-Agarth', 49900, 83, -3190, 0, 0, '8 small', 'none', 'bartender', 'VILLAGE', 109, 90, 25, 0),
+       ('Fruit & Wood village', 121541, 71, 74527, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 297, 91, 27,
+        0),
+       ('Ijukukelukavein', 40958, 98, 42147, 0, 0, '8 small Houses', 'None', 'Bartender', 'VILLAGE', 198, 92, 26, 0),
+       ('Andros Watch', 79837, 66, 61782, 1, 0, 'none', 'None', 'Smith, Commander', 'CASTLE', 264, 93, 27, 0),
+       ('Urdun-Idun', 101559, 88, -16662, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 77, 94, 19, 0),
+       ('Mon Eki', 67387, 69, 167852, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 443, 95, 20, 0),
+       ('Algharbiat rid', 44398, 71, 142091, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 431, 96, 14, 0),
+       ('Nurkrom', 107221, 124, 88424, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 305, 97, 27, 0),
+       ('Tower of guld-mazar', 46800, 70, -10850, 1, 0, '8 small Houses', 'none', 'Smith, Commander', 'STRONGHOLD', 70,
+        98, 25, 0),
+       ('ignis fire of the forest', 43718, 71, 39810, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 199, 99,
+        26, 0),
+       ('Andos-Althanc', 52900, 90, -4900, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 71, 100, 25, 0),
+       ('Rauros Bane', 68710, 88, 51304, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 205, 101, 27, 0),
+       ('Khasbab al arz', 27924, 82, 145170, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 430, 102, 14, 0),
+       ('Harnacla', 35837, 72, 11330, 0, 0, '8 small Houses', 'none', 'Bardenter', 'VILLAGE', 132, 103, 30, 0),
+       ('Andos Jaldar', 16850, 70, -18525, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 114, 104, 25, 0),
+       ('qimat aljabal', 19070, 105, 150076, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 447, 105, 14, 0),
+       ('Denerond', 31373, 64, 4672, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 130, 106, 30, 0),
+       ('Thuin Boid', 36162, 71, 5922, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 131, 107, 30, 0),
+       ('Village of Nootus Noot', 44161, 120, 17855, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 135, 108,
+        5, 0),
+       ('Hiriath Village', 21146, 71, 18039, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 192, 109, 5, 0),
+       ('Village of Ene', 33937, 79, 20680, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 176, 110, 5, 0),
+       ('Workshop of Doom', 45110, 57, 37655, 0, 0, '12 small Houses', 'Bombs, Catapult, Ram', 'Bartender', 'VILLAGE',
+        172, 111, 26, 0),
+       ('Andos-Maldar', 12150, 64, -4600, 0, 0, '8 small Houses', 'None', 'Bartender', 'VILLAGE', 126, 112, 25, 0),
+       ('Andos-Vrulgol', 56185, 90, -5790, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 72, 113, 25, 0),
+       ('Gwaelin', 19981, 71, 13789, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 180, 114, 30, 0),
+       ('Edras', 41491, 70, 12959, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 133, 115, 30, 0),
+       ('Glad Ereg', 44934, 83, 1484, 0, 0, '0', 'None', 'Smith,Commander', 'KEEP', 132, 116, 30, 0),
+       ('Azulmor', 84274, 72, 103598, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 343, 117, 20, 0),
+       ('Minas Malloth', 30391, 64, 2769, 1, 0, '4 small', 'none', 'Commander, smith', 'STRONGHOLD', 130, 118, 30, 0),
+       ('Marishburh', 23284, 70, 18842, 0, 0, '8 small', 'none', 'Bartender', 'VILLAGE', 177, 119, 30, 0),
+       ('Black- Mouth Castle', 75090, 90, 80040, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 309, 120, 27, 0),
+       ('Ló Near', 18340, 64, 642, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 129, 121, 30, 0),
+       ('Dol Orme', 36560, 72, 11394, 1, 0, 'none', 'none', 'Smith', 'CASTLE', 132, 122, 30, 0),
+       ('Fel Cosit', 41229, 82, 20995, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 175, 123, 30, 0),
+       ('Laldir', 19995, 71, 13939, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 180, 124, 30, 0),
+       ('Metriath', 19839, 71, 13907, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 180, 125, 30, 0),
+       ('Apple town', -17679, 77, 1241, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 121, 126, 10, 0),
+       ('Fornurnen Peace', 113281, 68, 76310, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 302, 127, 27, 0),
+       ('Trumarg Camp', 81292, 100, 62097, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 264, 128, 27, 0),
+       ('Agrafzahar', -23152, 77, -25050, 1, 1, '17 small Houses-4 large Houses', 'none', 'smith-commander-Bartender',
+        'TOWN', 63, 129, 23, 0),
+       ('Gûl-lug', 67105, 63, 48499, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 203, 130, 27, 0),
+       ('Veysun', 78150, 70, 71559, 1, 1, '28 small Houses, 4 large Houses', 'none',
+        'Bartender, Oddment-collector, Commander', 'TOWN', 336, 131, 21, 0),
+       ('Minas Pilinoth', 71699, 70, 62340, 0, 0, '32 small houses, 4 Large houses', 'None',
+        'Bartender, Smith, Commander', 'TOWN', 261, 132, 21, 0),
+       ('Destroyed Hope Castle', 79267, 96, 68530, 1, 0, 'none', 'none', 'Smith-Commander', 'CASTLE', 310, 133, 27, 0),
+       ('Dusty Ford', 121641, 68, 60310, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 298, 134, 27, 0),
+       ('Village of Westford', 42100, 80, 48297, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 200, 135, 5,
+        0),
+       ('Markhu Faham', -14324, 70, -35589, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 44, 136, 23, 0),
+       ('Crying Spirit Mine', 104312, 82, 72939, 0, 0, '12 small Houses', 'none', 'Bartender', 'VILLAGE', 301, 137, 27,
+        0),
+       ('Amon Eotheod', 63425, 88, 49050, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 201, 138, 24, 0),
+       ('Atalak-Grom', 86972, 148, 86803, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 306, 139, 27, 0),
+       ('Anduins Bane', 69711, 68, 52106, 1, 0, '8 small Houses', 'none', 'Smith-Commander', 'STRONGHOLD', 241, 140, 27,
+        0),
+       ('Spiders Forest Village', 89439, 68, 83968, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 307, 141,
+        27, 0),
+       ('Dagorlads Ruin', 84426, 66, 48093, 1, 0, 'None', 'None', 'Smith, Commander', 'CASTLE', 207, 142, 27, 0),
+       ('roavaverdam', 60876, 85, 36813, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 202, 143, 26, 0),
+       ('Dul-Zargad', 23600, 76, -1955, 1, 0, '8 (12) small Houses', 'Ladder, Catapult, Siege Tower', 'Smith-Commander',
+        'STRONGHOLD', 178, 144, 25, 0),
+       ('Dhul Voldir', 117067, 77, -14923, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 101, 145, 19, 0),
+       ('Screaming Bog Castle', 69867, 68, 52561, 1, 0, 'none', 'none', 'Smithy, Commander', 'CASTLE', 242, 146, 27, 0),
+       ('Between the two', 102327, 76, 67756, 0, 0, '8 small Houses', 'none', 'Bartender', 'VILLAGE', 300, 147, 27, 0),
+       ('Assagay', 125914, 68, 176537, 0, 0, '9 small Houses', 'none', 'Bartender, Hutmaker', 'VILLAGE', 441, 148, 12,
+        0),
+       ('Armenos', -18738, 70, -1844, 1, 0, 'none', 'none', 'Smith-Lord', 'CASTLE', 119, 149, 10, 0),
+       ('Lingwirin', -37947, 770, 2106, 0, 0, '8 small Houses', 'none', 'Vintner Elf', 'VILLAGE', 57, 150, 10, 0),
+       ('Goth-Fushaum', 107883, 68, 80803, 0, 0, '16 small Houses, 4 large Houses', 'none',
+        'Bartender, Commander, Oddment', 'TOWN', 303, 151, 27, 0),
+       ('Lostladen', 102319, 72, 90011, 0, 0, '8 Small Houses', 'None', 'Bartender', 'VILLAGE', 345, 152, 27, 0),
+       ('Fort Golden Prime', 131047, 63, 27574, 1, 0, 'None', 'None', 'Commander', 'CASTLE', 214, 153, 28, 0),
+       ('Eshowe war kraal', 95205, 73, 185851, 1, 0, 'none', 'none', 'Commander, Smith', 'CASTLE', 459, 154, 12, 0),
+       ('Fortress of the First Marshal', 53288, 69, 55558, 1, 0, '0', 'none', 'Commander, Smith', 'CASTLE', 245, 155,
+        24, 0),
+       ('Riders Rest', 54867, 72, 39357, 1, 0, '0', 'None', 'Commander, Smith', 'CASTLE', 201, 156, 24, 0),
+       ('Fortress of Flowers', 96938, 69, -6996, 1, 0, '0', 'none', 'Smith, Commander', 'CASTLE', 150, 157, 19, 0),
+       ('Emyn Ortheiad', 77715, 71, -13054, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 146, 158, 16, 0),
+       ('Anduins Horse', 67998, 72, 39471, 0, 0, '8', 'none', 'Bartender', 'VILLAGE', 201, 159, 24, 0),
+       ('Bonoldur', -18887, 72, -33962, 0, 0, '8', 'None', 'Barkeeper', 'VILLAGE', 50, 160, 23, 0),
+       ('Keldaruhm', -19058, 91, -31459, 0, 0, 'none', 'None', 'Smith, Commander', 'KEEP', 52, 161, 23, 0),
+       ('Thulgolir', -22028, 87, -7948, 2, 1, '2 mansions, 8 large houses, 192 small houses', 'none',
+        'Bartender, Commander, Oddment collector, Wandering trader', 'CAPITAL', 61, 162, 23, 0),
+       ('Bimoldur', -18047, 76, -34996, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 50, 163, 23, 0),
+       ('Kegrigh', -15862, 127, -31558, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 63, 164, 23, 0),
+       ('Bhurngalor', -21414, 126, -16619, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 62, 165, 23, 0),
+       ('Nildirth', -28608, 77, -24875, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 53, 166, 23, 0),
+       ('Nalgrin', -23463, 93, -33117, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 51, 167, 23, 0),
+       ('Haggalir', -25774, 87, -10133, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 60, 168, 23, 0),
+       ('Delyur', -26086, 72, -33101, 0, 0, '16 small houses, 4 large houses', 'none',
+        'Bartender, Commander, Oddment-collector', 'TOWN', 51, 169, 23, 0),
+       ('Vol Dural', -2206, 75, -35986, 0, 0, 'none', 'none', 'Commander, Smith', 'KEEP', 44, 170, 23, 0),
+       ('Hurph', 81118, 64, -22143, 0, 0, '12 small houses', 'none', 'Bartender', 'VILLAGE', 38, 171, 19, 0),
+       ('Underharrow', 46628, 76, 53024, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 246, 172, 24, 0),
+       ('Desolations Frontier', 102210, 200, -11654, 1, 0, 'none', 'none', 'Smith, Commander', 'CASTLE', 151, 173, 19,
+        0),
+       ('Bree', 13676, 68, 583, 2, 1, '2 mansions, 8 large houses, 70 small houses', 'none',
         'Blacksmith, Brewer, Baker, Bartender, Commander, oddment collector, wandering trader', 'CAPITAL', 128, 174, 29,
-        0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Briedget', 80973, 181, -223622, 1, 1, '4 large houses, 66 small houses', 'none',
-        'Bartender, Commander, Oddment Collector', 'TOWN', 40, 175, 19, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Andos-Razhag', 50330, 109, -670, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 134, 176, 25, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('den of Vipers', 47632, 75, 17455, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 171, 177, 26, 0);
-
-INSERT INTO claimbuilds (name, x, y, z, free_armies_remaining, free_trading_companies_remaining, number_of_houses,
-                         siege, traders, type, region, id, owned_by, version)
-VALUES ('Migdarth', -23652, 83, -17070, 0, 0, 'none', 'none', 'Smith, Commander', 'KEEP', 61, 178, 23, 0);
+        0),
+       ('Briedget', 80973, 181, -223622, 1, 1, '4 large houses, 66 small houses', 'none',
+        'Bartender, Commander, Oddment Collector', 'TOWN', 40, 175, 19, 0),
+       ('Andos-Razhag', 50330, 109, -670, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 134, 176, 25, 0),
+       ('den of Vipers', 47632, 75, 17455, 0, 0, '8 small houses', 'none', 'Bartender', 'VILLAGE', 171, 177, 26, 0),
+       ('Migdarth', -23652, 83, -17070, 0, 0, 'none', 'none', 'Smith, Commander', 'KEEP', 61, 178, 23, 0);
 
 
 -- Add production sites in claimbuilds
 INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 22);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (13, 1, 22);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (126, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (86, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (46, 2, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 5, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (62, 2, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (61, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (121, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (120, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (98, 1, 23);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (101, 1, 30);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (48, 1, 30);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (73, 3, 33);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (103, 1, 33);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 1, 34);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 34);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 34);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 34);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (80, 1, 36);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (1, 1, 36);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (17, 1, 36);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 6, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 2, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (104, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (98, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (80, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (45, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (66, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (79, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (62, 5, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (61, 5, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 2, 37);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 39);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 39);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 40);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 42);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 42);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (13, 1, 43);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 43);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (117, 1, 45);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 45);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 46);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 47);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 48);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (117, 1, 48);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (5, 1, 49);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (189, 1, 49);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 2, 50);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (59, 1, 50);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (73, 1, 51);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 51);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (34, 1, 52);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 52);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (17, 1, 53);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 53);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 53);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (188, 1, 53);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 2, 53);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 54);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (81, 1, 54);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (46, 2, 55);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 55);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (190, 1, 56);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 56);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 57);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 57);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (81, 1, 58);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 58);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 59);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 59);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 61);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 61);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 62);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 63);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (80, 1, 63);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (86, 1, 64);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 64);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (62, 1, 65);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (82, 1, 65);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 4, 66);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 66);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 1, 66);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 67);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (62, 1, 67);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 68);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (49, 1, 68);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 70);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (74, 1, 70);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 70);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 74);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (68, 1, 74);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (67, 1, 74);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 1, 74);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (126, 1, 75);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 75);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 78);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 78);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 79);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 79);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (41, 1, 80);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (119, 1, 80);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (51, 1, 81);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 81);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (119, 1, 82);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (41, 1, 82);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 83);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 83);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (82, 1, 84);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (137, 1, 84);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (13, 2, 84);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 85);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 85);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (125, 1, 86);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 86);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (74, 14, 87);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (75, 16, 87);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 5, 87);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 6, 87);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (13, 8, 87);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 90);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 90);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (119, 1, 91);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (118, 1, 91);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (51, 1, 91);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 92);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 92);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 94);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 94);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 1, 94);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (118, 1, 95);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (16, 1, 95);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (97, 1, 96);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (86, 1, 96);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 98);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 98);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 99);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 1, 99);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 100);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (63, 2, 100);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (86, 1, 102);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (41, 1, 102);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 103);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 1, 103);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 104);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 1, 104);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (33, 1, 105);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 105);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 106);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 1, 106);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 107);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 2, 107);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (71, 1, 108);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 108);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 109);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 109);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 110);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (49, 1, 110);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (137, 1, 111);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 111);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 111);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 112);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 112);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 113);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 1, 113);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 1, 113);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 114);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (49, 1, 114);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 115);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 115);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 118);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 119);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 119);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 121);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 121);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 123);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 123);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (23, 1, 126);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (80, 1, 126);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (189, 1, 126);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 127);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 127);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 1, 128);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 128);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (170, 1, 129);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (4, 1, 129);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 129);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (123, 1, 129);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (27, 1, 129);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (46, 1, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (15, 2, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (23, 1, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 131);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (46, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (41, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (36, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (57, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (39, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 132);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 134);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (74, 2, 134);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 135);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 135);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (27, 1, 136);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 136);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (74, 1, 137);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (82, 1, 137);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (13, 1, 137);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (35, 1, 138);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 138);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 140);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 141);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (51, 2, 141);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 143);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (19, 1, 143);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (137, 1, 144);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 144);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (98, 1, 145);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (9, 1, 145);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (82, 1, 147);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (72, 1, 147);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 148);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 2, 150);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (138, 3, 151);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 2, 151);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (191, 1, 152);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (115, 1, 152);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (174, 1, 158);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 158);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 159);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (11, 1, 159);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (84, 1, 160);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 1, 160);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (79, 2, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (66, 1, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 1, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (64, 1, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (86, 1, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (190, 18, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (61, 6, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 3, 162);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (66, 1, 169);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (116, 1, 169);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (138, 1, 169);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (52, 2, 171);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 171);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 172);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 172);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 2, 174);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (105, 1, 174);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 8, 175);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (189, 2, 175);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (61, 6, 175);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (114, 1, 175);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (78, 1, 176);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (129, 1, 176);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (90, 1, 177);
-INSERT INTO production_claimbuild (production_site_id, count, claimbuild_id)
-VALUES (58, 1, 177);
+VALUES (90, 1, 22),
+       (13, 1, 22),
+       (126, 1, 23),
+       (86, 1, 23),
+       (46, 2, 23),
+       (35, 1, 23),
+       (9, 5, 23),
+       (62, 2, 23),
+       (61, 1, 23),
+       (121, 1, 23),
+       (120, 1, 23),
+       (98, 1, 23),
+       (101, 1, 30),
+       (48, 1, 30),
+       (73, 3, 33),
+       (103, 1, 33),
+       (58, 1, 34),
+       (123, 1, 34),
+       (35, 1, 34),
+       (78, 1, 34),
+       (80, 1, 36),
+       (1, 1, 36),
+       (17, 1, 36),
+       (78, 6, 37),
+       (9, 2, 37),
+       (104, 1, 37),
+       (114, 1, 37),
+       (98, 1, 37),
+       (80, 1, 37),
+       (116, 1, 37),
+       (45, 1, 37),
+       (66, 1, 37),
+       (79, 1, 37),
+       (52, 1, 37),
+       (62, 5, 37),
+       (61, 5, 37),
+       (58, 2, 37),
+       (15, 1, 39),
+       (114, 1, 39),
+       (90, 1, 40),
+       (90, 1, 42),
+       (78, 1, 42),
+       (13, 1, 43),
+       (90, 1, 43),
+       (117, 1, 45),
+       (116, 1, 45),
+       (114, 1, 46),
+       (90, 1, 47),
+       (116, 1, 48),
+       (117, 1, 48),
+       (5, 1, 49),
+       (189, 1, 49),
+       (105, 2, 50),
+       (59, 1, 50),
+       (73, 1, 51),
+       (114, 1, 51),
+       (34, 1, 52),
+       (116, 1, 52),
+       (17, 1, 53),
+       (78, 1, 53),
+       (114, 1, 53),
+       (188, 1, 53),
+       (9, 2, 53),
+       (15, 1, 54),
+       (81, 1, 54),
+       (46, 2, 55),
+       (114, 1, 55),
+       (190, 1, 56),
+       (114, 1, 56),
+       (15, 1, 57),
+       (114, 1, 57),
+       (81, 1, 58),
+       (15, 1, 58),
+       (114, 1, 59),
+       (15, 1, 59),
+       (52, 1, 61),
+       (90, 1, 61),
+       (114, 1, 62),
+       (78, 1, 63),
+       (80, 1, 63),
+       (86, 1, 64),
+       (78, 1, 64),
+       (62, 1, 65),
+       (82, 1, 65),
+       (9, 4, 66),
+       (90, 1, 66),
+       (19, 1, 66),
+       (105, 1, 67),
+       (62, 1, 67),
+       (114, 1, 68),
+       (49, 1, 68),
+       (90, 1, 70),
+       (74, 1, 70),
+       (116, 1, 70),
+       (114, 1, 74),
+       (68, 1, 74),
+       (67, 1, 74),
+       (9, 1, 74),
+       (126, 1, 75),
+       (114, 1, 75),
+       (116, 1, 78),
+       (114, 1, 78),
+       (116, 1, 79),
+       (78, 1, 79),
+       (41, 1, 80),
+       (119, 1, 80),
+       (51, 1, 81),
+       (116, 1, 81),
+       (119, 1, 82),
+       (41, 1, 82),
+       (116, 1, 83),
+       (114, 1, 83),
+       (82, 1, 84),
+       (137, 1, 84),
+       (13, 2, 84),
+       (114, 1, 85),
+       (52, 1, 85),
+       (125, 1, 86),
+       (52, 1, 86),
+       (74, 14, 87),
+       (75, 16, 87),
+       (19, 5, 87),
+       (90, 6, 87),
+       (13, 8, 87),
+       (105, 1, 90),
+       (52, 1, 90),
+       (119, 1, 91),
+       (118, 1, 91),
+       (51, 1, 91),
+       (78, 1, 92),
+       (105, 1, 92),
+       (52, 1, 94),
+       (114, 1, 94),
+       (9, 1, 94),
+       (118, 1, 95),
+       (16, 1, 95),
+       (97, 1, 96),
+       (86, 1, 96),
+       (90, 1, 98),
+       (52, 1, 98),
+       (90, 1, 99),
+       (19, 1, 99),
+       (129, 1, 100),
+       (63, 2, 100),
+       (86, 1, 102),
+       (41, 1, 102),
+       (123, 1, 103),
+       (9, 1, 103),
+       (90, 1, 104),
+       (19, 1, 104),
+       (33, 1, 105),
+       (105, 1, 105),
+       (129, 1, 106),
+       (9, 1, 106),
+       (129, 1, 107),
+       (9, 2, 107),
+       (71, 1, 108),
+       (114, 1, 108),
+       (116, 1, 109),
+       (78, 1, 109),
+       (114, 1, 110),
+       (49, 1, 110),
+       (137, 1, 111),
+       (90, 1, 111),
+       (78, 1, 111),
+       (78, 1, 112),
+       (90, 1, 112),
+       (90, 1, 113),
+       (19, 1, 113),
+       (58, 1, 113),
+       (123, 1, 114),
+       (49, 1, 114),
+       (129, 1, 115),
+       (35, 1, 115),
+       (123, 1, 118),
+       (35, 1, 119),
+       (129, 1, 119),
+       (35, 1, 121),
+       (123, 1, 121),
+       (129, 1, 123),
+       (52, 1, 123),
+       (23, 1, 126),
+       (80, 1, 126),
+       (189, 1, 126),
+       (105, 1, 127),
+       (114, 1, 127),
+       (15, 1, 128),
+       (90, 1, 128),
+       (170, 1, 129),
+       (4, 1, 129),
+       (78, 1, 129),
+       (123, 1, 129),
+       (27, 1, 129),
+       (114, 1, 131),
+       (46, 1, 131),
+       (15, 2, 131),
+       (52, 1, 131),
+       (23, 1, 131),
+       (78, 1, 131),
+       (52, 1, 132),
+       (114, 1, 132),
+       (46, 1, 132),
+       (41, 1, 132),
+       (36, 1, 132),
+       (57, 1, 132),
+       (39, 1, 132),
+       (35, 1, 132),
+       (116, 1, 134),
+       (74, 2, 134),
+       (116, 1, 135),
+       (78, 1, 135),
+       (27, 1, 136),
+       (129, 1, 136),
+       (74, 1, 137),
+       (82, 1, 137),
+       (13, 1, 137),
+       (35, 1, 138),
+       (114, 1, 138),
+       (105, 1, 140),
+       (116, 1, 141),
+       (51, 2, 141),
+       (90, 1, 143),
+       (19, 1, 143),
+       (137, 1, 144),
+       (90, 1, 144),
+       (98, 1, 145),
+       (9, 1, 145),
+       (82, 1, 147),
+       (72, 1, 147),
+       (114, 1, 148),
+       (116, 2, 150),
+       (138, 3, 151),
+       (116, 2, 151),
+       (191, 1, 152),
+       (115, 1, 152),
+       (174, 1, 158),
+       (114, 1, 158),
+       (114, 1, 159),
+       (11, 1, 159),
+       (84, 1, 160),
+       (58, 1, 160),
+       (79, 2, 162),
+       (66, 1, 162),
+       (58, 1, 162),
+       (64, 1, 162),
+       (86, 1, 162),
+       (190, 18, 162),
+       (61, 6, 162),
+       (78, 3, 162),
+       (66, 1, 169),
+       (116, 1, 169),
+       (138, 1, 169),
+       (52, 2, 171),
+       (114, 1, 171),
+       (114, 1, 172),
+       (78, 1, 172),
+       (114, 2, 174),
+       (105, 1, 174),
+       (78, 8, 175),
+       (189, 2, 175),
+       (61, 6, 175),
+       (114, 1, 175),
+       (78, 1, 176),
+       (129, 1, 176),
+       (90, 1, 177),
+       (58, 1, 177);
 
 -- Add special buildings in claimbuilds
 INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 22);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('BANK', 23);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 23);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 23);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 23);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 30);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 33);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 34);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 35);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 35);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 36);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 37);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('BANK', 37);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 37);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 37);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 37);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 38);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 39);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 40);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 40);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 40);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 41);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 41);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 44);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 44);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 45);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 46);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 46);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 46);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('EMBASSY', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 50);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 51);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 52);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 56);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('EMBASSY', 56);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 56);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 57);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 58);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 59);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 60);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 60);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 60);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 61);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 62);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 62);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 62);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 63);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 64);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 65);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 66);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 66);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 66);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 67);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 68);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 69);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 69);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 70);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WATCHTOWER', 70);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 70);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 70);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 70);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 71);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 71);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 72);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 72);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 73);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 73);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 74);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 74);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 74);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 76);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 76);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 77);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 77);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 78);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 79);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 80);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 81);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 82);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 83);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 84);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 84);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 84);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WATCHTOWER', 84);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 85);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 86);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 87);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 87);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 87);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 87);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 87);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 88);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 88);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 89);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 89);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 90);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 91);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 92);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 93);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 93);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 93);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 94);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 95);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 96);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 97);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 97);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 98);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 98);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 98);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 99);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 100);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 101);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 101);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 102);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 103);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 104);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 105);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 106);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 107);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 108);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 109);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 110);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 111);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 112);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 113);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 114);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 115);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 116);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 117);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 117);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 118);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 118);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 118);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 120);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 120);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 121);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 122);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 122);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 123);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 124);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 124);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 125);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 125);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 126);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 127);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 128);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 129);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 129);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 130);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 130);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 131);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 131);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 131);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WATCHTOWER', 131);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 131);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 132);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 132);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 132);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 133);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 133);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 134);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 135);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 136);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 137);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 138);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 139);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 139);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 140);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 140);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 140);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 141);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 142);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 142);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 143);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 144);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 144);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 144);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 145);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 146);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 146);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 147);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 148);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 149);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 149);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 150);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 151);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 151);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 151);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 152);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 153);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 154);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 154);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 155);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 155);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 156);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 156);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 157);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 157);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 158);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 159);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 160);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 161);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('BANK', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 162);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 163);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 164);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 165);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 166);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 167);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 168);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 169);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 169);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 169);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HARBOUR', 169);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 169);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 170);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 171);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 172);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 173);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 173);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('HOUSE_OF_HEALING', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('SHOP', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 174);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 175);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('MARKET', 175);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 175);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('STABLES', 175);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 176);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('INN', 177);
-INSERT INTO claimbuild_special_buildings (special_buildings, claimbuild_id)
-VALUES ('WALL', 178);
+VALUES ('INN', 22),
+       ('BANK', 23),
+       ('HARBOUR', 23),
+       ('HOUSE_OF_HEALING', 23),
+       ('INN', 23),
+       ('INN', 30),
+       ('INN', 33),
+       ('INN', 34),
+       ('WALL', 35),
+       ('STABLES', 35),
+       ('INN', 36),
+       ('MARKET', 37),
+       ('BANK', 37),
+       ('HARBOUR', 37),
+       ('WALL', 37),
+       ('INN', 37),
+       ('WALL', 38),
+       ('INN', 39),
+       ('HOUSE_OF_HEALING', 40),
+       ('WALL', 40),
+       ('STABLES', 40),
+       ('STABLES', 41),
+       ('WALL', 41),
+       ('WALL', 44),
+       ('STABLES', 44),
+       ('INN', 45),
+       ('INN', 46),
+       ('SHOP', 46),
+       ('WALL', 46),
+       ('WALL', 50),
+       ('STABLES', 50),
+       ('HARBOUR', 50),
+       ('MARKET', 50),
+       ('INN', 50),
+       ('EMBASSY', 50),
+       ('HOUSE_OF_HEALING', 50),
+       ('INN', 51),
+       ('INN', 52),
+       ('HOUSE_OF_HEALING', 56),
+       ('EMBASSY', 56),
+       ('INN', 56),
+       ('INN', 57),
+       ('INN', 58),
+       ('INN', 59),
+       ('HOUSE_OF_HEALING', 60),
+       ('WALL', 60),
+       ('STABLES', 60),
+       ('INN', 61),
+       ('SHOP', 62),
+       ('INN', 62),
+       ('WALL', 62),
+       ('INN', 63),
+       ('INN', 64),
+       ('INN', 65),
+       ('STABLES', 66),
+       ('INN', 66),
+       ('MARKET', 66),
+       ('INN', 67),
+       ('INN', 68),
+       ('STABLES', 69),
+       ('WALL', 69),
+       ('MARKET', 70),
+       ('WATCHTOWER', 70),
+       ('HARBOUR', 70),
+       ('STABLES', 70),
+       ('INN', 70),
+       ('WALL', 71),
+       ('STABLES', 71),
+       ('WALL', 72),
+       ('STABLES', 72),
+       ('WALL', 73),
+       ('STABLES', 73),
+       ('INN', 74),
+       ('STABLES', 74),
+       ('MARKET', 74),
+       ('STABLES', 76),
+       ('WALL', 76),
+       ('STABLES', 77),
+       ('WALL', 77),
+       ('INN', 78),
+       ('INN', 79),
+       ('INN', 80),
+       ('INN', 81),
+       ('INN', 82),
+       ('INN', 83),
+       ('MARKET', 84),
+       ('INN', 84),
+       ('STABLES', 84),
+       ('WATCHTOWER', 84),
+       ('INN', 85),
+       ('INN', 86),
+       ('MARKET', 87),
+       ('WALL', 87),
+       ('STABLES', 87),
+       ('INN', 87),
+       ('HOUSE_OF_HEALING', 87),
+       ('STABLES', 88),
+       ('WALL', 88),
+       ('WALL', 89),
+       ('STABLES', 89),
+       ('INN', 90),
+       ('INN', 91),
+       ('INN', 92),
+       ('HOUSE_OF_HEALING', 93),
+       ('STABLES', 93),
+       ('WALL', 93),
+       ('INN', 94),
+       ('INN', 95),
+       ('INN', 96),
+       ('STABLES', 97),
+       ('WALL', 97),
+       ('WALL', 98),
+       ('HOUSE_OF_HEALING', 98),
+       ('STABLES', 98),
+       ('INN', 99),
+       ('INN', 100),
+       ('WALL', 101),
+       ('STABLES', 101),
+       ('INN', 102),
+       ('INN', 103),
+       ('INN', 104),
+       ('INN', 105),
+       ('INN', 106),
+       ('INN', 107),
+       ('INN', 108),
+       ('INN', 109),
+       ('INN', 110),
+       ('INN', 111),
+       ('INN', 112),
+       ('INN', 113),
+       ('INN', 114),
+       ('INN', 115),
+       ('WALL', 116),
+       ('WALL', 117),
+       ('STABLES', 117),
+       ('WALL', 118),
+       ('HOUSE_OF_HEALING', 118),
+       ('STABLES', 118),
+       ('STABLES', 120),
+       ('WALL', 120),
+       ('INN', 121),
+       ('WALL', 122),
+       ('STABLES', 122),
+       ('INN', 123),
+       ('WALL', 124),
+       ('STABLES', 124),
+       ('WALL', 125),
+       ('STABLES', 125),
+       ('INN', 126),
+       ('INN', 127),
+       ('INN', 128),
+       ('INN', 129),
+       ('STABLES', 129),
+       ('STABLES', 130),
+       ('WALL', 130),
+       ('HARBOUR', 131),
+       ('MARKET', 131),
+       ('STABLES', 131),
+       ('WATCHTOWER', 131),
+       ('INN', 131),
+       ('STABLES', 132),
+       ('WALL', 132),
+       ('HOUSE_OF_HEALING', 132),
+       ('STABLES', 133),
+       ('WALL', 133),
+       ('INN', 134),
+       ('INN', 135),
+       ('INN', 136),
+       ('INN', 137),
+       ('INN', 138),
+       ('WALL', 139),
+       ('STABLES', 139),
+       ('HARBOUR', 140),
+       ('WALL', 140),
+       ('STABLES', 140),
+       ('INN', 141),
+       ('WALL', 142),
+       ('STABLES', 142),
+       ('INN', 143),
+       ('WALL', 144),
+       ('HOUSE_OF_HEALING', 144),
+       ('STABLES', 144),
+       ('INN', 145),
+       ('WALL', 146),
+       ('STABLES', 146),
+       ('INN', 147),
+       ('SHOP', 148),
+       ('WALL', 149),
+       ('STABLES', 149),
+       ('INN', 150),
+       ('INN', 151),
+       ('STABLES', 151),
+       ('MARKET', 151),
+       ('INN', 152),
+       ('WALL', 153),
+       ('WALL', 154),
+       ('STABLES', 154),
+       ('STABLES', 155),
+       ('WALL', 155),
+       ('STABLES', 156),
+       ('WALL', 156),
+       ('STABLES', 157),
+       ('WALL', 157),
+       ('INN', 158),
+       ('INN', 159),
+       ('INN', 160),
+       ('WALL', 161),
+       ('MARKET', 162),
+       ('WALL', 162),
+       ('STABLES', 162),
+       ('BANK', 162),
+       ('INN', 162),
+       ('HOUSE_OF_HEALING', 162),
+       ('WALL', 163),
+       ('WALL', 164),
+       ('WALL', 165),
+       ('WALL', 166),
+       ('WALL', 167),
+       ('WALL', 168),
+       ('INN', 169),
+       ('MARKET', 169),
+       ('STABLES', 169),
+       ('HARBOUR', 169),
+       ('WALL', 169),
+       ('WALL', 170),
+       ('INN', 171),
+       ('INN', 172),
+       ('WALL', 173),
+       ('STABLES', 173),
+       ('SHOP', 174),
+       ('HOUSE_OF_HEALING', 174),
+       ('STABLES', 174),
+       ('INN', 174),
+       ('MARKET', 174),
+       ('SHOP', 174),
+       ('SHOP', 174),
+       ('SHOP', 174),
+       ('SHOP', 174),
+       ('WALL', 174),
+       ('INN', 175),
+       ('MARKET', 175),
+       ('WALL', 175),
+       ('STABLES', 175),
+       ('INN', 176),
+       ('INN', 177),
+       ('WALL', 178);
 
 -- Add roleplay characters
 INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (1, 0, true, 'Morwaith Armour and Weapons', NULL, 'Cetshwayo koMpande', false, 'Lion of Morwaith', 461, 37);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (2, 0, true,
+VALUES (1, 0, true, 'Morwaith Armour and Weapons', NULL, 'Cetshwayo koMpande', false, 'Lion of Morwaith', 461, 37),
+       (2, 0, true,
         'Gundabad Uruk Helmet with Angmar armour, Arnorian Spear, Angmar Warhammer, Orc Bow and Poisoned Angmar Dagger',
-        NULL, 'Knargaz', true, 'Knargaz of Angmar', 68, 72);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (3, 0, true, 'Gondolin', NULL, 'Firyawë', true, 'Lost Prince In Gondor', 168, 2);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (4, 0, true, 'Rohirric Armor and weapons, Barrow blade', NULL, 'Helm Hammerhand', true, 'Wight King of Rohan',
-        245, 4);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (5, 0, true, 'Half troll armour, iron armour, half troll arsenal, bow and a random brick', NULL, 'Lagmag', true,
-        'Lagging Half Troll', 494, 23);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (6, 0, true, 'Morgul Blade/Armor, Rhudel Bow, Iron X-Bow', NULL, 'Khamûl', true, 'Shadow of the East', 215, 7);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (7, 0, true, 'Iron, chain or leather armor, Arnorian swords and spear adn iron gear', NULL, 'Henry Hazelshaw',
-        true, 'Mayor of Bree', 128, 32);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (8, 0, true, 'Golden Trimmed Dwarven Armour, Dorwinion Elf Helmet, Dwarven arsenal', NULL, 'Midas', true,
-        'Durins Folk Treasurer', 102, 11);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (9, 0, true, 'Ranger armor, ranger bow, ranger sword and iron pike', NULL, 'Eredhon', true, 'King of Arnor', 131,
-        27);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (10, 0, true, 'Dwarven Armor And Weapons Iron Crossbow', NULL, 'Iðunn', true, 'Durins Jewel', 148, 28);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (11, 0, true, 'Morgul armour, Morgul blade, Orc bow, Mordor Warscythe', NULL, 'Donar', true,
-        'The Witch-King of Angmar', 267, 39);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (12, 0, true, 'Gondorian Armor And Weapon', NULL, 'Lorel Daughter Of Naruwel', true, 'Gondorian Architect', 263,
-        10);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (13, 0, true, 'Umbar Arsenal And Gear Harad Bow Bn Helmet And Mace', NULL, 'Salazir', true, 'Corsair', 395, 29);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (14, 0, true, 'Da Armor Da Sword Da Poison Dagger Lindon Spear Gondor Bow', NULL, 'Apples', true,
-        'Blade Of The Swan', 332, 13);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (15, 0, true, 'Fur Armour Iron/stone Spear Iron Crossbow Normal Bow Ered Luin Gear', NULL, 'Irdlirvirisissong',
-        true, 'Snowman Of Ered Luin', 52, 8);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (16, 0, true, 'Dwarven Gear Dwarven Arsenal Ironcrossbow', NULL, 'Vidarr The Grimm', false,
-        'Dwarven Boar-Whisperer', 102, 30);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (17, 0, true, 'Dwarven Arsenal And Gear Iron Crossbow', NULL, 'Stig Fornburg', true, 'The Iron Heart Of Durin',
-        103, 17);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (18, 0, true,
+        NULL, 'Knargaz', true, 'Knargaz of Angmar', 68, 72),
+       (3, 0, true, 'Gondolin', NULL, 'Firyawë', true, 'Lost Prince In Gondor', 168, 2),
+       (4, 0, true, 'Rohirric Armor and weapons, Barrow blade', NULL, 'Helm Hammerhand', true, 'Wight King of Rohan',
+        245, 4),
+       (5, 0, true, 'Half troll armour, iron armour, half troll arsenal, bow and a random brick', NULL, 'Lagmag', true,
+        'Lagging Half Troll', 494, 23),
+       (6, 0, true, 'Morgul Blade/Armor, Rhudel Bow, Iron X-Bow', NULL, 'Khamûl', true, 'Shadow of the East', 215, 7),
+       (7, 0, true, 'Iron, chain or leather armor, Arnorian swords and spear adn iron gear', NULL, 'Henry Hazelshaw',
+        true, 'Mayor of Bree', 128, 32),
+       (8, 0, true, 'Golden Trimmed Dwarven Armour, Dorwinion Elf Helmet, Dwarven arsenal', NULL, 'Midas', true,
+        'Durins Folk Treasurer', 102, 11),
+       (9, 0, true, 'Ranger armor, ranger bow, ranger sword and iron pike', NULL, 'Eredhon', true, 'King of Arnor', 131,
+        27),
+       (10, 0, true, 'Dwarven Armor And Weapons Iron Crossbow', NULL, 'Iðunn', true, 'Durins Jewel', 148, 28),
+       (11, 0, true, 'Morgul armour, Morgul blade, Orc bow, Mordor Warscythe', NULL, 'Donar', true,
+        'The Witch-King of Angmar', 267, 39),
+       (12, 0, true, 'Gondorian Armor And Weapon', NULL, 'Lorel Daughter Of Naruwel', true, 'Gondorian Architect', 263,
+        10),
+       (13, 0, true, 'Umbar Arsenal And Gear Harad Bow Bn Helmet And Mace', NULL, 'Salazir', true, 'Corsair', 395, 29),
+       (14, 0, true, 'Da Armor Da Sword Da Poison Dagger Lindon Spear Gondor Bow', NULL, 'Apples', true,
+        'Blade Of The Swan', 332, 13),
+       (15, 0, true, 'Fur Armour Iron/stone Spear Iron Crossbow Normal Bow Ered Luin Gear', NULL, 'Irdlirvirisissong',
+        true, 'Snowman Of Ered Luin', 52, 8),
+       (16, 0, true, 'Dwarven Gear Dwarven Arsenal Ironcrossbow', NULL, 'Vidarr The Grimm', false,
+        'Dwarven Boar-Whisperer', 102, 30),
+       (17, 0, true, 'Dwarven Arsenal And Gear Iron Crossbow', NULL, 'Stig Fornburg', true, 'The Iron Heart Of Durin',
+        103, 17),
+       (18, 0, true,
         'Trimmed Dwarven Armour Dwarven Weapons Blue Dwarven Battleaxe Bladorthin Spear Iron Crossbow Regular Bow',
-        NULL, 'Feros Wargslayer', true, 'Durin´s Hammer', 148, 9);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (19, 0, true, 'Gondor Armor And Weapons', NULL, 'Jonathel', true, 'Gondor Architect', 261, 5);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (20, 0, true, 'Golden Easterling Armour + Rhudel Weapons', NULL, 'Pallando', true, 'Blue Wizard Of Rhúdel', 215,
-        12);
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (21, 0, true, 'Standard Umbaric Equipment Dol Amroth Helmet Haradric Bow', NULL, 'Kazimierz', true,
-        'Corsair Of Umbar', 395, 35);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (22, 0, true, 'Dol Amroth And Blackroot Vale Gear With A Crossbow', NULL, 'Lauthber', true,
-        'Sergant Of Dol Amroth', 332, 31);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (23, 0, true, 'Full Taurethrim Arsenal And Blowgun Golden Taurethrim Armor Morwaith Spear', NULL, 'Chûn-Kai',
-        true, 'Jungle Guardian', 546, 40);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (24, 0, true, 'Umbar Arsenal And Gear Haradric Bow (default For Umbar)', NULL, 'Kaseem Meer', true,
-        'Liberator Of Umbar', 395, 36);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (25, 0, true, 'Blue Mountain Gear', NULL, 'Erik Blodoeks', true, 'Blue Mountain Warrior', 52, 24);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (26, 0, true, 'Morgul Armor Morgul Blade', NULL, 'The Uncleansed', true, 'The Spawn Of Mordor', 267, 42);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (27, 0, true, 'Southron Armor Icron Crossbow And Sword(southron Coast)', NULL, 'Vitellius Donatello', false,
-        'The Southron Architect', 426, 38);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (28, 0, true, 'Taurethrim Gear Regular Bow Some Iron Weapons', NULL, 'Yakta', true, 'Taurethrim Inventor', 546,
-        19);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (29, 0, true, 'Haradric Sword Spear Ithilien Ranger Armor Ranger Bow', NULL, 'Bêlzagar', true,
-        'The Nomadic Exile', 400, 16);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (30, 0, true, 'Gondor Armour + Weapons + Bows', NULL, 'Belegorn Arnorion', true, 'Leader Of The Gondorians', 263,
-        1);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (31, 0, true,
+        NULL, 'Feros Wargslayer', true, 'Durin´s Hammer', 148, 9),
+       (19, 0, true, 'Gondor Armor And Weapons', NULL, 'Jonathel', true, 'Gondor Architect', 261, 5),
+       (20, 0, true, 'Golden Easterling Armour + Rhudel Weapons', NULL, 'Pallando', true, 'Blue Wizard Of Rhúdel', 215,
+        12),
+       (21, 0, true, 'Standard Umbaric Equipment Dol Amroth Helmet Haradric Bow', NULL, 'Kazimierz', true,
+        'Corsair Of Umbar', 395, 35),
+       (22, 0, true, 'Dol Amroth And Blackroot Vale Gear With A Crossbow', NULL, 'Lauthber', true,
+        'Sergant Of Dol Amroth', 332, 31),
+       (23, 0, true, 'Full Taurethrim Arsenal And Blowgun Golden Taurethrim Armor Morwaith Spear', NULL, 'Chûn-Kai',
+        true, 'Jungle Guardian', 546, 40),
+       (24, 0, true, 'Umbar Arsenal And Gear Haradric Bow (default For Umbar)', NULL, 'Kaseem Meer', true,
+        'Liberator Of Umbar', 395, 36),
+       (25, 0, true, 'Blue Mountain Gear', NULL, 'Erik Blodoeks', true, 'Blue Mountain Warrior', 52, 24),
+       (26, 0, true, 'Morgul Armor Morgul Blade', NULL, 'The Uncleansed', true, 'The Spawn Of Mordor', 267, 42),
+       (27, 0, true, 'Southron Armor Icron Crossbow And Sword(southron Coast)', NULL, 'Vitellius Donatello', false,
+        'The Southron Architect', 426, 38),
+       (28, 0, true, 'Taurethrim Gear Regular Bow Some Iron Weapons', NULL, 'Yakta', true, 'Taurethrim Inventor', 546,
+        19),
+       (29, 0, true, 'Haradric Sword Spear Ithilien Ranger Armor Ranger Bow', NULL, 'Bêlzagar', true,
+        'The Nomadic Exile', 400, 16),
+       (30, 0, true, 'Gondor Armour + Weapons + Bows', NULL, 'Belegorn Arnorion', true, 'Leader Of The Gondorians', 263,
+        1),
+       (31, 0, true,
         'Bn Spear Bronze X-bow Rhunic Weapons/bow (no Spear) Rhunic Helm Bn Chest/pants Umbaric Boots Reed Armour',
-        NULL, 'Iaudun', true, 'Desert Nomad', 400, 3);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (32, 0, true, 'Black Uruk Armour And Weapons', NULL, 'Athre Mugle', true, 'Black Uruk', 267, 14);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (33, 0, true, 'Gundabad Uruk Armor And Weapons Orc Bow And Boar Mount', NULL, 'Bonkboar', false,
-        'Butcher Of Gundabad', 41, 15);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (34, 0, true, 'Ranger armor, ranger bow, arnorian sword, iron pike', NULL, 'Etheldin', true,
-        'Dúnedain of the Angle', 131, 62);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (35, 0, true, 'Gondorian Amor, Sword and Bow', NULL, 'Erenthir', false, 'Swordsman of Gondor', 263, 69);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (36, 0, true, 'Angmar armour and weapons', NULL, 'Fun-Din-Dun', true, 'Slave of Angmar', 68, 64);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (37, 0, true, 'Isengard armor, berserker Helmet, Isengard weapons and tools', NULL, 'Ugzoc', true,
-        'The Isengard ent slayer', 197, 71);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (38, 0, true, 'Pinath Gelin Armor Gondorian Sword And Blackroot Bow', NULL, 'Mablung Enthelor', true,
-        'Pinnath Gelin Soldier', 263, 45);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (39, 0, true, '1 Pinnath Gelin Armour 2 Lossarnach Battleaxe 3 Gondorian Pike 4 Gondorian Bow 5 Gondorian Sword',
-        NULL, 'Ithilian Enthelor', true, 'Pinnath Gelin Soldier', 263, 46);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (40, 0, true, 'Gold-trimmed Dwarf Armor Dwarven Battle Axe Dwarven Shield', NULL, 'Dwalin', true,
-        'Dwarf Of Erebor', 102, 41);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (41, 0, true, 'Rivendell Sword & Armour Crossbow', NULL, 'Willi Celelas', true, 'Healing Hobbit Toe', 184, 52);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (42, 0, true,
+        NULL, 'Iaudun', true, 'Desert Nomad', 400, 3),
+       (32, 0, true, 'Black Uruk Armour And Weapons', NULL, 'Athre Mugle', true, 'Black Uruk', 267, 14),
+       (33, 0, true, 'Gundabad Uruk Armor And Weapons Orc Bow And Boar Mount', NULL, 'Bonkboar', false,
+        'Butcher Of Gundabad', 41, 15),
+       (34, 0, true, 'Ranger armor, ranger bow, arnorian sword, iron pike', NULL, 'Etheldin', true,
+        'Dúnedain of the Angle', 131, 62),
+       (35, 0, true, 'Gondorian Amor, Sword and Bow', NULL, 'Erenthir', false, 'Swordsman of Gondor', 263, 69),
+       (36, 0, true, 'Angmar armour and weapons', NULL, 'Fun-Din-Dun', true, 'Slave of Angmar', 68, 64),
+       (37, 0, true, 'Isengard armor, berserker Helmet, Isengard weapons and tools', NULL, 'Ugzoc', true,
+        'The Isengard ent slayer', 197, 71),
+       (38, 0, true, 'Pinath Gelin Armor Gondorian Sword And Blackroot Bow', NULL, 'Mablung Enthelor', true,
+        'Pinnath Gelin Soldier', 263, 45),
+       (39, 0, true, '1 Pinnath Gelin Armour 2 Lossarnach Battleaxe 3 Gondorian Pike 4 Gondorian Bow 5 Gondorian Sword',
+        NULL, 'Ithilian Enthelor', true, 'Pinnath Gelin Soldier', 263, 46),
+       (40, 0, true, 'Gold-trimmed Dwarf Armor Dwarven Battle Axe Dwarven Shield', NULL, 'Dwalin', true,
+        'Dwarf Of Erebor', 102, 41),
+       (41, 0, true, 'Rivendell Sword & Armour Crossbow', NULL, 'Willi Celelas', true, 'Healing Hobbit Toe', 184, 52),
+       (42, 0, true,
         'Morgul Armor Morgul Blade Mordor Melee Weapons Mordor Orc Bow 1 Iron Crossbow Angmar Melee Weapons', NULL,
-        'Witch-King', true, 'Mordor Sorcerer', 267, 50);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (43, 0, true, 'Southron Armor Champion Helmet Southron Weapon Taurethrim Blowgun', NULL, 'Khalil', true,
-        'Patron Of Southron', 426, 53);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (44, 0, true, 'Dwarven Armor And Weapons Iron Crossbow Vanilla Bow', NULL, 'Frar', true,
-        'Longbeard Errant-Warrior', 102, 58);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (45, 0, true, 'Umbar armor, Umbar Battleaxe', NULL, 'Allakthor', true, 'Havenmaster of Umbar', 395, 43);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (46, 0, true, 'Ranger Armor, Ranger Bow, Arnorian Sword, Iron Pike', NULL, 'Ernarion', true,
-        'Dúnedain of the Angle', 131, 70);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (47, 0, true, 'Blue Mountain Armor, War-axe, Pike, Throwing-axe and iron Crossbow', NULL, 'Dwalin Ironfoot',
-        true, 'Dwarf of Ered Luin', 52, 73);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (48, 0, true, 'Angamr Armour and Weapons', NULL, 'Boing', true, 'Shaman of Angmar', 68, 74);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (49, 0, true, 'Black Uruk cleaver, Black uruk Armor, pants and boots, black leather hat with a green feather',
-        NULL, 'Lev Skywood', false, 'Black Morgul Shipwright', 267, 61);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (50, 0, true, 'Gondorian Armor, Lossarnach Chestplate, Lossarnach Battleaxe and Gondorian Weapons', NULL,
-        'Forlong', true, 'Protector of Lossarnach', 263, 6);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (51, 0, true, 'Gundabar Uruk armor, cleaver, bow, pike, spear', NULL, 'Gong son of Bolg', true,
-        'Mighty uruk of Angmar', 41, 63);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (52, 0, true, 'Uruk Armour, berserker Helmet, Uruk cleaver and spear, Orc Bow and skull staff', NULL, 'Lurtz',
-        true, 'Leader of Isengard', 197, 65);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (53, 0, true,
+        'Witch-King', true, 'Mordor Sorcerer', 267, 50),
+       (43, 0, true, 'Southron Armor Champion Helmet Southron Weapon Taurethrim Blowgun', NULL, 'Khalil', true,
+        'Patron Of Southron', 426, 53),
+       (44, 0, true, 'Dwarven Armor And Weapons Iron Crossbow Vanilla Bow', NULL, 'Frar', true,
+        'Longbeard Errant-Warrior', 102, 58),
+       (45, 0, true, 'Umbar armor, Umbar Battleaxe', NULL, 'Allakthor', true, 'Havenmaster of Umbar', 395, 43),
+       (46, 0, true, 'Ranger Armor, Ranger Bow, Arnorian Sword, Iron Pike', NULL, 'Ernarion', true,
+        'Dúnedain of the Angle', 131, 70),
+       (47, 0, true, 'Blue Mountain Armor, War-axe, Pike, Throwing-axe and iron Crossbow', NULL, 'Dwalin Ironfoot',
+        true, 'Dwarf of Ered Luin', 52, 73),
+       (48, 0, true, 'Angamr Armour and Weapons', NULL, 'Boing', true, 'Shaman of Angmar', 68, 74),
+       (49, 0, true, 'Black Uruk cleaver, Black uruk Armor, pants and boots, black leather hat with a green feather',
+        NULL, 'Lev Skywood', false, 'Black Morgul Shipwright', 267, 61),
+       (50, 0, true, 'Gondorian Armor, Lossarnach Chestplate, Lossarnach Battleaxe and Gondorian Weapons', NULL,
+        'Forlong', true, 'Protector of Lossarnach', 263, 6),
+       (51, 0, true, 'Gundabar Uruk armor, cleaver, bow, pike, spear', NULL, 'Gong son of Bolg', true,
+        'Mighty uruk of Angmar', 41, 63),
+       (52, 0, true, 'Uruk Armour, berserker Helmet, Uruk cleaver and spear, Orc Bow and skull staff', NULL, 'Lurtz',
+        true, 'Leader of Isengard', 197, 65),
+       (53, 0, true,
         'Dwarven Armour, Dwarven Weapons/Equipment, Fur Armour, Iron Crossbow, Spear of Bladorthin, Galadhrim Bow',
-        NULL, 'Denter Nienesson', true, 'Durins Banner', 102, 59);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (54, 0, true, 'Black Uruk Armor, Gundabad Helmet, Black Uruk Spear, War hammer und Bow, Morgul Blade', NULL,
-        'Sauron', true, 'Dark Lord of Mordor', 267, 34);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (55, 0, true, 'Gundabad and Angmar Armor and Weapons', NULL, 'Dharg', true, 'Scar Artist of Angmar', 68, 75);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (56, 0, true, 'Dwarven Armour with Leather Hat (purple Feather), Dwarven Warhammer, Dagger', NULL, 'Mug', true,
-        'The Durins Folk Hammer', 102, 80);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (57, 0, true, 'Lindon, Armor, Sword, Bow, Spear, Pike; Blacksmiths Hammer, Iron Crossbow', NULL, 'Menelvagor',
-        true, 'Knight of Amon Ereb', 121, 76);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (58, 0, true, 'Uruk Armour with berserk helmet, Uruk warhammer, crossbow and pike', NULL, 'Arenod', true,
-        'Shadow of Isengard', 197, 83);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (59, 0, true, 'Golden Rhunic set and a Kaftan, Full Rhunic Arsenal (hidden blade in rp only)', NULL, 'Dîla',
-        true, 'Immortal of Rhûn', 215, 48);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (60, 0, true, 'Woodland realm armor with sword, bow and battlestaff', NULL, 'Northon', true,
-        'of the Mirkwood Elves', 146, 44);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (61, 0, true, 'Wood elven Armor, sword and bow', NULL, 'Tatharion', true, 'The Mirkwood Warrior', 146, 54);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (62, 0, true, 'Blue Dwarven Armour Battleaxe And A Normal Bow', NULL, 'Thomir', true, 'King of Ered Luin', 61,
-        51);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (63, 0, true, 'Rohirric Marshal Armour, Rohirris Battleaxe, Lance, Bow', NULL, 'Aldan', true, 'Light of Rohan',
-        245, 84);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (64, 0, true, 'Winged Gondorian Helmet rest normal, Gondor Lance, Sword, Warhammer', NULL, 'Harlambos', true,
-        'Gondor Knight', 326, 82);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (65, 0, true, 'Dol Amroth weapons and armor + Rivendell Bow and armor', NULL, 'Imrahil', true,
-        'Retired Swan Prince', 332, 85);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (66, 0, true, 'Rohan Marshal armor and Rohan Arsenal', NULL, 'Ordric', true, 'Esquire of Rohan', 245, 79);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (67, 0, true, 'Silver trimmed dwarven armor, Dwarven Arsenal', NULL, 'Hjordlik the Mason', true, 'Durins Folk',
-        102, 87);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (68, 0, true, 'Dwarven gear and arsenal', NULL, 'Alfrikr Chaosminer', false, 'Loremaster of Durins Folk', 102,
-        88);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (69, 0, true, 'Rhun golden armor with a warlord helmet, Rhunic bow and Rhunic axe along with a Rhunic halberd',
-        NULL, 'Hearun Archanis', true, 'King of Rhun', 215, 89);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (70, 0, true, 'Custom Armor and Arsenal', NULL, 'Aulendur', true, 'Elvensmith of Gondor', 323, 18);
-
-INSERT INTO rpchars (id, version, active, gear, link_to_lore, name, pvp, title, current_region, owner_id)
-VALUES (71, 0, true, 'Taurethrim Arsenal, Golden Taure Armor', NULL, 'Sweetpea', true, 'Desert Wanderer', 192, 33);
+        NULL, 'Denter Nienesson', true, 'Durins Banner', 102, 59),
+       (54, 0, true, 'Black Uruk Armor, Gundabad Helmet, Black Uruk Spear, War hammer und Bow, Morgul Blade', NULL,
+        'Sauron', true, 'Dark Lord of Mordor', 267, 34),
+       (55, 0, true, 'Gundabad and Angmar Armor and Weapons', NULL, 'Dharg', true, 'Scar Artist of Angmar', 68, 75),
+       (56, 0, true, 'Dwarven Armour with Leather Hat (purple Feather), Dwarven Warhammer, Dagger', NULL, 'Mug', true,
+        'The Durins Folk Hammer', 102, 80),
+       (57, 0, true, 'Lindon, Armor, Sword, Bow, Spear, Pike; Blacksmiths Hammer, Iron Crossbow', NULL, 'Menelvagor',
+        true, 'Knight of Amon Ereb', 121, 76),
+       (58, 0, true, 'Uruk Armour with berserk helmet, Uruk warhammer, crossbow and pike', NULL, 'Arenod', true,
+        'Shadow of Isengard', 197, 83),
+       (59, 0, true, 'Golden Rhunic set and a Kaftan, Full Rhunic Arsenal (hidden blade in rp only)', NULL, 'Dîla',
+        true, 'Immortal of Rhûn', 215, 48),
+       (60, 0, true, 'Woodland realm armor with sword, bow and battlestaff', NULL, 'Northon', true,
+        'of the Mirkwood Elves', 146, 44),
+       (61, 0, true, 'Wood elven Armor, sword and bow', NULL, 'Tatharion', true, 'The Mirkwood Warrior', 146, 54),
+       (62, 0, true, 'Blue Dwarven Armour Battleaxe And A Normal Bow', NULL, 'Thomir', true, 'King of Ered Luin', 61,
+        51),
+       (63, 0, true, 'Rohirric Marshal Armour, Rohirris Battleaxe, Lance, Bow', NULL, 'Aldan', true, 'Light of Rohan',
+        245, 84),
+       (64, 0, true, 'Winged Gondorian Helmet rest normal, Gondor Lance, Sword, Warhammer', NULL, 'Harlambos', true,
+        'Gondor Knight', 326, 82),
+       (65, 0, true, 'Dol Amroth weapons and armor + Rivendell Bow and armor', NULL, 'Imrahil', true,
+        'Retired Swan Prince', 332, 85),
+       (66, 0, true, 'Rohan Marshal armor and Rohan Arsenal', NULL, 'Ordric', true, 'Esquire of Rohan', 245, 79),
+       (67, 0, true, 'Silver trimmed dwarven armor, Dwarven Arsenal', NULL, 'Hjordlik the Mason', true, 'Durins Folk',
+        102, 87),
+       (68, 0, true, 'Dwarven gear and arsenal', NULL, 'Alfrikr Chaosminer', false, 'Loremaster of Durins Folk', 102,
+        88),
+       (69, 0, true, 'Rhun golden armor with a warlord helmet, Rhunic bow and Rhunic axe along with a Rhunic halberd',
+        NULL, 'Hearun Archanis', true, 'King of Rhun', 215, 89),
+       (70, 0, true, 'Custom Armor and Arsenal', NULL, 'Aulendur', true, 'Elvensmith of Gondor', 323, 18),
+       (71, 0, true, 'Taurethrim Arsenal, Golden Taure Armor', NULL, 'Sweetpea', true, 'Desert Wanderer', 192, 33);
 
