@@ -1140,6 +1140,7 @@ public class ArmyServiceTest {
         String siege = "trebuchet";
         PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         faction.setLeader(player);
+        army.setCurrentRegion(region2);
 
         log.debug("Calling pickSiege");
         var exception = assertThrows(ArmyServiceException.class, () -> armyService.pickSiege(dto));
