@@ -71,7 +71,7 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureBindArmyRequestWorksProperly() throws Exception{
+    void ensureBindArmyRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController bindArmy works properly with correct values");
 
         // Assign
@@ -94,7 +94,7 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureUnbindArmyRequestWorksProperly() throws Exception{
+    void ensureUnbindArmyRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController unbindArmy works properly with correct values");
 
         // Assign
@@ -117,11 +117,11 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureDisbandArmyRequestWorksProperly() throws Exception{
+    void ensureDisbandArmyRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController disbandArmy works properly with correct values");
 
         // Assign
-        DeleteArmyDto dto = new DeleteArmyDto("1234",  "Knights of Gondor");
+        DeleteArmyDto dto = new DeleteArmyDto("1234", "Knights of Gondor");
 
         when(mockArmyService.disbandFromDto(dto, false)).thenReturn(army);
 
@@ -140,11 +140,11 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureDeleteArmyRequestWorksProperly() throws Exception{
+    void ensureDeleteArmyRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController deleteArmy works properly with correct values");
 
         // Assign
-        DeleteArmyDto dto = new DeleteArmyDto("1234",  "Knights of Gondor");
+        DeleteArmyDto dto = new DeleteArmyDto("1234", "Knights of Gondor");
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
@@ -168,7 +168,7 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureHealStartRequestWorksProperly() throws Exception{
+    void ensureHealStartRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController healStart works properly with correct values");
 
         // Assign
@@ -191,7 +191,7 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureHealStopRequestWorksProperly() throws Exception{
+    void ensureHealStopRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController healStop works properly with correct values");
 
         // Assign
@@ -214,11 +214,11 @@ public class ArmyRestControllerTest {
     }
 
     @Test
-    void ensureStationRequestWorksProperly() throws Exception{
+    void ensureStationRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController station works properly with correct values");
 
         // Assign
-        StationDto dto = new StationDto("Kek", "kek", "kek");
+        StationArmyDto dto = new StationArmyDto("Kek", "kek", "kek");
 
         when(mockArmyService.station(dto)).thenReturn(army);
 
@@ -235,12 +235,13 @@ public class ArmyRestControllerTest {
                 .andExpect(status().isOk());
         log.info("Test passed: station requests get handled properly");
     }
+
     @Test
-    void ensureUnstationRequestWorksProperly() throws Exception{
+    void ensureUnstationRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController unstation works properly with correct values");
 
         // Assign
-        UnstationDto dto = new UnstationDto("Kek", "kek");
+        UnstationArmyDto dto = new UnstationArmyDto("Kek", "kek");
 
         when(mockArmyService.unstation(dto)).thenReturn(army);
 
@@ -257,8 +258,9 @@ public class ArmyRestControllerTest {
                 .andExpect(status().isOk());
         log.info("Test passed: unstation requests get handled properly");
     }
+
     @Test
-    void ensureSetFreeArmyTokensRequestWorksProperly() throws Exception{
+    void ensureSetFreeArmyTokensRequestWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController setFreeArmyTokens works properly with correct values");
 
         // Assign
@@ -345,6 +347,7 @@ public class ArmyRestControllerTest {
                 .andExpect(status().isOk());
         log.info("Test passed: setPaid requests get handled properly");
     }
+
     @Test
     void ensureGetUnpaidWorksProperly() throws Exception {
         log.debug("Testing if ArmyRestController getUnpaid works properly");

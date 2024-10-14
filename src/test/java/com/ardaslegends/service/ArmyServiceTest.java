@@ -19,6 +19,7 @@ import java.time.ZoneOffset;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -56,7 +57,7 @@ public class ArmyServiceTest {
         mockPlayerService = mock(PlayerService.class);
         mockUnitTypeService = mock(UnitTypeService.class);
         mockClaimbuildRepository = mock(ClaimbuildRepository.class);
-        armyService = new ArmyService(mockArmyRepository, mockMovementRepository,mockPlayerService, mockFactionRepository, mockUnitTypeService, mockClaimbuildRepository);
+        armyService = new ArmyService(mockArmyRepository, mockMovementRepository, mockPlayerService, mockFactionRepository, mockUnitTypeService, mockClaimbuildRepository);
 
         region1 = Region.builder().id("90").build();
         region2 = Region.builder().id("91").build();
@@ -67,8 +68,8 @@ public class ArmyServiceTest {
         rpchar = RPChar.builder().name("Belegorn").isHealing(false).injured(false).currentRegion(region1).build();
         player = Player.builder().discordID("1234").faction(faction).build();
         player.addActiveRpChar(rpchar);
-        army = Army.builder().name("Knights of Gondor").armyType(ArmyType.ARMY).faction(faction).units(List.of(unit)).freeTokens(30 - unit.getCount() * unitType.getTokenCost()).currentRegion(region2).stationedAt(claimBuild).sieges(new ArrayList<>()).build();
-        movement =  Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army).path(List.of(PathElement.builder().region(region1).build())).build();
+        army = Army.builder().name("Knights of Gondor").armyType(ArmyType.ARMY).faction(faction).units(List.of(unit)).freeTokens(30 - unit.getCount() * unitType.getTokenCost()).currentRegion(region1).stationedAt(claimBuild).sieges(new ArrayList<>()).build();
+        movement = Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army).path(List.of(PathElement.builder().region(region1).build())).build();
 
         dto = new BindArmyDto(player.getDiscordID(), player.getDiscordID(), army.getName());
 
@@ -105,7 +106,7 @@ public class ArmyServiceTest {
         log.debug("Calling createArmy()");
         var result = armyService.createArmy(dto);
 
-        assertThat(result.getFreeTokens()).isEqualTo(30-21);
+        assertThat(result.getFreeTokens()).isEqualTo(30 - 21);
         log.info("Test passed: CreateArmy works properly with correct values");
     }
 
@@ -165,6 +166,7 @@ public class ArmyServiceTest {
         assertThat(result.getMessage()).isEqualTo(ArmyServiceException.cannotCreateArmyFromClaimbuildInDifferentFaction(player.getFaction().getName(), claimBuild.getOwnedBy().getName(), dto.armyType()).getMessage());
         log.info("Test passed: createArmy throws ArmyServiceException when claimBuild is from another faction");
     }
+
     @Test
     void ensureCreateArmyThrowsServiceExceptionWhenClaimBuildHasReachedMaxArmies() {
         log.debug("Testing if createArmy correctly throws SE when max armies is already reached");
@@ -190,6 +192,7 @@ public class ArmyServiceTest {
 
         log.info("Test passed: SE on max armies from ClaimBuild");
     }
+
     @Test
     void ensureCreateArmyThrowsServiceExceptionWhenUnitsExceedAvailableTokens() {
         log.debug("Testing if createArmy correctly throws SE when units exceed available tokens");
@@ -248,6 +251,7 @@ public class ArmyServiceTest {
         assertThat(result.getMessage()).isEqualTo(ArmyServiceException.tradingCompaniesCannotHeal(dto.armyName()).getMessage());
         log.info("Test passed: healStart throws Se when army object is a trading company");
     }
+
     @Test
     void ensureHealStartThrwosSeWhenArmyAndPlayerAreNotInTheSameFaction() {
         log.debug("Testing if healStart correctly throws SE when Player and Army are not in the same faction");
@@ -255,7 +259,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         army.setFaction(Faction.builder().name("Kekw").build());
 
-        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(),army.getName(), null, null);
+        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(), null, null);
 
         log.debug("Expecting SE on call");
         log.debug("Calling healStart");
@@ -272,7 +276,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         unit.setAmountAlive(unit.getCount());
 
-        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(),null, null);
+        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(), null, null);
 
         log.debug("Expecting SE on call");
         log.debug("Calling healStart");
@@ -289,7 +293,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         claimBuild.setSpecialBuildings(List.of());
 
-        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(),null, null);
+        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(), null, null);
 
         log.debug("Expecting SE on call");
         log.debug("Calling healStart");
@@ -317,6 +321,7 @@ public class ArmyServiceTest {
         assertThat(army.getIsHealing()).isFalse();
         log.info("Test passed: heal stop works properly with correct values");
     }
+
     @Test
     void ensureHealStopThrowsSeIfArmyIsNotHealing() {
         log.debug("Testing if heal stop correctly throws SE when army is not healing");
@@ -324,7 +329,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         army.setIsHealing(false);
 
-        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(),army.getName(), null, null);
+        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(), null, null);
 
         log.debug("Expecting SE on call");
         log.debug("Calling healStop");
@@ -342,7 +347,7 @@ public class ArmyServiceTest {
         army.setIsHealing(true);
         army.setFaction(Faction.builder().name("Kekw").build());
 
-        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(),army.getName(), null, null);
+        UpdateArmyDto dto = new UpdateArmyDto(player.getDiscordID(), army.getName(), null, null);
 
         log.debug("Expecting SE on call");
         log.debug("Calling healStop");
@@ -361,7 +366,7 @@ public class ArmyServiceTest {
         army.setStationedAt(null);
         army.getFaction().setLeader(player);
 
-        StationDto dto = new StationDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
 
         log.debug("Calling station(), expecting no errors");
         Army result = armyService.station(dto);
@@ -376,7 +381,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         when(mockClaimbuildRepository.findClaimBuildByName(claimBuild.getName())).thenReturn(Optional.empty());
 
-        StationDto dto = new StationDto(player.getDiscordID(),army.getName(),claimBuild.getName());
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
 
         log.debug("Expecting SE on call");
         log.debug("Calling station()");
@@ -390,7 +395,7 @@ public class ArmyServiceTest {
     void ensureStationThrowsSeWhenArmyIsAlreadyStationed() {
         log.debug("Testing if station throws Se when army is already stationed");
 
-        StationDto dto = new StationDto(player.getDiscordID(),army.getName(),claimBuild.getName());
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
 
         log.debug("Calling station(), expecting ArmySe");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.station(dto));
@@ -405,7 +410,7 @@ public class ArmyServiceTest {
 
         claimBuild.setOwnedBy(Faction.builder().name("Kek123").build());
         army.setStationedAt(null);
-        StationDto dto = new StationDto(player.getDiscordID(),army.getName(),claimBuild.getName());
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
 
         log.debug("Calling station(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.station(dto));
@@ -417,13 +422,42 @@ public class ArmyServiceTest {
     }
 
     @Test
+    void ensureStationThrowsWhenClaimbuildIsNotInTheSameRegionAsArmy() {
+        log.debug("Testing if station throws Se when claimbuild is not in the same region as army");
+
+        claimBuild.setRegion(region2);
+        army.setStationedAt(null);
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+
+        log.debug("Calling station(), expecting Se");
+        var result = assertThrows(ArmyServiceException.class, () -> armyService.station(dto));
+
+        assertThat(result.getMessage()).contains("is not in the same region as");
+        log.info("Test passed: station throws Se when claimbuild is not in the same region as army");
+    }
+
+    @Test
+    void ensureStationWorksWhenClaimbuildIsInTheSameRegionAsArmy() {
+        log.debug("Testing if station throws Se when claimbuild is not in the same region as army");
+
+        army.setBoundTo(player.getActiveCharacter().get());
+        army.setStationedAt(null);
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+
+        log.debug("Calling station(), expecting no errors");
+        var result = assertDoesNotThrow(() -> armyService.station(dto));
+
+        log.info("Test passed: station throws Se when claimbuild is not in the same region as army");
+    }
+
+    @Test
     void ensureStationThrowsSeWhenPlayerHasNoPermissionToPerformAction() {
         log.debug("Testing if station throws Se when player is not allowed to perform action");
 
         army.setStationedAt(null);
         army.setBoundTo(null);
 
-        StationDto dto = new StationDto(player.getDiscordID(), army.getName(), claimBuild.getName());
+        StationArmyDto dto = new StationArmyDto(player.getDiscordID(), army.getName(), claimBuild.getName());
 
         log.debug("Calling station(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.station(dto));
@@ -440,7 +474,7 @@ public class ArmyServiceTest {
 
         army.setBoundTo(player.getActiveCharacter().get());
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("Calling unstation, expecting no errors");
         var result = armyService.unstation(dto);
@@ -448,13 +482,14 @@ public class ArmyServiceTest {
         assertThat(result.getStationedAt()).isNull();
         log.info("Test passed: Unstation works correctly with correct values");
     }
+
     @Test
     void ensureUnstationThrowsSeWhenArmyIsNotStationed() {
         log.debug("Testing if unstation() throws Se when army is not stationed at a Cb");
 
         army.setStationedAt(null);
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("calling unstation(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.unstation(dto));
@@ -469,7 +504,7 @@ public class ArmyServiceTest {
 
         army.setBoundTo(null);
 
-        UnstationDto dto = new UnstationDto(player.getDiscordID(), army.getName());
+        UnstationArmyDto dto = new UnstationArmyDto(player.getDiscordID(), army.getName());
 
         log.debug("Calling unstation(), expecting Se");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.unstation(dto));
@@ -534,6 +569,7 @@ public class ArmyServiceTest {
         assertThat(army.getBoundTo()).isEqualTo(target.getActiveCharacter().get());
         log.info("Test passed: army binding works properly on other players as faction leader!");
     }
+
     @Test
     void ensureBindArmyThrowsServiceExceptionWhenNormalPlayerTriesToBindOtherPlayers() {
         log.debug("Testing if SE is thrown when normal player tries to bind other players");
@@ -550,6 +586,7 @@ public class ArmyServiceTest {
         log.trace("Expecting ServiceException");
         var result = assertThrows(ArmyServiceException.class, () -> armyService.bind(dto));
     }
+
     @Test
     void ensureBindArmyThrowsServiceExceptionWhenTargetArmyHasDifferentFaction() {
         log.debug("Testing if SE is thrown when target army has a different faction to the target player");
@@ -571,6 +608,7 @@ public class ArmyServiceTest {
 
         log.info("Test passed: bind() correctly throws SE when Army is from a different faction");
     }
+
     @Test
     void ensureBindArmyThrowsServiceExceptionWhenTargetPlayerIsWandererAndExecutorIsNotFactionLeaderOrLord() {
         log.debug("Testing if SE is thrown when target player is wanderer and executor is not leader or lord");
@@ -593,6 +631,7 @@ public class ArmyServiceTest {
 
         log.info("Test passed: bind() correctly throws SE when target player is wanderer and executor is not leader or lord");
     }
+
     @Test
     void ensureBindArmyThrowsServiceExceptionWhenTargetArmyIsInADifferentRegion() {
         log.debug("Testing if SE is thrown when target army is in a different region to the player");
@@ -985,7 +1024,7 @@ public class ArmyServiceTest {
         UpdateArmyDto dto = new UpdateArmyDto(null, army.getName(), 40.0, null);
 
         log.debug("Calling setArmyTokens");
-        var exception = assertThrows(ArmyServiceException.class ,() -> armyService.setFreeArmyTokens(dto));
+        var exception = assertThrows(ArmyServiceException.class, () -> armyService.setFreeArmyTokens(dto));
 
         assertThat(exception.getMessage()).isEqualTo(ArmyServiceException.tokenAbove30(dto.freeTokens()).getMessage());
         log.info("Test passed: setArmyTokens throws ArmyServiceException when trying to set tokens to value above 30!");
@@ -999,7 +1038,7 @@ public class ArmyServiceTest {
         UpdateArmyDto dto = new UpdateArmyDto(null, army.getName(), -1.0, null);
 
         log.debug("Calling setArmyTokens");
-        var exception = assertThrows(ArmyServiceException.class ,() -> armyService.setFreeArmyTokens(dto));
+        var exception = assertThrows(ArmyServiceException.class, () -> armyService.setFreeArmyTokens(dto));
 
         assertThat(exception.getMessage()).isEqualTo(ArmyServiceException.tokenNegative(dto.freeTokens()).getMessage());
         log.info("Test passed: setArmyTokens throws ArmyServiceException when trying to set tokens to negative value!");
@@ -1012,7 +1051,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         army.setBoundTo(player.getActiveCharacter().get());
         army.setCurrentRegion(claimBuild.getRegion());
 
@@ -1030,7 +1069,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         faction.setLeader(player);
         army.setCurrentRegion(claimBuild.getRegion());
 
@@ -1049,7 +1088,7 @@ public class ArmyServiceTest {
         log.trace("Initializing data");
         String siege = "trebuchet";
         army.setArmyType(ArmyType.TRADING_COMPANY);
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
 
         log.debug("Calling pickSiege");
         var exception = assertThrows(ArmyServiceException.class, () -> armyService.pickSiege(dto));
@@ -1064,7 +1103,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         army.setCurrentRegion(claimBuild.getRegion());
 
         log.debug("Calling pickSiege");
@@ -1080,7 +1119,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         faction.setLeader(player);
         army.setCurrentRegion(claimBuild.getRegion());
 
@@ -1099,8 +1138,9 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         faction.setLeader(player);
+        army.setCurrentRegion(region2);
 
         log.debug("Calling pickSiege");
         var exception = assertThrows(ArmyServiceException.class, () -> armyService.pickSiege(dto));
@@ -1116,7 +1156,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "trebuchet";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         Faction faction2 = Faction.builder().name("Dol Amroth").build();
         faction.setLeader(player);
         army.setCurrentRegion(claimBuild.getRegion());
@@ -1135,7 +1175,7 @@ public class ArmyServiceTest {
 
         log.trace("Initializing data");
         String siege = "hueueheuheu";
-        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(),army.getName(), claimBuild.getName(), siege);
+        PickSiegeDto dto = new PickSiegeDto(player.getDiscordID(), army.getName(), claimBuild.getName(), siege);
         faction.setLeader(player);
         army.setCurrentRegion(claimBuild.getRegion());
 
@@ -1153,10 +1193,10 @@ public class ArmyServiceTest {
         Army army1 = Army.builder().armyType(ArmyType.ARMY).build();
         Army army2 = Army.builder().armyType(ArmyType.ARMY).build();
         Army army3 = Army.builder().armyType(ArmyType.ARMY).build();
-        Army army4= Army.builder().armyType(ArmyType.ARMY).build();
+        Army army4 = Army.builder().armyType(ArmyType.ARMY).build();
 
 
-        Army army5= Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
+        Army army5 = Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
         Army army6 = Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
 
         Faction faction1 = Faction.builder().name("Gondor")
@@ -1190,10 +1230,10 @@ public class ArmyServiceTest {
         Army army1 = Army.builder().armyType(ArmyType.ARMY).build();
         Army army2 = Army.builder().armyType(ArmyType.ARMY).build();
         Army army3 = Army.builder().armyType(ArmyType.ARMY).build();
-        Army army4= Army.builder().armyType(ArmyType.ARMY).build();
+        Army army4 = Army.builder().armyType(ArmyType.ARMY).build();
 
 
-        Army army5= Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
+        Army army5 = Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
         Army army6 = Army.builder().armyType(ArmyType.TRADING_COMPANY).build();
 
         Faction faction1 = Faction.builder().name(factionName)
@@ -1246,33 +1286,33 @@ public class ArmyServiceTest {
     void ensureGetUnpaidArmiesWorksProperly() {
         log.debug("Testing if getUnpaidArmies works properly");
 
-        Army army1 = Army.builder().name("2000").createdAt(OffsetDateTime.of(2000, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army2 = Army.builder().name("2001").createdAt(OffsetDateTime.of(2001, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army3 = Army.builder().name("2002").createdAt(OffsetDateTime.of(2002, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army4 = Army.builder().name("2003").createdAt(OffsetDateTime.of(2003, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army5 = Army.builder().name("2004").createdAt(OffsetDateTime.of(2004, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army6 = Army.builder().name("2005").createdAt(OffsetDateTime.of(2005, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army7 = Army.builder().name("2006").createdAt(OffsetDateTime.of(2006, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army8 = Army.builder().name("2007").createdAt(OffsetDateTime.of(2007, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army9 = Army.builder().name("2008").createdAt(OffsetDateTime.of(2008, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army10 = Army.builder().name("2009").createdAt(OffsetDateTime.of(2009, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army11 = Army.builder().name("2010").createdAt(OffsetDateTime.of(2010, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army12 = Army.builder().name("2011").createdAt(OffsetDateTime.of(2011, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army13 = Army.builder().name("2012").createdAt(OffsetDateTime.of(2012, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army14 = Army.builder().name("2013").createdAt(OffsetDateTime.of(2013, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army15 = Army.builder().name("2014").createdAt(OffsetDateTime.of(2014, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army16 = Army.builder().name("2015").createdAt(OffsetDateTime.of(2015, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army17 = Army.builder().name("2016").createdAt(OffsetDateTime.of(2016, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army18 = Army.builder().name("2017").createdAt(OffsetDateTime.of(2017, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army19 = Army.builder().name("2018").createdAt(OffsetDateTime.of(2018, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        Army army20 = Army.builder().name("2019").createdAt(OffsetDateTime.of(2019, 1, 1,10,10,0,0, ZoneOffset.UTC)).isPaid(false).build();
-        List<Army> armyList = List.of(army1,army2,army3,army4,army5,army6,army7,army8, army9,army10,army11,army12,army13,army14,army15,army16,army17,army18,army19,army20);
+        Army army1 = Army.builder().name("2000").createdAt(OffsetDateTime.of(2000, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army2 = Army.builder().name("2001").createdAt(OffsetDateTime.of(2001, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army3 = Army.builder().name("2002").createdAt(OffsetDateTime.of(2002, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army4 = Army.builder().name("2003").createdAt(OffsetDateTime.of(2003, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army5 = Army.builder().name("2004").createdAt(OffsetDateTime.of(2004, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army6 = Army.builder().name("2005").createdAt(OffsetDateTime.of(2005, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army7 = Army.builder().name("2006").createdAt(OffsetDateTime.of(2006, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army8 = Army.builder().name("2007").createdAt(OffsetDateTime.of(2007, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army9 = Army.builder().name("2008").createdAt(OffsetDateTime.of(2008, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army10 = Army.builder().name("2009").createdAt(OffsetDateTime.of(2009, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army11 = Army.builder().name("2010").createdAt(OffsetDateTime.of(2010, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army12 = Army.builder().name("2011").createdAt(OffsetDateTime.of(2011, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army13 = Army.builder().name("2012").createdAt(OffsetDateTime.of(2012, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army14 = Army.builder().name("2013").createdAt(OffsetDateTime.of(2013, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army15 = Army.builder().name("2014").createdAt(OffsetDateTime.of(2014, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army16 = Army.builder().name("2015").createdAt(OffsetDateTime.of(2015, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army17 = Army.builder().name("2016").createdAt(OffsetDateTime.of(2016, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army18 = Army.builder().name("2017").createdAt(OffsetDateTime.of(2017, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army19 = Army.builder().name("2018").createdAt(OffsetDateTime.of(2018, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        Army army20 = Army.builder().name("2019").createdAt(OffsetDateTime.of(2019, 1, 1, 10, 10, 0, 0, ZoneOffset.UTC)).isPaid(false).build();
+        List<Army> armyList = List.of(army1, army2, army3, army4, army5, army6, army7, army8, army9, army10, army11, army12, army13, army14, army15, army16, army17, army18, army19, army20);
         when(mockArmyRepository.findAll()).thenReturn(armyList);
 
         var result = armyService.getUnpaid();
 
         assertThat(result.size()).isEqualTo(10);
-        assertThat(result).isEqualTo(List.of(army1,army2,army3,army4,army5,army6,army7,army8,army9,army10));
+        assertThat(result).isEqualTo(List.of(army1, army2, army3, army4, army5, army6, army7, army8, army9, army10));
     }
 
     @Test

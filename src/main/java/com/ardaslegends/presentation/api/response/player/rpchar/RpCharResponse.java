@@ -21,6 +21,8 @@ public record RpCharResponse(
         String currentRegion,
         @Schema(description = "Name of army the character is bound to", example = "Gondor Army", nullable = true)
         String boundTo,
+        @Schema(description = "Name of the claimbuild the character is stationed in", example = "Minas Tirith", nullable = true)
+        String stationedAt,
         @Schema(description = "States if the character is injured", example = "true")
         Boolean injured,
         @Schema(description = "States if the character is currently healing in a House of Healing", example = "true")
@@ -33,7 +35,7 @@ public record RpCharResponse(
 
     public RpCharResponse(RPChar rpChar) {
         this(rpChar.getName(), rpChar.getTitle(), rpChar.getGear(), rpChar.getPvp(), rpChar.getCurrentRegion().getId(),
-                rpChar.getBoundTo() == null ? null : rpChar.getBoundTo().getName(),
+                rpChar.getBoundTo() == null ? null : rpChar.getBoundTo().getName(), rpChar.getStationedAt() == null ? null : rpChar.getStationedAt().getName(),
                 rpChar.getInjured(), rpChar.getIsHealing(), rpChar.getStartedHeal(), rpChar.getHealEnds());
         log.debug("Created RpCharResponse");
     }
