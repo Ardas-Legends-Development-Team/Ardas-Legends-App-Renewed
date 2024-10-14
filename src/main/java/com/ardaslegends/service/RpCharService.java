@@ -107,6 +107,12 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
             throw RpCharServiceException.characterAlreadyStationed(character.getName(), character.getStationedAt().getName());
         }
 
+        log.debug("Check if character is in the same region as the claimbuild");
+        if (!character.getCurrentRegion().equals(claimBuild.getRegion())) {
+            log.warn("Character [{}] is not in the same region as the claimbuild [{}]", character.getName(), claimBuild.getName());
+            throw RpCharServiceException.characterNotInSameRegion(character.getName(), claimBuild.getName());
+        }
+
         // TODO: Check ally system
         log.debug("Checking if Claimbuild is in the same or an allied faction of the character");
         if (!claimBuild.getOwnedBy().equals(player.getFaction()) && !player.getFaction().getAllies().contains(claimBuild.getOwnedBy())) {

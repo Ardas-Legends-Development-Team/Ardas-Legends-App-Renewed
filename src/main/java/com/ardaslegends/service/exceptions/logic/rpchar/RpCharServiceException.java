@@ -11,6 +11,7 @@ public class RpCharServiceException extends LogicException {
     private final static String CHARACTER_ALREADY_STATIONED = "Character '%s' is already stationed at '%s'";
     private final static String CLAIMBUILD_NOT_IN_THE_SAME_OR_ALLIED_FACTION = "Character '%s' is not in the same or allied faction as claimbuild '%s'";
     private final static String CHARACTER_NOT_STATIONED = "Character '%s' is not stationed at any claimbuild";
+    private final static String CHARACTER_NOT_IN_SAME_REGION = "Character '%s' is not in the same region as claimbuild '%s'";
 
     protected RpCharServiceException(String message) {
         super(message);
@@ -38,5 +39,9 @@ public class RpCharServiceException extends LogicException {
 
     public static RpCharServiceException characterNotStationed(String characterName) {
         return new RpCharServiceException(CHARACTER_NOT_STATIONED.formatted(characterName));
+    }
+
+    public static RpCharServiceException characterNotInSameRegion(String characterName, String claimBuildName) {
+        return new RpCharServiceException(CHARACTER_NOT_IN_SAME_REGION.formatted(characterName, claimBuildName));
     }
 }

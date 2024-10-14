@@ -464,6 +464,13 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
             throw ArmyServiceException.armyAlreadyStationed(army.getArmyType(), army.getName(), army.getStationedAt().getName());
         }
 
+
+        log.debug("Check if character is in the same region as the claimbuild");
+        if (!army.getCurrentRegion().equals(claimBuild.getRegion())) {
+            log.warn("Army [{}] is not in the same region as the claimbuild [{}]", army.getName(), claimBuild.getName());
+            throw ArmyServiceException.armyNotInSameRegion(army.getName(), claimBuild.getName());
+        }
+
         // TODO: Check ally system
         log.debug("Checking if Claimbuild is in the same or an allied faction of the army");
         if (!claimBuild.getOwnedBy().equals(army.getFaction()) && !army.getFaction().getAllies().contains(claimBuild.getOwnedBy())) {

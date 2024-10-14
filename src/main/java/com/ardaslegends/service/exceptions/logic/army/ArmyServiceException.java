@@ -50,54 +50,174 @@ public class ArmyServiceException extends LogicException {
     private static final String SIEGE_NOT_FACTION_LEADER_OR_LORD = "Only faction leaders/lords of '%s' can pick siege for the army '%s' without being bound to it!";
     private static final String SIEGE_ARMY_NOT_IN_SAME_REGION_AS_CB = "The army '%s' is currently in region %s while the claimbuild '%s' is located in region %s. Move the army into the claimbuild's region in order to pick up siege from it!";
     private static final String SIEGE_NOT_AVAILABLE = "The siege equipment '%s' is not available in claimbuild '%s'. Available sieges are: '%s'";
-    public static ArmyServiceException noArmyWithName(String armyType, String armyName) { return new ArmyServiceException(NO_ARMYTYPE_WITH_NAME.formatted(armyType, armyName)); }
-    public static ArmyServiceException armyOrCompanyWithNameAlreadyExists(String name) {return new ArmyServiceException(ARMY_OR_COMPANY_WITH_NAME_ALREADY_EXISTS.formatted(name));}
-    public static ArmyServiceException tradingCompaniesCannotHeal(String name) {return new ArmyServiceException((TRADING_COMPANIES_CANNOT_HEAL.formatted(name)));}
-    public static ArmyServiceException noPermissionToPerformThisAction() { return new ArmyServiceException(NO_PERMISSION_TO_PERFORM_ACTION);}
-    public static ArmyServiceException claimbuildNotInTheSameOrAlliedFaction(ArmyType armyType, String claimbuildName) { return new ArmyServiceException(CLAIMBUILD_IS_NOT_IN_THE_SAME_OR_ALLIED_FACTION.formatted(claimbuildName, armyType.getName())); }
-    public static ArmyServiceException armyAlreadyStationed(ArmyType armyType, String armyName, String claimbuildName) { return new ArmyServiceException(ARMYTYPE_IS_ALREADY_STATIONED.formatted(armyType.getName(), armyName, claimbuildName)); }
-    public static ArmyServiceException notFactionLeader(String factionName) { return new ArmyServiceException(PLAYER_NOT_FACTION_LEADER.formatted(factionName)); }
-    public static ArmyServiceException invalidUnitString(String unitString) { return new ArmyServiceException(INVALID_UNIT_STRING.formatted(unitString)); }
-    public static ArmyServiceException notInSameRegion(ArmyType armyType, String armyName, String charName) { return new ArmyServiceException(NOT_IN_SAME_REGION.formatted(armyType.getName(), armyName, charName)); }
-    public static ArmyServiceException notSameFaction(ArmyType armyType, String armyName, String playerFactionName, String armyFactionName) { return new ArmyServiceException(NOT_SAME_FACTION.formatted(armyType.getName(), armyName, playerFactionName, armyType.getName(), armyFactionName)); }
-    public static ArmyServiceException alreadyBound(ArmyType armyType, String armyName, String playerName) { return new ArmyServiceException(ALREADY_BOUND.formatted(armyType.getName(), armyName, playerName)); }
-    public static ArmyServiceException cannotBindCharInjured(String charName, String armyName) { return new ArmyServiceException(CANNOT_BIND_CHAR_INJURED.formatted(charName, armyName)); }
-    public static ArmyServiceException cannotBindCharHealing(String charName, String armyName) { return new ArmyServiceException(CANNOT_BIND_CHAR_HEALING.formatted(charName, armyName)); }
-    public static ArmyServiceException noPlayerBoundToArmy(ArmyType armyType, String armyName) { return new ArmyServiceException(NO_PLAYER_BOUND_TO_ARMYTYPE.formatted(armyType.getName(), armyName)); }
-    public static ArmyServiceException cannotUnbindMovingArmy(ArmyType armyType, String armyName) { return new ArmyServiceException(CANNOT_UNBIND_MOVING_ARMY.formatted(armyType.getName(), armyName)); }
-    public static ArmyServiceException tooHighTokenCount(ArmyType armyType, double tokenCount) {return new ArmyServiceException(TOO_HIGH_TOKEN_COUNT.formatted(armyType.getName(), tokenCount)); };
-    public static ArmyServiceException maxArmyOrCompany(ArmyType armyType, String claimbuild, String units) {return new ArmyServiceException(MAX_ARMYTYPE_CREATED.formatted(claimbuild,armyType.getName(), units)); }
-    public static ArmyServiceException onlyLeaderCanBindWanderer(ArmyType armyType) {return new ArmyServiceException(ONLY_FACTION_LEADER_CAN_BIND_WANDERER.formatted(armyType.getName()));}
-    public static ArmyServiceException cannotMoveArmyDueToArmyBeingInMovement(ArmyType armyType, String armyName) {return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_DUE_TO_ALREADY_MOVING.formatted(armyType.getName(), armyName));}
-    public static ArmyServiceException cannotMoveArmyDueToPlayerAndArmyBeingInDifferentFactions(ArmyType armyType, String armyName) {return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_DUE_TO_PLAYER_AND_ARMY_BEING_IN_DIFFERENT_FACTIONS.formatted(armyType.getName(), armyName)); }
-    public static ArmyServiceException cannotMoveArmyWasCreatedRecently(String armyName, long hoursUntilMove) { return new ArmyServiceException(CANNOT_MOVE_ARMY_JUST_CREATED.formatted(armyName, hoursUntilMove)); }
-    public static ArmyServiceException cannotMoveArmyAlreadyInRegion(ArmyType armyType, String armyName, String region) {return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_ALREADY_IN_REGION.formatted(armyType.getName(), armyName,region));}
-    public static ArmyServiceException cannotBindArmyIsMoving(ArmyType armyType, String armyName, String region) {return new ArmyServiceException((CANNOT_BIND_ARMYTYPE_IS_MOVING).formatted(armyType.getName(), armyName, region));}
-    public static ArmyServiceException cannotBindCharIsMoving(ArmyType armyType, String charName, String region) {return new ArmyServiceException((CANNOT_BIND_CHAR_IS_MOVING).formatted(charName, region, armyType.getName()));}
-    public static ArmyServiceException cannotCreateArmyFromClaimbuildInDifferentFaction(String playerFaction, String claimbuildFaction, ArmyType armyType) {return new ArmyServiceException((CANNOT_CREATE_ARMYTYPE_WHEN_IN_DIFFERENT_FACTIONS).formatted(playerFaction, claimbuildFaction, armyType.getName()));}
-    public static ArmyServiceException armyAndPlayerInDifferentFaction(ArmyType armyType, String playerFaction, String armyFaction) {return new ArmyServiceException(ARMYTYPE_AND_PLAYER_IN_DIFFERENT_FACTION.formatted(armyType.getName(), playerFaction, armyFaction));}
-    public static ArmyServiceException needToStationArmyAtCbWithHouseOfHealing(ArmyType armyType, String armyName) {return new ArmyServiceException(ARMYTYPE_MUST_BE_STATIONED_AT_A_CLAIMBUILD_WITH_HOUSE_OF_HEALING.formatted(armyType.getName(), armyName, armyType.getName()));}
-    public static ArmyServiceException alreadyFullyHealed(ArmyType armyType, String armyName) { return new ArmyServiceException(ARMY_ALREADY_FULLY_HEALED.formatted(armyType.getName(), armyName)); }
-    public static ArmyServiceException armyIsNotHealing(ArmyType armyType, String armyName) {return new ArmyServiceException((CANNOT_STOP_HEALING_IF_ARMYTYPE_IS_NOT_HEALING.formatted(armyType.getName(), armyName)));}
-    //Disband army
-    public static ArmyServiceException notAllowedToDisbandNotSameFaction(ArmyType armyType, String armyName, String factionName) { return new ArmyServiceException(NOT_ALLOWED_TO_DISBAND_NOT_IN_SAME_FACTION.formatted(armyType.getName(), armyName, factionName)); }
-    public static ArmyServiceException notAllowedToDisband(ArmyType armyType) { return new ArmyServiceException(NOT_ALLOWED_TO_DISBAND.formatted(armyType.getName())); }
-    public static ArmyServiceException armyNotStationed(ArmyType armyType, String armyName) { return new ArmyServiceException((ARMYTYPE_IS_NOT_STATIONED.formatted(armyType.getName(), armyName))); }
 
-    //Set free tokens
-    public static ArmyServiceException tokenNegative(double tokenAmount) { return new ArmyServiceException(TOKEN_NEGATIVE.formatted(tokenAmount)); }
-    public static ArmyServiceException tokenAbove30(double tokenAmount) { return new ArmyServiceException(TOKEN_ABOVE_30.formatted(tokenAmount)); }
-
-    //pick siege
-    public static ArmyServiceException siegeOnlyArmyCanPick(String armyName) { return new ArmyServiceException(SIEGE_ONLY_ARMY_CAN_PICK.formatted(armyName)); }
-    public static ArmyServiceException siegeNotFactionLeaderOrLord(String factionName, String armyName) { return new ArmyServiceException(SIEGE_NOT_FACTION_LEADER_OR_LORD.formatted(factionName, armyName)); }
-    public static ArmyServiceException siegeArmyNotInSameRegionAsCB(String armyName, String armyRegion, String cbName, String cbRegion) { return new ArmyServiceException(SIEGE_ARMY_NOT_IN_SAME_REGION_AS_CB.formatted(armyName, armyRegion, cbName, cbRegion)); }
-    public static ArmyServiceException siegeNotAvailable(String inputtedSiege, String cbName, String availableSiege) { return new ArmyServiceException(SIEGE_NOT_AVAILABLE.formatted(inputtedSiege, cbName, availableSiege)); }
     protected ArmyServiceException(String message, Throwable rootCause) {
         super(message, rootCause);
     }
 
     protected ArmyServiceException(String message) {
         super(message);
+    }
+
+    public static ArmyServiceException noArmyWithName(String armyType, String armyName) {
+        return new ArmyServiceException(NO_ARMYTYPE_WITH_NAME.formatted(armyType, armyName));
+    }
+
+    public static ArmyServiceException armyOrCompanyWithNameAlreadyExists(String name) {
+        return new ArmyServiceException(ARMY_OR_COMPANY_WITH_NAME_ALREADY_EXISTS.formatted(name));
+    }
+
+    public static ArmyServiceException tradingCompaniesCannotHeal(String name) {
+        return new ArmyServiceException((TRADING_COMPANIES_CANNOT_HEAL.formatted(name)));
+    }
+
+    public static ArmyServiceException noPermissionToPerformThisAction() {
+        return new ArmyServiceException(NO_PERMISSION_TO_PERFORM_ACTION);
+    }
+
+    public static ArmyServiceException claimbuildNotInTheSameOrAlliedFaction(ArmyType armyType, String claimbuildName) {
+        return new ArmyServiceException(CLAIMBUILD_IS_NOT_IN_THE_SAME_OR_ALLIED_FACTION.formatted(claimbuildName, armyType.getName()));
+    }
+
+    public static ArmyServiceException armyAlreadyStationed(ArmyType armyType, String armyName, String claimbuildName) {
+        return new ArmyServiceException(ARMYTYPE_IS_ALREADY_STATIONED.formatted(armyType.getName(), armyName, claimbuildName));
+    }
+
+    public static ArmyServiceException notFactionLeader(String factionName) {
+        return new ArmyServiceException(PLAYER_NOT_FACTION_LEADER.formatted(factionName));
+    }
+
+    public static ArmyServiceException invalidUnitString(String unitString) {
+        return new ArmyServiceException(INVALID_UNIT_STRING.formatted(unitString));
+    }
+
+    public static ArmyServiceException notInSameRegion(ArmyType armyType, String armyName, String charName) {
+        return new ArmyServiceException(NOT_IN_SAME_REGION.formatted(armyType.getName(), armyName, charName));
+    }
+
+    public static ArmyServiceException notSameFaction(ArmyType armyType, String armyName, String playerFactionName, String armyFactionName) {
+        return new ArmyServiceException(NOT_SAME_FACTION.formatted(armyType.getName(), armyName, playerFactionName, armyType.getName(), armyFactionName));
+    }
+
+    public static ArmyServiceException alreadyBound(ArmyType armyType, String armyName, String playerName) {
+        return new ArmyServiceException(ALREADY_BOUND.formatted(armyType.getName(), armyName, playerName));
+    }
+
+    public static ArmyServiceException cannotBindCharInjured(String charName, String armyName) {
+        return new ArmyServiceException(CANNOT_BIND_CHAR_INJURED.formatted(charName, armyName));
+    }
+
+    public static ArmyServiceException cannotBindCharHealing(String charName, String armyName) {
+        return new ArmyServiceException(CANNOT_BIND_CHAR_HEALING.formatted(charName, armyName));
+    }
+
+    public static ArmyServiceException noPlayerBoundToArmy(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(NO_PLAYER_BOUND_TO_ARMYTYPE.formatted(armyType.getName(), armyName));
+    }
+
+    ;
+
+    public static ArmyServiceException cannotUnbindMovingArmy(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(CANNOT_UNBIND_MOVING_ARMY.formatted(armyType.getName(), armyName));
+    }
+
+    public static ArmyServiceException tooHighTokenCount(ArmyType armyType, double tokenCount) {
+        return new ArmyServiceException(TOO_HIGH_TOKEN_COUNT.formatted(armyType.getName(), tokenCount));
+    }
+
+    public static ArmyServiceException maxArmyOrCompany(ArmyType armyType, String claimbuild, String units) {
+        return new ArmyServiceException(MAX_ARMYTYPE_CREATED.formatted(claimbuild, armyType.getName(), units));
+    }
+
+    public static ArmyServiceException onlyLeaderCanBindWanderer(ArmyType armyType) {
+        return new ArmyServiceException(ONLY_FACTION_LEADER_CAN_BIND_WANDERER.formatted(armyType.getName()));
+    }
+
+    public static ArmyServiceException cannotMoveArmyDueToArmyBeingInMovement(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_DUE_TO_ALREADY_MOVING.formatted(armyType.getName(), armyName));
+    }
+
+    public static ArmyServiceException cannotMoveArmyDueToPlayerAndArmyBeingInDifferentFactions(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_DUE_TO_PLAYER_AND_ARMY_BEING_IN_DIFFERENT_FACTIONS.formatted(armyType.getName(), armyName));
+    }
+
+    public static ArmyServiceException cannotMoveArmyWasCreatedRecently(String armyName, long hoursUntilMove) {
+        return new ArmyServiceException(CANNOT_MOVE_ARMY_JUST_CREATED.formatted(armyName, hoursUntilMove));
+    }
+
+    public static ArmyServiceException cannotMoveArmyAlreadyInRegion(ArmyType armyType, String armyName, String region) {
+        return new ArmyServiceException(CANNOT_MOVE_ARMYTYPE_ALREADY_IN_REGION.formatted(armyType.getName(), armyName, region));
+    }
+
+    public static ArmyServiceException cannotBindArmyIsMoving(ArmyType armyType, String armyName, String region) {
+        return new ArmyServiceException((CANNOT_BIND_ARMYTYPE_IS_MOVING).formatted(armyType.getName(), armyName, region));
+    }
+
+    public static ArmyServiceException cannotBindCharIsMoving(ArmyType armyType, String charName, String region) {
+        return new ArmyServiceException((CANNOT_BIND_CHAR_IS_MOVING).formatted(charName, region, armyType.getName()));
+    }
+
+    public static ArmyServiceException cannotCreateArmyFromClaimbuildInDifferentFaction(String playerFaction, String claimbuildFaction, ArmyType armyType) {
+        return new ArmyServiceException((CANNOT_CREATE_ARMYTYPE_WHEN_IN_DIFFERENT_FACTIONS).formatted(playerFaction, claimbuildFaction, armyType.getName()));
+    }
+
+    public static ArmyServiceException armyAndPlayerInDifferentFaction(ArmyType armyType, String playerFaction, String armyFaction) {
+        return new ArmyServiceException(ARMYTYPE_AND_PLAYER_IN_DIFFERENT_FACTION.formatted(armyType.getName(), playerFaction, armyFaction));
+    }
+
+    public static ArmyServiceException needToStationArmyAtCbWithHouseOfHealing(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(ARMYTYPE_MUST_BE_STATIONED_AT_A_CLAIMBUILD_WITH_HOUSE_OF_HEALING.formatted(armyType.getName(), armyName, armyType.getName()));
+    }
+
+    public static ArmyServiceException alreadyFullyHealed(ArmyType armyType, String armyName) {
+        return new ArmyServiceException(ARMY_ALREADY_FULLY_HEALED.formatted(armyType.getName(), armyName));
+    }
+
+    public static ArmyServiceException armyIsNotHealing(ArmyType armyType, String armyName) {
+        return new ArmyServiceException((CANNOT_STOP_HEALING_IF_ARMYTYPE_IS_NOT_HEALING.formatted(armyType.getName(), armyName)));
+    }
+
+    //Disband army
+    public static ArmyServiceException notAllowedToDisbandNotSameFaction(ArmyType armyType, String armyName, String factionName) {
+        return new ArmyServiceException(NOT_ALLOWED_TO_DISBAND_NOT_IN_SAME_FACTION.formatted(armyType.getName(), armyName, factionName));
+    }
+
+    public static ArmyServiceException notAllowedToDisband(ArmyType armyType) {
+        return new ArmyServiceException(NOT_ALLOWED_TO_DISBAND.formatted(armyType.getName()));
+    }
+
+    public static ArmyServiceException armyNotStationed(ArmyType armyType, String armyName) {
+        return new ArmyServiceException((ARMYTYPE_IS_NOT_STATIONED.formatted(armyType.getName(), armyName)));
+    }
+
+    //Set free tokens
+    public static ArmyServiceException tokenNegative(double tokenAmount) {
+        return new ArmyServiceException(TOKEN_NEGATIVE.formatted(tokenAmount));
+    }
+
+    public static ArmyServiceException tokenAbove30(double tokenAmount) {
+        return new ArmyServiceException(TOKEN_ABOVE_30.formatted(tokenAmount));
+    }
+
+    //pick siege
+    public static ArmyServiceException siegeOnlyArmyCanPick(String armyName) {
+        return new ArmyServiceException(SIEGE_ONLY_ARMY_CAN_PICK.formatted(armyName));
+    }
+
+    public static ArmyServiceException siegeNotFactionLeaderOrLord(String factionName, String armyName) {
+        return new ArmyServiceException(SIEGE_NOT_FACTION_LEADER_OR_LORD.formatted(factionName, armyName));
+    }
+
+    public static ArmyServiceException siegeArmyNotInSameRegionAsCB(String armyName, String armyRegion, String cbName, String cbRegion) {
+        return new ArmyServiceException(SIEGE_ARMY_NOT_IN_SAME_REGION_AS_CB.formatted(armyName, armyRegion, cbName, cbRegion));
+    }
+
+    public static ArmyServiceException siegeNotAvailable(String inputtedSiege, String cbName, String availableSiege) {
+        return new ArmyServiceException(SIEGE_NOT_AVAILABLE.formatted(inputtedSiege, cbName, availableSiege));
+    }
+
+    //station
+    public static ArmyServiceException armyNotInSameRegion(String armyName, String claimbuildName) {
+        return new ArmyServiceException(NOT_IN_SAME_REGION.formatted(armyName, claimbuildName));
     }
 }
