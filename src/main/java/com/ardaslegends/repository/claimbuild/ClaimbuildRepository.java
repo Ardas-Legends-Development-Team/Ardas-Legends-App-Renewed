@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for managing {@link ClaimBuild} entities.
+ */
 @Repository
 public interface ClaimbuildRepository extends JpaRepository<ClaimBuild, Long>, ClaimbuildRepositoryCustom {
 

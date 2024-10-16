@@ -5,8 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Repository interface for managing {@link Region} entities.
+ */
 @Repository
 public interface RegionRepository extends JpaRepository<Region, String>, RegionRepositoryCustom {
     List<Region> findAllByHasOwnershipChangedTrue();

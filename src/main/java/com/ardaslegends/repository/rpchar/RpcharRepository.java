@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for managing {@link RPChar} entities.
+ */
 @Repository
 public interface RpcharRepository extends JpaRepository<RPChar, Long>, RpcharRepositoryCustom {
     Optional<RPChar> findRpcharByName(String name);
