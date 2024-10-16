@@ -2,9 +2,10 @@ package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
 import com.ardaslegends.domain.war.War;
+import com.ardaslegends.domain.war.WarParticipant;
 import com.ardaslegends.repository.region.RegionRepository;
-import com.ardaslegends.service.exceptions.logic.movement.PathfinderServiceException;
 import com.ardaslegends.service.exceptions.ServiceException;
+import com.ardaslegends.service.exceptions.logic.movement.PathfinderServiceException;
 import com.ardaslegends.service.utils.ServiceUtils;
 import com.ardaslegends.service.war.WarService;
 import lombok.Builder;
@@ -15,20 +16,31 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Service for finding the shortest path for movements.
+ * <p>
+ * This service provides methods to calculate the shortest path for movements of armies and characters.
+ * </p>
+ */
 @RequiredArgsConstructor
 @Builder
-
 @Service
 @Slf4j
 public class Pathfinder {
+    public static final int UNREACHABLE_COST = 999999;
     private final RegionRepository regionRepository;
     private final WarService warService;
 
-    public static final int UNREACHABLE_COST = 999999;
-
     /**
-     * Find the shortest path
-     * Return an object which contains the path and sum of weights
+     * Finds the shortest path for a movement.
+     *
+     * @param startRegion     The starting region.
+     * @param endRegion       The destination region.
+     * @param player          The player initiating the movement.
+     * @param isCharacterMove Whether the movement is for a character.
+     * @return A list of {@link PathElement} representing the shortest path.
+     * @throws PathfinderServiceException if the start and end regions are the same.
+     * @throws ServiceException           if any condition for finding the path is not met.
      */
     public List<PathElement> findShortestWay(Region startRegion, Region endRegion, Player player, boolean isCharacterMove) {
         log.info("Finding Path for player '{}': from '{}' to '{}' isRpChar: {}", player.getIgn(), startRegion.getId(), endRegion.getId(), isCharacterMove);
@@ -83,7 +95,7 @@ public class Pathfinder {
 
                 currentRegionCost += calculateCostDependingOnRegionType(currentRegion, dist, neighbourRegion, currentRegionCost);
 
-                if(!isCharacterMove)
+                if (!isCharacterMove)
                     currentRegionCost = applyArmyMovementRules(player, neighbourRegion, currentRegionCost, wars);
 
 
@@ -119,7 +131,7 @@ public class Pathfinder {
                             .min(Comparator.comparingInt(smallestWeights::get))
                             .orElseThrow(() -> {
                                 log.warn("No Region to visit!");
-                                throw ServiceException.pathfinderNoRegions(startRegion, endRegion);
+                                return ServiceException.pathfinderNoRegions(startRegion, endRegion);
                             });
         }
 
@@ -135,6 +147,17 @@ public class Pathfinder {
         return path;
     }
 
+
+    /**
+     * Builds the shortest path from the start region to the end region.
+     *
+     * @param startRegion     The starting region.
+     * @param endRegion       The destination region.
+     * @param isCharacterMove Whether the movement is for a character.
+     * @param smallestWeights The map of smallest weights for each region.
+     * @param previousRegions The map of previous regions in the path.
+     * @return A list of {@link PathElement} representing the shortest path.
+     */
     private ArrayList<PathElement> buildShortestPath(Region startRegion, Region endRegion, boolean isCharacterMove, Map<Region, Integer> smallestWeights, Map<Region, Region> previousRegions) {
         Region currentRegion;
         ArrayList<PathElement> path = new ArrayList<>();
@@ -169,6 +192,15 @@ public class Pathfinder {
         return path;
     }
 
+    /**
+     * Calculates the cost of moving between regions based on their types.
+     *
+     * @param currentNode       The current region.
+     * @param dist              The distance to the neighbor region.
+     * @param neighbourRegion   The neighbor region.
+     * @param currentRegionCost The current cost of the region.
+     * @return The calculated cost.
+     */
     private int calculateCostDependingOnRegionType(Region currentNode, int dist, Region neighbourRegion, int currentRegionCost) {
         log.debug("Checking if dis-/embarking...");
 
@@ -182,17 +214,15 @@ public class Pathfinder {
             boolean hasHarbor = currentNode.getClaimBuilds().stream()
                     .anyMatch(claimBuild -> claimBuild.getSpecialBuildings().contains(SpecialBuilding.HARBOUR));
 
-            if(hasHarbor) {
+            if (hasHarbor) {
                 log.debug("Found Harbour in current Region ({}) - can embark", neighbourRegion.getId());
                 currentRegionCost += 1;
-            }
-            else {
+            } else {
                 log.debug("No Harbour found in current Region ({}) - cannot embark", neighbourRegion.getId());
                 currentRegionCost = UNREACHABLE_COST;
             }
 
-        }
-        else if (currentNode.getRegionType() == RegionType.SEA && neighbourRegion.getRegionType() != RegionType.SEA) { //Checks if current region is Sea and neighbor is land
+        } else if (currentNode.getRegionType() == RegionType.SEA && neighbourRegion.getRegionType() != RegionType.SEA) { //Checks if current region is Sea and neighbor is land
             log.debug("Current region is Sea region and neighbors land region - can disembark");
             currentRegionCost += 1;
         }
@@ -200,6 +230,15 @@ public class Pathfinder {
         return currentRegionCost;
     }
 
+    /**
+     * Applies movement rules for armies based on the player's faction and the region's status.
+     *
+     * @param player            The player initiating the movement.
+     * @param neighbourRegion   The neighbor region.
+     * @param currentRegionCost The current cost of the region.
+     * @param wars              The set of active wars involving the player's faction.
+     * @return The updated cost after applying movement rules.
+     */
     private int applyArmyMovementRules(Player player, Region neighbourRegion, int currentRegionCost, Set<War> wars) {
         log.debug("Checking if army can move through Region {}", neighbourRegion.getId());
 
@@ -217,7 +256,7 @@ public class Pathfinder {
                 .map(war -> war.getEnemies(player.getFaction()))
                 .flatMap(Collection::stream)
                 .distinct()
-                .map(participant -> participant.getWarParticipant())
+                .map(WarParticipant::getWarParticipant)
                 .anyMatch(enemyFaction -> neighbourRegion.getClaimedBy().contains(enemyFaction));
         log.trace("Region {} isAtWarWithFactionInRegion: {}", neighbourRegion.getId(), isAtWarWithFactionInRegion);
 

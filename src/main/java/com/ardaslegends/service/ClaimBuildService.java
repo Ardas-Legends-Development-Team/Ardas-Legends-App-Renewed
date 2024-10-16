@@ -1,8 +1,8 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
-import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.ProductionSiteRepository;
+import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.region.RegionRepository;
 import com.ardaslegends.service.dto.claimbuild.CreateClaimBuildDto;
 import com.ardaslegends.service.dto.claimbuilds.DeleteClaimbuildDto;
@@ -10,6 +10,7 @@ import com.ardaslegends.service.dto.claimbuilds.UpdateClaimbuildOwnerDto;
 import com.ardaslegends.service.exceptions.ServiceException;
 import com.ardaslegends.service.exceptions.logic.claimbuild.ClaimBuildServiceException;
 import com.ardaslegends.service.utils.ServiceUtils;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -18,12 +19,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.validation.constraints.NotNull;
 import java.util.*;
 
+/**
+ * Service for handling claim build operations.
+ * <p>
+ * This service provides methods to create, update, and retrieve claim builds, as well as to manage their ownership and related entities.
+ * </p>
+ */
 @RequiredArgsConstructor
 @Slf4j
-
 @Service
 @Transactional(readOnly = true)
 public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRepository> {
@@ -35,10 +40,22 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
     private final FactionService factionService;
     private final PlayerService playerService;
 
+    /**
+     * Retrieves a paginated list of claim builds.
+     *
+     * @param pageable The pagination information.
+     * @return A {@link Page} of {@link ClaimBuild} objects.
+     */
     public Page<ClaimBuild> getClaimbuildsPaginated(Pageable pageable) {
         return secureFind(pageable, claimbuildRepository::findAll);
     }
 
+    /**
+     * Changes the owner of a claim build based on the provided data.
+     *
+     * @param dto The data for updating the claim build owner.
+     * @return The updated {@link ClaimBuild} object.
+     */
     @Transactional(readOnly = false)
     public ClaimBuild changeOwnerFromDto(UpdateClaimbuildOwnerDto dto) {
         log.debug("Trying to set the controlling faction of Claimbuild [{}] to [{}]", dto.claimbuildName(), dto.newFaction());
@@ -55,6 +72,13 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return changeOwner(claimBuild, faction);
     }
 
+    /**
+     * Changes the owner of a claim build.
+     *
+     * @param claimBuild The claim build to update.
+     * @param newOwner   The new owner faction.
+     * @return The updated {@link ClaimBuild} object.
+     */
     @Transactional(readOnly = false)
     public ClaimBuild changeOwner(ClaimBuild claimBuild, Faction newOwner) {
         log.debug("Trying to set owner of claimbuild [{}] to faction [{}]", claimBuild, newOwner);
@@ -69,6 +93,15 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return claimBuild;
     }
 
+    /**
+     * Creates a new claim build based on the provided data.
+     *
+     * @param dto            The data for creating the claim build.
+     * @param isNewlyCreated Whether the claim build is newly created.
+     * @return The created {@link ClaimBuild} object.
+     * @throws ClaimBuildServiceException if any condition for creating the claim build is not met.
+     * @throws ServiceException           if the region does not exist.
+     */
     @Transactional(readOnly = false)
     public ClaimBuild createClaimbuild(CreateClaimBuildDto dto, boolean isNewlyCreated) {
         log.debug("Trying to create claimbuild with data [{}]", dto);
@@ -86,8 +119,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
             var claimbuild = existingClaimbuild.get();
             log.warn("Cannot create new claimbuild with name [{}] because another one  with same name already exists (region [{}] - owned by [{}])", claimbuild.getName(), claimbuild.getRegion(), claimbuild.getOwnedBy());
             throw ClaimBuildServiceException.cbAlreadyExists(claimbuild.getName(), claimbuild.getRegion().getId(), claimbuild.getOwnedBy().getName());
-        }
-        else if(existingClaimbuild.isEmpty() && !isNewlyCreated) {
+        } else if (existingClaimbuild.isEmpty() && !isNewlyCreated) {
             log.warn("Tried to updated claimbuild with name [{}] but no claimbuild was found!", dto.name());
             throw ClaimBuildServiceException.couldNotUpdateClaimbuildBecauseNotFound(dto.name());
         }
@@ -108,22 +140,21 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         Faction faction = factionService.getFactionByName(dto.faction());
 
         log.debug("Getting the Claimbuild Type");
-        ClaimBuildType type = null;
+        ClaimBuildType type;
         try {
             log.trace("Trying to get enum value of inputted type [{}]", dto.type());
             type = ClaimBuildType.valueOf(dto.type().replace(' ', '_').toUpperCase());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.warn("Could not find claimbuild type [{}]!", dto.type());
             throw ClaimBuildServiceException.noCbTypeFound(dto.type());
         }
 
         log.trace("Checking if type is [{}]", ClaimBuildType.CAPITAL);
-        if(type.equals(ClaimBuildType.CAPITAL) && isNewlyCreated) {
+        if (type.equals(ClaimBuildType.CAPITAL) && isNewlyCreated) {
             log.debug("CB Type is [{}] - Checking if faction already has a [{}]", ClaimBuildType.CAPITAL, ClaimBuildType.CAPITAL);
             boolean hasCapital = faction.getClaimBuilds().stream().anyMatch(cb -> cb.getType().equals(ClaimBuildType.CAPITAL));
             log.trace("Faction has capital: [{}]", hasCapital);
-            if(hasCapital) {
+            if (hasCapital) {
                 log.warn("Faction [{}] already has a claimbuild of type [{}]", faction, ClaimBuildType.CAPITAL);
                 throw ClaimBuildServiceException.factionAlreadyHasCapital(faction.getName());
             }
@@ -137,15 +168,15 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
 
         log.trace("Calling createSpecialBuildingsFromString");
         List<SpecialBuilding> specialBuildings = new ArrayList<>();
-        if(!dto.specialBuildings().equals("none"))
+        if (!dto.specialBuildings().equals("none"))
             specialBuildings = createSpecialBuildingsFromString(dto.specialBuildings());
 
         log.debug("Creating the claimbuild instance so we can instantiate production sites and special buildings");
         //production sites will be set later on because they need the claimbuild instance when getting created
-        ClaimBuild claimBuild = null;
-        if(isNewlyCreated) {
+        ClaimBuild claimBuild;
+        if (isNewlyCreated) {
 
-            if(!region.isClaimable(faction)) {
+            if (!region.isClaimable(faction)) {
                 log.warn("Claimbuild [{}] cannot be created since the region [{}] is not claimable", dto.name(), region.getId());
                 throw ClaimBuildServiceException.regionIsNotClaimableForFaction(region.getId(), faction.getName());
             }
@@ -153,12 +184,11 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
             claimBuild = new ClaimBuild(dto.name(), region, type, faction, coordinate,
                     specialBuildings, dto.traders(), dto.siege(), dto.numberOfHouses(), builtBy);
 
-            if(! (type.equals(ClaimBuildType.HAMLET) || type.equals(ClaimBuildType.KEEP))) {
+            if (!(type.equals(ClaimBuildType.HAMLET) || type.equals(ClaimBuildType.KEEP))) {
                 log.debug("Claimbuild is not hamlet or keep, claiming region [{}] for faction [{}]", region.getId(), faction.getName());
                 region.addFactionToClaimedBy(faction);
             }
-        }
-        else {
+        } else {
             claimBuild = existingClaimbuild.get();
             claimBuild.setRegion(region);
             claimBuild.setType(type);
@@ -176,7 +206,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
 
         log.trace("Calling createProductionSitesFromString");
         List<ProductionClaimbuild> prodSites = new ArrayList<>();
-        if(!dto.productionSites().equals("none"))
+        if (!dto.productionSites().equals("none"))
             prodSites = createProductionSitesFromString(dto.productionSites(), claimBuild);
 
         log.trace("Setting production sites");
@@ -188,9 +218,16 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         claimBuild = secureSave(claimBuild, claimbuildRepository);
 
         logStr = isNewlyCreated ? "created new" : "updated";
-        log.info("Successfully {} [{}] claimbuild [{}] for faction [{}] in region [{}]",logStr, type, claimBuild.getName(), faction, region.getId());
+        log.info("Successfully {} [{}] claimbuild [{}] for faction [{}] in region [{}]", logStr, type, claimBuild.getName(), faction, region.getId());
         return claimBuild;
     }
+
+    /**
+     * Deletes a claim build based on the provided data.
+     *
+     * @param dto The data for deleting the claim build.
+     * @return The deleted {@link ClaimBuild} object.
+     */
     @Transactional(readOnly = false)
     public ClaimBuild deleteClaimbuild(DeleteClaimbuildDto dto) {
         log.debug("Trying to delete claimbuild with name [{}]", dto.claimbuildName());
@@ -201,7 +238,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         ClaimBuild claimBuild = getClaimBuildByName(dto.claimbuildName());
         Faction ownedby = claimBuild.getOwnedBy();
         Region region = claimBuild.getRegion();
-        if(!region.hasFactionOtherClaimbuildThan(claimBuild) && region.getClaimBuilds().contains(claimBuild)) {
+        if (!region.hasFactionOtherClaimbuildThan(claimBuild) && region.getClaimBuilds().contains(claimBuild)) {
             region.removeFactionFromClaimedBy(ownedby);
         }
 
@@ -220,6 +257,13 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return claimBuild;
     }
 
+    /**
+     * Retrieves a claim build by its name.
+     *
+     * @param name The name of the claim build.
+     * @return The {@link ClaimBuild} object.
+     * @throws ClaimBuildServiceException if no claim build with the specified name is found.
+     */
     public ClaimBuild getClaimBuildByName(String name) {
         log.debug("Getting Claimbuild with name [{}]", name);
 
@@ -229,7 +273,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         log.debug("Fetching claimbuild with name [{}]", name);
         Optional<ClaimBuild> fetchedBuild = secureFind(name, claimbuildRepository::findClaimBuildByName);
 
-        if(fetchedBuild.isEmpty()) {
+        if (fetchedBuild.isEmpty()) {
             log.warn("No Claimbuild found with name [{}]", name);
             throw ClaimBuildServiceException.noCbWithName(name);
         }
@@ -238,6 +282,13 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return fetchedBuild.get();
     }
 
+    /**
+     * Retrieves claim builds by their names.
+     *
+     * @param names The names of the claim builds.
+     * @return A list of {@link ClaimBuild} objects.
+     * @throws ClaimBuildServiceException if no claim builds with the specified names are found.
+     */
     public List<ClaimBuild> getClaimBuildsByNames(String[] names) {
         log.debug("Getting Claimbuild with names [{}]", (Object) names);
 
@@ -247,7 +298,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         log.debug("Fetching claimbuilds with names [{}]", (Object) names);
         List<ClaimBuild> fetchedClaimbuilds = secureFind(names, claimbuildRepository::queryByNames);
 
-        if(fetchedClaimbuilds.isEmpty()) {
+        if (fetchedClaimbuilds.isEmpty()) {
             log.warn("No Claimbuild found with names [{}]", (Object) names);
             throw ClaimBuildServiceException.noCbWithName(Arrays.toString(names));
         }
@@ -256,6 +307,13 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return fetchedClaimbuilds;
     }
 
+    /**
+     * Retrieves claim builds by the faction name.
+     *
+     * @param factionName The name of the faction.
+     * @return A list of {@link ClaimBuild} objects.
+     * @throws ClaimBuildServiceException if no claim builds for the specified faction are found.
+     */
     public List<ClaimBuild> getClaimBuildsByFaction(String factionName) {
         log.debug("Getting Claimbuilds of faction [{}]", factionName);
 
@@ -268,7 +326,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         log.debug("Fetching claimbuilds of faction [{}]", factionName);
         List<ClaimBuild> fetchedClaimbuilds = secureFind(faction, claimbuildRepository::queryByFaction);
 
-        if(fetchedClaimbuilds.isEmpty()) {
+        if (fetchedClaimbuilds.isEmpty()) {
             log.warn("No Claimbuild found for faction [{}]", faction);
             throw ClaimBuildServiceException.factionHasNoCbs(factionName);
         }
@@ -277,6 +335,13 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return fetchedClaimbuilds;
     }
 
+    /**
+     * Creates a set of players from the builtBy string.
+     *
+     * @param builtByString The builtBy string.
+     * @return A set of {@link Player} objects.
+     * @throws ClaimBuildServiceException if the builtBy string is invalid.
+     */
     public Set<Player> createBuiltByFromString(String builtByString) {
         log.debug("Creating builtBy from string [{}]", builtByString);
 
@@ -300,10 +365,18 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
         return builtBy;
     }
 
+    /**
+     * Creates a list of production sites from the production string.
+     *
+     * @param prodString The production string.
+     * @param claimBuild The claim build to associate with the production sites.
+     * @return A list of {@link ProductionClaimbuild} objects.
+     * @throws ClaimBuildServiceException if the production site string is invalid.
+     */
     public List<ProductionClaimbuild> createProductionSitesFromString(String prodString, @NotNull ClaimBuild claimBuild) {
         log.debug("Creating production sites from string [{}]", prodString);
 
-        if(prodString.equals("no")) {
+        if (prodString.equals("no")) {
             return Collections.emptyList();
         }
 
@@ -318,15 +391,14 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
             log.trace("Generating productionSite from data: [{}]", prodSiteData);
             String[] properties = prodSiteData.split(":");
 
-            ProductionSiteType type = null;
+            ProductionSiteType type;
             String resource = properties[1];
 
             try {
                 String inputtedType = properties[0].replace(' ', '_').toUpperCase(Locale.ROOT);
                 log.trace("Getting the enum for value [{}]", inputtedType);
                 type = ProductionSiteType.valueOf(inputtedType);
-            }
-            catch(Exception e) {
+            } catch (Exception e) {
                 log.warn("No Production Site type found for input [{}]", properties[0]);
                 throw ClaimBuildServiceException.noProductionSiteTypeFound(properties[0]);
             }
@@ -334,17 +406,16 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
             log.debug("Fetching Production Site with type [{}] and resource [{}]", type, resource);
             Optional<ProductionSite> fetchedProdSite = secureFind(type, resource, productionSiteRepository::queryByTypeAndResourceOptional);
 
-            if(fetchedProdSite.isEmpty()) {
+            if (fetchedProdSite.isEmpty()) {
                 log.warn("No Production Site found for type [{}] and resource [{}]!", type, resource);
                 throw ClaimBuildServiceException.noProductionSiteFound(type.name(), resource);
             }
 
-            long prodSiteAmount = 0L;
+            long prodSiteAmount;
             try {
                 prodSiteAmount = Long.parseLong(properties[2]);
                 log.trace("Production Site amount: [{}]", prodSiteAmount);
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 log.warn("Production Site String expected a number but was: [{}]", properties[2]);
                 throw ClaimBuildServiceException.invalidProductionSiteString(prodString);
             }
@@ -353,14 +424,21 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
             ProductionClaimbuild productionClaimbuild = new ProductionClaimbuild(id, fetchedProdSite.get(), claimBuild, prodSiteAmount);
             productionSites.add(productionClaimbuild);
         }
-        
+
         return productionSites;
     }
 
+    /**
+     * Creates a list of special buildings from the specialBuild string.
+     *
+     * @param specialBuildString The specialBuild string.
+     * @return A list of {@link SpecialBuilding} objects.
+     * @throws ClaimBuildServiceException if the specialBuild string is invalid.
+     */
     public List<SpecialBuilding> createSpecialBuildingsFromString(String specialBuildString) {
         log.debug("Creating special buildings from string [{}]", specialBuildString);
 
-        if(specialBuildString.equals("no")) {
+        if (specialBuildString.equals("no")) {
             return Collections.emptyList();
         }
 
@@ -379,8 +457,7 @@ public class ClaimBuildService extends AbstractService<ClaimBuild, ClaimbuildRep
                 log.trace("Found special building [{}]", specialBuilding);
                 log.trace("Adding special building to list");
                 specialBuildings.add(specialBuilding);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 log.warn("Could not find special building for inputted value [{}]", specialBuildName);
                 throw ClaimBuildServiceException.noSpecialBuildingFound(specialBuildName);
             }

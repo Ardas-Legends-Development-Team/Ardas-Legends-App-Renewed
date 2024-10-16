@@ -24,9 +24,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Service class for managing roleplay characters (RPChars).
+ * <p>
+ * This service provides methods to interact with the {@link RpcharRepository}
+ * to perform CRUD operations on {@link RPChar} entities.
+ * </p>
+ */
 @Slf4j
 @RequiredArgsConstructor
-
 @Service
 public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
 
@@ -34,11 +40,26 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
     private final PlayerService playerService;
     private final ClaimbuildRepository claimBuildRepository;
 
+    /**
+     * Retrieves a slice of all roleplay characters (RPChars) with pagination.
+     *
+     * @param pageable the pagination information.
+     * @return a slice of RPChars.
+     */
     public Slice<RPChar> getAll(Pageable pageable) {
         log.info("Getting slice of rpchars with data [{}]", pageable);
         return rpcharRepository.queryAll(pageable);
     }
 
+    /**
+     * Retrieves a list of roleplay characters (RPChars) by their names.
+     *
+     * @param names an array of RPChar names.
+     * @return a list of RPChars with the specified names.
+     * @throws RpCharServiceException   if no RPChars with the specified names are found.
+     * @throws NullPointerException     if the names array is null.
+     * @throws IllegalArgumentException if any name in the array is blank.
+     */
     public List<RPChar> getRpCharsByNames(String[] names) {
         log.debug("Getting RpChars with names [{}]", (Object) names);
 
@@ -57,6 +78,13 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
         return fetchedChars;
     }
 
+    /**
+     * Retrieves a roleplay character (RPChar) by its name.
+     *
+     * @param name the name of the RPChar.
+     * @return the RPChar with the specified name.
+     * @throws RpCharServiceException if no RPChar with the specified name is found.
+     */
     public RPChar getRpCharByName(@NonNull String name) {
         log.debug("Getting RpChar with name [{}]", name);
 
@@ -72,11 +100,24 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
         return character.get();
     }
 
-    public List<RPChar> saveRpChars(List<RPChar> chars) {
+    /**
+     * Saves a list of roleplay characters (RPChars).
+     *
+     * @param chars the list of RPChars to be saved.
+     */
+    public void saveRpChars(List<RPChar> chars) {
         log.debug("Saving chars [{}]", chars);
-        return secureSaveAll(chars, rpcharRepository);
+        secureSaveAll(chars, rpcharRepository);
     }
 
+    /**
+     * Stations a roleplay character (RPChar) at a specified claim build.
+     *
+     * @param dto the data transfer object containing the RPChar and claim build information.
+     * @return the stationed RPChar.
+     * @throws RpCharServiceException     if the RPChar is already stationed, not in the same region as the claim build, or the claim build is not in the same or allied faction.
+     * @throws ClaimBuildServiceException if the claim build does not exist.
+     */
     @Transactional(readOnly = false)
     public RPChar station(StationRpCharDto dto) {
         log.debug("Trying to station rpchar [{}] at [{}]", dto.characterName(), dto.claimbuildName());
@@ -125,10 +166,17 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
         log.debug("Set stationed, performing persist");
         secureSave(character, rpcharRepository);
 
-        log.info("Station Character Service Method for Character [{}] completed successfully");
+        log.info("Station Character Service Method for Character [{}] completed successfully", character);
         return character;
     }
 
+    /**
+     * Unstations a roleplay character (RPChar) from its current claim build.
+     *
+     * @param dto the data transfer object containing the RPChar information.
+     * @return the unstationed RPChar.
+     * @throws RpCharServiceException if the RPChar is not stationed at any claim build.
+     */
     @Transactional(readOnly = false)
     public RPChar unstation(UnstationRpCharDto dto) {
         log.debug("Trying to unstation character with data: [{}]", dto);
@@ -146,10 +194,10 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
 
         character.setStationedAt(null);
 
-        log.debug("Unstationed character [{}], persisting");
+        log.debug("Unstationed character [{}], persisting", character);
         secureSave(character, rpcharRepository);
 
-        log.info("Unstation Character Service Method for Character [{}] completed successfully");
+        log.info("Unstation Character Service Method for Character [{}] completed successfully", character);
         return character;
     }
 }

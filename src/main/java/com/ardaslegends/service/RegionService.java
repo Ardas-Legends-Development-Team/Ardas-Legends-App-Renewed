@@ -13,14 +13,29 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Service class for managing regions.
+ * <p>
+ * This service provides methods to interact with the {@link RegionRepository}
+ * to perform CRUD operations on {@link Region} entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @Service
 public class RegionService extends AbstractService<Region, RegionRepository> {
 
     private final RegionRepository regionRepository;
 
+    /**
+     * Resets the ownership status of all regions that have had their ownership changed.
+     * <p>
+     * This method sets the {@code hasOwnershipChanged} attribute of all regions to {@code false}
+     * and persists the changes.
+     * </p>
+     *
+     * @return a list of regions with updated ownership status.
+     */
     @Transactional(readOnly = false)
     public List<Region> resetHasOwnership() {
         log.debug("Resetting all regions with hasOwnership set to true");
@@ -41,6 +56,15 @@ public class RegionService extends AbstractService<Region, RegionRepository> {
         return regions;
     }
 
+    /**
+     * Retrieves a region by its ID.
+     *
+     * @param regionId the ID of the region to retrieve.
+     * @return the region with the specified ID.
+     * @throws RegionServiceException   if no region with the specified ID is found.
+     * @throws NullPointerException     if the region ID is null.
+     * @throws IllegalArgumentException if the region ID is blank.
+     */
     public Region getRegion(String regionId) {
         log.debug("Getting single region with id {}", regionId);
 
@@ -51,7 +75,7 @@ public class RegionService extends AbstractService<Region, RegionRepository> {
         log.debug("Fetching region {} from repository", regionId);
         Optional<Region> foundRegion = regionRepository.findById(regionId);
 
-        if(foundRegion.isEmpty()) {
+        if (foundRegion.isEmpty()) {
             log.warn("Found no region with id [{}]", regionId);
             throw RegionServiceException.noRegionFound(regionId);
         }
@@ -60,6 +84,11 @@ public class RegionService extends AbstractService<Region, RegionRepository> {
         return foundRegion.get();
     }
 
+    /**
+     * Retrieves all regions.
+     *
+     * @return a list of all regions.
+     */
     @Transactional(readOnly = true)
     public List<Region> getAll() {
         return regionRepository.queryAll();
