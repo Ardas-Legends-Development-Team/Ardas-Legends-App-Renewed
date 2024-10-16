@@ -1,17 +1,22 @@
 package com.ardaslegends.domain.war.battle;
 
+/**
+ * Represents the different phases of a battle.
+ */
 public enum BattlePhase {
     /**
-     * after declaration, before the 24h timer runs out
-     * during this phase allies can aid
+     * After declaration, before the 24h timer runs out.
+     * During this phase, allies can aid.
      */
     PRE_BATTLE,
+
     /**
-     * during time freeze, waiting for battle to happen
+     * During time freeze, waiting for the battle to happen.
      */
     ONGOING,
+
     /**
-     * after the battle happened and results are submitted
+     * After the battle happened and results are submitted.
      */
     CONCLUDED
 }

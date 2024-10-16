@@ -1,6 +1,6 @@
 package com.ardaslegends.presentation.discord.commands.update;
 
-import com.ardaslegends.domain.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
 import com.ardaslegends.presentation.discord.commands.ALCommand;
 import com.ardaslegends.presentation.discord.commands.ALCommandExecutor;
 import com.ardaslegends.presentation.discord.commands.update.staff.*;

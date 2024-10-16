@@ -13,12 +13,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Custom repository implementation for managing {@link RPChar} entities.
+ * <p>
+ * This implementation provides custom query methods for {@link RPChar} entities.
+ * </p>
+ */
 @Slf4j
 public class RpcharRepositoryImpl extends QuerydslRepositorySupport implements RpcharRepositoryCustom {
+
+    /**
+     * Constructs a new {@link RpcharRepositoryImpl}.
+     */
     public RpcharRepositoryImpl() {
         super(RPChar.class);
     }
 
+    /**
+     * Queries all {@link RPChar} entities with pagination support.
+     *
+     * @param pageable the pagination information.
+     * @return a {@link Slice} of {@link RPChar} entities.
+     * @throws NullPointerException if the pageable parameter is null.
+     */
     @Override
     public Slice<RPChar> queryAll(Pageable pageable) {
         Objects.requireNonNull(pageable, "Pageable must not be null!");
@@ -35,6 +52,13 @@ public class RpcharRepositoryImpl extends QuerydslRepositorySupport implements R
         return new SliceImpl<>(rpchars, pageable, (pageable.getOffset() < totalCount));
     }
 
+    /**
+     * Finds {@link RPChar} entities by their names.
+     *
+     * @param names an array of names to search for.
+     * @return a list of {@link RPChar} entities with the specified names.
+     * @throws NullPointerException if the names array is null.
+     */
     @Override
     public List<RPChar> findRpCharsByNames(String[] names) {
         log.debug("Querying rpchars by names: {}", Arrays.toString(names));
@@ -49,6 +73,4 @@ public class RpcharRepositoryImpl extends QuerydslRepositorySupport implements R
         log.debug("Queried rpchars: [{}]", fetchedRpChars);
         return fetchedRpChars;
     }
-
-
 }

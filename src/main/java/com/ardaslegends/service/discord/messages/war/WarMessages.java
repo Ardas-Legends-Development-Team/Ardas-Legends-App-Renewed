@@ -18,8 +18,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Utility class for creating Discord messages related to wars.
+ */
 public class WarMessages {
 
+    /**
+     * Creates a message declaring a war.
+     *
+     * @param war            The war to be declared.
+     * @param discordService The Discord service used to retrieve user and role information.
+     * @return An {@link ALMessage} containing the message and embeds for the war declaration.
+     * @throws NullPointerException if the war or discordService is null.
+     */
     public static ALMessage declareWar(War war, DiscordService discordService) {
         Objects.requireNonNull(war, "Declare war error discord message got passed null value for war");
         Objects.requireNonNull(discordService, "Declare war error discord message got passed null value for discordService");
@@ -54,6 +65,15 @@ public class WarMessages {
         return new ALMessage(message, List.of(embed));
     }
 
+    /**
+     * Creates a message for forcefully ending a war.
+     *
+     * @param war              The war to be ended.
+     * @param warEndedByPlayer The player who ended the war.
+     * @param discordService   The Discord service used to retrieve user and role information.
+     * @return An {@link ALMessage} containing the message and embeds for the war conclusion.
+     * @throws NullPointerException if the war, warEndedByPlayer, or discordService is null.
+     */
     public static ALMessage forceEndWar(War war, Player warEndedByPlayer, DiscordService discordService) {
         Objects.requireNonNull(war, "Force end war error discord message got passed null value for war");
         Objects.requireNonNull(warEndedByPlayer, "Force end war error discord message got passed null value for player that ended war");

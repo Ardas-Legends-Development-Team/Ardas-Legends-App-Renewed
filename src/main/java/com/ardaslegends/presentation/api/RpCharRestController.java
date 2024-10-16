@@ -19,21 +19,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for managing Roleplay Character (RPChar) entities.
+ * <p>
+ * This controller provides endpoints for retrieving, updating, and managing RPChar entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @Tag(name = "RPChar Controller", description = "All REST endpoints regarding Roleplay Characters")
 @RequestMapping(RpCharRestController.BASE_URL)
 public class RpCharRestController extends AbstractRestController {
 
-    public final static String BASE_URL = "/api/rpchars";
-    public final static String NAME = "/name";
-    public final static String PATH_STATION = "/station";
-    public final static String PATH_UNSTATION = "/unstation";
+    public static final String BASE_URL = "/api/rpchars";
+    public static final String NAME = "/name";
+    public static final String PATH_STATION = "/station";
+    public static final String PATH_UNSTATION = "/unstation";
 
     private final RpCharService rpCharService;
 
+    /**
+     * Retrieves a paginated list of RPChar entities.
+     *
+     * @param pageable the pagination information.
+     * @return a slice of {@link RpCharOwnerResponse} containing the RPChar entities.
+     */
     @Operation(summary = "Get RpChars Paginated", description = "Returns a Page of RpChars")
     @GetMapping
     public ResponseEntity<Slice<RpCharOwnerResponse>> getAll(Pageable pageable) {
@@ -51,6 +62,12 @@ public class RpCharRestController extends AbstractRestController {
         return ResponseEntity.ok(rpCharOwnerResponses);
     }
 
+    /**
+     * Retrieves RPChar entities by their names.
+     *
+     * @param names the names of the RPChar entities.
+     * @return an array of {@link RpCharOwnerResponse} containing the RPChar entities.
+     */
     @Operation(summary = "Get RpChars By Names", description = "Returns an array of RpChars with the specified names")
     @GetMapping(NAME)
     public ResponseEntity<RpCharOwnerResponse[]> getRpCharsByNames(@RequestParam(name = "name") String[] names) {
@@ -64,6 +81,12 @@ public class RpCharRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Stations a RPChar entity.
+     *
+     * @param dto the data transfer object containing the details of the RPChar to station.
+     * @return the updated {@link RpCharResponse}.
+     */
     @PatchMapping(PATH_STATION)
     public HttpEntity<RpCharResponse> station(@RequestBody StationRpCharDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
@@ -77,6 +100,12 @@ public class RpCharRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Unstations a RPChar entity.
+     *
+     * @param dto the data transfer object containing the details of the RPChar to unstation.
+     * @return the updated {@link RpCharResponse}.
+     */
     @PatchMapping(PATH_UNSTATION)
     public HttpEntity<RpCharResponse> unstation(@RequestBody UnstationRpCharDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);

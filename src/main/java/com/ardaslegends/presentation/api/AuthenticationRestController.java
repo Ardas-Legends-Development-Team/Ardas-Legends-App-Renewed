@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for managing authentication.
+ * <p>
+ * This controller provides an endpoint for authenticating users via Discord.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @Tag(name = "Authentication Controller", description = "REST endpoints concerning Authentication")
@@ -28,6 +33,15 @@ public class AuthenticationRestController {
     private final AuthenticationService authenticationService;
     private final JwtUtil jwtUtil;
 
+    /**
+     * Authenticates a user using a Discord access code.
+     * <p>
+     * This method receives a Discord access code, generates a Discord token by calling the Discord API, and returns a generated JWT to access the API.
+     * </p>
+     *
+     * @param dto the data transfer object containing the Discord access code.
+     * @return the {@link AuthenticateResponse} containing the generated JWT, Discord ID, and token expiration time.
+     */
     @Operation(summary = "Authenticate", description = "Receives a discord access code and generates a discord token by calling the discord API. Returns a generated JWT to access the API.")
     @PostMapping
     public ResponseEntity<AuthenticateResponse> authenticate(@RequestBody AuthenticateDto dto) {

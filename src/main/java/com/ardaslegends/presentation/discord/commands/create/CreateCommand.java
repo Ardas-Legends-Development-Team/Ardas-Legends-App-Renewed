@@ -1,6 +1,6 @@
 package com.ardaslegends.presentation.discord.commands.create;
 
-import com.ardaslegends.domain.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
 import com.ardaslegends.presentation.discord.commands.ALCommand;
 import com.ardaslegends.presentation.discord.commands.ALCommandExecutor;
 import com.ardaslegends.presentation.discord.commands.create.staff.CreateClaimbuildCommand;
@@ -29,48 +29,49 @@ public class CreateCommand implements ALCommand {
     private final ArmyService armyService;
 
     private final ClaimBuildService claimBuildService;
+
     @Override
     public SlashCommandBuilder init(Map<String, ALCommandExecutor> commands) {
         log.debug("Initializing /create command");
 
         var command = SlashCommand.with("create", "Creates an entity (RpChar, army, trader etc.)", Arrays.asList(
-                        new SlashCommandOptionBuilder()
-                                .setType(SlashCommandOptionType.SUB_COMMAND)
-                                .setName("rpchar")
-                                .setDescription("JAVACOORD Creates a Roleplay Character")
-                                .setOptions(Arrays.asList(
-                                        new SlashCommandOptionBuilder()
-                                                .setType(SlashCommandOptionType.USER)
-                                                .setName("target")
-                                                .setDescription("The player who the char should be created for")
-                                                .setRequired(true)
-                                                .build(),
-                                        new SlashCommandOptionBuilder()
-                                                .setType(SlashCommandOptionType.STRING)
-                                                .setName("name")
-                                                .setDescription("Character's name")
-                                                .setRequired(true)
-                                                .build(),
-                                        new SlashCommandOptionBuilder()
-                                                .setType(SlashCommandOptionType.STRING)
-                                                .setName("title")
-                                                .setDescription("Character's title")
-                                                .setRequired(true)
-                                                .build(),
-                                        new SlashCommandOptionBuilder()
-                                                .setType(SlashCommandOptionType.STRING)
-                                                .setName("gear")
-                                                .setDescription("Character's gear")
-                                                .setRequired(true)
-                                                .build(),
-                                        new SlashCommandOptionBuilder()
-                                                .setType(SlashCommandOptionType.BOOLEAN)
-                                                .setName("pvp")
-                                                .setDescription("Should the character participate in PvP?")
-                                                .setRequired(true)
-                                                .build()
-                                ))
-                                .build(),
+                new SlashCommandOptionBuilder()
+                        .setType(SlashCommandOptionType.SUB_COMMAND)
+                        .setName("rpchar")
+                        .setDescription("JAVACOORD Creates a Roleplay Character")
+                        .setOptions(Arrays.asList(
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.USER)
+                                        .setName("target")
+                                        .setDescription("The player who the char should be created for")
+                                        .setRequired(true)
+                                        .build(),
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.STRING)
+                                        .setName("name")
+                                        .setDescription("Character's name")
+                                        .setRequired(true)
+                                        .build(),
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.STRING)
+                                        .setName("title")
+                                        .setDescription("Character's title")
+                                        .setRequired(true)
+                                        .build(),
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.STRING)
+                                        .setName("gear")
+                                        .setDescription("Character's gear")
+                                        .setRequired(true)
+                                        .build(),
+                                new SlashCommandOptionBuilder()
+                                        .setType(SlashCommandOptionType.BOOLEAN)
+                                        .setName("pvp")
+                                        .setDescription("Should the character participate in PvP?")
+                                        .setRequired(true)
+                                        .build()
+                        ))
+                        .build(),
                 new SlashCommandOptionBuilder()
                         .setType(SlashCommandOptionType.SUB_COMMAND)
                         .setName("army")
@@ -185,9 +186,9 @@ public class CreateCommand implements ALCommand {
                                         .setDescription("Separate the buildings with - Example: House of Healing-Embassy")
                                         .setRequired(false)
                                         .build()
-                                ))
-                        .build()    
-                ));
+                        ))
+                        .build()
+        ));
 
         commands.put("create rpchar", new CreateRpCharCommand(playerService)::execute);
         commands.put("create army", new CreateArmyCommand(armyService)::execute);

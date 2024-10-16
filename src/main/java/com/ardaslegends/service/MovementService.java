@@ -8,10 +8,10 @@ import com.ardaslegends.repository.region.RegionRepository;
 import com.ardaslegends.service.dto.army.MoveArmyDto;
 import com.ardaslegends.service.dto.player.DiscordIdDto;
 import com.ardaslegends.service.dto.player.rpchar.MoveRpCharDto;
-import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.exceptions.ServiceException;
 import com.ardaslegends.service.exceptions.logic.army.ArmyServiceException;
 import com.ardaslegends.service.exceptions.logic.movement.MovementServiceException;
+import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.utils.ServiceUtils;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +26,17 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service for handling movement operations.
+ * <p>
+ * This service provides methods to create, update, and retrieve movements for armies and characters.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @Service
 @Transactional(readOnly = true)
-public class MovementService extends AbstractService<Movement, MovementRepository>{
+public class MovementService extends AbstractService<Movement, MovementRepository> {
 
     private final MovementRepository movementRepository;
     private final RegionRepository regionRepository;
@@ -42,6 +47,13 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
     private final Pathfinder pathfinder;
     private final RpCharService rpCharService;
 
+    /**
+     * Creates a new army movement based on the provided data.
+     *
+     * @param dto The data for creating the army movement.
+     * @return The created {@link Movement} object.
+     * @throws ServiceException if any condition for creating the movement is not met.
+     */
     // TODO: Check if time is frozen -> if yes, cancel request
     // TODO: Check if army is in a battle -> if yes, cancel request
     // TODO: Check if army is healing -> if yes, ask to stop healing
@@ -58,6 +70,13 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Calculates the movement for an army based on the provided data.
+     *
+     * @param dto The data for calculating the army movement.
+     * @return The calculated {@link Movement} object.
+     * @throws ServiceException if any condition for calculating the movement is not met.
+     */
     public Movement calculateArmyMovement(MoveArmyDto dto) {
         ServiceUtils.checkAllNulls(dto);
         ServiceUtils.checkAllBlanks(dto);
@@ -73,26 +92,26 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.trace("Fetching region entity");
         Optional<Region> fetchedRegion = secureFind(dto.toRegion(), regionRepository::findById);
 
-        if(fetchedRegion.isEmpty()) {
+        if (fetchedRegion.isEmpty()) {
             log.warn("Desired region [{}] does not exist in the database", dto.toRegion());
             throw ServiceException.regionDoesNotExist(dto.toRegion());
         }
         Region region = fetchedRegion.get();
 
         log.debug("Checking if army is already in the desired region");
-        if(dto.toRegion().equals(army.getCurrentRegion().getId())) {
+        if (dto.toRegion().equals(army.getCurrentRegion().getId())) {
             log.warn("Army is already in desired region [{}], no movement required", dto.toRegion());
-            throw ArmyServiceException.cannotMoveArmyAlreadyInRegion(army.getArmyType(),army.toString(), dto.toRegion());
+            throw ArmyServiceException.cannotMoveArmyAlreadyInRegion(army.getArmyType(), army.toString(), dto.toRegion());
         }
 
         log.debug("Checking if army is currently performing a movement");
-        if(secureFind(army, movementRepository::findMovementByArmyAndIsCurrentlyActiveTrue).isPresent()) {
+        if (secureFind(army, movementRepository::findMovementByArmyAndIsCurrentlyActiveTrue).isPresent()) {
             log.warn("Army [{}] is currently performing a movement", dto.armyName());
-            throw ArmyServiceException.cannotMoveArmyDueToArmyBeingInMovement(army.getArmyType(),army.getName());
+            throw ArmyServiceException.cannotMoveArmyDueToArmyBeingInMovement(army.getArmyType(), army.getName());
         }
 
         log.debug("Checking if army is older than 24h");
-        if(army.isYoungerThan24h()) {
+        if (army.isYoungerThan24h()) {
             log.warn("Army [{}] is younger than 24h and therefore cannot move!", army);
             long hoursUntilMove = 24 - Duration.between(army.getCreatedAt(), OffsetDateTime.now()).toHours();
             log.debug("Army can move again in [{}] hours", hoursUntilMove);
@@ -102,13 +121,13 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.debug("Checking if executor is allowed to perform the movement");
         boolean isAllowed = ServiceUtils.boundLordLeaderPermission(player, army);
 
-        if(!isAllowed) {
+        if (!isAllowed) {
             log.warn("Player [{}] in Faction [{}] does not have permission to move armies", player.getIgn(), player.getFaction());
             throw ArmyServiceException.noPermissionToPerformThisAction();
         }
 
         log.debug("Player [{}] is allowed to move army [{}], executing pathfinder", player, army);
-        List<PathElement> path = pathfinder.findShortestWay(army.getCurrentRegion(),region,player, false);
+        List<PathElement> path = pathfinder.findShortestWay(army.getCurrentRegion(), region, player, false);
 
         log.debug("Removing movement cost from faction stockpile");
         army.getFaction().subtractFoodFromStockpile(ServiceUtils.getFoodCost(path));
@@ -118,10 +137,16 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         int hoursUntilDone = ServiceUtils.getTotalPathCost(path);  //Gets a sum of all the
         val reachesNextRegionAt = currentTime.plusHours(path.get(1).getActualCost());
         val character = player.getActiveCharacter().orElseThrow(PlayerServiceException::noRpChar);
-        Movement movement = new Movement(character, army, false, path, currentTime, currentTime.plusHours(hoursUntilDone), true, reachesNextRegionAt);
-        return movement;
+        return new Movement(character, army, false, path, currentTime, currentTime.plusHours(hoursUntilDone), true, reachesNextRegionAt);
     }
 
+    /**
+     * Cancels an army movement based on the provided data.
+     *
+     * @param dto The data for canceling the army movement.
+     * @return The canceled {@link Movement} object.
+     * @throws ServiceException if any condition for canceling the movement is not met.
+     */
     @Transactional(readOnly = false)
     public Movement cancelArmyMovement(MoveArmyDto dto) {
         log.debug("Trying to cancel movement of army [{}] (executed by player [{}])", dto.armyName(), dto.executorDiscordId());
@@ -138,7 +163,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
 
         boolean isAllowed = ServiceUtils.boundLordLeaderPermission(player, army);
 
-        if(!isAllowed) {
+        if (!isAllowed) {
             log.warn("Player [{}] is not allowed to cancel movements of army [{}]", player, army);
             throw MovementServiceException.notAllowedToCancelMove();
         }
@@ -156,6 +181,13 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Creates a new character movement based on the provided data.
+     *
+     * @param dto The data for creating the character movement.
+     * @return The created {@link Movement} object.
+     * @throws ServiceException if any condition for creating the movement is not met.
+     */
     @Transactional(readOnly = false)
     public Movement createRpCharMovement(MoveRpCharDto dto) {
         log.debug("Moving RpChar of player {} to Region {}", dto.discordId(), dto.toRegion());
@@ -169,6 +201,13 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Calculates the movement for a character based on the provided data.
+     *
+     * @param dto The data for calculating the character movement.
+     * @return The calculated {@link Movement} object.
+     * @throws ServiceException if any condition for calculating the movement is not met.
+     */
     public Movement calculateRpCharMovement(MoveRpCharDto dto) {
         log.trace("Validating Data");
         ServiceUtils.checkAllNulls(dto);
@@ -177,7 +216,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.trace("Getting the player");
         Optional<Player> fetchedPlayer = secureFind(dto.discordId(), playerRepository::findByDiscordID);
 
-        if(fetchedPlayer.isEmpty()) {
+        if (fetchedPlayer.isEmpty()) {
             log.warn("No player found with discordId [{}]", dto.discordId());
             throw new IllegalArgumentException("No player found with discordId [%s]".formatted(dto.discordId()));
         }
@@ -191,26 +230,26 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
 
 
         log.debug("Checking if destination is the current region");
-        if(dto.toRegion().equals(rpChar.getCurrentRegion().getId())) {
+        if (dto.toRegion().equals(rpChar.getCurrentRegion().getId())) {
             log.warn("Character is already in region {}!", dto.toRegion());
             throw ServiceException.cannotMoveRpCharAlreadyInRegion(rpChar, rpChar.getCurrentRegion());
         }
 
         log.debug("Checking if rpChar is bound to army");
-        if(rpChar.getBoundTo() != null) {
+        if (rpChar.getBoundTo() != null) {
             log.warn("RpChar is currently bound to army!");
             throw ServiceException.cannotMoveRpCharBoundToArmy(rpChar, rpChar.getBoundTo());
         }
 
         log.debug("Checking if rpchar is currently healing");
-        if(rpChar.getIsHealing()) {
+        if (rpChar.getIsHealing()) {
             log.warn("RpChar [{}] is currently healing and therefore cannot move", rpChar);
             throw MovementServiceException.cannotMoveCharIsHealing(rpChar.getName());
         }
 
         log.debug("Checking if rpChar is already in a movement");
         List<Movement> playerMovements = secureFind(rpChar, movementRepository::findMovementsByRpChar);
-        if(playerMovements.stream().anyMatch(Movement::getIsCurrentlyActive)) { //Checking if there are any active movements
+        if (playerMovements.stream().anyMatch(Movement::getIsCurrentlyActive)) { //Checking if there are any active movements
             log.warn("Player {} is already involved in a movement!", player);
             throw ServiceException.cannotMoveRpCharAlreadyMoving(rpChar);
         }
@@ -220,7 +259,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.trace("Find the region the player is moving to");
         Optional<Region> fetchedToRegion = secureFind(dto.toRegion(), regionRepository::findById);
 
-        if(fetchedToRegion.isEmpty()) {
+        if (fetchedToRegion.isEmpty()) {
             log.warn("User inputed to Region does not exist [{}]", dto.toRegion());
             throw new IllegalArgumentException("The region %s does not exist!".formatted(dto.toRegion()));
         }
@@ -239,11 +278,17 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.trace("Building the movement object");
         int hoursUntilDone = ServiceUtils.getTotalPathCost(path);
         val reachesNextRegionAt = currentTime.plusHours(path.get(1).getActualCost());
-        Movement movement = new Movement(rpChar, null, true, path, currentTime, currentTime.plusHours(hoursUntilDone), true, reachesNextRegionAt);
 
-        return movement;
+        return new Movement(rpChar, null, true, path, currentTime, currentTime.plusHours(hoursUntilDone), true, reachesNextRegionAt);
     }
 
+    /**
+     * Cancels a character movement based on the provided data.
+     *
+     * @param dto The data for canceling the character movement.
+     * @return The canceled {@link Movement} object.
+     * @throws ServiceException if any condition for canceling the movement is not met.
+     */
     @Transactional(readOnly = false)
     public Movement cancelRpCharMovement(DiscordIdDto dto) {
         log.debug("Cancelling the rp char movement of player {}", dto.discordId());
@@ -256,7 +301,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         log.trace("Getting the player");
         Optional<Player> fetchedPlayer = secureFind(dto.discordId(), playerRepository::findByDiscordID);
 
-        if(fetchedPlayer.isEmpty()) {
+        if (fetchedPlayer.isEmpty()) {
             log.warn("No player found with discordId [{}]", dto.discordId());
             throw new IllegalArgumentException("No player found with discordId [%s]".formatted(dto.discordId()));
         }
@@ -278,6 +323,12 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Retrieves the movements of an army by its name.
+     *
+     * @param armyName The name of the army.
+     * @return A pair containing the active movement and a list of all movements.
+     */
     public Pair<Optional<Movement>, List<Movement>> getArmyMovements(@NonNull String armyName) {
         log.debug("Trying to get movements for army [{}]", armyName);
 
@@ -293,6 +344,12 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return Pair.of(currentMovement, pastMovements);
     }
 
+    /**
+     * Retrieves the movements of a character by its name.
+     *
+     * @param charName The name of the character.
+     * @return A pair containing the active movement and a list of all movements.
+     */
     public Pair<Optional<Movement>, List<Movement>> getCharMovements(@NonNull String charName) {
         log.debug("Trying to get movements for char [{}]", charName);
 
@@ -308,6 +365,12 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return Pair.of(currentMovement, pastMovements);
     }
 
+    /**
+     * Retrieves the active movement of an army.
+     *
+     * @param army The army entity.
+     * @return The active {@link Movement} object.
+     */
     public Movement getActiveMovementByArmy(Army army) {
         log.debug("Trying to get an active Movement for the army [{}]", army);
 
@@ -315,7 +378,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         Optional<Movement> fetchedMove = secureFind(army, movementRepository::findMovementByArmyAndIsCurrentlyActiveTrue);
 
         log.debug("Checking if a movement was found");
-        if(fetchedMove.isEmpty()) {
+        if (fetchedMove.isEmpty()) {
             log.warn("No active movement was found for the army [{}]!", army);
             throw MovementServiceException.noActiveMovementArmy(army.getName());
         }
@@ -326,6 +389,12 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Retrieves the active movement of a character.
+     *
+     * @param player The player entity.
+     * @return The active {@link Movement} object.
+     */
     public Movement getActiveMovementByChar(Player player) {
         log.debug("Trying to get an active Movement for the player [{}]", player);
 
@@ -338,7 +407,7 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         Optional<Movement> fetchedMove = secureFind(character, movementRepository::findMovementByRpCharAndIsCurrentlyActiveTrue);
 
         log.debug("Checking if a movement was found");
-        if(fetchedMove.isEmpty()) {
+        if (fetchedMove.isEmpty()) {
             log.warn("No active movement was found for the player [{}]!", player);
             throw MovementServiceException.noActiveMovementChar(character.getName());
         }
@@ -349,11 +418,23 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         return movement;
     }
 
+    /**
+     * Saves a movement.
+     *
+     * @param movement The movement to save.
+     * @return The saved {@link Movement} object.
+     */
     public Movement saveMovement(Movement movement) {
         log.debug("Saving movement [{}]", movement);
         return secureSave(movement, movementRepository);
     }
 
+    /**
+     * Saves a list of movements.
+     *
+     * @param movements The list of movements to save.
+     * @return The list of saved {@link Movement} objects.
+     */
     public List<Movement> saveMovements(List<Movement> movements) {
         log.debug("Saving movements [{}]", movements);
         return secureSaveAll(movements, movementRepository);

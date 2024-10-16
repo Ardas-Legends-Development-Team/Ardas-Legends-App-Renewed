@@ -8,11 +8,16 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository interface for managing {@link Army} entities.
+ */
 @Repository
 public interface ArmyRepository extends JpaRepository<Army, Long> {
 
-    public Optional<Army> findArmyByName(String name);
-    public List<Army> findAllByArmyType(ArmyType armyType);
-    public List<Army> findArmyByIsHealingTrue();
+    Optional<Army> findArmyByName(String name);
+
+    List<Army> findAllByArmyType(ArmyType armyType);
+
+    List<Army> findArmyByIsHealingTrue();
 
 }

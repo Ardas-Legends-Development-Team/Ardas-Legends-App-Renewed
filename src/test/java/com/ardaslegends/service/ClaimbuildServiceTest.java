@@ -1,8 +1,9 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
-import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
+import com.ardaslegends.domain.claimbuilds.*;
 import com.ardaslegends.repository.ProductionSiteRepository;
+import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.region.RegionRepository;
 import com.ardaslegends.service.dto.claimbuild.CreateClaimBuildDto;
 import com.ardaslegends.service.dto.claimbuilds.DeleteClaimbuildDto;
@@ -60,7 +61,7 @@ public class ClaimbuildServiceTest {
 
         claimBuildService = new ClaimBuildService(mockClaimbuildRepository, mockRegionRepository, mockProductionSiteRepository, mockFactionService, mockPlayerService);
 
-        claimbuildName= "Minas Tirith";
+        claimbuildName = "Minas Tirith";
         var claimbuildId = 10L;
 
         faction = Faction.builder().name("Gondor").build();

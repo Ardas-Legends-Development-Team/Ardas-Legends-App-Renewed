@@ -17,9 +17,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * REST controller for managing War entities.
+ * <p>
+ * This controller provides endpoints for creating, retrieving, and ending War entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @Tag(name = "War Controller", description = "REST Endpoints concerning Wars")
@@ -27,11 +31,17 @@ import org.springframework.web.bind.annotation.*;
 public class WarRestController extends AbstractRestController {
     public static final String BASE_URL = "/api/wars";
     public static final String CREATE_WAR = "/declare";
-    public static final String END = "/end"; //Will be used later on when faction leaders can end war
-    public static final String FORCE_END = END + "/force"; //Staff only
+    public static final String END = "/end"; // Will be used later on when faction leaders can end war
+    public static final String FORCE_END = END + "/force"; // Staff only
 
     private final WarService warService;
 
+    /**
+     * Retrieves a paginated list of War entities.
+     *
+     * @param pageable the pagination information.
+     * @return a page of {@link WarResponse} containing the War entities.
+     */
     @Operation(summary = "Get Wars Paginated", description = "Retrieves a Page with a set of elements, parameters define the size, which Page you want and how its sorted")
     @GetMapping
     public ResponseEntity<Page<WarResponse>> getWarsPaginated(Pageable pageable) {
@@ -45,7 +55,13 @@ public class WarRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
-
+    /**
+     * Creates a new War entity.
+     *
+     * @param dto the data transfer object containing the details of the war to create.
+     * @return the created {@link ActiveWarResponse}.
+     */
+    @Operation(summary = "Declare War", description = "Creates a new War entity.")
     @PostMapping(CREATE_WAR)
     public ResponseEntity<ActiveWarResponse> createWar(@RequestBody CreateWarDto dto) {
         log.debug("Incoming declareWar Request: Data [{}]", dto);
@@ -59,6 +75,14 @@ public class WarRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Forces the end of a War entity.
+     *
+     * @param warName           the name of the war to end.
+     * @param executorDiscordId the Discord ID of the executor.
+     * @return the ended {@link ActiveWarResponse}.
+     */
+    @Operation(summary = "Force End War", description = "Forces the end of a War entity. Staff only.")
     @DeleteMapping(FORCE_END)
     public ResponseEntity<ActiveWarResponse> forceEndWar(String warName, String executorDiscordId) {
         val dto = new EndWarDto(warName, executorDiscordId);

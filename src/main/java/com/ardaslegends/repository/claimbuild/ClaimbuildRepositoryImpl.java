@@ -1,8 +1,8 @@
 package com.ardaslegends.repository.claimbuild;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Faction;
-import com.ardaslegends.domain.QClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.QClaimBuild;
 import com.ardaslegends.repository.exceptions.ClaimbuildRepositoryException;
 import com.ardaslegends.repository.exceptions.RepositoryNullPointerException;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +15,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Custom repository implementation for managing {@link ClaimBuild} entities.
+ * <p>
+ * This implementation provides custom query methods for {@link ClaimBuild} entities.
+ * </p>
+ */
 @Slf4j
 @Repository
 public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implements ClaimbuildRepositoryCustom {
@@ -22,6 +28,14 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
         super(ClaimBuild.class);
     }
 
+    /**
+     * Queries a {@link ClaimBuild} by its name (case-insensitive).
+     *
+     * @param claimbuildName the name of the claim build.
+     * @return the {@link ClaimBuild} with the specified name.
+     * @throws ClaimbuildRepositoryException if no claim build with the specified name is found.
+     * @throws NullPointerException          if the claim build name is null.
+     */
     @Override
     public ClaimBuild queryByNameIgnoreCase(String claimbuildName) {
         val fetchedClaimbuild = queryByNameIgnoreCaseOptional(claimbuildName);
@@ -33,6 +47,13 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
         return fetchedClaimbuild.get();
     }
 
+    /**
+     * Queries an {@link Optional} containing a {@link ClaimBuild} by its name (case-insensitive).
+     *
+     * @param claimbuildName the name of the claim build.
+     * @return an {@link Optional} containing the found {@link ClaimBuild}, or empty if not found.
+     * @throws NullPointerException if the claim build name is null.
+     */
     @Override
     public Optional<ClaimBuild> queryByNameIgnoreCaseOptional(String claimbuildName) {
         Objects.requireNonNull(claimbuildName, "Claimbuild Name must not be null!");
@@ -45,12 +66,26 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
         return Optional.ofNullable(fetchedClaimbuild);
     }
 
+    /**
+     * Checks if a {@link ClaimBuild} exists by its name (case-insensitive).
+     *
+     * @param claimbuildName the name of the claim build.
+     * @return true if a {@link ClaimBuild} with the specified name exists, false otherwise.
+     * @throws NullPointerException if the claim build name is null.
+     */
     @Override
     public boolean existsByNameIgnoreCase(String claimbuildName) {
         log.trace("Checking if a claimbuild with name '%s' already exists");
         return queryByNameIgnoreCaseOptional(claimbuildName).isPresent();
     }
 
+    /**
+     * Queries a list of {@link ClaimBuild} entities by their names.
+     *
+     * @param names an array of claim build names.
+     * @return a list of {@link ClaimBuild} entities with the specified names.
+     * @throws NullPointerException if the names array is null.
+     */
     @Override
     public List<ClaimBuild> queryByNames(String[] names) {
         log.debug("Querying claimbuilds by names: {}", Arrays.toString(names));
@@ -67,6 +102,13 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
         return fetchedClaimbuilds;
     }
 
+    /**
+     * Queries a list of {@link ClaimBuild} entities by their faction.
+     *
+     * @param faction the faction of the claim builds.
+     * @return a list of {@link ClaimBuild} entities associated with the specified faction.
+     * @throws RepositoryNullPointerException if the faction is null.
+     */
     @Override
     public List<ClaimBuild> queryByFaction(Faction faction) {
         log.debug("Querying claimbuilds of faction [{}]", faction);
@@ -84,6 +126,4 @@ public class ClaimbuildRepositoryImpl extends QuerydslRepositorySupport implemen
         log.debug("Queried claimbuilds: [{}]", fetchedClaimbuilds);
         return fetchedClaimbuilds;
     }
-
-
 }

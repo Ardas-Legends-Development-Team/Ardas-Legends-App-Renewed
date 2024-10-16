@@ -1,7 +1,7 @@
 package com.ardaslegends.presentation.api.response.claimbuild;
 
-import com.ardaslegends.domain.ClaimBuild;
-import com.ardaslegends.domain.SpecialBuilding;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.api.response.army.ArmyResponse;
 import com.ardaslegends.presentation.api.response.claimbuild.coordinate.CoordinateResponse;
 import com.ardaslegends.presentation.api.response.player.PlayerResponse;

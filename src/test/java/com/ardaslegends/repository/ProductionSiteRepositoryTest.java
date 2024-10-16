@@ -1,9 +1,9 @@
 package com.ardaslegends.repository;
 
-import com.ardaslegends.domain.ProductionSite;
-import com.ardaslegends.domain.ProductionSiteType;
-import com.ardaslegends.domain.Resource;
-import com.ardaslegends.domain.ResourceType;
+import com.ardaslegends.domain.claimbuilds.ProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSiteType;
+import com.ardaslegends.domain.claimbuilds.Resource;
+import com.ardaslegends.domain.claimbuilds.ResourceType;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;

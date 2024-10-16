@@ -10,6 +10,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Set;
 
+/**
+ * Repository interface for managing {@link RoleplayApplication} entities.
+ * <p>
+ * This repository provides methods to perform CRUD operations and custom queries
+ * on {@link RoleplayApplication} entities.
+ * </p>
+ */
 @Repository
 public interface RoleplayApplicationRepository extends JpaRepository<RoleplayApplication, Long> {
 
@@ -17,5 +24,5 @@ public interface RoleplayApplicationRepository extends JpaRepository<RoleplayApp
     Slice<RoleplayApplication> findByState(ApplicationState state, Pageable pageable);
 
     @Query("select r from RoleplayApplication r where r.state = ?1")
-    public Set<RoleplayApplication> findByState(ApplicationState state);
+    Set<RoleplayApplication> findByState(ApplicationState state);
 }

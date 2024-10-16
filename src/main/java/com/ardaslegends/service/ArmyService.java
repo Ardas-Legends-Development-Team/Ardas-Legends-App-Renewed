@@ -1,6 +1,8 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
@@ -24,6 +26,12 @@ import java.time.OffsetDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Service for handling army operations.
+ * <p>
+ * This service provides methods to create, update, and retrieve armies, as well as to manage their movements and statuses.
+ * </p>
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -36,11 +44,27 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
     private final UnitTypeService unitTypeService;
     private final ClaimbuildRepository claimBuildRepository;
 
+    /**
+     * Retrieves a paginated list of armies.
+     *
+     * @param pageable The pagination information.
+     * @return A {@link Page} of {@link Army} objects.
+     */
     public Page<Army> getArmiesPaginated(Pageable pageable) {
         log.info("Getting page of armies with data [size:{},page:{}]", pageable.getPageSize(), pageable.getPageNumber());
         return secureFind(pageable, armyRepository::findAll);
     }
 
+    /**
+     * Creates a new army based on the provided data.
+     *
+     * @param dto The data for creating the army.
+     * @return The created {@link Army} object.
+     * @throws ArmyServiceException       if any condition for creating the army is not met.
+     * @throws FactionServiceException    if the faction is not found.
+     * @throws ClaimBuildServiceException if the claim build is not found.
+     * @throws PlayerServiceException     if the player is not found.
+     */
     @Transactional(readOnly = false)
     public Army createArmy(CreateArmyDto dto) {
         log.debug("Creating army with data [{}]", dto);
@@ -154,6 +178,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return finalArmy;
     }
 
+    /**
+     * Starts healing the army based on the provided data.
+     *
+     * @param dto The data for updating the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army healStart(UpdateArmyDto dto) {
         log.debug("Trying to start healing for army [{}]", dto.armyName());
@@ -183,14 +213,14 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
 
         log.debug("Checking if army has dead units");
         if (army.allUnitsAlive()) {
-            log.warn("Army [{}] is already fully healed!");
+            log.warn("Army [{}] is already fully healed!", army);
             throw ArmyServiceException.alreadyFullyHealed(army.getArmyType(), army.getName());
         }
 
         log.debug("Checking if army is stationed at a CB");
         // Army is null or Claimbuild does not have a House of healing
         if (army.getStationedAt() == null || !army.getStationedAt().getSpecialBuildings().contains(SpecialBuilding.HOUSE_OF_HEALING)) {
-            log.warn("Army [{}] is not stationed at a claimbuild");
+            log.warn("Army [{}] is not stationed at a claimbuild", army);
             throw ArmyServiceException.needToStationArmyAtCbWithHouseOfHealing(army.getArmyType(), army.toString());
         }
 
@@ -213,6 +243,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Stops healing the army based on the provided data.
+     *
+     * @param dto The data for updating the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army healStop(UpdateArmyDto dto) {
         log.debug("Trying to start healing for army [{}]", dto.armyName());
@@ -228,7 +264,7 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
 
         log.debug("Checking if army is healing");
         if (!army.getIsHealing()) {
-            log.warn("Army [{}] is not healing, cant stop it!");
+            log.warn("Army [{}] is not healing, cant stop it!", army);
             throw ArmyServiceException.armyIsNotHealing(army.getArmyType(), army.toString());
         }
 
@@ -245,6 +281,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Binds the army based on the provided data.
+     *
+     * @param dto The data for binding the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army bind(BindArmyDto dto) {
         log.debug("Binding army [{}] to player with discord id [{}]", dto.armyName(), dto.targetDiscordId());
@@ -276,7 +318,7 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         If not binding self then fetch the target player from DB
          */
         log.trace("Getting the target player's instance");
-        Player targetPlayer = null;
+        Player targetPlayer;
         if (isBindingSelf)
             targetPlayer = executor;
         else
@@ -358,6 +400,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Unbinds the army based on the provided data.
+     *
+     * @param dto The data for unbinding the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army unbind(BindArmyDto dto) {
         log.debug("Unbinding army [{}] from player [{}] - executed by player [{}]", dto.armyName(), dto.targetDiscordId(), dto.executorDiscordId());
@@ -434,6 +482,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Stations the army based on the provided data.
+     *
+     * @param dto The data for stationing the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army station(StationArmyDto dto) {
         log.debug("Trying to station army [{}] at [{}]", dto.armyName(), dto.claimbuildName());
@@ -492,10 +546,16 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         log.debug("Set stationed, performing persist");
         secureSave(army, armyRepository);
 
-        log.info("Station Army Service Method for Army [{}] completed successfully");
+        log.info("Station Army Service Method for Army [{}] completed successfully", army);
         return army;
     }
 
+    /**
+     * Unstations the army based on the provided data.
+     *
+     * @param dto The data for unstations the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army unstation(UnstationArmyDto dto) {
         log.debug("Trying to unstation army with data: [{}]", dto);
@@ -510,7 +570,7 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         Player player = playerService.getPlayerByDiscordId(dto.executorDiscordId());
 
         if (army.getStationedAt() == null) {
-            log.warn("Army [{}] is not stationed at a cb, so cannot be unstationed!", army.toString());
+            log.warn("Army [{}] is not stationed at a cb, so cannot be unstationed!", army);
             throw ArmyServiceException.armyNotStationed(army.getArmyType(), army.toString());
         }
 
@@ -521,17 +581,24 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
             throw ArmyServiceException.noPermissionToPerformThisAction();
         }
 
-        log.debug("Player [{}] is allowed to perform unstation");
+        log.debug("Player [{}] is allowed to perform unstation", player);
 
         army.setStationedAt(null);
 
-        log.debug("Unstationed army [{}], persisting");
+        log.debug("Unstationed army [{}], persisting", army);
         secureSave(army, armyRepository);
 
-        log.info("Unstation Army Service Method for Army [{}] completed successfully");
+        log.info("Unstation Army Service Method for Army [{}] completed successfully", army);
         return army;
     }
 
+    /**
+     * Disbands the army based on the provided data.
+     *
+     * @param dto    The data for deleting the army.
+     * @param forced Whether the disbanding is forced.
+     * @return The disbanded {@link Army} object.
+     */
     public Army disbandFromDto(DeleteArmyDto dto, boolean forced) {
         log.debug("Trying to disband army [{}] executed by player [{}]", dto.armyName(), dto.executorDiscordId());
 
@@ -586,6 +653,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Disbands the army.
+     *
+     * @param army The army to disband.
+     * @return The disbanded {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army disband(Army army) {
         log.debug("Disbanding army [{}]", army);
@@ -603,6 +676,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Sets the free army tokens based on the provided data.
+     *
+     * @param dto The data for updating the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army setFreeArmyTokens(UpdateArmyDto dto) {
         log.debug("Trying to update the free tokens of army [{}] to value [{}]", dto.armyName(), dto.freeTokens());
@@ -635,6 +714,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Picks a siege for the army based on the provided data.
+     *
+     * @param dto The data for picking the siege.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army pickSiege(PickSiegeDto dto) {
         log.debug("Trying to pick siege [{}] for army [{}] from cb [{}] - executed by player [{}]", dto.siege(), dto.armyName(), dto.claimbuildName(), dto.executorDiscordId());
@@ -702,6 +787,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Retrieves the upkeep of the specified faction.
+     *
+     * @param factionName The name of the faction.
+     * @return The {@link UpkeepDto} containing the upkeep information.
+     */
     public UpkeepDto getUpkeepOfFaction(String factionName) {
         log.debug("Getting upkeep of faction [{}]", factionName);
 
@@ -726,6 +817,11 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return new UpkeepDto(fetchedFaction.get().getName(), armyCount, upkeep);
     }
 
+    /**
+     * Retrieves the upkeep of all factions.
+     *
+     * @return A list of {@link UpkeepDto} containing the upkeep information for all factions.
+     */
     public List<UpkeepDto> upkeep() {
 
         log.debug("Fetching all Factions");
@@ -748,6 +844,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return upkeepDtoList;
     }
 
+    /**
+     * Sets the payment status of the army based on the provided data.
+     *
+     * @param dto The data for updating the army.
+     * @return The updated {@link Army} object.
+     */
     @Transactional(readOnly = false)
     public Army setIsPaid(UpdateArmyDto dto) {
         log.debug("Trying to set isPaid to true for army or company [{}]", dto);
@@ -770,9 +872,10 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
-    /***
-     * Gets the 10 oldest created armies that are not paid for
-     * @return List of 10 armies, sorted by creation date
+    /**
+     * Retrieves the 10 oldest unpaid armies.
+     *
+     * @return A list of the 10 oldest unpaid {@link Army} objects.
      */
     public List<Army> getUnpaid() {
         log.debug("Trying to get the 10 oldest unpaid armies or trading companies");
@@ -788,6 +891,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return armies;
     }
 
+    /**
+     * Retrieves the army by its name.
+     *
+     * @param armyName The name of the army.
+     * @return The {@link Army} object.
+     */
     public Army getArmyByName(String armyName) {
         log.debug("Getting army by name [{}]", armyName);
         log.trace("Checking for null");
@@ -806,6 +915,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return army;
     }
 
+    /**
+     * Converts the unit input string into an array of {@link UnitTypeDto}.
+     *
+     * @param unitString The unit input string.
+     * @return An array of {@link UnitTypeDto}.
+     */
     public UnitTypeDto[] convertUnitInputIntoUnits(String unitString) {
         log.debug("Converting unitString into units: [{}]", unitString);
 
@@ -833,6 +948,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         return units.toArray(new UnitTypeDto[0]);
     }
 
+    /**
+     * Validates the unit input string.
+     *
+     * @param unitString The unit input string.
+     * @throws IllegalArgumentException if the unit string is invalid.
+     */
     public void validateUnitString(String unitString) {
         log.debug("Validating unitString [{}]", unitString);
         // The two defining syntax chars in the unitString
@@ -890,6 +1011,12 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         }
     }
 
+    /**
+     * Saves a list of armies.
+     *
+     * @param armies The list of armies to save.
+     * @return The list of saved {@link Army} objects.
+     */
     public List<Army> saveArmies(List<Army> armies) {
         log.debug("Saving armies [{}]", armies);
         return secureSaveAll(armies, armyRepository);

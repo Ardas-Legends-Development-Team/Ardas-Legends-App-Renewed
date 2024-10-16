@@ -12,20 +12,36 @@ import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
+/**
+ * Represents a unit casualty in a battle.
+ * This class is marked as {@link Embeddable} to be used as a component of other entities.
+ */
 @NoArgsConstructor
 @Getter
-
 @Embeddable
 public class UnitCasualty {
 
+    /**
+     * The unit that suffered casualties.
+     */
     @NotNull
     @ManyToOne
     @JoinColumn(name = "unit_id", foreignKey = @ForeignKey(name = "fk_battle_unit_casualties_unit_id"))
     private Unit unit;
 
+    /**
+     * The amount of casualties.
+     */
     @NotNull
     private Long amount;
 
+    /**
+     * Constructs a new UnitCasualty.
+     *
+     * @param unit   the unit that suffered casualties
+     * @param amount the amount of casualties
+     * @throws NullPointerException if the unit or amount is null
+     */
     public UnitCasualty(Unit unit, Long amount) {
         Objects.requireNonNull(unit, "UnitCasualty constructor: unit was null!");
         Objects.requireNonNull(amount, "UnitCasualty constructor: amount was null!");
@@ -34,10 +50,20 @@ public class UnitCasualty {
         this.amount = amount;
     }
 
+    /**
+     * Returns the army to which the unit belongs.
+     *
+     * @return the army to which the unit belongs
+     */
     public Army getArmy() {
         return unit.getArmy();
     }
 
+    /**
+     * Returns a string representation of this UnitCasualty.
+     *
+     * @return a string representation of this UnitCasualty
+     */
     @Override
     public String toString() {
         return "UnitCasualty{" +
@@ -46,6 +72,12 @@ public class UnitCasualty {
                 '}';
     }
 
+    /**
+     * Checks if this UnitCasualty is equal to another object.
+     *
+     * @param o the object to compare with
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,6 +89,11 @@ public class UnitCasualty {
         return amount.equals(that.amount);
     }
 
+    /**
+     * Returns the hash code of this UnitCasualty.
+     *
+     * @return the hash code of this UnitCasualty
+     */
     @Override
     public int hashCode() {
         int result = unit.hashCode();

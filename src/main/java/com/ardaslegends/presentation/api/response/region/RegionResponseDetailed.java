@@ -1,6 +1,9 @@
 package com.ardaslegends.presentation.api.response.region;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.RPChar;
+import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 
 public record RegionResponseDetailed(
         String id,

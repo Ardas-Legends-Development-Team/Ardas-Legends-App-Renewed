@@ -1,6 +1,11 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.Player;
+import com.ardaslegends.domain.RPChar;
+import com.ardaslegends.domain.Role;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.discord.config.BotProperties;
 import com.ardaslegends.repository.player.PlayerRepository;
 import com.ardaslegends.service.dto.player.*;
@@ -29,7 +34,6 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Slf4j
-
 @Service
 @Transactional(readOnly = true)
 public class PlayerService extends AbstractService<Player, PlayerRepository> {
@@ -43,11 +47,23 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
 
     private final BotProperties properties;
 
+    /**
+     * Retrieves a paginated list of players.
+     *
+     * @param pageable the pagination information.
+     * @return a page of players.
+     */
     public Page<Player> getPlayersPaginated(Pageable pageable) {
-        var page = secureFind(pageable, playerRepository::findAll);
-        return page;
+        return secureFind(pageable, playerRepository::findAll);
     }
 
+    /**
+     * Creates a new player.
+     *
+     * @param dto the data transfer object containing player information.
+     * @return the created player.
+     * @throws PlayerServiceException if the player already exists.
+     */
     @Transactional(readOnly = false)
     public Player createPlayer(CreatePlayerDto dto) {
 
@@ -56,11 +72,11 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         log.debug("Creating Player with Data: {}", dto);
 
         ServiceUtils.checkNulls(dto, Arrays.stream(dto.getClass().getDeclaredFields())
-                .map(field -> field.getName())
+                .map(Field::getName)
                 .collect(Collectors.toList()));
 
         ServiceUtils.checkBlanks(dto, Arrays.stream(dto.getClass().getDeclaredFields())
-                .map(field -> field.getName())
+                .map(Field::getName)
                 .collect(Collectors.toList()));
         // Executing queries for required data
 
@@ -98,6 +114,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return player;
     }
 
+    /**
+     * Creates a new roleplay character.
+     *
+     * @param dto the data transfer object containing roleplay character information.
+     * @return the created roleplay character.
+     * @throws ServiceException if the player is not in a faction or already has a roleplay character.
+     */
     @Transactional(readOnly = false)
     public RPChar createRoleplayCharacter(CreateRPCharDto dto) {
 
@@ -105,12 +128,12 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
 
         log.debug("Creating Roleplay Character with Data {}", dto);
 
-        ServiceUtils.checkNulls(dto, Arrays.stream(dto.getClass().getDeclaredFields()).map(field -> field.getName()).collect(Collectors.toList()));
+        ServiceUtils.checkNulls(dto, Arrays.stream(dto.getClass().getDeclaredFields()).map(Field::getName).collect(Collectors.toList()));
 
         ServiceUtils.checkBlanks(dto, Arrays.stream(dto.getClass().getDeclaredFields()).
                 filter(field -> field.getType().
                         isAssignableFrom(String.class))
-                .map(field -> field.getName())
+                .map(Field::getName)
                 .collect(Collectors.toList()));
 
         if (dto.title().length() > 25) {
@@ -159,6 +182,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
                 .orElseThrow(() -> PlayerServiceException.unexpectedErrorSavingCharacter(persistedPlayer.getIgn()));
     }
 
+    /**
+     * Retrieves a player by their in-game name (IGN).
+     *
+     * @param ign the in-game name of the player.
+     * @return the player with the specified IGN.
+     * @throws ServiceException if no player with the specified IGN is found.
+     */
     public Player getPlayerByIgn(String ign) {
         log.debug("Fetching Player with Ign: {}", ign);
         Objects.requireNonNull(ign, "IGN must not be null!");
@@ -173,6 +203,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return fetchedPlayer.get();
     }
 
+    /**
+     * Retrieves a player by their Discord ID.
+     *
+     * @param discordId the Discord ID of the player.
+     * @return the player with the specified Discord ID.
+     * @throws PlayerServiceException if no player with the specified Discord ID is found.
+     */
     public Player getPlayerByDiscordId(String discordId) {
         log.debug("Fetching Player with Discord ID: {}", discordId);
         Objects.requireNonNull(discordId, "DiscordId must not be null!");
@@ -187,6 +224,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return fetchedPlayer.get();
     }
 
+    /**
+     * Updates the faction of a player.
+     *
+     * @param dto the data transfer object containing the new faction information.
+     * @return the updated player.
+     * @throws ServiceException if the player or faction is not found.
+     */
     @Transactional(readOnly = false)
     public Player updatePlayerFaction(UpdatePlayerFactionDto dto) {
         log.debug("Updating the Faction of player '{}' to '{}'", dto.discordId(), dto.factionName());
@@ -206,16 +250,12 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
 
         /*
         Finding the player instance by the ign
-         */
 
-        Player player = null;
-
-        /*
         I don't have to put this into a try-catch block because the getPlayerByIgn function already
         throws all the needed exceptions
          */
         log.trace("Trying to search for player with ign '{}'", dto.discordId());
-        player = getPlayerByDiscordId(dto.discordId());
+        Player player = getPlayerByDiscordId(dto.discordId());
         log.debug("Found player '{}'", dto.discordId());
 
         /*
@@ -247,6 +287,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return player;
     }
 
+    /**
+     * Updates the in-game name (IGN) of a player.
+     *
+     * @param dto the data transfer object containing the new IGN information.
+     * @return the updated player.
+     * @throws IllegalArgumentException if the new IGN is already taken.
+     */
     @Transactional(readOnly = false)
     public Player updateIgn(UpdatePlayerIgnDto dto) {
         log.debug("Updating ign of player [{}]", dto);
@@ -290,6 +337,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return playerToUpdate;
     }
 
+    /**
+     * Updates the Discord ID of a player.
+     *
+     * @param dto the data transfer object containing the new Discord ID information.
+     * @return the updated player.
+     * @throws IllegalArgumentException if the new Discord ID is already taken.
+     */
     @Transactional(readOnly = false)
     public Player updateDiscordId(UpdateDiscordIdDto dto) {
         log.debug("Updating discord id, data [{}]", dto);
@@ -327,6 +381,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return playerToUpdate;
     }
 
+    /**
+     * Updates the name of a roleplay character.
+     *
+     * @param dto the data transfer object containing the new character name information.
+     * @return the updated roleplay character.
+     * @throws IllegalArgumentException if the new character name is already taken.
+     */
     @Transactional(readOnly = false)
     public RPChar updateCharacterName(UpdateRpCharDto dto) {
         log.debug("Updating character name, data [{}]", dto);
@@ -365,6 +426,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return updatedCharacter;
     }
 
+    /**
+     * Updates the title of a roleplay character.
+     *
+     * @param dto the data transfer object containing the new character title information.
+     * @return the updated roleplay character.
+     * @throws IllegalArgumentException if the title exceeds the maximum length.
+     */
     @Transactional(readOnly = false)
     public RPChar updateCharacterTitle(UpdateRpCharDto dto) {
         log.debug("Updating character title to '{}' for player's ({}) rpchar '{}'", dto.title(), dto.discordId(), dto.charName());
@@ -400,6 +468,12 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return updatedChar;
     }
 
+    /**
+     * Updates the gear of a roleplay character.
+     *
+     * @param dto the data transfer object containing the new character gear information.
+     * @return the updated roleplay character.
+     */
     @Transactional(readOnly = false)
     public RPChar updateCharacterGear(UpdateRpCharDto dto) {
         log.debug("Updating character gear to '{}' for player's ({}) rpchar '{}'", dto.gear(), dto.discordId(), dto.charName());
@@ -431,7 +505,12 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return updatedCharacter;
     }
 
-
+    /**
+     * Updates the PvP status of a roleplay character.
+     *
+     * @param dto the data transfer object containing the new character PvP status information.
+     * @return the updated roleplay character.
+     */
     @Transactional(readOnly = false)
     public RPChar updateCharacterPvp(UpdateRpCharDto dto) {
         log.debug("Updating character's pvp status to '{}' for player's ({}) rpchar '{}'", dto.pvp(), dto.discordId(), dto.charName());
@@ -463,6 +542,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return updatedCharacter;
     }
 
+    /**
+     * Deletes a player.
+     *
+     * @param dto the data transfer object containing the Discord ID of the player to be deleted.
+     * @return the deleted player.
+     * @throws PlayerServiceException if the player is not found.
+     */
     @Transactional(readOnly = false)
     public Player deletePlayer(DiscordIdDto dto) {
         log.debug("Deleting player with data [{}]", dto);
@@ -488,6 +574,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return player;
     }
 
+    /**
+     * Deletes a roleplay character.
+     *
+     * @param dto the data transfer object containing the Discord ID of the player whose roleplay character is to be deleted.
+     * @return the deleted roleplay character.
+     * @throws PlayerServiceException if the player or roleplay character is not found.
+     */
     @Transactional(readOnly = false)
     public RPChar deleteRpChar(DiscordIdDto dto) {
         log.debug("Deleting Rpchar with data [{}]", dto);
@@ -510,12 +603,19 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         log.debug("Deleting RpChar [{}] from player [{}]", deletedCharacter, player);
 
         log.debug("Trying to save player with deleted RpChar [{}]", player);
-        player = secureSave(player, playerRepository);
+        secureSave(player, playerRepository);
 
         log.info("Succesfully deleted rpchar [{}]", deletedCharacter);
         return deletedCharacter;
     }
 
+    /**
+     * Injures a roleplay character.
+     *
+     * @param dto the data transfer object containing the Discord ID of the player whose roleplay character is to be injured.
+     * @return the injured roleplay character.
+     * @throws PlayerServiceException if the player or roleplay character is not found.
+     */
     @Transactional(readOnly = false)
     public RPChar injureChar(DiscordIdDto dto) {
         log.debug("Trying to injure character of player [{}]", dto.discordId());
@@ -543,6 +643,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return rpChar;
     }
 
+    /**
+     * Starts healing a roleplay character.
+     *
+     * @param dto the data transfer object containing the Discord ID of the player whose roleplay character is to be healed.
+     * @return the roleplay character that started healing.
+     * @throws PlayerServiceException if the player or roleplay character is not found, or if the character is not injured or there is no House of Healing in the current region.
+     */
     @Transactional(readOnly = false)
     public RPChar healStart(DiscordIdDto dto) {
         log.debug("Trying to start healing character of player [{}]", dto.discordId());
@@ -587,6 +694,13 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return rpchar;
     }
 
+    /**
+     * Stops healing a roleplay character.
+     *
+     * @param dto the data transfer object containing the Discord ID of the player whose roleplay character is to stop healing.
+     * @return the roleplay character that stopped healing.
+     * @throws PlayerServiceException if the player or roleplay character is not found, or if the character is not currently healing.
+     */
     @Transactional(readOnly = false)
     public RPChar healStop(DiscordIdDto dto) {
         log.debug("Trying to stop healing character of player [{}]", dto.discordId());
@@ -621,6 +735,12 @@ public class PlayerService extends AbstractService<Player, PlayerRepository> {
         return rpchar;
     }
 
+    /**
+     * Saves a list of players.
+     *
+     * @param players the list of players to be saved.
+     * @return the saved players.
+     */
     public List<Player> savePlayers(List<Player> players) {
         log.debug("Saving players [{}]", players);
         return secureSaveAll(players, playerRepository);

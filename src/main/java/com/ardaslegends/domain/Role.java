@@ -1,5 +1,9 @@
 package com.ardaslegends.domain;
 
+/**
+ * Enum representing different roles in the application.
+ * This enum is used to categorize various roles that users can have.
+ */
 public enum Role {
     ROLE_USER,
     ROLE_ADMIN,

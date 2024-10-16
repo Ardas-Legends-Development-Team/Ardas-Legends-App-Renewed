@@ -1,13 +1,18 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.Player;
+import com.ardaslegends.domain.RPChar;
+import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.discord.config.BotProperties;
 import com.ardaslegends.repository.player.PlayerRepository;
 import com.ardaslegends.service.dto.player.*;
 import com.ardaslegends.service.dto.player.rpchar.CreateRPCharDto;
 import com.ardaslegends.service.dto.player.rpchar.UpdateRpCharDto;
-import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.exceptions.ServiceException;
+import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.external.MojangApiService;
 import lombok.extern.slf4j.Slf4j;
 import org.javacord.api.DiscordApi;
@@ -22,6 +27,7 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
+
 @Slf4j
 public class PlayerServiceTest {
 
@@ -47,7 +53,7 @@ public class PlayerServiceTest {
         mockMojangApiService = mock(MojangApiService.class);
         mockProperties = mock(BotProperties.class);
         mockDiscordApi = mock(DiscordApi.class);
-        playerService = new PlayerService(mockPlayerRepository, mockFactionService ,mockMojangApiService, mockDiscordApi, mockProperties);
+        playerService = new PlayerService(mockPlayerRepository, mockFactionService, mockMojangApiService, mockDiscordApi, mockProperties);
 
         faction = Faction.builder().name("Gondor").build();
         region = Region.builder().id("91").build();
@@ -101,6 +107,7 @@ public class PlayerServiceTest {
 
         assertThat(result.getMessage()).isEqualTo(PlayerServiceException.ignAlreadyUsed(dto.ign()).getMessage());
     }
+
     @Test
     void ensureCreatePlayerThrowsServiceExceptionFindingDatabaseEntryWithSameDiscordId() {
         // Assign
@@ -170,6 +177,7 @@ public class PlayerServiceTest {
 
         assertThat(result.getMessage()).isEqualTo(ServiceException.createRpCharNoFaction(player.getIgn()).getMessage());
     }
+
     @Test
     void ensureCreateRPCharThrowsIAEWhenPlayerAlreadyHasAnRPChar() {
         // Assign
@@ -355,7 +363,7 @@ public class PlayerServiceTest {
         Player existingPlayer = Player.builder().ign(newIgn).build();
 
         log.trace("Initializing updatePlayerDto");
-        UpdatePlayerIgnDto updateDto = new UpdatePlayerIgnDto (newIgn, "discordId");
+        UpdatePlayerIgnDto updateDto = new UpdatePlayerIgnDto(newIgn, "discordId");
 
         log.trace("Initializing mocked methods");
         when(mockPlayerRepository.findPlayerByIgn(newIgn)).thenReturn(Optional.of(player));
@@ -512,7 +520,7 @@ public class PlayerServiceTest {
         String charName = "Belegorn";
         String oldTitle = "Gondorian";
         String newTitle = "King of Gondor";
-        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName,newTitle, "91", "Army1", null, false);
+        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, newTitle, "91", "Army1", null, false);
 
         log.trace("Initializng RpChar Object");
         RPChar rpChar = RPChar.builder().title(oldTitle).name(charName).build();
@@ -542,7 +550,7 @@ public class PlayerServiceTest {
 
         // Assign
         log.trace("Initializing Dto");
-        UpdateRpCharDto dto = new UpdateRpCharDto("okeoke",null,"Toomanycharactersssssssssssssss",null,null,null,null);
+        UpdateRpCharDto dto = new UpdateRpCharDto("okeoke", null, "Toomanycharactersssssssssssssss", null, null, null, null);
 
         // Act
         log.trace("Executing updateCharacterTitle");
@@ -587,7 +595,7 @@ public class PlayerServiceTest {
         String charName = "Belegorn";
         String gear = "Gondorian Armour, Gondorian Sword + DA Spear";
         String oldGear = "Ithilien Armour, Gondorian Sword";
-        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null,null, gear, false);
+        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null, null, gear, false);
 
         log.trace("Initializng RpChar Object");
         RPChar rpChar = RPChar.builder().name(charName).gear(oldGear).build();
@@ -621,7 +629,7 @@ public class PlayerServiceTest {
         log.trace("Initializing Dto");
         String charName = "Belegorn";
         String gear = "Gondorian Armour, Gondorian Sword + DA Spear";
-        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null,null, gear, false);
+        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null, null, gear, false);
 
         log.trace("Initializing Player object");
         Player player = Player.builder().discordID(dto.discordId()).rpChars(new HashSet<>(1)).build();
@@ -651,7 +659,7 @@ public class PlayerServiceTest {
         String charName = "Belegorn";
         boolean oldPvp = false;
         boolean newPvp = true;
-        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null,null, null, newPvp);
+        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null, null, null, newPvp);
 
         log.trace("Initializng RpChar Object");
         RPChar rpChar = RPChar.builder().name(charName).pvp(oldPvp).build();
@@ -684,7 +692,7 @@ public class PlayerServiceTest {
         // Assign
         log.trace("Initializing Dto");
         String charName = "Belegorn";
-        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null,null, null, false);
+        UpdateRpCharDto dto = new UpdateRpCharDto("12345", charName, null, null, null, null, false);
 
         log.trace("Initializing Player object");
         Player player = Player.builder().discordID(dto.discordId()).rpChars(new HashSet<>(1)).build();

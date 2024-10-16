@@ -1,5 +1,6 @@
 package com.ardaslegends.domain;
 
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import com.ardaslegends.service.utils.ServiceUtils;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,12 +14,15 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Represents a region in the application.
+ * This class is marked as {@link Entity} and is mapped to the "regions" table in the database.
+ */
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
 @Slf4j
 @Entity
 @Table(name = "regions")
@@ -27,40 +31,74 @@ import java.util.Set;
         property = "id")
 public final class Region extends AbstractDomainObject {
 
+    /**
+     * The unique identifier of the region.
+     */
     @Id
-    private String id; //unique, the region id
+    private String id;
 
-    private String name; //the name of the region (prob also unique)
+    /**
+     * The name of the region.
+     */
+    private String name;
 
+    /**
+     * The type of the region.
+     */
     @Enumerated(EnumType.STRING)
-    private RegionType regionType; // type of the region
+    private RegionType regionType;
 
+    /**
+     * The list of factions which the region is claimed by.
+     */
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "faction_claimed_regions",
             joinColumns = {@JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_region"))},
             inverseJoinColumns = {@JoinColumn(name = "faction", foreignKey = @ForeignKey(name = "fk_faction_claimed_regions_faction"))})
     @Builder.Default
-    private Set<Faction> claimedBy = new HashSet<>(); //the list of factions which the region is claimed by
+    private Set<Faction> claimedBy = new HashSet<>();
 
+    /**
+     * The list of claim builds in this region.
+     */
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "region")
     @Builder.Default
-    private Set<ClaimBuild> claimBuilds = new HashSet<>(); //list of claimbuilds in this region
+    private Set<ClaimBuild> claimBuilds = new HashSet<>();
 
+    /**
+     * The list of neighboring regions.
+     */
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "region_neighbours",
             joinColumns = {@JoinColumn(name = "region", foreignKey = @ForeignKey(name = "fk_region_neighbours_region"))},
             inverseJoinColumns = {@JoinColumn(name = "neighbour", foreignKey = @ForeignKey(name = "fk_region_neighbours_neighbour"))})
     @Builder.Default
-    private Set<Region> neighboringRegions = new HashSet<>(); //list of neighboring regions
+    private Set<Region> neighboringRegions = new HashSet<>();
 
+    /**
+     * Indicates whether the ownership has changed since the last claim map update.
+     */
     @Column(name = "has_ownership_changed_since_last_claimmap_update")
     private boolean hasOwnershipChanged;
 
+    /**
+     * The set of roleplay characters currently in this region.
+     */
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "currentRegion")
     @Builder.Default
     private Set<RPChar> charsInRegion = new HashSet<>(1);
 
+    /**
+     * Constructs a new Region with the specified attributes.
+     *
+     * @param id                 the unique identifier of the region
+     * @param name               the name of the region
+     * @param regionType         the type of the region
+     * @param claimedBy          the list of factions which the region is claimed by
+     * @param claimBuilds        the list of claim builds in this region
+     * @param neighboringRegions the list of neighboring regions
+     */
     @JsonIgnore
     public Region(String id, String name, RegionType regionType, Set<Faction> claimedBy, Set<ClaimBuild> claimBuilds, Set<Region> neighboringRegions) {
         this.id = id;
@@ -72,28 +110,33 @@ public final class Region extends AbstractDomainObject {
         this.hasOwnershipChanged = false;
     }
 
-    @JsonIgnore
     /**
+     * Adds a neighboring region to this region.
      *
-     * @param possibleNeighbour, the region that you want to add, Not-Null-Constraint
-     * @throws NullPointerException, when parameter is null
-     * @return false when region is already in Set, true when it succeeds
+     * @param possibleNeighbour the region to add as a neighbor
+     * @return false if the region is already a neighbor, true otherwise
+     * @throws NullPointerException if the possibleNeighbour parameter is null
      */
+    @JsonIgnore
     public boolean addNeighbour(@NonNull Region possibleNeighbour) {
-
         if (neighboringRegions.contains(possibleNeighbour))
             return false;
 
         neighboringRegions.add(possibleNeighbour);
         return true;
-
     }
 
+    /**
+     * Adds a faction to the list of factions that have claimed this region.
+     *
+     * @param faction the faction to add
+     * @throws NullPointerException if the faction parameter is null
+     */
     @JsonIgnore
     public void addFactionToClaimedBy(Faction faction) {
         log.debug("Add claiming faction [{}] to region [{}]", faction, this.id);
 
-        Objects.requireNonNull(faction, "Faction must not be nulL!");
+        Objects.requireNonNull(faction, "Faction must not be null!");
         ServiceUtils.checkBlankString(faction.getName(), "faction name");
 
         if (!this.claimedBy.contains(faction)) {
@@ -105,14 +148,20 @@ public final class Region extends AbstractDomainObject {
             log.debug("Also setting hasOwnershipChanged to true [ownershipChanged: {}]", this.hasOwnershipChanged);
         }
 
-        log.debug("Faction [{}] is in region [{}]'s claimedBy Set");
+        log.debug("Faction [{}] is in region [{}]'s claimedBy Set", faction, this.id);
     }
 
+    /**
+     * Removes a faction from the list of factions that have claimed this region.
+     *
+     * @param faction the faction to remove
+     * @throws NullPointerException if the faction parameter is null
+     */
     @JsonIgnore
     public void removeFactionFromClaimedBy(Faction faction) {
         log.debug("Remove claiming faction [{}] from region [{}]", faction, this.id);
 
-        Objects.requireNonNull(faction, "Faction must not be nulL!");
+        Objects.requireNonNull(faction, "Faction must not be null!");
         ServiceUtils.checkBlankString(faction.getName(), "faction name");
 
         if (this.getClaimedBy().contains(faction)) {
@@ -127,14 +176,31 @@ public final class Region extends AbstractDomainObject {
         log.debug("Faction [{}] is not in region [{}]'s claimedBy Set", faction, this.id);
     }
 
+    /**
+     * Returns an unmodifiable set of neighboring regions.
+     *
+     * @return an unmodifiable set of neighboring regions
+     */
     public Set<Region> getNeighboringRegions() {
         return Collections.unmodifiableSet(neighboringRegions);
     }
 
+    /**
+     * Returns the cost of the region.
+     *
+     * @return the cost of the region
+     */
     public int getCost() {
         return regionType.getCost();
     }
 
+    /**
+     * Checks if a faction has a claim build in this region.
+     *
+     * @param faction the faction to check
+     * @return true if the faction has a claim build in this region, false otherwise
+     * @throws NullPointerException if the faction parameter is null
+     */
     @JsonIgnore
     public boolean hasClaimbuildInRegion(Faction faction) {
         Objects.requireNonNull(faction, "Faction must not be null");
@@ -146,6 +212,13 @@ public final class Region extends AbstractDomainObject {
         return hasClaimbuild;
     }
 
+    /**
+     * Checks if a faction is the only faction that has claim builds in this region.
+     *
+     * @param faction the faction to check
+     * @return true if the faction is the only faction with claim builds in this region, false otherwise
+     * @throws NullPointerException if the faction parameter is null
+     */
     @JsonIgnore
     public boolean isOnlyFactionInRegion(Faction faction) {
         Objects.requireNonNull(faction, "Faction must not be null");
@@ -157,6 +230,13 @@ public final class Region extends AbstractDomainObject {
         return isOnlyFaction;
     }
 
+    /**
+     * Checks if a faction has other claim builds in this region besides the specified claim build.
+     *
+     * @param cb the claim build to check against
+     * @return true if the faction has other claim builds in this region, false otherwise
+     * @throws NullPointerException if the cb parameter is null
+     */
     @JsonIgnore
     public boolean hasFactionOtherClaimbuildThan(ClaimBuild cb) {
         Objects.requireNonNull(cb, "claimbuild must not be null");
@@ -168,6 +248,13 @@ public final class Region extends AbstractDomainObject {
         return hasClaimbuild;
     }
 
+    /**
+     * Checks if the region is claimable by a faction.
+     *
+     * @param faction the faction to check
+     * @return true if the region is claimable by the faction, false otherwise
+     * @throws NullPointerException if the faction parameter is null
+     */
     @JsonIgnore
     public boolean isClaimable(Faction faction) {
         Objects.requireNonNull(faction, "Faction must not be null");
@@ -178,6 +265,11 @@ public final class Region extends AbstractDomainObject {
         return hasClaimbuild || regionHasNoCb;
     }
 
+    /**
+     * Returns a string representation of this region.
+     *
+     * @return a string representation of this region
+     */
     @Override
     public String toString() {
         return "Region{" +
@@ -185,6 +277,12 @@ public final class Region extends AbstractDomainObject {
                 '}';
     }
 
+    /**
+     * Checks if this Region is equal to another object.
+     *
+     * @param o the object to compare with
+     * @return true if the objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -193,6 +291,11 @@ public final class Region extends AbstractDomainObject {
         return id.equals(region.id);
     }
 
+    /**
+     * Returns the hash code of this Region.
+     *
+     * @return the hash code of this Region
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);

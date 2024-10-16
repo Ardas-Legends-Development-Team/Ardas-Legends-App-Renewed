@@ -1,9 +1,10 @@
-package com.ardaslegends.configuration;
+package com.ardaslegends.configuration.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -11,17 +12,38 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+/**
+ * Filter for handling authentication of requests from the Stockpile Plugin.
+ * This filter checks for a specific header and secret value to authenticate
+ * requests from the Stockpile Plugin and bypasses security checks if valid.
+ */
 @Component
 public class StockpilePluginFilter extends OncePerRequestFilter {
 
     private final SecurityProperties securityProperties;
 
+    /**
+     * Constructs a new StockpilePluginFilter.
+     *
+     * @param securityProperties the security properties to use for configuration
+     */
     public StockpilePluginFilter(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
     }
 
+    /**
+     * Filters incoming requests to check for the Stockpile Plugin's authentication header.
+     * If the header and secret value match, the request is authenticated as coming from the plugin.
+     * Otherwise, the request proceeds with the normal security checks.
+     *
+     * @param request     the HTTP request
+     * @param response    the HTTP response
+     * @param filterChain the filter chain
+     * @throws ServletException if an error occurs during filtering
+     * @throws IOException      if an I/O error occurs during filtering
+     */
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         String secretHeader = securityProperties.getPluginAccess().getHeaderName();
         String secretValue = securityProperties.getPluginAccess().getSecret();

@@ -1,9 +1,9 @@
 package com.ardaslegends.presentation.api;
 
 import com.ardaslegends.domain.Army;
-import com.ardaslegends.domain.ClaimBuild;
-import com.ardaslegends.domain.ClaimBuildType;
-import com.ardaslegends.domain.SpecialBuilding;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.AbstractRestController;
 import com.ardaslegends.presentation.api.response.claimbuild.ClaimbuildResponse;
 import com.ardaslegends.service.ClaimBuildService;
@@ -24,8 +24,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * REST controller for managing Claimbuild entities.
+ * <p>
+ * This controller provides endpoints for creating, retrieving, updating, and deleting Claimbuild entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @RequestMapping(ClaimbuildRestController.BASE_URL)
@@ -42,6 +47,11 @@ public class ClaimbuildRestController extends AbstractRestController {
 
     private final ClaimBuildService claimBuildService;
 
+    /**
+     * Retrieves all Claimbuild types.
+     *
+     * @return an array of Claimbuild types.
+     */
     @GetMapping(GET_TYPES)
     public ResponseEntity<String[]> getTypes() {
         log.debug("Incoming getClaimbuildTypes Request");
@@ -53,6 +63,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(claimbuildTypesStringArray);
     }
 
+    /**
+     * Retrieves a paginated list of Claimbuild entities.
+     *
+     * @param pageable the pagination information.
+     * @return a page of {@link ClaimbuildResponse} containing the Claimbuild entities.
+     */
     @Operation(summary = "Get Claimbuilds Paginated", description = "Retrieves a Page with a set of elements, parameters define the size, which Page you want and how its sorted")
     @GetMapping
     public ResponseEntity<Page<ClaimbuildResponse>> getClaimbuildsPaginated(Pageable pageable) {
@@ -64,6 +80,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(pageResponse);
     }
 
+    /**
+     * Retrieves Claimbuilds by their names.
+     *
+     * @param names the names of the Claimbuilds to retrieve.
+     * @return an array of {@link ClaimbuildResponse} containing the Claimbuilds with the specified names.
+     */
     @Operation(summary = "Get Claimbuilds By Name", description = "Returns an array of claimbuilds with the specified names")
     @GetMapping(NAME)
     public ResponseEntity<ClaimbuildResponse[]> getClaimbuildsByNames(@RequestParam(name = "name") String[] names) {
@@ -77,6 +99,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Retrieves Claimbuilds by their faction.
+     *
+     * @param faction the faction of the Claimbuilds to retrieve.
+     * @return an array of {@link ClaimbuildResponse} containing the Claimbuilds of the specified faction.
+     */
     @Operation(summary = "Get Claimbuilds By Faction", description = "Returns an array of claimbuilds of the specified faction")
     @GetMapping(FACTION)
     public ResponseEntity<ClaimbuildResponse[]> getClaimbuildsByFaction(@RequestParam String faction) {
@@ -90,6 +118,11 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Retrieves all special buildings.
+     *
+     * @return an array of special buildings.
+     */
     @GetMapping(GET_SPECIAL_BUILDINGS)
     public HttpEntity<String[]> getSpecialBuildings() {
         log.debug("Incoming getAllSpecialBuilds request");
@@ -101,6 +134,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(specialBuildingsStringArray);
     }
 
+    /**
+     * Creates a new Claimbuild entity.
+     *
+     * @param dto the data transfer object containing the details of the Claimbuild to create.
+     * @return the created {@link ClaimBuild}.
+     */
     @PostMapping(PATH_CREATE_CLAIMBUILD)
     public HttpEntity<ClaimBuild> createClaimbuild(@RequestBody CreateClaimBuildDto dto) {
         log.debug("Incoming createClaimbuild Request: Data [{}]", dto);
@@ -112,6 +151,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(claimBuild);
     }
 
+    /**
+     * Updates an existing Claimbuild entity.
+     *
+     * @param dto the data transfer object containing the details of the Claimbuild to update.
+     * @return the updated {@link ClaimBuild}.
+     */
     @PatchMapping(PATH_UPDATE_CLAIMBUILD)
     public HttpEntity<ClaimBuild> updateClaimbuild(@RequestBody CreateClaimBuildDto dto) {
         log.debug("Incoming updateClaimbuild Request: Data [{}]", dto);
@@ -123,6 +168,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(claimBuild);
     }
 
+    /**
+     * Updates the owner of a Claimbuild entity.
+     *
+     * @param dto the data transfer object containing the details of the Claimbuild owner to update.
+     * @return the updated {@link UpdateClaimbuildOwnerDto}.
+     */
     @PatchMapping(UPDATE_CLAIMBUILD_FATION)
     public HttpEntity<UpdateClaimbuildOwnerDto> updateClaimbuildOwner(@RequestBody UpdateClaimbuildOwnerDto dto) {
         log.debug("Incoming update Claimbuild Owner Request with data [{}]", dto);
@@ -137,6 +188,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Deletes a Claimbuild entity.
+     *
+     * @param dto the data transfer object containing the details of the Claimbuild to delete.
+     * @return the deleted {@link DeleteClaimbuildDto}.
+     */
     @DeleteMapping(DELETE_CLAIMBUILD)
     public HttpEntity<DeleteClaimbuildDto> deleteClaimbuild(@RequestBody DeleteClaimbuildDto dto) {
         log.debug("Incoming delete Claimbuild Request with data [{}]", dto);
@@ -144,14 +201,12 @@ public class ClaimbuildRestController extends AbstractRestController {
         log.trace("Calling wrappedServiceExecution of deleteClaimbuild");
         var result = claimBuildService.deleteClaimbuild(dto);
 
-
         log.trace("Building body Dto");
         DeleteClaimbuildDto body = new DeleteClaimbuildDto(result.getName(),
-                 result.getStationedArmies().stream().map(Army::getName).collect(Collectors.toList()),
-                 result.getCreatedArmies().stream().map(Army::getName).collect(Collectors.toList()));
+                result.getStationedArmies().stream().map(Army::getName).collect(Collectors.toList()),
+                result.getCreatedArmies().stream().map(Army::getName).collect(Collectors.toList()));
 
         log.info("Creating response with body [{}]", body);
-        var response = ResponseEntity.ok(body);
-        return response;
+        return ResponseEntity.ok(body);
     }
 }

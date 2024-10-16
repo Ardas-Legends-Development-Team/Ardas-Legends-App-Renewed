@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for managing Battles.
+ * <p>
+ * This controller provides endpoints for declaring and concluding battles.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @Tag(name = "Battle Controller", description = "REST endpoints concerning Battles")
@@ -28,6 +33,15 @@ public class BattleRestController {
 
     private final BattleService battleService;
 
+    /**
+     * Declares a new battle.
+     * <p>
+     * This method receives a {@link CreateBattleDto} and creates a new battle.
+     * </p>
+     *
+     * @param dto the data transfer object containing the details of the battle to create.
+     * @return the created {@link BattleResponse}.
+     */
     @Operation(summary = "Declare Battle", description = "Declare a battle on an army or claimbuild")
     @PostMapping
     public ResponseEntity<BattleResponse> createBattle(@RequestBody CreateBattleDto dto) {
@@ -43,6 +57,15 @@ public class BattleRestController {
         return ResponseEntity.ok(battleResponse);
     }
 
+    /**
+     * Concludes an existing battle.
+     * <p>
+     * This method receives a {@link ConcludeBattleDto} and concludes the specified battle.
+     * </p>
+     *
+     * @param dto the data transfer object containing the details of the battle to conclude.
+     * @return the concluded {@link BattleResponse}.
+     */
     @Operation(summary = "Conclude Battle", description = "Concludes a battle with the passed result")
     @PostMapping(CONCLUDE)
     public ResponseEntity<BattleResponse> concludeBattle(@RequestBody ConcludeBattleDto dto) {

@@ -1,6 +1,7 @@
 package com.ardaslegends.service.time;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.player.PlayerRepository;
@@ -12,7 +13,6 @@ import com.ardaslegends.service.utils.ServiceUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-import org.apache.commons.lang3.time.DurationFormatUtils;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +28,13 @@ import static java.time.temporal.ChronoUnit.HOURS;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.NANOSECONDS;
 
+/**
+ * Service for handling scheduled tasks related to movements and healings.
+ * <p>
+ * This service handles the scheduled tasks for processing movements and healings of armies and players.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @Service
 public class ScheduleService {
@@ -43,6 +48,12 @@ public class ScheduleService {
     private final TimeFreezeService timeFreezeService;
     private final Clock clock;
 
+    /**
+     * Handles the scheduled movements.
+     * <p>
+     * This method is executed every 15 minutes and processes all active movements.
+     * </p>
+     */
     @Scheduled(cron = "0 */15 * ? * *")
     @Transactional(readOnly = false)
     public void handleMovements() {
@@ -66,6 +77,12 @@ public class ScheduleService {
         log.info("Finished handling movements. Updated movements: [{}] - finished in {} seconds", allActiveMoves.size(), neededTime.toPlainString());
     }
 
+    /**
+     * Handles the scheduled healings.
+     * <p>
+     * This method is executed every 15 minutes and processes all healing armies and players.
+     * </p>
+     */
     @Scheduled(cron = "0 */15 * ? * *")
     @Transactional(readOnly = false)
     public void handleHealings() {
@@ -97,12 +114,18 @@ public class ScheduleService {
         log.info("Finished handling healing. Updated armies: [{}], updated chars: [{}] - finished in {} seconds", healingArmies.size(), healingPlayers.size(), neededTime.toPlainString());
     }
 
+    /**
+     * Handles a single movement.
+     *
+     * @param movement The movement to handle.
+     * @param now      The current time.
+     */
     private void handleSingleMovement(Movement movement, OffsetDateTime now) {
         log.debug("Handling movement of {} {} with path {}", movement.getMovingEntity(), movement.getMovingEntityName(),
                 ServiceUtils.buildPathStringWithCurrentRegion(movement.getPath(), movement.getCurrentRegion()));
         log.debug("Movement data: {}", movement);
 
-        if(timeFreezeService.isTimeFrozen()) {
+        if (timeFreezeService.isTimeFrozen()) {
             log.debug("Time is frozen - delaying movement");
             val timeSinceLastUpdate = Duration.between(movement.getLastUpdatedAt(), now);
             log.trace("Duration since last movement update: [{}]", ServiceUtils.formatDuration(timeSinceLastUpdate));
@@ -116,13 +139,13 @@ public class ScheduleService {
         }
 
         log.trace("Entering loop while now [{}] is after reachesNextRegionAt [{}]", now, movement.getReachesNextRegionAt());
-        while(now.isAfter(movement.getReachesNextRegionAt())) {
+        while (now.isAfter(movement.getReachesNextRegionAt())) {
             log.trace("Now [{}] is after reachesNextRegionAt [{}]", now, movement.getReachesNextRegionAt());
             log.trace("Updating current region from [{}] to [{}]", movement.getCurrentRegion(), movement.getNextRegion());
             movement.setCurrentRegion(movement.getNextRegion());
 
             log.trace("Checking if current region is destination");
-            if(movement.getNextPathElement() == null) {
+            if (movement.getNextPathElement() == null) {
                 log.info("Movement of {} {} with path [{}] reached its destination, setting isActive to false", movement.getMovingEntity(), movement.getMovingEntityName(),
                         ServiceUtils.buildPathString(movement.getPath()));
                 movement.end();
@@ -144,11 +167,17 @@ public class ScheduleService {
                 ServiceUtils.buildPathStringWithCurrentRegion(movement.getPath(), movement.getCurrentRegion()));
     }
 
+    /**
+     * Handles the healing of a single army.
+     *
+     * @param army The army to heal.
+     * @param now  The current time.
+     */
     private void handleHealingArmy(Army army, OffsetDateTime now) {
         log.debug("Handling healing army [{}]", army);
         OffsetDateTime endTime = army.getHealEnd();
 
-        if(timeFreezeService.isTimeFrozen()) {
+        if (timeFreezeService.isTimeFrozen()) {
             log.debug("Time is frozen - delaying army healing");
             val timeSinceLastUpdate = Duration.between(army.getHealLastUpdatedAt(), now);
             log.trace("Duration since last army healing update: [{}]", ServiceUtils.formatDuration(timeSinceLastUpdate));
@@ -171,13 +200,13 @@ public class ScheduleService {
         //we have to add 1 here because we want to know how many hours have passed
         //HOURS.between returns 0 if you have 00:59:59 minutes/seconds
         int hoursLeft = (int) HOURS.between(now, endTime) + 1;
-        if(now.isAfter(endTime)) {
+        if (now.isAfter(endTime)) {
             log.debug("Current date is after end date, setting hours left to 0");
             hoursLeft = 0;
         }
         log.debug("Hours left: [{}]", hoursLeft);
 
-        if(hoursLeft <= 0) {
+        if (hoursLeft <= 0) {
             log.debug("Healing has less than or 0 hours left - completing it");
             log.debug("Healing all the units");
             army.getUnits().stream().forEach(unit -> unit.setAmountAlive(unit.getCount()));
@@ -195,7 +224,7 @@ public class ScheduleService {
 
         //If we didn't heal an hour since last time, exit function
 
-        if(hoursHealedSinceLastTime == 0 && hoursLeft != 0) {
+        if (hoursHealedSinceLastTime == 0 && hoursLeft != 0) {
             log.debug("No hour has passed for this healing - exiting function");
             return;
         }
@@ -208,7 +237,7 @@ public class ScheduleService {
 
         int divisor = 24;
         log.trace("Setting divisor to [{}]", divisor);
-        if(army.getStationedAt().getType().equals(ClaimBuildType.STRONGHOLD)) {
+        if (army.getStationedAt().getType().equals(ClaimBuildType.STRONGHOLD)) {
             divisor /= 2;
             log.trace("Army is stationed at Stronghold, setting divisor to [{}]", divisor);
         }
@@ -226,7 +255,7 @@ public class ScheduleService {
          */
 
         log.trace("Entering loop");
-        while(hoursHealedSinceLastReplenish >= divisor) {
+        while (hoursHealedSinceLastReplenish >= divisor) {
             log.trace("hoursHealedSinceLastReplenish: [{}]", hoursHealedSinceLastReplenish);
             log.trace("Subtracting divisor [{}] from hoursHealedSinceLastReplenish [{}]", divisor, hoursHealedSinceLastReplenish);
             hoursHealedSinceLastReplenish -= divisor;
@@ -242,7 +271,7 @@ public class ScheduleService {
             int currentUnitIndex = 0;
             Unit currentUnit = units.get(currentUnitIndex);
 
-            while(replenishTokens > 0) {
+            while (replenishTokens > 0) {
                 log.trace("Starting to replenish unit: [{}]", currentUnit);
                 log.trace("Unit [{}] has currently {}/{} alive units", currentUnit.getUnitType(), currentUnit.getAmountAlive(), currentUnit.getCount());
                 log.trace("Replenish tokens left: [{}]", replenishTokens);
@@ -251,7 +280,7 @@ public class ScheduleService {
                 log.trace("Dead units: [{}]", deadUnits);
                 double tokensToHeal = deadUnits * currentUnit.getCost();
                 log.trace("Tokens to heal: [{}]", tokensToHeal);
-                if(tokensToHeal >= replenishTokens) {
+                if (tokensToHeal >= replenishTokens) {
                     log.trace("More tokens to heal than replenish tokens available - using all replenish tokens on unit [{}]", currentUnit);
                     int canHealUnits = (int) (replenishTokens / currentUnit.getCost());
                     log.trace("Unit has cost [{}] - can heal [{}] with [{}] refresh tokens", currentUnit.getCost(), canHealUnits, replenishTokens);
@@ -259,8 +288,7 @@ public class ScheduleService {
                     log.trace("Unit now has {}/{} units", currentUnit.getAmountAlive(), currentUnit.getCount());
                     replenishTokens = 0;
                     log.trace("Set replenish tokens to [{}]", replenishTokens);
-                }
-                else {
+                } else {
                     log.trace("Less units to heal than replenish tokens available - healing unit [{}] to full", currentUnit.getUnitType());
                     currentUnit.setAmountAlive(currentUnit.getCount());
                     log.trace("Unit now has {}/{} units", currentUnit.getAmountAlive(), currentUnit.getCount());
@@ -268,13 +296,12 @@ public class ScheduleService {
                     log.trace("Set replenish tokens to [{}]", replenishTokens);
 
                     log.trace("Setting the next unit");
-                    if(currentUnitIndex == units.size()-1) {
+                    if (currentUnitIndex == units.size() - 1) {
                         log.trace("current unit was last in list, not setting new current unit");
                         log.info("Army [{}] has finished its healing process!", army.getName());
                         army.resetHealingStats();
                         replenishTokens = 0;
-                    }
-                    else {
+                    } else {
                         currentUnitIndex++;
                         currentUnit = units.get(currentUnitIndex);
                         log.trace("Set new current unit to [{}]", currentUnit);
@@ -283,7 +310,7 @@ public class ScheduleService {
             }
             log.trace("Exited loop");
 
-            if(!army.allUnitsAlive()) {
+            if (!army.allUnitsAlive()) {
                 log.trace("Army not fully healed - updating parameters");
                 log.trace("Setting the new amount of hours healed to [{}]", army.getHoursHealed() + hoursHealedSinceLastTime);
                 army.setHoursHealed(army.getHoursHealed() + hoursHealedSinceLastTime);
@@ -295,13 +322,19 @@ public class ScheduleService {
         }
     }
 
+    /**
+     * Handles the healing of a single player.
+     *
+     * @param player The player to heal.
+     * @param now    The current time.
+     */
     private void handleHealingPlayer(Player player, OffsetDateTime now) {
         log.debug("Handling healing player [{}]", player);
         RPChar rpChar = player.getActiveCharacter().orElseThrow(PlayerServiceException::noRpChar);
         log.trace("Got player's rpchar [{}]", rpChar);
         OffsetDateTime endTime = rpChar.getHealEnds();
 
-        if(timeFreezeService.isTimeFrozen()) {
+        if (timeFreezeService.isTimeFrozen()) {
             log.debug("Time is frozen - delaying army healing");
             val timeSinceLastUpdate = Duration.between(rpChar.getHealLastUpdatedAt(), now);
             log.trace("Duration since last rpChar healing update: [{}]", ServiceUtils.formatDuration(timeSinceLastUpdate));
@@ -324,13 +357,13 @@ public class ScheduleService {
         //we have to add 1 here because we want to know how many hours have passed
         //HOURS.between returns 0 if you have 00:59:59 minutes/seconds
         int hoursLeft = (int) HOURS.between(now, endTime) + 1;
-        if(now.isAfter(endTime)) {
+        if (now.isAfter(endTime)) {
             log.debug("Current date is after end date, setting hours left to 0");
             hoursLeft = 0;
         }
         log.debug("Hours left: [{}]", hoursLeft);
 
-        if(hoursLeft <= 0) {
+        if (hoursLeft <= 0) {
             log.info("Character [{}] of player [{}] finished healing - setting isInjured and isHealing to false", rpChar, player);
             rpChar.setInjured(false);
             rpChar.setIsHealing(false);

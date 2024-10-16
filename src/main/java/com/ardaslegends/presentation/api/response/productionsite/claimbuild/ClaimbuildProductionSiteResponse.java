@@ -1,6 +1,6 @@
 package com.ardaslegends.presentation.api.response.productionsite.claimbuild;
 
-import com.ardaslegends.domain.ProductionClaimbuild;
+import com.ardaslegends.domain.claimbuilds.ProductionClaimbuild;
 import com.ardaslegends.presentation.api.response.productionsite.ProductionSiteResponse;
 
 public record ClaimbuildProductionSiteResponse(
