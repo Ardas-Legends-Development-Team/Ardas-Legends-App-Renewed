@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration class for the security settings of the application.
+ * This class defines the security filter chain for the application.
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
@@ -19,6 +24,14 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
     private final SecurityProperties securityProperties;
 
+    /**
+     * Constructs a new SecurityConfiguration.
+     *
+     * @param stockpilePluginFilter   the custom filter for stockpile plugin
+     * @param jwtAuthenticationFilter the filter for processing JWT authentication
+     * @param authenticationProvider  the provider for authentication
+     * @param securityProperties      the properties for security configuration
+     */
     public SecurityConfiguration(
             StockpilePluginFilter stockpilePluginFilter,
             JwtAuthenticationFilter jwtAuthenticationFilter,
@@ -31,6 +44,15 @@ public class SecurityConfiguration {
         this.securityProperties = securityProperties;
     }
 
+    /**
+     * Configures the security filter chain.
+     * This method sets up the security filters, including disabling CSRF, configuring public and role-based routes,
+     * and adding custom filters for JWT authentication and stockpile plugin.
+     *
+     * @param http the HttpSecurity object to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
