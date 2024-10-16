@@ -1,4 +1,4 @@
-package com.ardaslegends.domain;
+package com.ardaslegends.domain.claimbuilds;
 
 /**
  * Enum representing different types of resources.

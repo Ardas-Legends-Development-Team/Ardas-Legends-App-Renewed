@@ -1,6 +1,8 @@
 package com.ardaslegends.repository;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
 import com.ardaslegends.repository.faction.FactionRepository;
 import io.vavr.collection.List;
 import lombok.val;
@@ -44,7 +46,7 @@ public class ArmyRepositoryTest {
         gondor = Faction.builder().name("Gondor").homeRegion(region1).build();
         rpChar = RPChar.builder().name("Belegorn").currentRegion(region1).build();
         var mordor = Faction.builder().name("Mordor").homeRegion(region2).build();
-        claimbuild = ClaimBuild.builder().name("Nimheria").coordinates(new Coordinate(0,0,0)).ownedBy(gondor)
+        claimbuild = ClaimBuild.builder().name("Nimheria").coordinates(new Coordinate(0, 0, 0)).ownedBy(gondor)
                 .region(region1).type(ClaimBuildType.CASTLE).build();
 
         factionRepository.saveAll(List.of(gondor, mordor));

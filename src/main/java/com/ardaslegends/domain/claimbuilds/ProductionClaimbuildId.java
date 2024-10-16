@@ -1,5 +1,6 @@
-package com.ardaslegends.domain;
+package com.ardaslegends.domain.claimbuilds;
 
+import com.ardaslegends.domain.AbstractDomainObject;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 

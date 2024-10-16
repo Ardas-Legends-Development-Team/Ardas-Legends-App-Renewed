@@ -1,6 +1,8 @@
 package com.ardaslegends.presentation.api;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.service.ClaimBuildService;
 import com.ardaslegends.service.dto.claimbuild.CreateClaimBuildDto;
 import com.ardaslegends.service.dto.claimbuilds.DeleteClaimbuildDto;
@@ -45,6 +47,7 @@ public class ClaimbuildRestControllerTest {
     private List<PathElement> path;
     private Movement movement;
     private ClaimBuild claimBuild;
+
     @BeforeEach
     void setup() {
         mockClaimbuildService = mock(ClaimBuildService.class);
@@ -66,7 +69,7 @@ public class ClaimbuildRestControllerTest {
         pathElement = PathElement.builder().region(region1).actualCost(region1.getCost()).baseCost(region1.getCost()).build();
         pathElement2 = PathElement.builder().region(region2).actualCost(region2.getCost()).baseCost(region2.getCost()).build();
         path = List.of(pathElement, pathElement2);
-        movement =  Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army1).path(path).build();
+        movement = Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army1).path(path).build();
 
         claimBuild.setStationedArmies(List.of(army1));
         claimBuild.setCreatedArmies(List.of(army2, army3));
@@ -104,7 +107,7 @@ public class ClaimbuildRestControllerTest {
 
         log.debug(result.getResponse().getContentAsString());
         ClaimBuild response = mapper.readValue(result.getResponse().getContentAsString()
-                ,ClaimBuild.class);
+                , ClaimBuild.class);
 
         assertThat(response.getName()).isEqualTo(claimBuild.getName());
         assertThat(response.getOwnedBy().getName()).isEqualTo(claimBuild.getOwnedBy().getName());
@@ -144,7 +147,7 @@ public class ClaimbuildRestControllerTest {
 
         log.debug(result.getResponse().getContentAsString());
         ClaimBuild response = mapper.readValue(result.getResponse().getContentAsString()
-                ,ClaimBuild.class);
+                , ClaimBuild.class);
 
         assertThat(response.getName()).isEqualTo(claimBuild.getName());
         assertThat(response.getOwnedBy().getName()).isEqualTo(claimBuild.getOwnedBy().getName());
@@ -181,13 +184,14 @@ public class ClaimbuildRestControllerTest {
         request.setCharacterEncoding("UTF-8");
 
         UpdateClaimbuildOwnerDto response = mapper.readValue(request.getContentAsString()
-                ,UpdateClaimbuildOwnerDto.class);
+                , UpdateClaimbuildOwnerDto.class);
 
         assertThat(response.claimbuildName()).isEqualTo(claimBuild.getName());
         assertThat(response.newFaction()).isEqualTo(claimBuild.getOwnedBy().getName());
 
         log.info("Test passed: updateClaimbuildOwner builds the correct response");
     }
+
     @Test
     void ensureDeleteClaimbuildWorksProperly() throws Exception {
         log.debug("Testing if deleteClaimbuild works properly with correct values");
@@ -220,7 +224,7 @@ public class ClaimbuildRestControllerTest {
 
         System.out.println(request.getContentAsString());
         DeleteClaimbuildDto response = mapper.readValue(request.getContentAsString()
-                ,DeleteClaimbuildDto.class);
+                , DeleteClaimbuildDto.class);
 
 
         assertThat(response.claimbuildName()).isEqualTo(claimBuild.getName());

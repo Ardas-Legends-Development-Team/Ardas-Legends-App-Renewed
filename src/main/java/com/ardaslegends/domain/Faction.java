@@ -1,5 +1,6 @@
 package com.ardaslegends.domain;
 
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import com.ardaslegends.service.exceptions.logic.faction.FactionServiceException;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;

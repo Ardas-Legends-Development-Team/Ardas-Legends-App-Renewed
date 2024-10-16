@@ -1,6 +1,9 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.domain.war.War;
 import com.ardaslegends.domain.war.WarParticipant;
 import com.ardaslegends.domain.war.battle.Battle;

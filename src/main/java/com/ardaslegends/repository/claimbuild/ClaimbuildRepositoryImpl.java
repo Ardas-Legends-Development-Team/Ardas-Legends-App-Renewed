@@ -1,8 +1,8 @@
 package com.ardaslegends.repository.claimbuild;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Faction;
-import com.ardaslegends.domain.QClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.QClaimBuild;
 import com.ardaslegends.repository.exceptions.ClaimbuildRepositoryException;
 import com.ardaslegends.repository.exceptions.RepositoryNullPointerException;
 import lombok.extern.slf4j.Slf4j;

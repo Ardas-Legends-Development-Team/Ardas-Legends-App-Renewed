@@ -1,6 +1,7 @@
 package com.ardaslegends.domain;
 
 import com.ardaslegends.domain.applications.RoleplayApplication;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;

@@ -1,9 +1,9 @@
 package com.ardaslegends.presentation.api;
 
 import com.ardaslegends.domain.Army;
-import com.ardaslegends.domain.ClaimBuild;
-import com.ardaslegends.domain.ClaimBuildType;
-import com.ardaslegends.domain.SpecialBuilding;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.AbstractRestController;
 import com.ardaslegends.presentation.api.response.claimbuild.ClaimbuildResponse;
 import com.ardaslegends.service.ClaimBuildService;

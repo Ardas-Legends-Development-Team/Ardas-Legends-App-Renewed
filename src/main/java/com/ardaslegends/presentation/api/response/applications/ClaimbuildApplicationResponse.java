@@ -1,10 +1,9 @@
 package com.ardaslegends.presentation.api.response.applications;
 
-import com.ardaslegends.domain.ClaimBuildType;
 import com.ardaslegends.domain.Coordinate;
-import com.ardaslegends.domain.ProductionSite;
-import com.ardaslegends.domain.SpecialBuilding;
 import com.ardaslegends.domain.applications.ClaimbuildApplication;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.api.response.player.PlayerResponse;
 import com.ardaslegends.service.dto.productionSite.ProductionSiteDto;
 

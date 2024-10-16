@@ -1,6 +1,8 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;

@@ -1,7 +1,7 @@
 package com.ardaslegends.service.dto.productionSite;
 
-import com.ardaslegends.domain.ProductionSiteType;
 import com.ardaslegends.domain.applications.EmbeddedProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSiteType;
 
 public record ProductionSiteDto(ProductionSiteType type, String resource, long count) {
     public ProductionSiteDto(EmbeddedProductionSite embeddedProductionSite) {

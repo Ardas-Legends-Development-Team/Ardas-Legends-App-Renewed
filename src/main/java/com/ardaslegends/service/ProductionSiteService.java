@@ -1,6 +1,6 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.ProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSite;
 import com.ardaslegends.repository.ProductionSiteRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

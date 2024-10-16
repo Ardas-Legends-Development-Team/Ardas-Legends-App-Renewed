@@ -3,11 +3,10 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <!-- Project from https://start.vaadin.com/project/a4ea19b6-c439-45ae-8f76-78b7e961851f -->
     <groupId>com.ardaslegends</groupId>
-    <artifactId>alspringbackend</artifactId>
-    <name>ALSpringBackend</name>
-    <version>1.0.4</version>
+    <artifactId>alspringbackendrenewed</artifactId>
+    <name>ALSpringBackendRenewed</name>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -284,8 +283,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!-- Clean build and startup time for Vaadin apps sometimes may exceed
-                     the default Spring Boot's 30sec timeout.  -->
                 <configuration>
                     <wait>500</wait>
                     <maxAttempts>240</maxAttempts>

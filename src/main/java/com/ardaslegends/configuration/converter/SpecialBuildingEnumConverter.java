@@ -1,6 +1,6 @@
 package com.ardaslegends.configuration.converter;
 
-import com.ardaslegends.domain.SpecialBuilding;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import lombok.NonNull;

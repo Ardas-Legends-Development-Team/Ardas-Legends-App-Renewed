@@ -1,8 +1,8 @@
 package com.ardaslegends.repository.productionsite;
 
-import com.ardaslegends.domain.ProductionSite;
-import com.ardaslegends.domain.ProductionSiteType;
-import com.ardaslegends.domain.QProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSiteType;
+import com.ardaslegends.domain.claimbuilds.QProductionSite;
 import com.ardaslegends.repository.exceptions.ProductionSiteRepositoryException;
 import lombok.val;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;

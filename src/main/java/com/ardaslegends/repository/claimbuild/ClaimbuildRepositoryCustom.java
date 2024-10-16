@@ -1,7 +1,7 @@
 package com.ardaslegends.repository.claimbuild;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 
 import java.util.List;
 import java.util.Optional;

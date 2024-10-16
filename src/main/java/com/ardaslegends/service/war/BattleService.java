@@ -1,6 +1,7 @@
 package com.ardaslegends.service.war;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import com.ardaslegends.domain.war.battle.*;
 import com.ardaslegends.repository.war.QueryWarStatus;
 import com.ardaslegends.repository.war.WarRepository;

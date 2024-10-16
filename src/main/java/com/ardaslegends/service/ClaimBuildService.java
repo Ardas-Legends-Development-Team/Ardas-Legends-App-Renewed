@@ -1,6 +1,10 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.Coordinate;
+import com.ardaslegends.domain.Faction;
+import com.ardaslegends.domain.Player;
+import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.claimbuilds.*;
 import com.ardaslegends.repository.ProductionSiteRepository;
 import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.region.RegionRepository;

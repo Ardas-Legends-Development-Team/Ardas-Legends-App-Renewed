@@ -1,6 +1,8 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.player.PlayerRepository;
@@ -8,10 +10,10 @@ import com.ardaslegends.repository.region.RegionRepository;
 import com.ardaslegends.service.dto.army.MoveArmyDto;
 import com.ardaslegends.service.dto.player.DiscordIdDto;
 import com.ardaslegends.service.dto.player.rpchar.MoveRpCharDto;
-import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.exceptions.ServiceException;
 import com.ardaslegends.service.exceptions.logic.army.ArmyServiceException;
 import com.ardaslegends.service.exceptions.logic.movement.MovementServiceException;
+import com.ardaslegends.service.exceptions.logic.player.PlayerServiceException;
 import com.ardaslegends.service.utils.ServiceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +21,10 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -81,7 +86,7 @@ public class MovementServiceTest {
         pathElement1 = PathElement.builder().region(region1).baseCost(region1.getCost()).actualCost(region1.getCost()).build();
         pathElement2 = PathElement.builder().region(region2).baseCost(region2.getCost()).actualCost(region2.getCost()).build();
         path = List.of(pathElement1, pathElement2);
-        movement =  Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army).path(path).build();
+        movement = Movement.builder().isCharMovement(false).isCurrentlyActive(true).army(army).path(path).build();
 
         when(mockPlayerService.getPlayerByDiscordId(player.getDiscordID())).thenReturn(player);
         when(mockArmyRepository.findArmyByName(army.getName())).thenReturn(Optional.of(army));
@@ -90,7 +95,7 @@ public class MovementServiceTest {
         when(mockMovementRepository.findMovementByArmyAndIsCurrentlyActiveTrue(army)).thenReturn(Optional.of(movement));
         when(mockRegionRepository.findById(region1.getId())).thenReturn(Optional.of(region1));
         when(mockRegionRepository.findById(region2.getId())).thenReturn(Optional.of(region2));
-        when(mockPathfinder.findShortestWay(any(),any(),any(),anyBoolean())).thenReturn(movement.getPath());
+        when(mockPathfinder.findShortestWay(any(), any(), any(), anyBoolean())).thenReturn(movement.getPath());
     }
 
     @Test
@@ -121,7 +126,7 @@ public class MovementServiceTest {
         assertThat(createdMovement.getRpChar()).isEqualTo(player.getActiveCharacter().get());
         assertThat(createdMovement.getIsCharMovement()).isTrue();
         assertThat(createdMovement.getStartTime().toLocalDate()).isEqualTo(LocalDate.now());
-        assertThat(createdMovement.getEndTime().toLocalDate()).isEqualTo(LocalDate.now().plusDays(ServiceUtils.getTotalPathCost(path)/24));
+        assertThat(createdMovement.getEndTime().toLocalDate()).isEqualTo(LocalDate.now().plusDays(ServiceUtils.getTotalPathCost(path) / 24));
         assertThat(createdMovement.getArmy()).isNull();
 
         log.info("Test passed: createRpCharMovement works with valid values!");
@@ -149,6 +154,7 @@ public class MovementServiceTest {
 
         log.info("Test passed: createRpCharMovement throws IllegalArgumentException when no player is found!");
     }
+
     @Test
     void ensureMoveRpCharThrowsSEWhenNoRpChar() {
         log.debug("Testing if createRpCharMovement throws IllegalArgumentException when player has no Rp Char!");
@@ -439,6 +445,7 @@ public class MovementServiceTest {
 
         log.info("Test passed: createArmyMovement works properly with correct values");
     }
+
     @Test
     void ensureCreateArmyMovementThrowsSeWhenPlayerIsNotRegistered() {
         log.debug("Testing if createArmyMovement throws Se when region does not exist");
@@ -514,6 +521,7 @@ public class MovementServiceTest {
         assertThat(result.getMessage()).contains("No permission to perform this action");
         log.info("Test passed: createArmyMovement throws Se when player is not allowed to move");
     }
+
     @Test
     void ensureCancelArmyMovementWorks() {
         log.debug("Testing if cancelArmyMovement works with proper data!");
@@ -568,7 +576,6 @@ public class MovementServiceTest {
 
         log.info("Test passed: cancelArmyMovement throws Service Exception when Army not found!");
     }
-
 
 
     @Test

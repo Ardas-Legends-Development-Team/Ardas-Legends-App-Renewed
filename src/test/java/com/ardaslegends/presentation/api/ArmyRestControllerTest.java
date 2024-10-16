@@ -1,6 +1,7 @@
 package com.ardaslegends.presentation.api;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import com.ardaslegends.presentation.api.response.army.ArmyResponse;
 import com.ardaslegends.service.ArmyService;
 import com.ardaslegends.service.dto.army.*;

@@ -1,6 +1,9 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.player.PlayerRepository;
@@ -150,10 +153,10 @@ public class ScheduleServiceTest {
     void ensureHandleMovementsWorksForCharMoves() {
         log.debug("Testing if handleMovements works properly!");
 
-        pathElement.setActualCost(pathElement.getActualCost()/2);
-        pathElement2.setActualCost(pathElement2.getActualCost()/2);
-        pathElement3.setActualCost(pathElement3.getActualCost()/2);
-        pathElement4.setActualCost(pathElement4.getActualCost()/2);
+        pathElement.setActualCost(pathElement.getActualCost() / 2);
+        pathElement2.setActualCost(pathElement2.getActualCost() / 2);
+        pathElement3.setActualCost(pathElement3.getActualCost() / 2);
+        pathElement4.setActualCost(pathElement4.getActualCost() / 2);
         endTime2 = startTime.plusHours(ServiceUtils.getTotalPathCost(path2));
         movement2.setStartTime(startTime);
         movement2.setEndTime(endTime2);

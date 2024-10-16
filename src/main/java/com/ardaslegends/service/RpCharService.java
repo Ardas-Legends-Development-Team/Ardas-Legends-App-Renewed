@@ -1,8 +1,8 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Player;
 import com.ardaslegends.domain.RPChar;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import com.ardaslegends.repository.claimbuild.ClaimbuildRepository;
 import com.ardaslegends.repository.rpchar.RpcharRepository;
 import com.ardaslegends.service.dto.player.rpchar.StationRpCharDto;

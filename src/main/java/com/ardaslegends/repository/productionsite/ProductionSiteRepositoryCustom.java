@@ -1,7 +1,7 @@
 package com.ardaslegends.repository.productionsite;
 
-import com.ardaslegends.domain.ProductionSite;
-import com.ardaslegends.domain.ProductionSiteType;
+import com.ardaslegends.domain.claimbuilds.ProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSiteType;
 
 import java.util.Optional;
 import java.util.Set;

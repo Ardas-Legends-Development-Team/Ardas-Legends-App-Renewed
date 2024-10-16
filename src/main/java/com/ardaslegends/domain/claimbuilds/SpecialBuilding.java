@@ -1,4 +1,4 @@
-package com.ardaslegends.domain;
+package com.ardaslegends.domain.claimbuilds;
 
 import com.ardaslegends.configuration.converter.SpecialBuildingEnumConverter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;

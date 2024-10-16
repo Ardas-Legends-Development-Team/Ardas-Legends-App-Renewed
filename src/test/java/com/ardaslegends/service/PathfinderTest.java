@@ -1,6 +1,9 @@
 package com.ardaslegends.service;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.repository.region.RegionRepository;
 import com.ardaslegends.service.exceptions.logic.movement.PathfinderServiceException;
 import com.ardaslegends.service.war.WarService;
@@ -17,13 +20,12 @@ import static org.mockito.Mockito.when;
 
 public class PathfinderTest {
 
+    Region r1, r2, r3, r4, r5, r6;
+    Region rs1, rs2;
     private RegionRepository mockRepository;
     private WarService mockWarRepository;
     private Pathfinder pathfinder;
     private Player player;
-
-    Region r1, r2, r3, r4, r5, r6;
-    Region rs1, rs2;
 
     @BeforeEach
     void testData() {
@@ -42,7 +44,7 @@ public class PathfinderTest {
         Faction faction_good = new Faction("Gondor", player, new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), "white", r1, "Double move in Gondor");
         Faction faction_bad = new Faction("Mordor", null, new ArrayList<>(), new ArrayList<>(), new HashSet<>(), new ArrayList<>(), new ArrayList<>(), "black", r3, "Move in Mordor");
 
-        Army army = Army.builder().name("Test army").armyType(ArmyType.ARMY).faction(faction_good).currentRegion(r1).boundTo(null). units(new ArrayList<>())
+        Army army = Army.builder().name("Test army").armyType(ArmyType.ARMY).faction(faction_good).currentRegion(r1).boundTo(null).units(new ArrayList<>())
                 .sieges(new ArrayList<>()).stationedAt(null).freeTokens(15.0).isHealing(false).healStart(null).healEnd(null).hoursHealed(0).hoursLeftHealing(0)
                 .originalClaimbuild(null).createdAt(null).isPaid(false).build();
         RPChar rpchar = RPChar.builder().name("Aldwin").currentRegion(r1).boundTo(army).build();

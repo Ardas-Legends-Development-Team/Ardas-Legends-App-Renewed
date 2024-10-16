@@ -1,6 +1,10 @@
 package com.ardaslegends.service;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.PathElement;
+import com.ardaslegends.domain.Player;
+import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.RegionType;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.domain.war.War;
 import com.ardaslegends.domain.war.WarParticipant;
 import com.ardaslegends.repository.region.RegionRepository;

@@ -1,6 +1,7 @@
 package com.ardaslegends.service.time;
 
 import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.claimbuilds.ClaimBuildType;
 import com.ardaslegends.repository.ArmyRepository;
 import com.ardaslegends.repository.MovementRepository;
 import com.ardaslegends.repository.player.PlayerRepository;

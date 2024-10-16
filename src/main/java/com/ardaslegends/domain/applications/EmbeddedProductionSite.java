@@ -1,7 +1,7 @@
 package com.ardaslegends.domain.applications;
 
 import com.ardaslegends.domain.AbstractDomainObject;
-import com.ardaslegends.domain.ProductionSite;
+import com.ardaslegends.domain.claimbuilds.ProductionSite;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;

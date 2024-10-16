@@ -1,5 +1,6 @@
 package com.ardaslegends.domain;
 
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,7 @@ public class RegionTest {
     Set<Faction> factionSet;
     Region region;
     Faction factionWithNoCbInClaimedBy;
+
     @BeforeEach
     void setup() {
 
@@ -28,7 +30,7 @@ public class RegionTest {
         factionWithNoCbInClaimedBy = Faction.builder().name("No Cb Faction").regions(new HashSet<>()).build();
 
         factionSet = new HashSet<>();
-        factionSet.addAll(Set.of(mordor,gondor,factionWithNoCbInClaimedBy));
+        factionSet.addAll(Set.of(mordor, gondor, factionWithNoCbInClaimedBy));
 
         ClaimBuild claimBuild1 = ClaimBuild.builder().name("kek1").ownedBy(gondor).build();
         ClaimBuild claimBuild2 = ClaimBuild.builder().name("kek2").ownedBy(gondor).build();
@@ -141,7 +143,7 @@ public class RegionTest {
 
         var neighbors = r1.getNeighboringRegions();
 
-        assertThrows(NullPointerException.class,  () -> r1.addNeighbour(null));
+        assertThrows(NullPointerException.class, () -> r1.addNeighbour(null));
 
         assertThat(neighbors).isNotNull();
         assertThat(neighbors.size()).isEqualTo(0);

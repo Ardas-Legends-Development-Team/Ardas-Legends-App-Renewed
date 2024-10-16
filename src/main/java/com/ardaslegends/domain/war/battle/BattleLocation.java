@@ -1,7 +1,7 @@
 package com.ardaslegends.domain.war.battle;
 
-import com.ardaslegends.domain.ClaimBuild;
 import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.claimbuilds.ClaimBuild;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;

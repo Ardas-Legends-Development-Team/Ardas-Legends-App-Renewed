@@ -1,4 +1,4 @@
-package com.ardaslegends.domain;
+package com.ardaslegends.domain.claimbuilds;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

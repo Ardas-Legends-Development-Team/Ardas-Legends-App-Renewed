@@ -1,6 +1,6 @@
 package com.ardaslegends.configuration.converter;
 
-import com.ardaslegends.domain.ResourceType;
+import com.ardaslegends.domain.claimbuilds.ResourceType;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.convert.converter.Converter;

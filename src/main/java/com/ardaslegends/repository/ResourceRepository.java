@@ -1,6 +1,6 @@
 package com.ardaslegends.repository;
 
-import com.ardaslegends.domain.Resource;
+import com.ardaslegends.domain.claimbuilds.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,11 @@
 package com.ardaslegends.presentation.discord.utils;
 
-import com.ardaslegends.domain.*;
+import com.ardaslegends.domain.Army;
+import com.ardaslegends.domain.PathElement;
+import com.ardaslegends.domain.Region;
+import com.ardaslegends.domain.Unit;
+import com.ardaslegends.domain.claimbuilds.ProductionClaimbuild;
+import com.ardaslegends.domain.claimbuilds.SpecialBuilding;
 import com.ardaslegends.presentation.discord.exception.BotException;
 import com.ardaslegends.presentation.exceptions.InternalServerException;
 import com.ardaslegends.service.exceptions.ServiceException;
@@ -37,7 +42,7 @@ public interface DiscordUtils {
 
         while (option.isSubcommandOrGroup()) {
             commandName.append(" %s".formatted(option.getName()));
-            if(option.getOptions().size() > 0)
+            if (option.getOptions().size() > 0)
                 option = option.getOptions().get(0);
             else
                 break;
@@ -57,7 +62,7 @@ public interface DiscordUtils {
         while (option.isSubcommandOrGroup()) {
             log.debug("GetOptions: Option [{}] is subcommand [{}]", option.getName(), option.isSubcommandOrGroup());
             optionList = option.getOptions();
-            if(option.getOptions().size() > 0)
+            if (option.getOptions().size() > 0)
                 option = option.getOptions().get(0);
             else
                 break;
@@ -99,16 +104,15 @@ public interface DiscordUtils {
 
         SlashCommandInteractionOption option;
 
-        if(optional) {
+        if (optional) {
             var optionalOption = getOptionalOption(name, options);
 
-            if(optionalOption.isEmpty()) {
+            if (optionalOption.isEmpty()) {
                 return Optional.empty();
             }
 
             option = optionalOption.get();
-        }
-        else {
+        } else {
             option = getOption(name, options);
         }
 
@@ -314,14 +318,14 @@ public interface DiscordUtils {
 
     default String createDurationString(int costInHours) {
         log.debug("Building Duration String from cost in hours: [{}]", costInHours);
-        int days =  (int) Math.floor(costInHours / 24.0);
+        int days = (int) Math.floor(costInHours / 24.0);
         log.trace("Days: [{}]", days);
         int hours = costInHours % 24;
         log.trace("Hours: [{}]", hours);
 
         StringBuilder costStr = new StringBuilder("%d day(s)".formatted(days));
 
-        if(hours > 0) {
+        if (hours > 0) {
             costStr.append(" and %d hours".formatted(hours));
         }
 
