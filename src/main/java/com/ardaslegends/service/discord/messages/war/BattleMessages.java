@@ -3,7 +3,6 @@ package com.ardaslegends.service.discord.messages.war;
 import com.ardaslegends.domain.Army;
 import com.ardaslegends.domain.Player;
 import com.ardaslegends.domain.RPChar;
-import com.ardaslegends.domain.Unit;
 import com.ardaslegends.domain.war.battle.Battle;
 import com.ardaslegends.domain.war.battle.RpCharCasualty;
 import com.ardaslegends.domain.war.battle.UnitCasualty;
@@ -22,11 +21,22 @@ import org.javacord.api.entity.user.User;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Utility class for creating Discord messages related to battles.
+ */
 public class BattleMessages {
 
+    /**
+     * Creates a message declaring a battle.
+     *
+     * @param battle         The battle to be declared.
+     * @param discordService The Discord service used to retrieve user and role information.
+     * @return An {@link ALMessage} containing the message and embeds for the battle declaration.
+     * @throws NullPointerException if the battle or discordService is null.
+     */
     public static ALMessage declareBattle(Battle battle, DiscordService discordService) {
         Objects.requireNonNull(battle, "Declare Battle discord message got passed null value for battle");
-        Objects.requireNonNull(battle, "Declare Battle discord message got passed null value for discordService");
+        Objects.requireNonNull(discordService, "Declare Battle discord message got passed null value for discordService");
 
         AllowedMentions mentions = new AllowedMentionsBuilder()
                 .setMentionUsers(true)
@@ -43,13 +53,13 @@ public class BattleMessages {
                 .append(" has declared battle on the ")
                 .append((isFieldBattle ? "army " :
                         battle.getBattleLocation().getClaimBuild().getOwnedBy().getName() + " " +
-                        battle.getBattleLocation().getClaimBuild().getType().getName() + " "))
+                                battle.getBattleLocation().getClaimBuild().getType().getName() + " "))
                 .append((isFieldBattle ? battle.getFirstDefender().getName() : battle.getBattleLocation().getClaimBuild().getName()))
                 .append("!");
 
         val embedDescription = message.getStringBuilder().toString();
 
-        if(defendingArmies.stream().anyMatch(army -> army.getBoundTo() != null)) {
+        if (defendingArmies.stream().anyMatch(army -> army.getBoundTo() != null)) {
             val defendingPlayerMentions = defendingArmies.stream()
                     .map(Army::getBoundTo)
                     .filter(Objects::nonNull)
@@ -88,11 +98,11 @@ public class BattleMessages {
                 .setThumbnail(Thumbnails.DECLARE_BATTLE.getUrl())
                 .setTimestampToNow();
 
-        if(!isFieldBattle) {
-            embed.addField("","")
+        if (!isFieldBattle) {
+            embed.addField("", "")
                     .addInlineField("Claimbuild", battle.getBattleLocation().getClaimBuild().getName() +
-                    " (" + discordService.getRoleByIdOrElseThrow(battle.getBattleLocation().getClaimBuild().getOwnedBy().getFactionRoleId()).getMentionTag()
-                    + ")")
+                            " (" + discordService.getRoleByIdOrElseThrow(battle.getBattleLocation().getClaimBuild().getOwnedBy().getFactionRoleId()).getMentionTag()
+                            + ")")
                     .addInlineField("Claimbuild Type", battle.getBattleLocation().getClaimBuild().getType().getName());
         }
 
@@ -102,9 +112,17 @@ public class BattleMessages {
         return new ALMessage(message, embeds);
     }
 
+    /**
+     * Creates a message concluding a battle.
+     *
+     * @param battle         The battle to be concluded.
+     * @param discordService The Discord service used to retrieve user and role information.
+     * @return An {@link ALMessage} containing the message and embeds for the battle conclusion.
+     * @throws NullPointerException if the battle or discordService is null.
+     */
     public static ALMessage concludeBattle(Battle battle, DiscordService discordService) {
         Objects.requireNonNull(battle, "Conclude Battle discord message got passed null value for battle");
-        Objects.requireNonNull(battle, "Conclude Battle discord message got passed null value for discordService");
+        Objects.requireNonNull(discordService, "Conclude Battle discord message got passed null value for discordService");
 
         AllowedMentions mentions = new AllowedMentionsBuilder()
                 .setMentionUsers(true)
@@ -119,7 +137,7 @@ public class BattleMessages {
         val embedDescription = message.getStringBuilder().toString();
         val battleResult = battle.getBattleResult();
 
-        if(!battleResult.getRpCharCasualties().isEmpty()) {
+        if (!battleResult.getRpCharCasualties().isEmpty()) {
             val injuredPlayerMentions = battleResult.getRpCharCasualties().stream()
                     .map(RpCharCasualty::getRpChar)
                     .map(RPChar::getOwner)
@@ -157,8 +175,8 @@ public class BattleMessages {
                 .setThumbnail(Thumbnails.DECLARE_BATTLE.getUrl())
                 .setTimestampToNow();
 
-        if(!battle.isFieldBattle()) {
-            embed.addField("","")
+        if (!battle.isFieldBattle()) {
+            embed.addField("", "")
                     .addInlineField("Claimbuild", battle.getBattleLocation().getClaimBuild().getName() +
                             " (" + discordService.getRoleByIdOrElseThrow(battle.getBattleLocation().getClaimBuild().getOwnedBy().getFactionRoleId()).getMentionTag()
                             + ")")
@@ -181,6 +199,13 @@ public class BattleMessages {
         return new ALMessage(message, embeds);
     }
 
+    /**
+     * Creates an embed for army casualties.
+     *
+     * @param unitCasualties The set of unit casualties.
+     * @param discordService The Discord service used to retrieve role information.
+     * @return An {@link EmbedBuilder} containing the army casualties information.
+     */
     public static EmbedBuilder armyCasualtiesEmbed(Set<UnitCasualty> unitCasualties, DiscordService discordService) {
         Map<Army, List<UnitCasualty>> casualtiesByArmy = unitCasualties.stream()
                 .collect(Collectors.groupingBy(UnitCasualty::getArmy));
@@ -209,7 +234,7 @@ public class BattleMessages {
             });
         });
 
-        if(unitCasualties.isEmpty()) {
+        if (unitCasualties.isEmpty()) {
             armyString.delete(0, Integer.MAX_VALUE);
             unitString.delete(0, Integer.MAX_VALUE);
             aliveString.delete(0, Integer.MAX_VALUE);
@@ -227,36 +252,39 @@ public class BattleMessages {
                 .setTimestampToNow();
     }
 
+    /**
+     * Creates an embed for role-playing character casualties.
+     *
+     * @param rpCharCasualties The set of role-playing character casualties.
+     * @return An {@link EmbedBuilder} containing the role-playing character casualties information.
+     */
     public static EmbedBuilder rpCharCasualtiesEmbed(Set<RpCharCasualty> rpCharCasualties) {
 
         val charString = new StringBuilder();
         rpCharCasualties.forEach(casualty -> {
             charString.append(casualty.getRpChar().getName())
                     .append(" ");
-            if(casualty.getSlainByChar() != null) {
+            if (casualty.getSlainByChar() != null) {
                 charString.append("got slain by ");
-                if(casualty.getSlainByChar().getActiveCharacter().isPresent()) {
+                if (casualty.getSlainByChar().getActiveCharacter().isPresent()) {
                     charString.append(casualty.getSlainByChar().getActiveCharacter().get().getName());
-                }
-                else
+                } else
                     charString.append(casualty.getSlainByChar().getIgn());
 
-                if(StringUtils.isNotBlank(casualty.getSlainByWeapon())) {
+                if (StringUtils.isNotBlank(casualty.getSlainByWeapon())) {
                     charString.append(" using ")
                             .append(casualty.getSlainByWeapon());
                 }
 
-            }
-            else if (StringUtils.isNotBlank(casualty.getOptionalCause())){
+            } else if (StringUtils.isNotBlank(casualty.getOptionalCause())) {
                 charString.append(casualty.getOptionalCause());
-            }
-            else
+            } else
                 charString.append("fell in battle");
 
             charString.append("\n");
         });
 
-        if(rpCharCasualties.isEmpty())
+        if (rpCharCasualties.isEmpty())
             charString.delete(0, Integer.MAX_VALUE).append("No character has died in this battle!");
 
         return new EmbedBuilder()
