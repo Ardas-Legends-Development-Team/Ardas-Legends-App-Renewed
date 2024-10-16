@@ -29,7 +29,12 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
+/**
+ * Service for handling war operations.
+ * <p>
+ * This service provides methods to create, end, and retrieve wars, as well as to check the status of factions in wars.
+ * </p>
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -40,12 +45,32 @@ public class WarService extends AbstractService<War, WarRepository> {
     private final PlayerService playerService;
     private final DiscordService discordService;
 
+    /**
+     * Retrieves a paginated list of wars.
+     * <p>
+     * This method retrieves a paginated list of wars from the repository.
+     * </p>
+     *
+     * @param pageable The pagination information.
+     * @return A {@link Page} of {@link War} objects.
+     * @throws NullPointerException if the pageable parameter is null.
+     */
     public Page<War> getWars(Pageable pageable) {
         Objects.requireNonNull(pageable, "Pageable getWarsBody must not be null");
-        var page = secureFind(pageable, warRepository::findAll);
-        return page;
+        return secureFind(pageable, warRepository::findAll);
     }
 
+    /**
+     * Creates a new war based on the provided data.
+     * <p>
+     * This method validates the provided data, checks various conditions, and creates a new war if all conditions are met.
+     * </p>
+     *
+     * @param createWarDto The data for creating the war.
+     * @return The created {@link War} object.
+     * @throws WarServiceException     if any condition for creating the war is not met.
+     * @throws FactionServiceException if the defending faction is not found.
+     */
     @Transactional(readOnly = false)
     public War createWar(CreateWarDto createWarDto) {
         log.debug("Creating war with data [defender: {}]", createWarDto);
@@ -107,16 +132,43 @@ public class WarService extends AbstractService<War, WarRepository> {
         return war;
     }
 
+    /**
+     * Retrieves the active wars of the specified faction by name.
+     * <p>
+     * This method retrieves the active wars of the specified faction by name.
+     * </p>
+     *
+     * @param factionName The name of the faction.
+     * @return A set of active {@link War} objects involving the specified faction.
+     */
     public Set<War> getActiveWarsOfFaction(String factionName) {
         // TODO, not yet implemented
         return null;
     }
 
+    /**
+     * Retrieves the active wars of the specified faction.
+     * <p>
+     * This method retrieves the active wars of the specified faction.
+     * </p>
+     *
+     * @param faction The faction to retrieve active wars for.
+     * @return A set of active {@link War} objects involving the specified faction.
+     */
     public Set<War> getActiveWarsOfFaction(Faction faction) {
-        Set<War> wars = secureFind(faction, warRepository::findAllActiveWarsWithFaction);
-        return wars;
+        return secureFind(faction, warRepository::findAllActiveWarsWithFaction);
     }
 
+    /**
+     * Forces the end of a war based on the provided data.
+     * <p>
+     * This method validates the provided data, checks various conditions, and forces the end of a war if all conditions are met.
+     * </p>
+     *
+     * @param dto The data for ending the war.
+     * @return The ended {@link War} object.
+     * @throws StaffPermissionException if the player does not have permission to force end the war.
+     */
     @Transactional(readOnly = false)
     public War forceEndWar(EndWarDto dto) {
         log.debug("Player with discord id [{}] is trying to force end war [{}]", dto.executorDiscordId(), dto.warName());
@@ -148,6 +200,16 @@ public class WarService extends AbstractService<War, WarRepository> {
         return war;
     }
 
+    /**
+     * Retrieves the wars with the specified name.
+     * <p>
+     * This method retrieves the wars with the specified name.
+     * </p>
+     *
+     * @param name The name of the wars to retrieve.
+     * @return A set of {@link War} objects with the specified name.
+     * @throws NotFoundException if no wars with the specified name are found.
+     */
     public Set<War> getWarsByName(String name) {
         log.debug("Getting wars with name [{}]", name);
 
@@ -162,12 +224,20 @@ public class WarService extends AbstractService<War, WarRepository> {
             throw NotFoundException.noWarWithNameFound(name);
         }
 
-        foundWars.forEach(war -> {
-            log.debug("Found war [{}] between attacker [{}] and defender [{}]", war.getName(), war.getInitialAttacker().getWarParticipant().getName(), war.getInitialDefender().getWarParticipant().getName());
-        });
+        foundWars.forEach(war -> log.debug("Found war [{}] between attacker [{}] and defender [{}]", war.getName(), war.getInitialAttacker().getWarParticipant().getName(), war.getInitialDefender().getWarParticipant().getName()));
         return foundWars;
     }
 
+    /**
+     * Retrieves the active war with the specified name.
+     * <p>
+     * This method retrieves the active war with the specified name.
+     * </p>
+     *
+     * @param name The name of the active war to retrieve.
+     * @return The active {@link War} object with the specified name.
+     * @throws NotFoundException if no active war with the specified name is found.
+     */
     public War getActiveWarByName(String name) {
         log.debug("Getting active war with name [{}]", name);
         val foundWar = warRepository.queryActiveWarByName(name);
@@ -180,5 +250,4 @@ public class WarService extends AbstractService<War, WarRepository> {
         log.info("Found active war with name [{}] between attacker [{}] and defender [{}]", war.getName(), war.getInitialAttacker().getWarParticipant().getName(), war.getInitialDefender().getWarParticipant().getName());
         return war;
     }
-
 }

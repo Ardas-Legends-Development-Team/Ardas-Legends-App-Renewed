@@ -27,6 +27,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.OffsetDateTime;
 import java.util.*;
 
+/**
+ * Service class for handling battle operations.
+ * <p>
+ * This service provides methods to create and conclude battles between armies and claim builds.
+ * </p>
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Service
@@ -43,6 +49,17 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
     private final TimeFreezeService timeFreezeService;
     private final DiscordService discordService;
 
+    /**
+     * Creates a new battle based on the provided data.
+     * <p>
+     * This method validates the provided data, checks various conditions, and creates a new battle if all conditions are met.
+     * </p>
+     *
+     * @param createBattleDto The data for creating the battle.
+     * @return The created {@link Battle} object.
+     * @throws BattleServiceException if any condition for creating the battle is not met.
+     * @throws ArmyServiceException   if the player does not have permission to start the battle.
+     */
     @Transactional(readOnly = false)
     public Battle createBattle(CreateBattleDto createBattleDto) {
         log.debug("Creating battle with data {}", createBattleDto);
@@ -221,6 +238,15 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         return battle;
     }
 
+    /**
+     * Starts the battle and sets the BattlePhase to ONGOING.
+     * <p>
+     * This method is called by the 24h timer after the battle was created.
+     * </p>
+     *
+     * @param battle The battle to start.
+     * @return The started battle.
+     */
     private Battle startBattle(Battle battle) {
         log.debug("Starting battle [{}]", battle);
 
@@ -237,6 +263,17 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         return battle;
     }
 
+    /**
+     * Concludes the specified battle based on the provided data.
+     * <p>
+     * This method updates the battle result, handles casualties, and unfreezes time.
+     * </p>
+     *
+     * @param concludeBattleDto The data for concluding the battle.
+     * @return The concluded {@link Battle} object.
+     * @throws BattleServiceException if any condition for concluding the battle is not met.
+     * @throws RpCharServiceException if any player character has no active role-playing character.
+     */
     @Transactional(readOnly = false)
     public Battle concludeBattle(ConcludeBattleDto concludeBattleDto) {
         log.debug("Concluding battle with data {}", concludeBattleDto);
@@ -363,12 +400,14 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
     }
 
     /**
-     * Updates the units of the army specified in the SurvivingUnitsDto to only include the surviving
-     * units also specified in the dto
+     * Updates the surviving units from the provided data.
+     * <p>
+     * This method updates the units that survived the battle and returns a set of unit casualties.
+     * </p>
      *
-     * @param dto    Dto which contains the army and its surviving units
-     * @param battle The battle which the casualties happened in
-     * @return A set of UnitCasualty objects of the units that died in the battle.
+     * @param dto    The data transfer object containing the surviving units.
+     * @param battle The battle to update.
+     * @return A set of {@link UnitCasualty} objects representing the units that died in the battle.
      */
     private Set<UnitCasualty> updateSurvivingUnitsFromDto(SurvivingUnitsDto dto, Battle battle) {
         log.debug("Updating the surviving units of army [{}]", dto.army());
@@ -439,10 +478,13 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
     }
 
     /**
-     * Kills all the units in the army and returns a set of UnitCasualties for all the units
+     * Kills all the units in the specified army and returns a set of unit casualties.
+     * <p>
+     * This method kills all the units in the specified army and returns a set of {@link UnitCasualty} objects representing the units that died in the battle.
+     * </p>
      *
-     * @param army Army which units should be killed
-     * @return A set of UnitCasualty objects of the units that died in the battle.
+     * @param army The army whose units should be killed.
+     * @return A set of {@link UnitCasualty} objects representing the units that died in the battle.
      */
     private Set<UnitCasualty> killAllUnitsOfArmy(Army army) {
         log.debug("Killing all units of army [{}]", army.getName());
@@ -466,11 +508,14 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
     }
 
     /**
-     * Injures every RpChar of the players passed in the DiscordIdDto array.
+     * Injures every role-playing character of the players passed in the data transfer object array.
+     * <p>
+     * This method injures the characters of the specified players and returns a set of role-playing character casualties.
+     * </p>
      *
-     * @param dtos Array of discord id dtos of the players that died in the battle
-     * @return A Set of RpCharCasualties for every injured RpChar
-     * @throws RpCharServiceException noActiveRpChar When player has no RpChar
+     * @param dtos The array of data transfer objects containing the Discord IDs of the players that died in the battle.
+     * @return A set of {@link RpCharCasualty} objects representing the injured role-playing characters.
+     * @throws RpCharServiceException if any player has no active role-playing character.
      */
     private Set<RpCharCasualty> updateKilledPlayers(RpCharCasualtyDto[] dtos) {
         log.debug("Injuring the characters of players: {}", (Object) dtos);
@@ -526,9 +571,12 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
 
     /**
      * Checks if the army with the given ID is currently involved in any active battles.
+     * <p>
+     * This method checks if the specified army is currently involved in any active battles.
+     * </p>
      *
-     * @param armyId the ID of the army to check
-     * @return true if the army is in an active battle, false otherwise
+     * @param armyId The ID of the army to check.
+     * @return {@code true} if the army is in an active battle, {@code false} otherwise.
      */
     @Transactional(readOnly = true)
     public boolean isArmyInActiveBattle(Long armyId) {
@@ -539,9 +587,12 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
 
     /**
      * Retrieves the past battles involving the specified army.
+     * <p>
+     * This method retrieves the past battles involving the specified army.
+     * </p>
      *
-     * @param armyId the ID of the army to retrieve past battles for
-     * @return a set of past battles involving the specified army
+     * @param armyId The ID of the army to retrieve past battles for.
+     * @return A set of past {@link Battle} objects involving the specified army.
      */
     @Transactional(readOnly = true)
     public Set<Battle> getPastBattlesByArmyId(Long armyId) {
