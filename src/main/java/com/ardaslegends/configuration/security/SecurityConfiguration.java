@@ -1,4 +1,4 @@
-package com.ardaslegends.configuration;
+package com.ardaslegends.configuration.security;
 
 import com.ardaslegends.domain.Role;
 import org.springframework.context.annotation.Bean;

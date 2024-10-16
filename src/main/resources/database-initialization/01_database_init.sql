@@ -1,3 +1,5 @@
+-- Drop the existing public schema and all its objects
 drop schema public cascade;
-create schema public;
 
+-- Create a new public schema
+create schema public;
