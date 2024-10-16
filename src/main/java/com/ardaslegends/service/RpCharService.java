@@ -140,7 +140,7 @@ public class RpCharService extends AbstractService<RPChar, RpcharRepository> {
         RPChar character = getRpCharByName(dto.characterName());
 
         if (character.getStationedAt() == null) {
-            log.warn("Army [{}] is not stationed at a cb, so cannot be unstationed!", character);
+            log.warn("Character [{}] is not stationed at any claimbuild, so cannot be unstationed!", character);
             throw RpCharServiceException.characterNotStationed(character.getName());
         }
 
