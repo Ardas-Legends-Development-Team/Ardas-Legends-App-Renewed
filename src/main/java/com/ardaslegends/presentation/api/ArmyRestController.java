@@ -37,7 +37,7 @@ public class ArmyRestController extends AbstractRestController {
     private static final String PATH_UPKEEP = "/upkeep";
     private static final String PATH_UPKEEP_PER_FACTION = "/upkeep/{faction}";
     private static final String PATH_SET_IS_PAID = "/setPaid";
-    private static final String PATH_GET_UNPAID =  "/unpaid";
+    private static final String PATH_GET_UNPAID = "/unpaid";
 
     private final ArmyService armyService;
 
@@ -51,11 +51,12 @@ public class ArmyRestController extends AbstractRestController {
 
         return ResponseEntity.ok(pageResponse);
     }
+
     @PostMapping(PATH_CREATE_ARMY)
     public HttpEntity<ArmyResponse> createArmy(@RequestBody CreateArmyDto dto) {
         log.debug("Incoming createArmy Request: Data [{}]", dto);
 
-        if(dto.unitString() != null) {
+        if (dto.unitString() != null) {
             log.debug("Found unitString in CreateArmyDto, building units from string");
             var units = armyService.convertUnitInputIntoUnits(dto.unitString());
             dto = new CreateArmyDto(dto.executorDiscordId(), dto.name(), dto.armyType(), dto.claimBuildName(), units);
@@ -130,7 +131,7 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful start healing Request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful start healing Request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
@@ -143,12 +144,12 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful stop healing Request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful stop healing Request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping(PATH_STATION)
-    public HttpEntity<ArmyResponse> station(@RequestBody StationDto dto) {
+    public HttpEntity<ArmyResponse> station(@RequestBody StationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
 
         log.debug("Calling station()");
@@ -156,12 +157,12 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful station request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful station request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping(PATH_UNSTATION)
-    public HttpEntity<ArmyResponse> unstation(@RequestBody UnstationDto dto) {
+    public HttpEntity<ArmyResponse> unstation(@RequestBody UnstationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
 
         log.debug("Calling unstation()");
@@ -169,7 +170,7 @@ public class ArmyRestController extends AbstractRestController {
         log.debug("Converting to ArmyResponse");
         ArmyResponse response = new ArmyResponse(modifiedArmy);
 
-        log.info("Sending successful unstation request for [{}]", modifiedArmy.toString());
+        log.info("Sending successful unstation request for [{}]", modifiedArmy);
         return ResponseEntity.ok(response);
     }
 

@@ -1,11 +1,11 @@
 package com.ardaslegends.presentation.api.response.claimbuild;
 
 import com.ardaslegends.domain.ClaimBuild;
-import com.ardaslegends.domain.ClaimBuildType;
 import com.ardaslegends.domain.SpecialBuilding;
 import com.ardaslegends.presentation.api.response.army.ArmyResponse;
 import com.ardaslegends.presentation.api.response.claimbuild.coordinate.CoordinateResponse;
 import com.ardaslegends.presentation.api.response.player.PlayerResponse;
+import com.ardaslegends.presentation.api.response.player.rpchar.RpCharResponse;
 import com.ardaslegends.presentation.api.response.productionsite.claimbuild.ClaimbuildProductionSiteResponse;
 
 public record ClaimbuildResponse(
@@ -29,9 +29,8 @@ public record ClaimbuildResponse(
         Integer createdCompaniesCount,
         Integer freeCompaniesRemaining,
         boolean atMaxArmies,
-        boolean atMaxCompanies
-
-
+        boolean atMaxCompanies,
+        RpCharResponse[] stationedChars
 ) {
     public ClaimbuildResponse(ClaimBuild claimBuild) {
         this(
@@ -55,7 +54,8 @@ public record ClaimbuildResponse(
                 claimBuild.getCountOfTradingCompanies(),
                 claimBuild.getFreeTradingCompaniesRemaining(),
                 claimBuild.atMaxArmies(),
-                claimBuild.atMaxTradingCompanies()
+                claimBuild.atMaxTradingCompanies(),
+                claimBuild.getStationedChars().stream().map(RpCharResponse::new).toArray(RpCharResponse[]::new)
         );
     }
 }

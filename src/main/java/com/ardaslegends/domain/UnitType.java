@@ -29,18 +29,21 @@ public final class UnitType extends AbstractDomainObject {
     private Double tokenCost; //how much tokens this unit costs
 
     @NotNull
+    @Builder.Default
     private Boolean isMounted = false;
 
     @ManyToMany
     @JoinTable(name = "factions_units",
             joinColumns = {@JoinColumn(name = "unit_name", foreignKey = @ForeignKey(name = "fk_factions_units_unit_name"))},
             inverseJoinColumns = {@JoinColumn(name = "faction_id", foreignKey = @ForeignKey(name = "fk_factions_units_faction_id"))})
+    @Builder.Default
     private Set<Faction> usableBy = new HashSet<>(2);
 
     public UnitType(String unitName, Double tokenCost, Boolean isMounted) {
         this.unitName = unitName;
         this.tokenCost = tokenCost;
         this.isMounted = isMounted;
+        this.usableBy = new HashSet<>(2);
     }
 
     @Override
