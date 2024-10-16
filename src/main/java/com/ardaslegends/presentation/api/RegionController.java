@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 
+/**
+ * REST controller for managing Region entities.
+ * <p>
+ * This controller provides endpoints for retrieving, updating, and resetting Region entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @RequestMapping(RegionController.BASE_URL)
@@ -30,6 +35,11 @@ public class RegionController extends AbstractRestController {
 
     private final RegionService regionService;
 
+    /**
+     * Retrieves all Region entities.
+     *
+     * @return an array of {@link RegionResponse} containing all Region entities.
+     */
     @GetMapping(GET_ALL)
     public ResponseEntity<RegionResponse[]> getAll() {
         log.info("Incoming getAll Request");
@@ -42,6 +52,12 @@ public class RegionController extends AbstractRestController {
         return ResponseEntity.ok(regionsResponse);
     }
 
+    /**
+     * Retrieves a Region entity by its ID.
+     *
+     * @param regionId the ID of the region.
+     * @return the {@link RegionResponseDetailed} containing the region details.
+     */
     @GetMapping(GET_REGION_BY_ID)
     public ResponseEntity<RegionResponseDetailed> getRegion(@PathVariable String regionId) {
         log.debug("Incoming getRegion Request with regionId path variable [{}]", regionId);
@@ -58,7 +74,11 @@ public class RegionController extends AbstractRestController {
         return ResponseEntity.ok(regionResponse);
     }
 
-
+    /**
+     * Retrieves all Region entities with detailed information.
+     *
+     * @return an array of {@link RegionResponseDetailed} containing all Region entities with detailed information.
+     */
     @GetMapping(GET_ALL_DETAILED)
     public ResponseEntity<RegionResponseDetailed[]> getAllDetailed() {
         log.info("Incoming getAllDetailed Request");
@@ -71,8 +91,13 @@ public class RegionController extends AbstractRestController {
         return ResponseEntity.ok(regionsResponse);
     }
 
+    /**
+     * Retrieves all Region types.
+     *
+     * @return an array of {@link String} containing all Region types.
+     */
     @GetMapping(GET_REGION_TYPES)
-    public HttpEntity<String[]> getRegionTypes(){
+    public HttpEntity<String[]> getRegionTypes() {
         log.info("Incoming getRegionTypes Request");
 
         val regionTypesStringArray = Arrays.stream(RegionType.values())
@@ -82,6 +107,11 @@ public class RegionController extends AbstractRestController {
         return ResponseEntity.ok(regionTypesStringArray);
     }
 
+    /**
+     * Resets the ownership status of all Region entities.
+     *
+     * @return a {@link ResponseEntity} with status code 200 (OK).
+     */
     @PatchMapping(RESET_OWNERSHIP)
     public ResponseEntity<Void> resetOwnershipChanged() {
         log.info("Incoming reset ownership-changed request");
@@ -92,5 +122,4 @@ public class RegionController extends AbstractRestController {
         log.debug("Returning status code ok for reset-ownership");
         return ResponseEntity.ok(null);
     }
-
 }

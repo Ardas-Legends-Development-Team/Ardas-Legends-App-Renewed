@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * REST controller for managing Army entities.
+ * <p>
+ * This controller provides endpoints for creating, retrieving, updating, and deleting Army entities.
+ * </p>
+ */
 @RequiredArgsConstructor
-
 @Slf4j
 @RestController
 @RequestMapping(ArmyRestController.BASE_URL)
@@ -41,6 +46,12 @@ public class ArmyRestController extends AbstractRestController {
 
     private final ArmyService armyService;
 
+    /**
+     * Retrieves a paginated list of Army entities.
+     *
+     * @param pageable the pagination information.
+     * @return a page of {@link ArmyResponse} containing the Army entities.
+     */
     @Operation(summary = "Get Armies Paginated", description = "Retrieves a Page with a set of elements, parameters define the size, which Page you want and how its sorted")
     @GetMapping
     public HttpEntity<Page<ArmyResponse>> getArmiesPaginated(Pageable pageable) {
@@ -52,6 +63,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(pageResponse);
     }
 
+    /**
+     * Creates a new Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to create.
+     * @return the created {@link ArmyResponse}.
+     */
     @PostMapping(PATH_CREATE_ARMY)
     public HttpEntity<ArmyResponse> createArmy(@RequestBody CreateArmyDto dto) {
         log.debug("Incoming createArmy Request: Data [{}]", dto);
@@ -70,6 +87,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Binds an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to bind.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_BIND_ARMY)
     public HttpEntity<ArmyResponse> bindArmy(@RequestBody BindArmyDto dto) {
         log.debug("Incoming bindArmy Request: Data [{}]", dto);
@@ -83,6 +106,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Unbinds an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to unbind.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_UNBIND_ARMY)
     public HttpEntity<ArmyResponse> unbindArmy(@RequestBody BindArmyDto dto) {
         log.debug("Incoming unbindArmy Request: Data [{}]", dto);
@@ -96,6 +125,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Disbands an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to disband.
+     * @return the updated {@link ArmyResponse}.
+     */
     @DeleteMapping(PATH_DISBAND_ARMY)
     public HttpEntity<ArmyResponse> disbandArmy(@RequestBody DeleteArmyDto dto) {
         log.debug("Incoming disbandArmy Request: Data [{}]", dto);
@@ -109,6 +144,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Deletes an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to delete.
+     * @return the updated {@link ArmyResponse}.
+     */
     @DeleteMapping(PATH_DELETE_ARMY)
     public HttpEntity<ArmyResponse> deleteArmy(@RequestBody DeleteArmyDto dto) {
         log.debug("Incoming deleteArmy Request: Data [{}]", dto);
@@ -122,6 +163,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Starts healing an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to start healing.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_START_HEALING)
     public HttpEntity<ArmyResponse> startHealing(@RequestBody UpdateArmyDto dto) {
         log.debug("Incoming start healing Request: Data [{}]", dto);
@@ -135,6 +182,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Stops healing an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to stop healing.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_STOP_HEALING)
     public HttpEntity<ArmyResponse> stopHealing(@RequestBody UpdateArmyDto dto) {
         log.debug("Incoming stop healing Request: Data [{}]", dto);
@@ -148,6 +201,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Stations an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to station.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_STATION)
     public HttpEntity<ArmyResponse> station(@RequestBody StationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
@@ -161,6 +220,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Unstations an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to unstation.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_UNSTATION)
     public HttpEntity<ArmyResponse> unstation(@RequestBody UnstationArmyDto dto) {
         log.debug("Incoming station request: Data [{}]", dto);
@@ -174,6 +239,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Sets free tokens for an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to set free tokens.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_SET_FREE_TOKENS)
     public HttpEntity<ArmyResponse> setFreeArmyTokens(@RequestBody UpdateArmyDto dto) {
         log.debug("Incoming setFreeArmyTokens Request: Data [{}]", dto);
@@ -187,6 +258,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Picks a siege for an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to pick a siege.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_PICK_SIEGE)
     public HttpEntity<ArmyResponse> pickSiege(@RequestBody PickSiegeDto dto) {
         log.debug("Incoming pickSiege Request: Data [{}]", dto);
@@ -200,6 +277,11 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Retrieves the upkeep information for all Army entities.
+     *
+     * @return a list of {@link UpkeepDto} containing the upkeep information.
+     */
     @GetMapping(PATH_UPKEEP)
     public HttpEntity<List<UpkeepDto>> upkeep() {
         log.debug("Incoming upkeep request");
@@ -211,6 +293,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(upkeepList);
     }
 
+    /**
+     * Retrieves the upkeep information for a specific faction.
+     *
+     * @param factionName the name of the faction.
+     * @return the {@link UpkeepDto} containing the upkeep information for the specified faction.
+     */
     @GetMapping(PATH_UPKEEP_PER_FACTION)
     public HttpEntity<UpkeepDto> upkeepPerFaction(@PathVariable("faction") String factionName) {
         log.debug("Incoming upkeep per faction request for faction: [{}]", factionName);
@@ -222,6 +310,12 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * Sets the paid status for an Army entity.
+     *
+     * @param dto the data transfer object containing the details of the Army to set as paid.
+     * @return the updated {@link ArmyResponse}.
+     */
     @PatchMapping(PATH_SET_IS_PAID)
     public HttpEntity<ArmyResponse> setIsPaid(@RequestBody UpdateArmyDto dto) {
         log.debug("Incoming setIsPaid Request for army or company [{}]", dto);
@@ -235,6 +329,11 @@ public class ArmyRestController extends AbstractRestController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Retrieves a list of unpaid Army entities.
+     *
+     * @return a list of {@link ArmyResponse} containing the unpaid Army entities.
+     */
     @GetMapping(PATH_GET_UNPAID)
     public HttpEntity<List<ArmyResponse>> getUnpaid() {
         log.debug("Incoming getUnpaid Request");

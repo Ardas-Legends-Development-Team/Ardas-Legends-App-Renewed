@@ -3,17 +3,21 @@ package com.ardaslegends.presentation.api;
 import com.ardaslegends.presentation.AbstractRestController;
 import com.ardaslegends.presentation.api.response.productionsite.ProductionSiteResponse;
 import com.ardaslegends.service.ProductionSiteService;
-import com.ardaslegends.service.dto.productionSite.ProductionSiteDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * REST controller for managing ProductionSite entities.
+ * <p>
+ * This controller provides endpoints for retrieving ProductionSite entities.
+ * </p>
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
@@ -24,6 +28,11 @@ public class ProductionSiteController extends AbstractRestController {
 
     private final ProductionSiteService productionSiteService;
 
+    /**
+     * Retrieves all ProductionSite entities.
+     *
+     * @return an array of {@link ProductionSiteResponse} containing all ProductionSite entities.
+     */
     @GetMapping(GET_ALL)
     public HttpEntity<ProductionSiteResponse[]> getAll() {
         log.debug("Incoming getAll productionSites request");
@@ -34,6 +43,4 @@ public class ProductionSiteController extends AbstractRestController {
 
         return ResponseEntity.ok(productionSiteSet);
     }
-
 }
-
