@@ -110,6 +110,25 @@ public final class Movement extends AbstractDomainObject {
     }
 
     /**
+     * Returns the ID of the start region of the movement.
+     *
+     * @return the ID of the start region
+     */
+    public String getStartRegionId() {
+        return path.get(0).getRegion().getId();
+    }
+
+    /**
+     * Returns the ID of the destination region of the movement.
+     *
+     * @return the ID of the destination region
+     */
+    public String getDestinationRegionId() {
+        return path.get(path.size() - 1).getRegion().getId();
+    }
+
+
+    /**
      * Sets the movement to inactive and sets reachesNextRegionAt to null.
      */
     public void end() {
