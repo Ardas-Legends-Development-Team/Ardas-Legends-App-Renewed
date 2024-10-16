@@ -1,5 +1,9 @@
 package com.ardaslegends.domain;
 
+/**
+ * Enum representing the initial factions in the application.
+ * This enum is used to define the various initial factions available.
+ */
 public enum InitialFaction {
     ANGMAR,
     BLUE_MOUNTAINS,

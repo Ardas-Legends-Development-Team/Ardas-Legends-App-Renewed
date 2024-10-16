@@ -2,7 +2,14 @@ package com.ardaslegends.domain;
 
 import com.ardaslegends.configuration.converter.SpecialBuildingEnumConverter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import lombok.Getter;
 
+/**
+ * Enum representing different types of special buildings.
+ * This enum is used to categorize various special buildings in the application.
+ * It is deserialized using {@link SpecialBuildingEnumConverter}.
+ */
+@Getter
 @JsonDeserialize(converter = SpecialBuildingEnumConverter.class)
 public enum SpecialBuilding {
     WATCHTOWER("Watchtower"),
@@ -16,13 +23,10 @@ public enum SpecialBuilding {
     SHOP("Shop"),
     WALL("Wall");
 
-    private String name;
+    private final String name;
 
-    private SpecialBuilding(String name) {
+    SpecialBuilding(String name) {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
 }
