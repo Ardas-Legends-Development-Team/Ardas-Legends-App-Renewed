@@ -1,89 +1,442 @@
 @startuml
 
-class War <<Entity>> {
-    id_Key: Long
-    name: String
-    aggressors: List<WarParticipants>
-    defenders: List<WarParticipants>
-    startDate: OffsetDateTime
-    battles: List<Battle>
+package com.ardaslegends.domain.applications {
+
+    abstract class AbstractApplication<T> {
+        - Player applicant
+        - ApplicationState state
+        - OffsetDateTime appliedAt
+        - Short voteCount
+        - OffsetDateTime lastVoteAt
+        - Set<Player> acceptedBy
+        - Set<Player> declinedBy
+        - OffsetDateTime resolvedAt
+        - URL discordApplicationMessageLink
+        - Long discordApplicationMessageId
+        - URL discordAcceptedMessageLink
+        - Long discordAcceptedMessageId
+
+        + AbstractApplication()
+        + AbstractApplication(Player applicant)
+        + Message sendApplicationMessage(TextChannel channel)
+        + void updateApplicationMessage(TextChannel channel)
+        + Message sendAcceptedMessage(TextChannel channel)
+        + Set<Player> getAcceptedBy()
+        + Set<Player> getDeclinedBy()
+        + void addAcceptor(Player player)
+        + void addDecline(Player player)
+        + void removeVote(Player player)
+        + boolean acceptable()
+        + T accept()
+        # EmbedBuilder buildApplicationMessage()
+        # EmbedBuilder buildAcceptedMessage()
+        # T finishApplication()
+        # Short getRequiredVoteCount()
+    }
+
+    AbstractApplication "1" *-- "1" Player
+    AbstractApplication "1" *-- "1" ApplicationState
+    AbstractApplication "1" *-- "0..*" Player : acceptedBy
+    AbstractApplication "1" *-- "0..*" Player : declinedBy
+
+    enum ApplicationState {
+        ACCEPTED
+        OPEN
+        DENIED_BY_STAFF
+        WITHDRAWN
+    }
+
+    ApplicationState : +String displayName
+    ApplicationState : +ApplicationState(String displayName)
+
+    class ClaimbuildApplication extends AbstractApplication<ClaimBuild> {
+        - String claimbuildName
+        - Faction ownedBy
+        - Region region
+        - ClaimBuildType claimBuildType
+        - Coordinate coordinate
+        - Set<EmbeddedProductionSite> productionSites
+        - List<SpecialBuilding> specialBuildings
+        - String traders
+        - String siege
+        - String numberOfHouses
+        - Set<Player> builtBy
+
+        + ClaimbuildApplication()
+        + ClaimbuildApplication(Player applicant, String claimbuildName, Faction ownedBy, Region region, ClaimBuildType claimBuildType, Coordinate coordinate, Set<EmbeddedProductionSite> productionSites, List<SpecialBuilding> specialBuildings, String traders, String siege, String numberOfHouses, Set<Player> builtBy)
+        + EmbedBuilder buildApplicationMessage()
+        + EmbedBuilder buildAcceptedMessage()
+        + ClaimBuild finishApplication()
+        + Short getRequiredVoteCount()
+        + List<ProductionClaimbuild> mapProductionSites(ClaimBuild claimBuild)
+        + String createProductionSiteString()
+        + String createSpecialBuildingsString()
+    }
+
+    ClaimbuildApplication "1" *-- "1" Faction
+    ClaimbuildApplication "1" *-- "1" Region
+    ClaimbuildApplication "1" *-- "1" ClaimBuildType
+    ClaimbuildApplication "1" *-- "1" Coordinate
+    ClaimbuildApplication "1" *-- "0..*" EmbeddedProductionSite : productionSites
+    ClaimbuildApplication "1" *-- "0..*" SpecialBuilding : specialBuildings
+    ClaimbuildApplication "1" *-- "0..*" Player : builtBy
+
+    class EmbeddedProductionSite extends AbstractDomainObject {
+        - ProductionSite productionSite
+        - Long count
+
+        + boolean equals(Object o)
+        + int hashCode()
+    }
+
+    EmbeddedProductionSite "1" *-- "1" ProductionSite
+
+    class RoleplayApplication extends AbstractApplication<RPChar> {
+        - Faction faction
+        - String characterName
+        - String characterTitle
+        - String whyDoYouWantToBeThisCharacter
+        - String gear
+        - Boolean pvp
+        - String linkToLore
+
+        + RoleplayApplication(Player applicant, Faction faction, String characterName, String characterTitle, String whyDoYouWantToBeThisCharacter, String gear, Boolean pvp, String linkToLore)
+        + EmbedBuilder buildApplicationMessage()
+        + EmbedBuilder buildAcceptedMessage()
+        + RPChar finishApplication()
+        + Short getRequiredVoteCount()
+    }
+
+    RoleplayApplication "1" *-- "1" Faction
 }
 
-class WarParticipant <<Entity>> {
-    id_Key: Long
-    war_key: Long
-    warParticipant: Faction
-    initialParty: Boolean
-    joiningDate: OffsetDateTime
+package com.ardaslegends.domain.war {
+    class War extends AbstractDomainObject {
+        - Long id
+        - String name
+        - Set<WarParticipant> aggressors
+        - Set<WarParticipant> defenders
+        - OffsetDateTime startDate
+        - OffsetDateTime endDate
+        - Boolean isActive
+        - Set<Battle> battles
+
+        + War()
+        + War(String name, Faction aggressor, Faction defender)
+        + Set<WarParticipant> getEnemies(Faction faction)
+        + WarParticipant getInitialAttacker()
+        + WarParticipant getInitialDefender()
+        + void addToAggressors(Faction faction)
+        + void addToDefenders(Faction faction)
+        + void addToBattles(Battle battle)
+        + void end()
+        + Set<WarParticipant> getAggressors()
+        + Set<WarParticipant> getDefenders()
+        + Set<Battle> getBattles()
+        + String toString()
+    }
+
+    War "1" *-- "0..*" WarParticipant : aggressors
+    War "1" *-- "0..*" WarParticipant : defenders
+    War "1" *-- "0..*" Battle : battles
+
+    class WarParticipant {
+        - Faction warParticipant
+        - Boolean initialParty
+        - OffsetDateTime joiningDate
+
+        + boolean equals(Object o)
+        + int hashCode()
+        + String toString()
+        + String getName()
+    }
+
+    WarParticipant "1" *-- "1" Faction
 }
 
-class Battle <<Entity>> {
-    id_Key: Long
-    declaredDate: OffsetDateTime
-    timeFrozenFrom: OffsetDateTime
-    timeFrozenUntil: OffsetDateTime
-    agreedBattleDate: OffsetDateTime
-    attackers: List<BattleParticipant>
-    defenders: List<BattleParticipant>
-    battleLocation: BattleLocation
+package com.ardaslegends.domain.war.battle {
+    class Battle extends AbstractDomainObject {
+    - Long id
+    - Set<War> wars
+    - String name
+    - Set<Army> attackingArmies
+    - Army initialAttacker
+    - Faction initialDefender
+    - Set<Army> defendingArmies
+    - BattlePhase battlePhase
+    - OffsetDateTime declaredDate
+    - OffsetDateTime timeFrozenFrom
+    - OffsetDateTime timeFrozenUntil
+    - OffsetDateTime agreedBattleDate
+    - BattleLocation battleLocation
+    - BattleResult battleResult
+
+    + Battle()
+    + Battle(Set<War> wars, String name, Set<Army> attackingArmies, Set<Army> defendingArmies, OffsetDateTime declaredDate, OffsetDateTime timeFrozenFrom, OffsetDateTime timeFrozenUntil, OffsetDateTime agreedBattleDate, BattleLocation battleLocation)
+    + Set<Army> getPartakingArmies()
+    + Army getFirstDefender()
+    + boolean isOver()
+    + boolean isFieldBattle()
+    }
+
+    Battle "1" *-- "0..*" War : wars
+    Battle "1" *-- "0..*" Army : attackingArmies
+    Battle "1" *-- "1" Army : initialAttacker
+    Battle "1" *-- "1" Faction : initialDefender
+    Battle "1" *-- "0..*" Army : defendingArmies
+    Battle "1" *-- "1" BattleLocation : battleLocation
+    Battle "1" *-- "1" BattleResult : battleResult
+
+    class BattleLocation {
+    - Region region
+    - Boolean fieldBattle
+    - ClaimBuild claimBuild
+
+    + BattleLocation(Region region, boolean fieldBattle, ClaimBuild claimBuild)
+    + BattleLocation()
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
+    }
+
+    BattleLocation "1" *-- "1" Region
+    BattleLocation "1" *-- "1" ClaimBuild
+
+    enum BattlePhase {
+    PRE_BATTLE
+    ONGOING
+    CONCLUDED
+    }
+
+    class BattleResult {
+    - Faction winner
+    - Set<UnitCasualty> unitCasualties
+    - Set<RpCharCasualty> rpCharCasualties
+
+    + BattleResult(Faction winner)
+    + BattleResult(Faction winner, Set<UnitCasualty> unitCasualties, Set<RpCharCasualty> rpCharCasualties)
+    + Set<UnitCasualty> getUnitCasualties()
+    + Set<RpCharCasualty> getRpCharCasualties()
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + boolean isPresent()
+    }
+
+    BattleResult "1" *-- "1" Faction : winner
+    BattleResult "1" *-- "0..*" UnitCasualty : unitCasualties
+    BattleResult "1" *-- "0..*" RpCharCasualty : rpCharCasualties
+
+    class RpCharCasualty {
+    - RPChar rpChar
+    - Player slainByChar
+    - String slainByWeapon
+    - String optionalCause
+
+    + RpCharCasualty(RPChar rpChar)
+    + RpCharCasualty(RPChar rpChar, Player slainByChar, String slainByWeapon)
+    + RpCharCasualty(RPChar rpChar, String optionalCause)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    }
+
+    RpCharCasualty "1" *-- "1" RPChar : rpChar
+    RpCharCasualty "1" *-- "0..1" Player : slainByChar
+
+    class UnitCasualty {
+    - Unit unit
+    - Long amount
+
+    + UnitCasualty(Unit unit, Long amount)
+    + Army getArmy()
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    }
+
+    UnitCasualty "1" *-- "1" Unit : unit
 }
 
-class BattleParticipant <<Entity>> {
-    id_Key: Long
-    battle_Key: Long
-    army: Army
-    boundTo: Player
+package com.ardaslegends.domain {
+class AbstractDomainObject {
 }
 
-class BattleLocation <<Value Object>> {
-    region: Region
-    fieldBattle: Boolean
-    claimbuild: ClaimBuild
+class AbstractEntity {
+    - Long id
+    - Integer version
+
+    + AbstractEntity()
+    + AbstractEntity(Long id, Integer version)
+    + boolean equals(Object o)
+    + int hashCode()
 }
 
-class Region <<Entity>> {
-    id_Key: String
-    name: String
-    regionType: RegionType
-    claimedBy: List<Faction>
-    claimbuilds: List<ClaimBuilds> |By Claimbuild|
-    neighboringRegions: List<Region>
+AbstractEntity "1" *-- "1" AbstractDomainObject
+
+
+class Army extends AbstractDomainObject {
+    - Long id
+    - String name
+    - ArmyType armyType
+    - Faction faction
+    - Region currentRegion
+    - RPChar boundTo
+    - List<Unit> units
+    - List<String> sieges
+    - ClaimBuild stationedAt
+    - Double freeTokens
+    - Boolean isHealing
+    - OffsetDateTime healStart
+    - OffsetDateTime healEnd
+    - Integer hoursHealed
+    - Integer hoursLeftHealing
+    - OffsetDateTime healLastUpdatedAt
+    - ClaimBuild originalClaimbuild
+    - OffsetDateTime createdAt
+    - List<Movement> movements
+    - Boolean isPaid
+
+    + Army()
+    + Army(String name, ArmyType armyType, Faction faction, Region currentRegion, RPChar boundTo, List<Unit> units, List<String> sieges, ClaimBuild stationedAt, Double freeTokens, boolean isHealing, OffsetDateTime healStart, OffsetDateTime healEnd, Integer hoursHealed, Integer hoursLeftHealing, ClaimBuild originalClaimbuild, OffsetDateTime createdAt, boolean isPaid)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+    + boolean allUnitsAlive()
+    + boolean hasUnitsLeft()
+    + Optional<Movement> getActiveMovement()
+    + int getAmountOfHealHours()
+    + void resetHealingStats()
+    + boolean isYoungerThan24h()
 }
 
-enum RegionType {
-    SEA
-    SHORE
-    LAND
-    MOUNTAIN
+Army "1" *-- "1" Faction : faction
+Army "1" *-- "1" Region : currentRegion
+Army "1" *-- "1" RPChar : boundTo
+Army "1" *-- "0..*" Unit : units
+Army "1" *-- "1" ClaimBuild : stationedAt
+Army "1" *-- "1" ClaimBuild : originalClaimbuild
+Army "1" *-- "0..*" Movement : movements
+
+
+enum ArmyType {
+    ARMY
+    TRADING_COMPANY
+    ARMED_TRADERS
 }
 
-class ClaimBuild <<Entity>> {
-    id_Key: Long
-    name: String
-    region: Region
-    type: ClaimBuildType
-    ownedBy: Faction
-    coordinates: Coordinate
-    stationedArmies: List<Army>
-    createdArmies: List<Army>
-    createdTradingCompanies: List<Army>
-    productionSites: List<ProductionClaimbuild>
-    specialBuildings: List<SpecialBuilding>
-    numberOfHouses: String
-    traders: String
-    siege: String
-    builtBy: List<Player>
+ArmyType : - String name
+ArmyType : + ArmyType(String name)
+ArmyType : + String getName()
+
+
+class ClaimBuild extends AbstractEntity {
+    - String name
+    - Region region
+    - ClaimBuildType type
+    - Faction ownedBy
+    - Coordinate coordinates
+    - List<Army> stationedArmies
+    - List<Army> createdArmies
+    - List<ProductionClaimbuild> productionSites
+    - List<SpecialBuilding> specialBuildings
+    - String traders
+    - String siege
+    - String numberOfHouses
+    - Set<Player> builtBy
+    - int freeArmiesRemaining
+    - int freeTradingCompaniesRemaining
+    - Set<RPChar> stationedChars
+
+    + ClaimBuild()
+    + ClaimBuild(String name, Region region, ClaimBuildType type, Faction ownedBy, Coordinate coordinates, List<SpecialBuilding> specialBuildings, String traders, String siege, String numberOfHouses, Set<Player> builtBy)
+    + ClaimBuild(String name, Region region, ClaimBuildType type, Faction ownedBy, Coordinate coordinates, List<ProductionClaimbuild> productionSites, List<SpecialBuilding> specialBuildings, String traders, String siege, String numberOfHouses, Set<Player> builtBy)
+    + int getCountOfArmies()
+    + int getCountOfTradingCompanies()
+    + boolean atMaxArmies()
+    + boolean atMaxTradingCompanies()
+    + String toString()
 }
 
-enum ClaimBuildType {
-    HAMLET
-    VILLAGE
-    TOWN
-    CAPITAL
-    KEEP
-    CASTLE
-    STRONGHOLD
+ClaimBuild "1" *-- "1" Region : region
+ClaimBuild "1" *-- "1" ClaimBuildType : type
+ClaimBuild "1" *-- "1" Faction : ownedBy
+ClaimBuild "1" *-- "1" Coordinate : coordinates
+ClaimBuild "1" *-- "0..*" Army : stationedArmies
+ClaimBuild "1" *-- "0..*" Army : createdArmies
+ClaimBuild "1" *-- "0..*" ProductionClaimbuild : productionSites
+ClaimBuild "1" *-- "0..*" SpecialBuilding : specialBuildings
+ClaimBuild "1" *-- "0..*" RPChar : stationedChars
+ClaimBuild "1" *-- "0..*" Player : builtBy
+
+
+class ClaimBuildType {
+    - int maxArmies
+    - int freeArmies
+    - int maxTradingCompanies
+    - int freeTradingCompanies
+    - String name
+
+    + ClaimBuildType(int maxArmies, int maxTradingCompanies, int freeArmies, int freeTradingCompanies, String name)
+    + int getMaxArmies()
+    + int getFreeArmies()
+    + int getMaxTradingCompanies()
+    + int getFreeTradingCompanies()
+    + String getName()
 }
+
+
+class Coordinate {
+    - Integer x
+    - Integer y
+    - Integer z
+
+    + Coordinate()
+    + Coordinate(Integer x, Integer y, Integer z)
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
+}
+
+
+class Faction extends AbstractDomainObject {
+    - Long id
+    - String name
+    - InitialFaction initialFaction
+    - Player leader
+    - List<Army> armies
+    - List<Player> players
+    - Set<Region> regions
+    - List<ClaimBuild> claimBuilds
+    - Set<UnitType> availableUnits
+    - List<Faction> allies
+    - String colorcode
+    - Long factionRoleId
+    - Region homeRegion
+    - String factionBuffDescr
+    - Integer foodStockpile
+    - Set<String> aliases
+
+    + Faction()
+    + Faction(String name, Player leader, List<Army> armies, List<Player> players, Set<Region> regions, List<ClaimBuild> claimBuilds, List<Faction> allies, String colorcode, Region homeRegion, String factionBuffDescr)
+    + void addFoodToStockpile(int amount)
+    + void subtractFoodFromStockpile(int amount)
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
+}
+
+Faction "1" *-- "1" Player : leader
+Faction "1" *-- "0..*" Army : armies
+Faction "1" *-- "0..*" Player : players
+Faction "1" *-- "0..*" Region : regions
+Faction "1" *-- "0..*" ClaimBuild : claimBuilds
+Faction "1" *-- "0..*" UnitType : availableUnits
+Faction "1" *-- "0..*" Faction : allies
+Faction "1" *-- "1" Region : homeRegion
+Faction "1" *-- "1" InitialFaction : initialFaction
+Faction "1" *-- "0..*" String : aliases
+
 
 enum InitialFaction {
     ANGMAR
@@ -119,61 +472,225 @@ enum InitialFaction {
     CUSTOM
 }
 
-class Faction <<Entity>> {
-    id_Key: Long
-    name: String
-    initialFaction: InitialFaction
-    factionLeader: Player
-    armies: List<Army> |By Army|
-    players:  List<Player> |By Player|
-    regions: List<Region> |By Region|
-    claimbuilds: List<ClaimBuilds> |By Claimbuild|
-    allies: List<Faction>
-    colorcode: String
-    factionRoleId: Long
-    homeRegion: Region
-    factionBuffDescr: String
-    aliases: List<String>
 
+class Movement extends AbstractDomainObject {
+    - Long id
+    - RPChar rpChar
+    - Army army
+    - Boolean isCharMovement
+    - List<PathElement> path
+    - OffsetDateTime startTime
+    - OffsetDateTime endTime
+    - Boolean isCurrentlyActive
+    - OffsetDateTime reachesNextRegionAt
+    - OffsetDateTime lastUpdatedAt
+
+    + Movement()
+    + Movement(RPChar rpChar, Army army, Boolean isCharMovement, List<PathElement> path, OffsetDateTime startTime, OffsetDateTime endTime, Boolean isCurrentlyActive, OffsetDateTime reachesNextRegionAt)
+    + String getStartRegionId()
+    + String getDestinationRegionId()
+    + void end()
+    + String getMovingEntity()
+    + String getMovingEntityName()
+    + Integer getCost()
+    + Region getCurrentRegion()
+    + void setCurrentRegion(Region region)
+    + Region getNextRegion()
+    + PathElement getCurrentPathElement()
+    + PathElement getNextPathElement()
+    + Duration getDurationUntilNextRegion()
+    + Duration getDurationUntilComplete()
+    + Duration getDurationAlreadyMoved()
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
 }
 
-class Player <<Entity>> {
-    id_Key: Long
-    ign: String
-    uuid: String
-    discordID: String
-    faction: Faction
-    rpChar: RPChar
+Movement "1" *-- "1" RPChar : rpChar
+Movement "1" *-- "1" Army : army
+Movement "1" *-- "0..*" PathElement : path
+
+
+class PathElement {
+    - Integer actualCost
+    - Integer baseCost
+    - Region region
+
+    + PathElement()
+    + PathElement(Integer actualCost, Integer baseCost, Region region)
+    + boolean equals(Object o)
+    + int hashCode()
+    + String toString()
+    + boolean hasRegion(Region region)
 }
 
-class RPChar <<Embeddable>> {
-    name: String
-    title: String
-    gear: String
-    pvp: Boolean
-    currentRegion: Region
-    boundTo: Army
+PathElement "1" *-- "1" Region : region
+
+
+class Player extends AbstractDomainObject implements UserDetails {
+    - Long id
+    - String ign
+    - String uuid
+    - String discordID
+    - Faction faction
+    - Set<RPChar> rpChars
+    - List<ClaimBuild> builtClaimbuilds
+    - Set<Role> roles
+
+    + Player()
+    + Player(String ign, String uuid, String discordID, Faction faction, RPChar rpChar)
+    + Player(String ign, String uuid, String discordID, Faction faction)
+    + Optional<RPChar> getActiveCharacter()
+    + Set<RPChar> getRpChars()
+    + void addActiveRpChar(RPChar rpChar)
+    + RPChar deleteCharacter()
+    + List<ClaimBuild> getBuiltClaimbuilds()
+    + String toString()
+    + Collection<? extends GrantedAuthority> getAuthorities()
+    + void addRole(Role role)
+    + String getPassword()
+    + String getUsername()
+    + boolean isAccountNonExpired()
+    + boolean isAccountNonLocked()
+    + boolean isCredentialsNonExpired()
+    + boolean isEnabled()
 }
 
-class Coordinate <<Value Object>> {
-    x: Integer
-    y: Integer
-    z: Integer
+Player "1" *-- "1" Faction : faction
+Player "1" *-- "0..*" RPChar : rpChars
+Player "1" *-- "0..*" ClaimBuild : builtClaimbuilds
+Player "1" *-- "0..*" Role : roles
+
+
+class ProductionClaimbuild extends AbstractDomainObject {
+    - ProductionClaimbuildId id
+    - ProductionSite productionSite
+    - ClaimBuild claimbuild
+    - Long count
+
+    + ProductionClaimbuild()
+    + ProductionClaimbuild(ProductionSite productionSite, ClaimBuild claimbuild, Long count)
+    + boolean equals(Object o)
+    + int hashCode()
 }
 
-class ProductionSite <<Entity>> {
-    id_Key: Long
-    type: ProductionSiteType
-    producedResource: Resource
-    amountProduced: Integer
+ProductionClaimbuild "1" *-- "1" ProductionClaimbuildId : id
+ProductionClaimbuild "1" *-- "1" ProductionSite : productionSite
+ProductionClaimbuild "1" *-- "1" ClaimBuild : claimbuild
+
+
+class ProductionClaimbuildId extends AbstractDomainObject implements Serializable {
+    - static final long serialVersionUID
+    - Long productionSiteId
+    - Long claimbuildId
+
+    + ProductionClaimbuildId()
+    + ProductionClaimbuildId(Long productionSiteId, Long claimbuildId)
+    + boolean equals(Object o)
+    + int hashCode()
 }
 
-class Resource <<Entity>> {
-    id_Key: Long
-    minecraftItemId: String
-    name: String
-    resourceType: ResourceType
+ProductionClaimbuildId "1" *-- "1" ProductionSite : productionSiteId
+ProductionClaimbuildId "1" *-- "1" ClaimBuild : claimbuildId
+
+
+class ProductionSite extends AbstractDomainObject {
+    - Long id
+    - ProductionSiteType type
+    - Resource producedResource
+    - Integer amountProduced
+
+    + ProductionSite()
+    + ProductionSite(Long id, ProductionSiteType type, Resource producedResource, Integer amountProduced)
+    + boolean equals(Object o)
+    + int hashCode()
 }
+
+ProductionSite "1" *-- "1" Resource : producedResource
+
+
+enum ProductionSiteType {
+    FARM
+    FISHING_LODGE
+    MINE
+    QUARRY
+    MAN_FLESH_PIT
+    SLAUGHTERHOUSE
+    HUNTING_LODGE
+    ORCHARD
+    LUMBER_CAMP
+    WORKSHOP
+    INCOME
+    PEARL_FISHER
+    HOUSE_OF_LORE
+    DYE_HOUSE
+}
+
+
+class Region extends AbstractDomainObject {
+    - String id
+    - String name
+    - RegionType regionType
+    - Set<Faction> claimedBy
+    - Set<ClaimBuild> claimBuilds
+    - Set<Region> neighboringRegions
+    - boolean hasOwnershipChanged
+    - Set<RPChar> charsInRegion
+
+    + Region()
+    + Region(String id, String name, RegionType regionType, Set<Faction> claimedBy, Set<ClaimBuild> claimBuilds, Set<Region> neighboringRegions)
+    + boolean addNeighbour(Region possibleNeighbour)
+    + void addFactionToClaimedBy(Faction faction)
+    + void removeFactionFromClaimedBy(Faction faction)
+    + Set<Region> getNeighboringRegions()
+    + int getCost()
+    + boolean hasClaimbuildInRegion(Faction faction)
+    + boolean isOnlyFactionInRegion(Faction faction)
+    + boolean hasFactionOtherClaimbuildThan(ClaimBuild cb)
+    + boolean isClaimable(Faction faction)
+    + String toString()
+    + boolean equals(Object o)
+    + int hashCode()
+}
+
+Region "1" *-- "0..*" Faction : claimedBy
+Region "1" *-- "0..*" ClaimBuild : claimBuilds
+Region "1" *-- "0..*" Region : neighboringRegions
+Region "1" *-- "0..*" RPChar : charsInRegion
+
+
+enum RegionType {
+    SEA
+    LAND
+    HILL
+    ICE
+    DESERT
+    FOREST
+    SWAMP
+    JUNGLE
+    MOUNTAIN
+
+    + String name
+    + int cost
+
+    + RegionType(String name, int cost)
+    + int getCost()
+}
+
+
+class Resource implements Serializable {
+    + Long id
+    + String resourceName
+    + String minecraftItemId
+    + ResourceType resourceType
+    + List<ProductionSite> productionSites
+
+    + Resource()
+    + Resource(Long id, String resourceName, String minecraftItemId, ResourceType resourceType, List<ProductionSite> productionSites)
+}
+
+Resource "1" *-- "0..*" ProductionSite : productionSites
+
 
 enum ResourceType {
     ORE
@@ -189,26 +706,52 @@ enum ResourceType {
     OTHER
 }
 
-class ProductionClaimbuild <<Entity>> {
-    claimbuild: ClaimBuild
-    productionSite: ProductionSite
-    count: integer
+
+enum Role {
+    ROLE_USER
+    ROLE_ADMIN
+    ROLE_STAFF
+    ROLE_COMMANDER
+    ROLE_LORD
+    ROLE_FACTION_LEADER
+    ROLE_PLUGIN
 }
 
-enum ProductionSiteType {
-    FARM
-    FISHING_LODGE
-    MINE
-    QUARRY
-    MAN_FLESH_PIT
-    SLAUGHTERHOUSE
-    HUNTING_LODGE
-    ORCHARD
-    LUMBER_CAMP
-    WORKSHOP
-    INCOME
-    PEARL_FISHER
+
+class RPChar extends AbstractEntity {
+    - Player owner
+    - String name
+    - String title
+    - String gear
+    - Boolean pvp
+    - Region currentRegion
+    - Army boundTo
+    - ClaimBuild stationedAt
+    - Set<Movement> movements
+    - Boolean injured
+    - Boolean isHealing
+    - OffsetDateTime startedHeal
+    - OffsetDateTime healEnds
+    - OffsetDateTime healLastUpdatedAt
+    - String linkToLore
+    - Boolean active
+
+    + RPChar()
+    + RPChar(RoleplayApplication application)
+    + RPChar(Player owner, String name, String title, String gear, Boolean pvp, String linkToLore)
+    + void injure()
+    + void startHealing()
+    + Set<Movement> getMovements()
+    + String toString()
 }
+
+RPChar "1" *-- "1" Player : owner
+RPChar "1" *-- "1" Region : currentRegion
+RPChar "1" *-- "1" Army : boundTo
+RPChar "1" *-- "1" ClaimBuild : stationedAt
+RPChar "1" *-- "0..*" Movement : movements
+
+
 
 enum SpecialBuilding {
     WATCHTOWER
@@ -221,83 +764,45 @@ enum SpecialBuilding {
     MARKET
     SHOP
     WALL
+
+    + String name
+
+    + SpecialBuilding(String name)
 }
 
-class Army <<Entity>> {
-    id_Key: Long
-    name: String
-    armyType: ArmyType
-    faction: Faction
-    currentRegion: Region
-    boundTo: Player
-    units: List<Unit>
-    sieges: List<String>
-    stationedAt: ClaimBuild
-    freeTokens: Integer
-    originalClaimbuild: ClaimBuild
+
+class Unit extends AbstractDomainObject {
+    + Long id
+    + UnitType unitType
+    + Army army
+    + Integer count
+    + Integer amountAlive
+
+    + Unit()
+    + Unit(Long id, UnitType unitType, Army army, Integer count, Integer amountAlive)
+    + Double getCost()
+    + boolean isMounted()
 }
 
-enum ArmyType {
-    ARMY
-    TRADING_COMPANY
-    ARMED_TRADERS
+Unit "1" *-- "1" UnitType : unitType
+Unit "1" *-- "1" Army : army
+
+
+class UnitType extends AbstractDomainObject {
+    + String unitName
+    + Double tokenCost
+    + Boolean isMounted
+    + Set<Faction> usableBy
+
+    + UnitType()
+    + UnitType(String unitName, Double tokenCost, Boolean isMounted)
+    + boolean equals(Object o)
+    + int hashCode()
 }
 
-class Unit <<Value Object>> {
-    unitType: UnitType
-    count: Integer
+UnitType "0..*" *-- "0..*" Faction : usableBy
+
 }
 
-class UnitType <<Entity>> {
-    unitName: String
-    tokenCost: Double
-}
-
-Region -  ClaimBuild
-Region - Region
-Region -down- RPChar
-RegionType -up- Region
-
-Faction -down- Region
-Faction -right Player
-Faction -left Army
-Faction -up- ClaimBuild
-Faction - Faction
-Faction -right- WarParticipant
-Faction -right- InitialFaction
-
-WarParticipant -up- War
-War -right- Battle
-Battle -up- BattleLocation
-Battle -down- BattleParticipant
-BattleParticipant -left- Player
-BattleParticipant -left- Army
-
-
-
-ClaimBuild - Player
-ClaimBuild -right- ClaimBuildType
-ClaimBuild -up- Coordinate
-ClaimBuild - Army
-ClaimBuild -up- BattleLocation
-
-ProductionSite - ProductionClaimbuild
-ProductionSite -down- Resource
-Resource -left- ResourceType
-ProductionClaimbuild - ClaimBuild
-SpecialBuilding - ClaimBuild
-
-ProductionSite -left- ProductionSiteType
-
-
-RPChar - Player
-
-Army -down- Unit
-Army - Region
-Army - RPChar
-
-ArmyType - Army
-
-UnitType - Unit
 
 @enduml
