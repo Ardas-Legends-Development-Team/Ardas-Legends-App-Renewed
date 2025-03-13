@@ -59,6 +59,27 @@ Contains all test code for the backend and is organized in folders depending on 
 
 ### src/main/java
 
+The application is separated into multiple layers to facilitate organization and code scaling:
+- Domain layer: all data structure definitions, used by the rest of the application, *for example to define what an Army is*.
+- Service layer: all processing and calculation logic. The service contains the biggest chunk of processes and defines the rules in the code.
+- Repository layer: all communication code between the application and the database. Defines what operations we can do on the DB tables.
+- Presentation layer: the entry point of our application once it is running. All operations called by the frontend start here.
+
+A simple flow of a frontend API request:
+
+Presentation (REST controllers) <-> Service <-> Repository <-> Database
+
+During this flow objects from the Domain layer are being used
+
 Contains all the Java source code and is organized as below:
 
+| Path     |    -  | Usage |
+| :-----: | :-------: | :----: |
+|**configuration**      |    :   | Holds all configuration classes for Spring, security, convertions, property loading etc. |
+|**domain**      |    :   | Holds all entity data, which represents the data structures of the application. It is used to create the database schema from our Java code. |
+|**presentation**      |    :   | Contains all endpoints available to interact with the server |
+|**presentation/api**      |    :   | Contains all REST API controllers that are used by the website. Those controllers then call upon service layer methods. |
+|**presentation/discord**      |    :   | Contains all discord command code and calls relevant service layer code *Javacord library is now deprecated, the bot will soon be removed* |
+|**repository**      |    :   | Contains all code necessary to access the database. |
+|**service**      |    :   | Contains all business logic and calculations of the application. |
 
