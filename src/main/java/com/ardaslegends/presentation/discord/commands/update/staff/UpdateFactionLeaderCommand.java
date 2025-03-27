@@ -33,7 +33,7 @@ public class UpdateFactionLeaderCommand implements ALStaffCommandExecutor {
 
         UpdateFactionLeaderDto dto = new UpdateFactionLeaderDto(factionName, user.getIdAsString());
         var result = discordServiceExecution(dto, factionService::setFactionLeader, "Error while changing faction leader");
-        log.trace("UpdateFactionLeader: Faction [{}] with leader [{}]", result.getName());
+        log.trace("UpdateFactionLeader: Faction [{}] with leader [{}]", result.getName(), result.getLeader());
 
         log.debug("UpdateFactionLeader: Building Embed");
         return new ALMessageResponse(null, new EmbedBuilder()

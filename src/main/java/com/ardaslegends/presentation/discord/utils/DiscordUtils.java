@@ -291,7 +291,7 @@ public interface DiscordUtils {
         Map<SpecialBuilding, Long> countedSpecialBuildings = specialBuildingList.stream()
                 .collect(Collectors.groupingBy(specialBuilding -> specialBuilding, Collectors.counting()));
 
-        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong + " " + specialBuilding.getName() + ", "));
+        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong).append(" ").append(specialBuilding.getName()).append(", "));
 
         String returnSpecialString = specialString.toString();
 

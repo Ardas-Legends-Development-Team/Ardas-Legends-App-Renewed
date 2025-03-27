@@ -41,7 +41,7 @@ public class DeleteArmyOrCompanyCommand implements ALStaffCommandExecutor {
 
         String armyType = army.getArmyType().getName();
 
-        String thumbnail = "";
+        String thumbnail;
         if (army.getArmyType() == ArmyType.ARMY) {
             thumbnail = getFactionBanner(army.getFaction().getName());
         } else {
