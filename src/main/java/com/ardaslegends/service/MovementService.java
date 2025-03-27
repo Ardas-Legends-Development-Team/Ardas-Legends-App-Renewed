@@ -125,11 +125,10 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
             throw ArmyServiceException.noPermissionToPerformThisAction();
         }
 
-        log.debug("Checking if army is healing. If yes we will need an explicit confirmation in order " +
-                "to stop healing and start the movement");
+        log.debug("Checking if army is healing.");
         if (army.getIsHealing()) {
-            // TODO: Check if army is healing -> see if we have been sent an additional parameter
-            // confirming that we want to stop the healing and start moving
+            log.warn("Army [{}] is currently healing and therefore cannot move", army);
+            throw MovementServiceException.cannotMoveArmyIsHealing(army.getName());
         }
 
         log.debug("Player [{}] is allowed to move army [{}], executing pathfinder", player, army);

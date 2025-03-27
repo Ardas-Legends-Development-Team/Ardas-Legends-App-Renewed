@@ -635,4 +635,59 @@ public class MovementServiceTest {
 
         log.info("Test passed: cancelArmyMovement throws Service Exception when no Movement is found!");
     }
+
+    @Test
+    void ensureMoveArmyThrowsSEWhenArmyIsHealing() {
+        log.debug("Testing if createArmyMovement throws ServiceException when Army is healing!");
+
+        // Assign
+        log.trace("Initializing Dto");
+        MoveArmyDto dto = new MoveArmyDto(player.getDiscordID(), army.getName(), region2.getId());
+        army.setIsHealing(true);
+
+        log.trace("Mocking methods");
+        when(mockMovementRepository.findMovementByArmyAndIsCurrentlyActiveTrue(army)).thenReturn(Optional.empty());
+        when(mockPlayerRepository.findByDiscordID(player.getDiscordID())).thenReturn(Optional.of(player));
+        when(mockRegionRepository.findById(region2.getId())).thenReturn(Optional.of(region2));
+
+        //Act
+        var exception = assertThrows(MovementServiceException.class, () -> movementService.createArmyMovement(dto));
+
+        //Assert
+        log.debug("Asserting that createArmyMovement throws ServiceException");
+        assertThat(exception.getMessage()).isEqualTo(MovementServiceException.cannotMoveArmyIsHealing(army.getName()).getMessage());
+
+        log.info("Test passed: createArmyMovement throws ServiceException when Army is healing!");
+    }
+
+    @Test
+    void ensureMoveArmyWorksWhenArmyIsNotHealing() {
+        log.debug("Testing if createArmyMovement works when Army is not healing!");
+
+        // Assign
+        log.trace("Initializing Dto");
+        MoveArmyDto dto = new MoveArmyDto(player.getDiscordID(), army.getName(), region2.getId());
+        army.setIsHealing(false);
+
+        log.trace("Mocking methods");
+        when(mockPlayerRepository.findByDiscordID(player.getDiscordID())).thenReturn(Optional.of(player));
+        when(mockRegionRepository.findById(region2.getId())).thenReturn(Optional.of(region2));
+
+        army.setBoundTo(player.getActiveCharacter().get());
+        when(mockMovementRepository.findMovementByArmyAndIsCurrentlyActiveTrue(army)).thenReturn(Optional.empty());
+
+        //Act
+        log.debug("Calling createArmyMovement, expecting no errors");
+        var result = movementService.createArmyMovement(dto);
+
+        //Assert
+        assertThat(result).isNotNull();
+        assertThat(result.getArmy()).isEqualTo(army);
+        assertThat(result.getRpChar()).isEqualTo(player.getActiveCharacter().get());
+        assertThat(result.getIsCurrentlyActive()).isTrue();
+        assertThat(result.getIsCharMovement()).isFalse();
+        assertThat(result.getPath()).isEqualTo(movement.getPath());
+
+        log.info("Test passed: createArmyMovement works correctly when Army is not healing!");
+    }
 }
