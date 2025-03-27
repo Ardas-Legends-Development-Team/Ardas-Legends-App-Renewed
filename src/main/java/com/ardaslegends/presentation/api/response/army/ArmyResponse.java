@@ -1,12 +1,9 @@
 package com.ardaslegends.presentation.api.response.army;
 
 import com.ardaslegends.domain.Army;
-import com.ardaslegends.domain.Unit;
 import com.ardaslegends.presentation.api.response.unit.UnitResponse;
 
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.stream.Collectors;
 
 public record ArmyResponse(
         long id,
@@ -38,7 +35,7 @@ public record ArmyResponse(
                 army.getBoundTo() == null ? null : army.getBoundTo().getName(),
                 army.getUnits().stream().map(UnitResponse::new).toArray(UnitResponse[]::new),
                 army.getSieges().toArray(String[]::new),
-                army.getStationedAt() == null ? "null": army.getStationedAt().getName(),
+                army.getStationedAt() == null ? "null" : army.getStationedAt().getName(),
                 army.getFreeTokens(),
                 army.getIsHealing(),
                 army.getHealStart(),

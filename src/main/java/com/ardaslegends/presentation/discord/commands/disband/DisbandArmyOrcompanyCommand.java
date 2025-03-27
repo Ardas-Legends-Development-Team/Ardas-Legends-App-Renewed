@@ -44,7 +44,7 @@ public class DisbandArmyOrcompanyCommand implements ALCommandExecutor {
         Army army = discordServiceExecution(dto, false, armyService::disbandFromDto, "Error while disbanding Army/Company");
         String armyType = army.getArmyType().getName();
 
-        String thumbnail = "";
+        String thumbnail;
         if (army.getArmyType() == ArmyType.ARMY) {
             thumbnail = getFactionBanner(army.getFaction().getName());
         } else {

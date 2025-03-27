@@ -50,6 +50,7 @@ public class Commands implements DiscordUtils {
     private final Map<String, ALCommandExecutor> executions;
 
     private final BotProperties properties;
+
     public Commands(DiscordApi api, BindCommand bind, RegisterCommand register, CreateCommand create, DeleteCommand delete, BotProperties properties,
                     UpdateCommand update, MoveCommand move, CancelCommand cancel, InjureCommand injure, HealCommand heal, UnbindCommand unbind,
                     DisbandCommand disband, InfoCommand info, StationCommand station, UnstationCommand unstation, StockpileCommand stockpile,
@@ -105,21 +106,21 @@ public class Commands implements DiscordUtils {
                 var responseUpdater = interaction.respondLater().join();
 
                 EmbedBuilder embed;
-                ALMessageResponse response = null;
+                ALMessageResponse response;
                 try {
                     String fullname = getFullCommandName(interaction);
                     log.trace("Full CommandName: [{}]", fullname);
                     List<SlashCommandInteractionOption> options = getOptions(interaction);
 
                     log.trace("List of available options: {}", options.stream()
-                            .map(interactionOption -> interactionOption.getName())
+                            .map(SlashCommandInteractionOption::getName)
                             .collect(Collectors.joining(", ")));
 
                     log.info("Incoming '/{}' command", fullname);
                     log.trace("Calling command execution function");
                     response = executions.get(fullname).execute(interaction, options, properties);
 
-                    if(response == null) {
+                    if (response == null) {
                         responseUpdater.delete();
                         return;
                     }
@@ -130,8 +131,7 @@ public class Commands implements DiscordUtils {
                         response.message()
                                 // TODO Change to war channel
                                 .send(rpCommandsChannel);
-                    }
-                    else {
+                    } else {
                         responseUpdater.addEmbed(response.embed()).update().join();
                     }
 
@@ -149,7 +149,6 @@ public class Commands implements DiscordUtils {
                 }
 
 
-
                 log.debug("Updating response to new embed");
                 // The join() is important so that the exceptions go into the catch blocks
             } catch (Exception e) {
@@ -165,12 +164,6 @@ public class Commands implements DiscordUtils {
         channels.stream()
                 .forEach(textChannel -> {
                     textChannel.addMessageCreateListener(messageCreateEvent -> {
-                        var author = messageCreateEvent.getMessageAuthor();
-                        var message = messageCreateEvent.getMessage();
-
-                  //      if(!author.isYourself() && !message.getContent().startsWith("/")) {
-                    //        messageCreateEvent.deleteMessage();
-                      //  }
                     });
                 });
     }

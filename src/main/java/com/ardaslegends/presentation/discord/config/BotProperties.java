@@ -10,7 +10,6 @@ import org.javacord.api.entity.channel.TextChannel;
 import org.javacord.api.entity.permission.Role;
 import org.javacord.api.entity.server.Server;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
@@ -46,6 +45,7 @@ public class BotProperties {
     public String getToken() {
         return token;
     }
+
     @Value("${ardaslegends.bot.server}")
     private void setDiscordServer(String serverId) {
         Objects.requireNonNull(serverId);
@@ -55,6 +55,7 @@ public class BotProperties {
 
         this.discordServer = server;
     }
+
     @Value("${ardaslegends.roleplay.commands.channel}")
     private void setRpCommandsChannel(String rpCommandsChannelId) {
         Objects.requireNonNull(rpCommandsChannelId);
@@ -64,6 +65,7 @@ public class BotProperties {
 
         this.generalRpCommandsChannel = channel;
     }
+
     @Value("${ardaslegends.bot.staff-roles}")
     private void setDiscordStaffRoles(List<String> roleIds) {
         Objects.requireNonNull(roleIds);
@@ -96,7 +98,7 @@ public class BotProperties {
         val channel = api.getTextChannelById(channelId).orElseThrow();
         log.info("Found CbApps Channel");
 
-        this.claimbuildAppsChannel= channel;
+        this.claimbuildAppsChannel = channel;
     }
 
     @Value("${ardaslegends.bot.error.channel}")
@@ -106,7 +108,7 @@ public class BotProperties {
 
         val channel = api.getTextChannelById(errorChannelId).orElseThrow();
 
-        this.errorChannel= channel;
+        this.errorChannel = channel;
         log.info("Found error Channel [{}]", errorChannel.getIdAsString());
     }
 

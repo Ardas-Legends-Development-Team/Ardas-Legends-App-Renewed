@@ -1,5 +1,6 @@
 package com.ardaslegends.presentation.discord.commands.update.staff;
 
+import com.ardaslegends.domain.Player;
 import com.ardaslegends.presentation.discord.commands.ALMessageResponse;
 import com.ardaslegends.presentation.discord.commands.ALStaffCommandExecutor;
 import com.ardaslegends.presentation.discord.config.BotProperties;
@@ -70,17 +71,17 @@ public class UpdateClaimbuildValues implements ALStaffCommandExecutor {
 
 
         log.debug("CreateClaimbuild: Building Dto");
-        CreateClaimBuildDto dto = new CreateClaimBuildDto(name,region,type,faction,x,y,z,productionSites,specialBuildings,traders,sieges,numberOfHouses,builtBy);
+        CreateClaimBuildDto dto = new CreateClaimBuildDto(name, region, type, faction, x, y, z, productionSites, specialBuildings, traders, sieges, numberOfHouses, builtBy);
         log.debug("Dto result [{}]", dto);
 
         log.debug("UpdateClaimbuild: Calling createClaimbuild Service");
-        var claimbuild = discordServiceExecution(dto,false, claimBuildService::createClaimbuild, "Error during Claimbuild Creation");
+        var claimbuild = discordServiceExecution(dto, false, claimBuildService::createClaimbuild, "Error during Claimbuild Creation");
         log.debug("UpdateClaimbuild: Result [{}]", claimbuild);
 
 
         String prodString = createProductionSiteString(claimbuild.getProductionSites());
         String specialBuildingsString = createSpecialBuildingsString(claimbuild.getSpecialBuildings());
-        String builtByString = claimbuild.getBuiltBy().stream().map(player -> player.getIgn()).collect(Collectors.joining(", "));
+        String builtByString = claimbuild.getBuiltBy().stream().map(Player::getIgn).collect(Collectors.joining(", "));
 
         return new ALMessageResponse(null, new EmbedBuilder()
                 .setTitle("Claimbuild %s was successfully updated!".formatted(claimbuild.getName()))

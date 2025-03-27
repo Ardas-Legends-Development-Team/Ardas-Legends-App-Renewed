@@ -27,6 +27,7 @@ public class RegisterCommand implements ALCommand, ALCommandExecutor {
 
     private final DiscordApi api;
     private final PlayerService playerService;
+
     @Override
     public SlashCommandBuilder init(Map<String, ALCommandExecutor> commands) {
         log.debug("Initializing /register command");

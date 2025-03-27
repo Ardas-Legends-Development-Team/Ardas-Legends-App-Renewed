@@ -11,22 +11,26 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public interface ALStaffCommandExecutor extends ALCommandExecutor{
+public interface ALStaffCommandExecutor extends ALCommandExecutor {
 
     Logger log = LoggerFactory.getLogger(DiscordUtils.class);
 
     default void checkStaff(SlashCommandInteraction interaction, List<String> staffRoles) {
 
         User user = interaction.getUser();
+        if (interaction.getServer().isEmpty()) {
+            throw new BotException("No Discord server found",
+                    new RuntimeException("No server found for interaction"));
+        }
         Server server = interaction.getServer().get();
-        log.debug("Checking if user [{}] is staff member of server [{}]",user.getName(), server.getName());
+        log.debug("Checking if user [{}] is staff member of server [{}]", user.getName(), server.getName());
         log.debug("Staff roles are: [{}]", staffRoles);
 
         boolean isStaff = user.getRoles(server).stream()
                 .map(Role::getIdAsString)
                 .anyMatch(staffRoles::contains);
 
-        if(!isStaff) {
+        if (!isStaff) {
             String message = "You are not a staff member and do not have the permission to execute this command!";
             throw new BotException("No permission to execute command", new RuntimeException(message));
         }

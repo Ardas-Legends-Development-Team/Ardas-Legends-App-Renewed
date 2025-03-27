@@ -37,7 +37,7 @@ public interface DiscordUtils {
     default String getFullCommandName(SlashCommandInteraction commandInteraction) {
         StringBuilder commandName = new StringBuilder(commandInteraction.getCommandName());
 
-        SlashCommandInteractionOption option = commandInteraction.getOptions().get(0);
+        SlashCommandInteractionOption option = commandInteraction.getOptions().getFirst();
 
         while (option.isSubcommandOrGroup()) {
             commandName.append(" %s".formatted(option.getName()));
@@ -291,7 +291,7 @@ public interface DiscordUtils {
         Map<SpecialBuilding, Long> countedSpecialBuildings = specialBuildingList.stream()
                 .collect(Collectors.groupingBy(specialBuilding -> specialBuilding, Collectors.counting()));
 
-        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong + " " + specialBuilding.getName() + ", "));
+        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong).append(" ").append(specialBuilding.getName()).append(", "));
 
         String returnSpecialString = specialString.toString();
 
@@ -319,7 +319,7 @@ public interface DiscordUtils {
             costStr.append(" and %d hours".formatted(hours));
         }
 
-        log.debug("Duration: [{}]", costStr.toString());
+        log.debug("Duration: [{}]", costStr);
         return costStr.toString();
     }
 

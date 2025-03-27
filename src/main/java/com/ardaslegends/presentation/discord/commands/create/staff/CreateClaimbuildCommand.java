@@ -1,5 +1,6 @@
 package com.ardaslegends.presentation.discord.commands.create.staff;
 
+import com.ardaslegends.domain.Player;
 import com.ardaslegends.presentation.discord.commands.ALMessageResponse;
 import com.ardaslegends.presentation.discord.commands.ALStaffCommandExecutor;
 import com.ardaslegends.presentation.discord.config.BotProperties;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 public class CreateClaimbuildCommand implements ALStaffCommandExecutor {
 
     private final ClaimBuildService claimBuildService;
+
     @Override
     public ALMessageResponse execute(SlashCommandInteraction interaction, List<SlashCommandInteractionOption> options, BotProperties properties) {
         log.debug("Incoming /create claimbuild request, getting option-data");
@@ -69,18 +71,18 @@ public class CreateClaimbuildCommand implements ALStaffCommandExecutor {
 
 
         log.debug("CreateClaimbuild: Building Dto");
-        CreateClaimBuildDto dto = new CreateClaimBuildDto(name,region,type,faction,x,y,z,productionSites,specialBuildings,traders,sieges,numberOfHouses,builtBy);
+        CreateClaimBuildDto dto = new CreateClaimBuildDto(name, region, type, faction, x, y, z, productionSites, specialBuildings, traders, sieges, numberOfHouses, builtBy);
         log.debug("Dto result [{}]", dto);
 
         log.debug("CreateClaimbuild: Calling createClaimbuild Service");
-        var claimbuild = discordServiceExecution(dto,true, claimBuildService::createClaimbuild, "Error during Claimbuild Creation");
+        var claimbuild = discordServiceExecution(dto, true, claimBuildService::createClaimbuild, "Error during Claimbuild Creation");
         log.debug("CreateClaimbuild: Result [{}]", claimbuild);
         log.debug(claimbuild.getProductionSites().toString());
 
 
         String prodString = createProductionSiteString(claimbuild.getProductionSites());
         String specialBuildingsString = createSpecialBuildingsString(claimbuild.getSpecialBuildings());
-        String builtByString = claimbuild.getBuiltBy().stream().map(player -> player.getIgn()).collect(Collectors.joining(", "));
+        String builtByString = claimbuild.getBuiltBy().stream().map(Player::getIgn).collect(Collectors.joining(", "));
 
         return new ALMessageResponse(null, new EmbedBuilder()
                 .setTitle("Claimbuild %s was successfully created!".formatted(claimbuild.getName()))

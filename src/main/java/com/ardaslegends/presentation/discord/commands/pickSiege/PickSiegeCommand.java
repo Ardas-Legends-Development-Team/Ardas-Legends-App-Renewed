@@ -31,24 +31,24 @@ public class PickSiegeCommand implements ALCommand, ALCommandExecutor {
     public SlashCommandBuilder init(Map<String, ALCommandExecutor> commands) {
         log.debug("Initializing /pick-siege command");
         var command = SlashCommand.with("pick-siege", "Pick up siege equipment with an army", Arrays.asList(
-                new SlashCommandOptionBuilder()
-                        .setType(SlashCommandOptionType.STRING)
-                        .setName("army-name")
-                        .setDescription("Name of the army")
-                        .setRequired(true)
-                        .build(),
-                new SlashCommandOptionBuilder()
-                        .setType(SlashCommandOptionType.STRING)
-                        .setName("claimbuild-name")
-                        .setDescription("The name of the claimbuild to pick up siege from")
-                        .setRequired(true)
-                        .build(),
-                new SlashCommandOptionBuilder()
-                        .setType(SlashCommandOptionType.STRING)
-                        .setName("siege")
-                        .setDescription("The siege equipment to pick up")
-                        .setRequired(true)
-                        .build()
+                        new SlashCommandOptionBuilder()
+                                .setType(SlashCommandOptionType.STRING)
+                                .setName("army-name")
+                                .setDescription("Name of the army")
+                                .setRequired(true)
+                                .build(),
+                        new SlashCommandOptionBuilder()
+                                .setType(SlashCommandOptionType.STRING)
+                                .setName("claimbuild-name")
+                                .setDescription("The name of the claimbuild to pick up siege from")
+                                .setRequired(true)
+                                .build(),
+                        new SlashCommandOptionBuilder()
+                                .setType(SlashCommandOptionType.STRING)
+                                .setName("siege")
+                                .setDescription("The siege equipment to pick up")
+                                .setRequired(true)
+                                .build()
                 )
         );
         commands.put("pick-siege", this::execute);

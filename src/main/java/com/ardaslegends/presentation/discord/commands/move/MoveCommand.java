@@ -53,7 +53,7 @@ public class MoveCommand implements ALCommand {
                                         .build()
                         ))
                         .build()
-                ));
+        ));
 
 
         commands.put("move rpchar", new MoveRpcharCommand(movementService));

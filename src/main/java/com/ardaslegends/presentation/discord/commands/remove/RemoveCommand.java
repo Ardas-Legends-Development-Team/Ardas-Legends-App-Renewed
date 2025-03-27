@@ -20,7 +20,7 @@ import java.util.Map;
 
 @Slf4j
 @Component
-public class RemoveCommand  implements ALCommand {
+public class RemoveCommand implements ALCommand {
 
     private final DiscordApi api;
 

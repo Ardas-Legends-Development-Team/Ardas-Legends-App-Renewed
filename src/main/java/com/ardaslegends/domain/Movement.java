@@ -115,7 +115,7 @@ public final class Movement extends AbstractDomainObject {
      * @return the ID of the start region
      */
     public String getStartRegionId() {
-        return path.get(0).getRegion().getId();
+        return path.getFirst().getRegion().getId();
     }
 
     /**
@@ -124,7 +124,7 @@ public final class Movement extends AbstractDomainObject {
      * @return the ID of the destination region
      */
     public String getDestinationRegionId() {
-        return path.get(path.size() - 1).getRegion().getId();
+        return path.getLast().getRegion().getId();
     }
 
 

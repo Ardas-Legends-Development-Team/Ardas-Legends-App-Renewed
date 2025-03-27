@@ -22,6 +22,7 @@ public class CancelCommand implements ALCommand {
     private final MovementService movementService;
     private final PlayerService playerService;
     private final ArmyService armyService;
+
     @Override
     public SlashCommandBuilder init(Map<String, ALCommandExecutor> commands) {
         log.debug("Initializing /cancel command");
@@ -77,7 +78,7 @@ public class CancelCommand implements ALCommand {
                                         .build()
                         ))
                         .build()
-                ));
+        ));
 
 
         commands.put("cancel move rpchar", new CancelMoveRpcharCommand(movementService));
