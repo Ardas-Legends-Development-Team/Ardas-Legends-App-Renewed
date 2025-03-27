@@ -113,7 +113,7 @@ public class Commands implements DiscordUtils {
                     List<SlashCommandInteractionOption> options = getOptions(interaction);
 
                     log.trace("List of available options: {}", options.stream()
-                            .map(interactionOption -> interactionOption.getName())
+                            .map(SlashCommandInteractionOption::getName)
                             .collect(Collectors.joining(", ")));
 
                     log.info("Incoming '/{}' command", fullname);

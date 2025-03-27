@@ -90,28 +90,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             if (userDiscordId != null && authentication == null) {
                 try {
-                    boolean isTokenValid = jwtUtil.isTokenValid(jwt);
-                    log.debug("Token is valid: {}", isTokenValid);
-                    if (jwtUtil.isTokenValid(jwt)) {
-                        try {
-                            log.debug("Loading user by username to get UserDetails");
-                            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
-                            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                                    userDetails,
-                                    null,
-                                    userDetails.getAuthorities()
-                            );
-                            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                            SecurityContextHolder.getContext().setAuthentication(authToken);
-                        } catch (Exception e) {
-                            if (request.getRequestURI().equals(PlayerRestController.BASE_URL) && request.getMethod().equals("POST")) {
-                                log.info("User does not exist, but we are in the /register endpoint, so we will create a new user");
-                                filterChain.doFilter(request, response);
-                            } else {
-                                log.error("Error setting user authentication in security context", e);
-                                handlerExceptionResolver.resolveException(request, response, null, e);
-                                return;
-                            }
+                    jwtUtil.verifyIfTokenIsValid(jwt);
+                    log.debug("Token is valid");
+                    try {
+                        log.debug("Loading user by username to get UserDetails");
+                        UserDetails userDetails = this.userDetailsService.loadUserByUsername(userDiscordId);
+                        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                                userDetails,
+                                null,
+                                userDetails.getAuthorities()
+                        );
+                        authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(authToken);
+                    } catch (Exception e) {
+                        if (request.getRequestURI().equals(PlayerRestController.BASE_URL) && request.getMethod().equals("POST")) {
+                            log.info("User does not exist, but we are in the /register endpoint, so we will create a new user");
+                            filterChain.doFilter(request, response);
+                        } else {
+                            log.error("Error setting user authentication in security context", e);
+                            handlerExceptionResolver.resolveException(request, response, null, e);
+                            return;
                         }
                     }
                 } catch (Exception e) {

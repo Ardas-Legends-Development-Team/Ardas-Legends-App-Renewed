@@ -26,12 +26,12 @@ public class InjureCommand implements ALCommand {
         log.debug("Initializing /injure command");
 
         var command = SlashCommand.with("injure", "JAVACORD Injures your character", Arrays.asList(
-                        new SlashCommandOptionBuilder()
-                                .setType(SlashCommandOptionType.SUB_COMMAND)
-                                .setName("rpchar")
-                                .setDescription("Injures your character")
-                                .build()
-                ));
+                new SlashCommandOptionBuilder()
+                        .setType(SlashCommandOptionType.SUB_COMMAND)
+                        .setName("rpchar")
+                        .setDescription("Injures your character")
+                        .build()
+        ));
         commands.put("injure rpchar", new InjureRpcharCommand(playerService));
         log.info("Finished initializing /injure command");
         return command;

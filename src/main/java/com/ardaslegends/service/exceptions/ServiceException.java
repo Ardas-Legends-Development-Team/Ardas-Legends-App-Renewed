@@ -1,10 +1,10 @@
 package com.ardaslegends.service.exceptions;
+
 import com.ardaslegends.domain.Army;
 import com.ardaslegends.domain.RPChar;
 import com.ardaslegends.domain.Region;
 import org.springframework.web.client.RestClientException;
 import jakarta.validation.constraints.NotNull;
-import java.security.Provider;
 
 public class ServiceException extends RuntimeException {
 
@@ -119,7 +119,7 @@ public class ServiceException extends RuntimeException {
     }
 
     public static ServiceException pathfinderNoRegions(Region startRegion, Region endRegion) {
-        String msg = NO_REGIONS_TO_VISIT.formatted(startRegion,endRegion);
+        String msg = NO_REGIONS_TO_VISIT.formatted(startRegion, endRegion);
         return new ServiceException(msg);
     }
 
@@ -132,6 +132,7 @@ public class ServiceException extends RuntimeException {
         String msg = CANNOT_MOVE_RPCHAR_DUE_TO_ALREADY_IN_REGION.formatted(rpchar.getName(), region.getId());
         return new ServiceException(msg);
     }
+
     public static ServiceException cannotMoveRpCharBoundToArmy(@NotNull RPChar rpchar, @NotNull Army army) {
         String msg = CANNOT_MOVE_RPCHAR_DUE_BOUND_TO_ARMY.formatted(rpchar.getName(), army.getName());
         return new ServiceException(msg);
@@ -142,12 +143,24 @@ public class ServiceException extends RuntimeException {
         return new ServiceException(msg);
     }
 
-    public static ServiceException regionDoesNotExist(@NotNull String toRegion) {return new ServiceException(DESIRED_REGION_DOES_NOT_EXIST.formatted(toRegion)); }
+    public static ServiceException regionDoesNotExist(@NotNull String toRegion) {
+        return new ServiceException(DESIRED_REGION_DOES_NOT_EXIST.formatted(toRegion));
+    }
 
-    public static ServiceException moreThanOneActiveMovement(@NotNull RPChar rpchar) { return new ServiceException(MORE_THAN_ONE_ACTIVE_MOVEMENT.formatted(rpchar.getName())); }
+    public static ServiceException moreThanOneActiveMovement(@NotNull RPChar rpchar) {
+        return new ServiceException(MORE_THAN_ONE_ACTIVE_MOVEMENT.formatted(rpchar.getName()));
+    }
 
-    public static ServiceException joinException(Throwable ex) {return new ServiceException(ex.getMessage(), ex);}
-    protected ServiceException(String message, Throwable rootCause) { super(message, rootCause);}
-    protected ServiceException(String message) { super(message);}
+    public static ServiceException joinException(Throwable ex) {
+        return new ServiceException(ex.getMessage(), ex);
+    }
+
+    protected ServiceException(String message, Throwable rootCause) {
+        super(message, rootCause);
+    }
+
+    protected ServiceException(String message) {
+        super(message);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.ardaslegends.presentation.discord.commands.update.staff;
 
+import com.ardaslegends.domain.Region;
 import com.ardaslegends.presentation.discord.commands.ALMessageResponse;
 import com.ardaslegends.presentation.discord.commands.ALStaffCommandExecutor;
 import com.ardaslegends.presentation.discord.config.BotProperties;
@@ -29,7 +30,7 @@ public class UpdateClaimmapCommand implements ALStaffCommandExecutor {
         log.trace("UpdateClaimmap: Result [{}]", result);
 
         String regionString = result.stream()
-                .map(region -> region.getId())
+                .map(Region::getId)
                 .collect(Collectors.joining(", "));
 
         log.debug("UpdateClaimmap: Building Embed");

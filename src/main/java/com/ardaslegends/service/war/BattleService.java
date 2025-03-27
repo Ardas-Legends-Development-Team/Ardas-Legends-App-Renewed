@@ -206,7 +206,7 @@ public class BattleService extends AbstractService<Battle, BattleRepository> {
         BattleLocation battleLocation = new BattleLocation(battleRegion, createBattleDto.isFieldBattle(), attackedClaimbuild);
         log.debug("Created BattleLocation [{}]", battleLocation);
 
-        log.debug("War information: " + wars);
+        log.debug("War information: {}", wars);
 
         log.trace("Assembling Battle Object");
         final Battle createdBattle = new Battle(wars,
