@@ -27,6 +27,8 @@ legendary battles and make it become a legend in the world of Arda.
 - Get application-dev.properties and security-config.yml files from team lead in order to be able to launch the application with the necessary configuration.
 - Launch application by running src/main/java/com/ardaslegends/Application.java
 
+*Note:* If you want to run the complete full-stack application and access the website, then head to the frontend repository and follow the provided installation instructions.
+
 ## Contributing
 
 **DISCLAIMER:** communication is key to success, to don't hesitate to communicate with the team lead if you have questions or need to coordinate on your tasks.
