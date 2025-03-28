@@ -13,16 +13,32 @@ legendary battles and make it become a legend in the world of Arda.
 
 ## How to set up the project
 
-*Work In Progress*
-
 - Set up Java project:
     - Install Git and Java
     - Clone the repository
-    - Run Maven clean install
+    - Install JDK 21
+    - Run Maven clean & Maven install
 - Set up database:
     - Install PostgreSQL
-    - Launch the SQL scripts in src/main/resources/database-initialization
+    - Launch the SQL scripts in src/main/resources/database-initialization in the predefined order. It does those operations in order:
+       - Drop and create a new schema to prepare the database
+       - Insert static data such as regions, claimbuild types etc.
+       - (Optional) Insert development test data (only for development & testing purposes)
+- Get application-dev.properties and security-config.yml files from team lead in order to be able to launch the application with the necessary configuration.
 - Launch application by running src/main/java/com/ardaslegends/Application.java
+
+## Contributing
+
+**DISCLAIMER:** communication is key to success, to don't hesitate to communicate with the team lead if you have questions or need to coordinate on your tasks.
+
+The branches follow a typical feature-branch architecture, meaning that:
+- main branch is reserved for releases
+- develop branch is the main development branch and where all features, bugs and refactors are merged into
+- for each feature, bugfix etc. a separate branch MUST be created, prefixed with it's type. For example feature/feature-1, bug/bugfix-1. When the development of the specific element is done, then a Pull Request should be created, adding the team lead as the reviewer along with any other members you find suitable. After the feature is validated, the branch is squashed and merged with the develop branch.
+
+Each new branch must be linked to an issue, and the developer is responsible with keeping the linked issue up to date, notably checking tasklists.
+
+In the project board, when a new issue is being taken care of by a developper from the Current Spring, then he assigns himself and updates it's status to In-Progress.
 
 ## Technical Background
 
