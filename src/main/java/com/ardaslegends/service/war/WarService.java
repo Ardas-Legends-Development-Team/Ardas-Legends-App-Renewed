@@ -92,7 +92,6 @@ public class WarService extends AbstractService<War, WarRepository> {
         Faction attackingFaction = executorPlayer.getFaction();
         log.trace("Attacking faction is [{}]", attackingFaction.getName());
 
-        // TODO: This should include lords who also can declare wars
         if (!attackingFaction.getLeader().equals(executorPlayer)) {
             log.warn("Player [{}] does not have the permission to declare war!", executorPlayer.getIgn());
             throw WarServiceException.noWarDeclarationPermissions();

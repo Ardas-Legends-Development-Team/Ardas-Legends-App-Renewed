@@ -33,9 +33,11 @@ public class ArmyServiceException extends LogicException {
     private static final String ARMYTYPE_MUST_BE_STATIONED_AT_A_CLAIMBUILD_WITH_HOUSE_OF_HEALING = "The %s '%s' is not stationed at a CB with a House of Healing, cannot start healing - Please station the %s at CB";
     private static final String ARMY_ALREADY_FULLY_HEALED = "The %s '%s' is already fully healed!";
     private static final String ARMY_OR_COMPANY_WITH_NAME_ALREADY_EXISTS = "Army or company with name %s already exists, please choose a different name";
-    private static final String INVALID_UNIT_STRING = "The string '%s' is not grammatically correct \n " +
-            "A correct string would be: Gondorian Ranger:5-Mordor Orc:2 \n" +
-            "Actual Grammar=[Unit name]:[Integer amount]-[Next Unit name]:[next integer amount]";
+    private static final String INVALID_UNIT_STRING = """
+            The string '%s' is not grammatically correct\s
+             \
+            A correct string would be: Gondorian Ranger:5-Mordor Orc:2\s
+            Actual Grammar=[Unit name]:[Integer amount]-[Next Unit name]:[next integer amount]""";
     //Disband army
     private static final String NOT_ALLOWED_TO_DISBAND_NOT_IN_SAME_FACTION = "The %s '%s' is part of the faction '%s' - only the faction leader can disband it!";
     private static final String NOT_ALLOWED_TO_DISBAND = "Only faction leaders and lords with permission are allowed to disband %s!";
@@ -114,8 +116,6 @@ public class ArmyServiceException extends LogicException {
     public static ArmyServiceException noPlayerBoundToArmy(ArmyType armyType, String armyName) {
         return new ArmyServiceException(NO_PLAYER_BOUND_TO_ARMYTYPE.formatted(armyType.getName(), armyName));
     }
-
-    ;
 
     public static ArmyServiceException cannotUnbindMovingArmy(ArmyType armyType, String armyName) {
         return new ArmyServiceException(CANNOT_UNBIND_MOVING_ARMY.formatted(armyType.getName(), armyName));

@@ -82,17 +82,15 @@ public class JwtUtil {
      * Validates the given JWT token.
      *
      * @param token The JWT token.
-     * @return true if the token is valid, false otherwise.
      * @throws ExpiredJwtException      if the token has expired.
      * @throws UnsupportedJwtException  if the token is unsupported.
      * @throws MalformedJwtException    if the token is malformed.
      * @throws SignatureException       if the token has an invalid signature.
      * @throws IllegalArgumentException if the token is empty or null.
      */
-    public boolean isTokenValid(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
+    public void verifyIfTokenIsValid(String token) throws ExpiredJwtException, UnsupportedJwtException, MalformedJwtException, SignatureException, IllegalArgumentException {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            return true;
         } catch (SignatureException ex) {
             // Invalid signature/claims
             throw new SignatureException("Invalid signature/claims");

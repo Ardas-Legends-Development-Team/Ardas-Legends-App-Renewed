@@ -145,7 +145,7 @@ public final class Region extends AbstractDomainObject {
             faction.getRegions().add(this);
 
             this.hasOwnershipChanged = true;
-            log.debug("Also setting hasOwnershipChanged to true [ownershipChanged: {}]", this.hasOwnershipChanged);
+            log.debug("Also setting hasOwnershipChanged to true");
         }
 
         log.debug("Faction [{}] is in region [{}]'s claimedBy Set", faction, this.id);
@@ -170,7 +170,7 @@ public final class Region extends AbstractDomainObject {
             faction.getRegions().remove(this);
 
             this.hasOwnershipChanged = true;
-            log.debug("Also setting hasOwnershipChanged to true [ownershipChanged: {}]", this.hasOwnershipChanged);
+            log.debug("Also setting hasOwnershipChanged to true");
         }
 
         log.debug("Faction [{}] is not in region [{}]'s claimedBy Set", faction, this.id);

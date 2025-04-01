@@ -329,12 +329,9 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
         val targetCharacter = targetPlayer.getActiveCharacter()
                 .orElseThrow(PlayerServiceException::playerHasNoRpchar);
 
-        // TODO: Check for Wanderer or Allied Faction
         log.debug("Checking if army and player are in the same faction");
         if (!army.getFaction().equals(targetPlayer.getFaction())) {
             log.debug("Player and army are not in the same faction");
-            log.debug("Checking if the faction is allied to the players faction");
-            //TODO Check for allied faction
             log.debug("Checking if the player is a wanderer");
             if (targetPlayer.getFaction().getName().equals("Wanderer")) {
                 log.debug("Target player is a wanderer - checking if executor is faction leader");
@@ -956,8 +953,6 @@ public class ArmyService extends AbstractService<Army, ArmyRepository> {
      */
     public void validateUnitString(String unitString) {
         log.debug("Validating unitString [{}]", unitString);
-        // The two defining syntax chars in the unitString
-        char[] syntaxChars = {':', '-'};
 
         // Expected Syntax char, first one is :, then alternating between - and :
         char expectedChar = ':';

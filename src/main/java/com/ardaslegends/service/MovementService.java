@@ -56,7 +56,6 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
      */
     // TODO: Check if time is frozen -> if yes, cancel request
     // TODO: Check if army is in a battle -> if yes, cancel request
-    // TODO: Check if army is healing -> if yes, ask to stop healing
     @Transactional(readOnly = false)
     public Movement createArmyMovement(MoveArmyDto dto) {
         log.debug("Trying to move Army [{}] executed by [{}] to Region [{}]", dto.armyName(), dto.executorDiscordId(), dto.toRegion());
@@ -124,6 +123,12 @@ public class MovementService extends AbstractService<Movement, MovementRepositor
         if (!isAllowed) {
             log.warn("Player [{}] in Faction [{}] does not have permission to move armies", player.getIgn(), player.getFaction());
             throw ArmyServiceException.noPermissionToPerformThisAction();
+        }
+
+        log.debug("Checking if army is healing.");
+        if (army.getIsHealing()) {
+            log.warn("Army [{}] is currently healing and therefore cannot move", army);
+            throw MovementServiceException.cannotMoveArmyIsHealing(army.getName());
         }
 
         log.debug("Player [{}] is allowed to move army [{}], executing pathfinder", player, army);

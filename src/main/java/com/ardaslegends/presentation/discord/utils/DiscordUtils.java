@@ -30,7 +30,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-// TODO: Add Logging
 public interface DiscordUtils {
 
     Logger log = LoggerFactory.getLogger(DiscordUtils.class);
@@ -38,12 +37,12 @@ public interface DiscordUtils {
     default String getFullCommandName(SlashCommandInteraction commandInteraction) {
         StringBuilder commandName = new StringBuilder(commandInteraction.getCommandName());
 
-        SlashCommandInteractionOption option = commandInteraction.getOptions().get(0);
+        SlashCommandInteractionOption option = commandInteraction.getOptions().getFirst();
 
         while (option.isSubcommandOrGroup()) {
             commandName.append(" %s".formatted(option.getName()));
-            if (option.getOptions().size() > 0)
-                option = option.getOptions().get(0);
+            if (!option.getOptions().isEmpty())
+                option = option.getOptions().getFirst();
             else
                 break;
         }
@@ -55,15 +54,15 @@ public interface DiscordUtils {
         // Returned list of options, initialized with TOP-LEVEL Option list
         List<SlashCommandInteractionOption> optionList = interaction.getOptions();
 
-        SlashCommandInteractionOption option = interaction.getOptions().get(0);
+        SlashCommandInteractionOption option = interaction.getOptions().getFirst();
 
         // Changes the returned list of options if the next option is a subcommand
         // Subcommands are always the first option .get(0) of the level above
         while (option.isSubcommandOrGroup()) {
             log.debug("GetOptions: Option [{}] is subcommand [{}]", option.getName(), option.isSubcommandOrGroup());
             optionList = option.getOptions();
-            if (option.getOptions().size() > 0)
-                option = option.getOptions().get(0);
+            if (!option.getOptions().isEmpty())
+                option = option.getOptions().getFirst();
             else
                 break;
             log.debug("GetOptions: New Option [{}]", option.getName());
@@ -93,11 +92,9 @@ public interface DiscordUtils {
         Objects.requireNonNull(name, "GetOptionalOption: Name must not be null");
         Objects.requireNonNull(options, "GetOptionalOption: Option List must not be null");
 
-        var foundOption = options.stream()
+        return options.stream()
                 .filter(interactionOption -> interactionOption.getName().equals(name))
                 .findFirst();
-
-        return foundOption;
     }
 
     default <T> Optional getOptionalValue(String name, List<SlashCommandInteractionOption> options, Class<T> clazz, boolean optional) {
@@ -139,7 +136,7 @@ public interface DiscordUtils {
         }
 
         T guaranteedValue = optionalValue.get();
-        log.trace("GetOption: Returning option with name [{}] and value [{}]", optionName, guaranteedValue.toString());
+        log.trace("GetOption: Returning option with name [{}] and value [{}]", optionName, guaranteedValue);
         return guaranteedValue;
     }
 
@@ -153,7 +150,7 @@ public interface DiscordUtils {
 
     @NonNull
     default String getStringOption(String name, List<SlashCommandInteractionOption> options) {
-        String optionValue = (String) getRequiredValue(name, options, String.class);
+        String optionValue = getRequiredValue(name, options, String.class);
         log.trace("GetStringOption: [{}] Returning value [{}]", name, optionValue);
         return optionValue;
     }
@@ -165,14 +162,7 @@ public interface DiscordUtils {
     }
 
     default User getUserOption(String name, List<SlashCommandInteractionOption> options) {
-        /**Optional<User> foundOption = interaction.getOptionUserValueByName(name);
-         if (foundOption.isEmpty()) {
-         throw new RuntimeException("No User option with name '%s' found!".formatted(name));
-         }
-
-         return foundOption.get();
-         **/
-        User optionValue = (User) getRequiredValue(name, options, User.class);
+        User optionValue = getRequiredValue(name, options, User.class);
         log.trace("GetUserOption: Returning value [{}]", optionValue);
         return optionValue;
     }
@@ -301,7 +291,7 @@ public interface DiscordUtils {
         Map<SpecialBuilding, Long> countedSpecialBuildings = specialBuildingList.stream()
                 .collect(Collectors.groupingBy(specialBuilding -> specialBuilding, Collectors.counting()));
 
-        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong + " " + specialBuilding.getName() + ", "));
+        countedSpecialBuildings.forEach((specialBuilding, aLong) -> specialString.append(aLong).append(" ").append(specialBuilding.getName()).append(", "));
 
         String returnSpecialString = specialString.toString();
 
@@ -329,7 +319,7 @@ public interface DiscordUtils {
             costStr.append(" and %d hours".formatted(hours));
         }
 
-        log.debug("Duration: [{}]", costStr.toString());
+        log.debug("Duration: [{}]", costStr);
         return costStr.toString();
     }
 

@@ -25,8 +25,8 @@ public interface WarRepository extends JpaRepository<War, Long>, WarRepositoryCu
      * @return A set of wars that the faction is a participant in.
      */
     @Query("""
-            select w from War w 
-                left join w.aggressors aggressors 
+            select w from War w\s
+                left join w.aggressors aggressors\s
                 left join w.defenders defenders
             where (aggressors.warParticipant = ?1
             or defenders.warParticipant = ?1)
