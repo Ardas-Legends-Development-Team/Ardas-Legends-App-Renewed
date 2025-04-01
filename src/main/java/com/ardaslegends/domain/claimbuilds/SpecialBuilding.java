@@ -21,6 +21,9 @@ public enum SpecialBuilding {
     INN("Inn"),
     MARKET("Market"),
     SHOP("Shop"),
+    BLACKSMITH("Blacksmith"),
+    JEWELRY("Jewelry"),
+    BAKERY("Bakery"),
     WALL("Wall");
 
     private final String name;

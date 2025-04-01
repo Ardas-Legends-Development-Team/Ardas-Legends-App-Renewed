@@ -21,10 +21,15 @@ public enum ProductionSiteType {
     HUNTING_LODGE("Hunting Lodge"),
     ORCHARD("Orchard"),
     LUMBER_CAMP("Lumber Camp"),
+    THATCHERS_YARD("Thatcher's Yard"),
     WORKSHOP("Workshop"),
     INCOME("Income"),
     PEARL_FISHER("Pearl Fisher"),
     HOUSE_OF_LORE("House of Lore"),
+    GLASSBLOWER("Glassblower"),
+    TILE_MAKER("Tile Maker"),
+    STONEMASON("Stonemason"),
+    BREWERY("Brewery"),
     DYE_HOUSE("Dye House");
 
     /**

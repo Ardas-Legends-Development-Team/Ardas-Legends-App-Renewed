@@ -3665,7 +3665,15 @@ VALUES (1, 'Larch Wood', 'WOOD'),
        (186, 'Enduring Scroll', 'OTHER'),
        (187, 'Swift Scroll', 'OTHER'),
        (188, 'Long Scroll', 'OTHER'),
-       (189, 'Sand', 'SHOVELABLE');
+       (189, 'Sand', 'SHOVELABLE'),
+       (190, 'Thatch', 'OTHER'),
+       (191, 'Wattle and Daub', 'OTHER'),
+       (189, 'Glass', 'OTHER'),
+       (189, 'Stained Glass', 'OTHER'),
+       (189, 'Fine Glass', 'OTHER'),
+       (189, 'Stained Fine Glass', 'OTHER'),
+       (189, 'Brick', 'OTHER'),
+       (189, 'Ale Barrel', 'OTHER');
 
 
 -------------------------------------------- Production Sites
@@ -3896,6 +3904,31 @@ VALUES ('HOUSE_OF_LORE', 'Striking Scroll', 2),
        ('HOUSE_OF_LORE', 'Enduring Scroll', 2),
        ('HOUSE_OF_LORE', 'Swift Scroll', 2),
        ('HOUSE_OF_LORE', 'Long Scroll', 2);
+
+-- Thatcher's Yard
+INSERT INTO production_sites (type, produced_resource, amount_produced)
+VALUES ('THATCHERS_YARD', 'Thatch', 1728),
+('THATCHERS_YARD', 'Wattle and Daub', 1728);
+
+-- Glassblower FIXME: add all available glass types
+INSERT INTO production_sites (type, produced_resource, amount_produced)
+VALUES ('GLASSBLOWER', 'Glass', 576),
+('GLASSBLOWER', 'Stained Glass', 576),
+('GLASSBLOWER', 'Fine Glass', 576),
+('GLASSBLOWER', 'Fine Stained Glass', 576);
+
+-- Tile maker FIXME: add all available clay tiles
+INSERT INTO production_sites (type, produced_resource, amount_produced)
+VALUES ('TILE_MAKER', 'Clay Tile', 1728);
+
+-- Stonemason FIXME: add all available bricks
+INSERT INTO production_sites (type, produced_resource, amount_produced)
+VALUES ('STONEMASON', 'Brick', 1728);
+
+-- Brewery FIXME: add all available brews
+INSERT INTO production_sites (type, produced_resource, amount_produced)
+VALUES ('BREWERY', 'Ale Barrel', 27);
+
 
 -------------------------------------------- Unit Types
 -- Tier 1
