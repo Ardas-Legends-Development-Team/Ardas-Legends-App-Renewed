@@ -36,7 +36,10 @@ public enum ClaimBuildType {
 
     CASTLE(1, 0, 1, 0, "Castle"),
 
-    STRONGHOLD(1, 0, 1, 0, "Stronghold");
+    STRONGHOLD(1, 0, 1, 0, "Stronghold"),
+
+    CITADEL(2, 0, 2, 0, "Citadel");
+
 
     private final int maxArmies;
     private final int freeArmies;
