@@ -3901,48 +3901,47 @@ VALUES ('HOUSE_OF_LORE', 'Striking Scroll', 2),
 -- Tier 1
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
 VALUES ('Hobbit Bounder', 2, false),
-       ('Hillmen', 2, false);
+       ('Hillman', 2, false);
 
 -- Tier 2
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
 VALUES ('Gundabad Orc', 3, false),
-       ('Lamedon Hillmen', 3, false),
-       ('Mordor Wargs', 3, true),
-       ('Gundabad Wargs', 3, true),
-       ('Angmar Wargs', 3, true),
-       ('Isengard Wargs', 3, true),
+       ('Lamedon Hillman', 3, false),
+       ('Mordor Warg', 3, true),
+       ('Gundabad Warg', 3, true),
+       ('Angmar Warg', 3, true),
+       ('Isengard Warg', 3, true),
        ('Easterling Clansman', 3, false),
        ('Isengard Snaga', 3, false),
-       ('Mordor Spiders', 3, true),
-       ('Mirkwood Spiders', 3, true),
-       ('Mounted Hobbit Bounder', 3, true),
-       ('Gundabad Banner Bearer', 3, false);
+       ('Mordor Spider', 3, true),
+       ('Mirkwood Spider', 3, true),
+       ('Mounted Hobbit Bounder', 3, true);
 
 -- Tier 3
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
 VALUES ('Mordor Orc', 4, false),
        ('Angmar Orc', 4, false),
        ('Dol Guldur Orc', 4, false),
-       ('Levymen', 4, false),
+       ('Levyman', 4, false),
        ('Nomad Guard', 4, false),
        ('Bree Guard', 4, false),
-       ('Gundabad Orc Archers', 4, false),
-       ('Rhudaur Axethrowers', 4, false),
-       ('Dunlending Axethrowers', 4, false),
-       ('Dol Amroth Men-at-arms', 4, false),
+       ('Gundabad Orc Archer', 4, false),
+       ('Rhudaur Axethrower', 4, false),
+       ('Dunlending Axethrower', 4, false),
+       ('Dol Amroth Man-at-arms', 4, false),
        ('Pelargir Marine', 4, false),
        ('Lamedon Warrior', 4, false),
-       ('Rhudaur Warriors', 4, false),
-       ('Dunlending Warriors', 4, false),
+       ('Rhudaur Warrior', 4, false),
+       ('Dunlending Warrior', 4, false),
        ('Coast Southron Warrior', 4, false),
        ('Vintner Guard', 4, false),
-       ('Gondorian Renegades', 4, false),
+       ('Gondorian Renegade', 4, false),
        ('Harnenor Soldier', 4, false),
        ('Gulfing Warrior', 4, false),
        ('Easterling Warrior', 4, false),
        ('Easterling Fire-thrower', 4, false),
        ('Southron Coast Warrior', 4, false),
-       ('Snaga Orc Archers', 4, false),
+       ('Snaga Orc Archer', 4, false),
        ('Taurethrim Warrior', 4, false),
        ('Morwaith Warrior', 4, false),
        ('Nomad Banner Bearer', 4, false),
@@ -3966,34 +3965,35 @@ VALUES ('Mordor Orc', 4, false),
        ('Dorwinion Banner Bearer', 4, false),
        ('Harnennor Banner Bearer', 4, false),
        ('Gulfing Banner Bearer', 4, false),
+       ('Gundabad Banner Bearer', 4, false),
        ('Angmar Banner Bearer', 4, false);
 
 -- Tier 4
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Rohirrim Warriors', 6, false),
+VALUES ('Rohirrim Warrior', 6, false),
        ('Gondor Soldier', 6, false),
-       ('Mordor Orc Archers', 6, false),
-       ('Angmar Orc Archers', 6, false),
-       ('Dol Guldur Orc Archers', 6, false),
-       ('Taurethrim Blowgunners', 6, false),
-       ('Easterling Archers', 6, false),
-       ('Umbar Corsairs', 6, false),
-       ('Umbar Soldiers', 6, false),
-       ('Dunlending Bowmen', 6, false),
-       ('Lossarnach Axemen', 6, false),
-       ('Pinnath Gelin Soldiers', 6, false),
-       ('Rohirrim Archers', 6, false),
-       ('Half-Trolls', 6, false),
+       ('Mordor Orc Archer', 6, false),
+       ('Angmar Orc Archer', 6, false),
+       ('Dol Guldur Orc Archer', 6, false),
+       ('Taurethrim Blowgunner', 6, false),
+       ('Easterling Archer', 6, false),
+       ('Umbar Corsair', 6, false),
+       ('Umbar Soldier', 6, false),
+       ('Dunlending Bowman', 6, false),
+       ('Lossarnach Axeman', 6, false),
+       ('Pinnath Gelin Soldier', 6, false),
+       ('Rohirrim Archer', 6, false),
+       ('Half-Troll', 6, false),
        ('Harnenor Archer', 6, false),
        ('Dalish Soldier', 6, false),
-       ('Southron Coast Archers', 6, false),
+       ('Southron Coast Archer', 6, false),
        ('Gulfing Archer', 6, false),
-       ('Blackroot Vale Soldiers', 6, false),
+       ('Blackroot Vale Soldier', 6, false),
        ('Harnennor Warrior', 6, false),
        ('Gondor Tower Guard', 6, false),
-       ('Gundabad Warg Riders', 6, true),
-       ('Isengard Snaga Warg Riders', 6, true),
-       ('Dol Amroth Men-at-arms Cavalry', 6, true),
+       ('Gundabad Warg Rider', 6, true),
+       ('Isengard Snaga Warg Rider', 6, true),
+       ('Dol Amroth Man-at-arms Cavalry', 6, true),
        ('Lamedon Horseman', 6, true),
        ('Easterling Horseman', 6, true),
        ('Morwaith Zebra Rider', 6, true),
@@ -4006,49 +4006,49 @@ VALUES ('Rohirrim Warriors', 6, false),
 
 -- Tier 5
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Gundabad Warg Rider Archers', 7, true),
-       ('Isengard Snaga Warg Rider Archers', 7, true),
+VALUES ('Gundabad Warg Rider Archer', 7, true),
+       ('Isengard Snaga Warg Rider Archer', 7, true),
        ('Golden Easterling', 7, false);
 
 -- Tier 6
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Rangers', 8, false),
-       ('Ithilien Rangers', 8, false),
-       ('Gondor Archers', 8, false),
-       ('Umbar Archers', 8, false),
-       ('Lamedon Archers', 8, false),
+VALUES ('Ranger', 8, false),
+       ('Ithilien Ranger', 8, false),
+       ('Gondor Archer', 8, false),
+       ('Umbar Archer', 8, false),
+       ('Lamedon Archer', 8, false),
        ('Dalish Archer', 8, false),
-       ('Wood-Elf Scouts', 8, false),
-       ('Dunlending Berserkers', 8, false),
-       ('Uruk Berserkers', 8, false),
-       ('Gondor Cavalrymen', 8, true),
-       ('Umbar Cavalrymen', 8, true),
+       ('Wood-Elf Scout', 8, false),
+       ('Dunlending Berserker', 8, false),
+       ('Uruk Berserker', 8, false),
+       ('Gondor Cavalryman', 8, true),
+       ('Umbar Cavalryman', 8, true),
        ('Blackroot Vale Cavalry', 8, true),
        ('Pinnath Gelin Cavalry', 8, true),
        ('Rohirrim Cavalry', 8, true),
        ('Ranger Outrider', 8, true),
-       ('Southron Champions', 8, false),
+       ('Southron Champion', 8, false),
        ('Ithilien Banner Bearer', 8, false),
        ('Ranger Banner Bearer', 8, false);
 
 -- Tier 7
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Mordor Spider Archers', 9, true),
-       ('Mirkwood Spider Archers', 9, true),
-       ('Angmar Warg Archers', 9, true),
-       ('Mordor Warg Archers', 9, true),
-       ('Mounted Golden Easterlings', 9, true);
+VALUES ('Mordor Spider Archer', 9, true),
+       ('Mirkwood Spider Archer', 9, true),
+       ('Angmar Warg Archer', 9, true),
+       ('Mordor Warg Archer', 9, true),
+       ('Mounted Golden Easterling', 9, true);
 
 -- Tier 8
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Blackroot Vale Bowmen', 10, false),
-       ('Dwarf Warriors', 10, false),
-       ('Uruks', 10, false),
+VALUES ('Blackroot Vale Bowman', 10, false),
+       ('Dwarf Warrior', 10, false),
+       ('Uruk', 10, false),
        ('Half-Troll Warrior', 10, false),
-       ('Wood-Elf Warriors', 10, false),
-       ('Elf Warriors', 10, false),
-       ('Vintner Guard Crossbowmen', 10, false),
-       ('Bladorthin Warriors', 10, false),
+       ('Wood-Elf Warrior', 10, false),
+       ('Elf Warrior', 10, false),
+       ('Vintner Guard Crossbowman', 10, false),
+       ('Bladorthin Warrior', 10, false),
        ('Swan Knight', 10, false),
        ('Wood-Elf Banner Bearer', 10, false),
        ('Uruk Banner Bearer', 10, false),
@@ -4060,7 +4060,7 @@ VALUES ('Blackroot Vale Bowmen', 10, false),
 
 -- Tier 9
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Black Uruks', 11, false),
+VALUES ('Black Uruk', 11, false),
        ('Lindon Cavalry', 11, true),
        ('Rivendell Cavalry', 11, true),
        ('Galadhrim Cavalry', 11, true),
@@ -4069,58 +4069,58 @@ VALUES ('Black Uruks', 11, false),
 
 -- Tier 10
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Dwarf Axe Throwers', 12, false),
-       ('Uruk Archers', 12, false),
+VALUES ('Dwarf Axe Thrower', 12, false),
+       ('Uruk Archer', 12, false),
        ('Black Uruk Archer', 12, false),
-       ('Bladorthin Archers', 12, false),
+       ('Bladorthin Archer', 12, false),
        ('Mounted Swan Knight', 12, true),
-       ('Dwarven Boar Riders', 12, true),
-       ('Dwarven Axe Thrower Boar Riders', 12, true);
+       ('Dwarven Boar Rider', 12, true),
+       ('Dwarven Axe Thrower Boar Rider', 12, true);
 
 -- Tier 11
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
 VALUES ('Angmar Troll', 16, false),
-       ('Uruk Crossbowers', 16, false),
-       ('Half-Troll Rhino Riders', 16, true);
+       ('Uruk Crossbower', 16, false),
+       ('Half-Troll Rhino Rider', 16, true);
 
 -- Tier 12
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Mirk Trolls', 20, false),
-       ('Hill Trolls', 20, false),
+VALUES ('Mirk Troll', 20, false),
+       ('Hill Troll', 20, false),
        ('Huorn', 20, false);
 
 -- Tier 13
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Two-headed Angmar Trolls', 24, false);
+VALUES ('Two-headed Angmar Troll', 24, false);
 
 -- Tier 14
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Two-headed Mirk Trolls', 30, false),
-       ('Two-headed Hill Trolls', 30, false);
+VALUES ('Two-headed Mirk Troll', 30, false),
+       ('Two-headed Hill Troll', 30, false);
 
 -- Tier 15
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Ologs', 50, false);
+VALUES ('Olog', 50, false);
 
 -- Tier 16
 INSERT INTO unit_types (unit_name, token_cost, is_mounted)
-VALUES ('Two-Headed Ologs', 90, false);
+VALUES ('Two-Headed Olog', 90, false);
 
 
 -- Add units to their corresponding faction
 -- Angmar (Faction ID: 1)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Angmar Wargs', 1),
+VALUES ('Angmar Warg', 1),
        ('Angmar Orc', 1),
-       ('Angmar Orc Archers', 1),
+       ('Angmar Orc Archer', 1),
        ('Angmar Banner Bearer', 1),
        ('Angmar Troll', 1),
-       ('Two-headed Angmar Trolls', 1),
-       ('Hillmen', 1),
-       ('Rhudaur Axethrowers', 1),
-       ('Rhudaur Warriors', 1),
+       ('Two-headed Angmar Troll', 1),
+       ('Hillman', 1),
+       ('Rhudaur Axethrower', 1),
+       ('Rhudaur Warrior', 1),
        ('Rhudaur Banner Bearer', 1),
-       ('Hill Trolls', 1);
+       ('Hill Troll', 1);
 
 -- Bree (Faction ID: 2)
 INSERT INTO factions_units (unit_name, faction_id)
@@ -4134,8 +4134,8 @@ VALUES ('Dalish Soldier', 3),
 
 -- Dol Amroth (Faction ID: 4)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Dol Amroth Men-at-arms', 4),
-       ('Dol Amroth Men-at-arms Cavalry', 4),
+VALUES ('Dol Amroth Man-at-arms', 4),
+       ('Dol Amroth Man-at-arms Cavalry', 4),
        ('Dol Amroth Banner Bearer', 4),
        ('Swan Knight', 4),
        ('Mounted Swan Knight', 4);
@@ -4143,50 +4143,50 @@ VALUES ('Dol Amroth Men-at-arms', 4),
 -- Dol Guldur (Faction ID: 5)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Dol Guldur Orc', 5),
-       ('Dol Guldur Orc Archers', 5),
+       ('Dol Guldur Orc Archer', 5),
        ('Dol Guldur Banner Bearer', 5),
-       ('Mirkwood Spiders', 5),
-       ('Mordor Spiders', 5),
-       ('Mirkwood Spider Archers', 5),
-       ('Mirk Trolls', 5);
+       ('Mirkwood Spider', 5),
+       ('Mordor Spider', 5),
+       ('Mirkwood Spider Archer', 5),
+       ('Mirk Troll', 5);
 
 -- Dorwinion (Faction ID: 6)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Vintner Guard', 6),
-       ('Vintner Guard Crossbowmen', 6),
+       ('Vintner Guard Crossbowman', 6),
        ('Dorwinion Banner Bearer', 6),
-       ('Bladorthin Warriors', 6),
-       ('Bladorthin Archers', 6);
+       ('Bladorthin Warrior', 6),
+       ('Bladorthin Archer', 6);
 
 -- Dunland (Faction ID: 7)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Dunlending Axethrowers', 7),
-       ('Dunlending Warriors', 7),
-       ('Dunlending Bowmen', 7),
+VALUES ('Dunlending Axethrower', 7),
+       ('Dunlending Warrior', 7),
+       ('Dunlending Bowman', 7),
        ('Dunlending Banner Bearer', 7),
-       ('Dunlending Berserkers', 7);
+       ('Dunlending Berserker', 7);
 
 -- Durin's Folk (Faction ID: 8)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Dwarf Warriors', 8),
-       ('Dwarf Axe Throwers', 8),
-       ('Dwarven Boar Riders', 8),
+VALUES ('Dwarf Warrior', 8),
+       ('Dwarf Axe Thrower', 8),
+       ('Dwarven Boar Rider', 8),
        ('Dwarf Banner Bearer', 8),
-       ('Dwarven Axe Thrower Boar Riders', 8);
+       ('Dwarven Axe Thrower Boar Rider', 8);
 
 -- Ered Luin (Faction ID: 9)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Dwarf Warriors', 9),
-       ('Dwarf Axe Throwers', 9),
-       ('Dwarven Boar Riders', 9),
+VALUES ('Dwarf Warrior', 9),
+       ('Dwarf Axe Thrower', 9),
+       ('Dwarven Boar Rider', 9),
        ('Blue Mountains Banner Bearer', 9),
-       ('Dwarven Axe Thrower Boar Riders', 9);
+       ('Dwarven Axe Thrower Boar Rider', 9);
 
 -- Gondor (Faction ID: 10)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Gondor Soldier', 10),
-       ('Gondor Archers', 10),
-       ('Gondor Cavalrymen', 10),
+       ('Gondor Archer', 10),
+       ('Gondor Cavalryman', 10),
        ('Gondor Banner Bearer', 10),
        ('Gondor Tower Guard', 10),
        ('Lamedon Warrior', 10),
@@ -4194,14 +4194,14 @@ VALUES ('Gondor Soldier', 10),
        ('Lamedon Banner Bearer', 10),
        ('Pelargir Marine', 10),
        ('Pelargir Banner Bearer', 10),
-       ('Pinnath Gelin Soldiers', 10),
+       ('Pinnath Gelin Soldier', 10),
        ('Pinnath Gelin Cavalry', 10),
        ('Pinnath Gelin Banner Bearer', 10),
-       ('Levymen', 10),
-       ('Ithilien Rangers', 10),
+       ('Levyman', 10),
+       ('Ithilien Ranger', 10),
        ('Ithilien Banner Bearer', 10),
-       ('Blackroot Vale Soldiers', 10),
-       ('Blackroot Vale Bowmen', 10),
+       ('Blackroot Vale Soldier', 10),
+       ('Blackroot Vale Bowman', 10),
        ('Blackroot Vale Cavalry', 10),
        ('Blackroot Vale Banner Bearer', 10);
 
@@ -4214,18 +4214,18 @@ VALUES ('Gulfing Warrior', 11),
 -- Gundabad (Faction ID: 12)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Gundabad Orc', 12),
-       ('Gundabad Wargs', 12),
-       ('Gundabad Warg Riders', 12),
-       ('Gundabad Warg Rider Archers', 12),
-       ('Gundabad Orc Archers', 12),
+       ('Gundabad Warg', 12),
+       ('Gundabad Warg Rider', 12),
+       ('Gundabad Warg Rider Archer', 12),
+       ('Gundabad Orc Archer', 12),
        ('Gundabad Banner Bearer', 12),
-       ('Uruks', 12);
+       ('Uruk', 12);
 
 -- Half-Trolls (Faction ID: 13)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Half-Trolls', 13),
+VALUES ('Half-Troll', 13),
        ('Half-Troll Warrior', 13),
-       ('Half-Troll Rhino Riders', 13),
+       ('Half-Troll Rhino Rider', 13),
        ('Half Troll Banner Bearer', 13);
 
 -- Harnennor (Faction ID: 14)
@@ -4243,38 +4243,38 @@ VALUES ('Hobbit Bounder', 15),
 
 -- Isengard (Faction ID: 16)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Isengard Wargs', 16),
+VALUES ('Isengard Warg', 16),
        ('Isengard Snaga', 16),
-       ('Isengard Snaga Warg Riders', 16),
-       ('Isengard Snaga Warg Rider Archers', 16),
-       ('Uruks', 16),
-       ('Snaga Orc Archers', 16),
-       ('Uruk Berserkers', 16);
+       ('Isengard Snaga Warg Rider', 16),
+       ('Isengard Snaga Warg Rider Archer', 16),
+       ('Uruk', 16),
+       ('Snaga Orc Archer', 16),
+       ('Uruk Berserker', 16);
 
 -- Lindon (Faction ID: 17)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Lindon Cavalry', 17),
        ('Lindon Banner Bearer', 17),
-       ('Elf Warriors', 17);
+       ('Elf Warrior', 17);
 
 -- Lothlórien (Faction ID: 18)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Galadhrim Banner Bearer', 18),
        ('Galadhrim Cavalry', 18),
-       ('Elf Warriors', 18);
+       ('Elf Warrior', 18);
 
 -- Mordor (Faction ID: 19)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Mordor Wargs', 19),
+VALUES ('Mordor Warg', 19),
        ('Mordor Orc', 19),
-       ('Mordor Orc Archers', 19),
-       ('Mordor Spider Archers', 19),
+       ('Mordor Orc Archer', 19),
+       ('Mordor Spider Archer', 19),
        ('Mordor Banner Bearer', 19),
-       ('Black Uruks', 19),
+       ('Black Uruk', 19),
        ('Black Uruk Archer', 19),
        ('Black Uruk Banner Bearer', 19),
-       ('Ologs', 19),
-       ('Two-Headed Ologs', 19);
+       ('Olog', 19),
+       ('Two-Headed Olog', 19);
 
 -- Morwaith (Faction ID: 20)
 INSERT INTO factions_units (unit_name, faction_id)
@@ -4289,7 +4289,7 @@ VALUES ('Nomad Guard', 21),
 
 -- Rangers of the North (Faction ID: 22)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Rangers', 22),
+VALUES ('Ranger', 22),
        ('Ranger Banner Bearer', 22),
        ('Ranger Outrider', 22);
 
@@ -4298,49 +4298,49 @@ INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Easterling Clansman', 23),
        ('Easterling Warrior', 23),
        ('Easterling Fire-thrower', 23),
-       ('Easterling Archers', 23),
+       ('Easterling Archer', 23),
        ('Easterling Horseman', 23),
        ('Easterling Banner Bearer', 23),
        ('Golden Easterling', 23),
-       ('Mounted Golden Easterlings', 23);
+       ('Mounted Golden Easterling', 23);
 
 -- Rivendell (Faction ID: 24)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Rivendell Cavalry', 24),
        ('Rivendell Banner Bearer', 24),
-       ('Elf Warriors', 24);
+       ('Elf Warrior', 24);
 
 -- Rohan (Faction ID: 25)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Rohirrim Warriors', 25),
-       ('Rohirrim Archers', 25),
+VALUES ('Rohirrim Warrior', 25),
+       ('Rohirrim Archer', 25),
        ('Rohirrim Cavalry', 25),
        ('Rohirrim Banner Bearer', 25);
 
 -- Southron Coast (Faction ID: 26)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Southron Coast Warrior', 26),
-       ('Southron Coast Archers', 26),
+       ('Southron Coast Archer', 26),
        ('Coast Southron Banner Bearer', 26);
 
 -- Taurethrim (Faction ID: 27)
 INSERT INTO factions_units (unit_name, faction_id)
 VALUES ('Taurethrim Warrior', 27),
-       ('Taurethrim Blowgunners', 27),
+       ('Taurethrim Blowgunner', 27),
        ('Taurethrim Banner Bearer', 27);
 
 -- Umbar (Faction ID: 28)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Umbar Corsairs', 28),
-       ('Umbar Soldiers', 28),
-       ('Umbar Archers', 28),
-       ('Umbar Cavalrymen', 28),
+VALUES ('Umbar Corsair', 28),
+       ('Umbar Soldier', 28),
+       ('Umbar Archer', 28),
+       ('Umbar Cavalryman', 28),
        ('Umbar Banner Bearer', 28),
-       ('Gondorian Renegades', 28);
+       ('Gondorian Renegade', 28);
 
 -- Woodland Realm (Faction ID: 29)
 INSERT INTO factions_units (unit_name, faction_id)
-VALUES ('Wood-Elf Scouts', 29),
+VALUES ('Wood-Elf Scout', 29),
        ('Wood-Elf Elk Rider', 29),
-       ('Wood-Elf Warriors', 29),
+       ('Wood-Elf Warrior', 29),
        ('Wood-Elf Banner Bearer', 29);
