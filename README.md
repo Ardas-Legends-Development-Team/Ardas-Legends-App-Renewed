@@ -20,27 +20,37 @@ legendary battles and make it become a legend in the world of Arda.
     - Run Maven clean & Maven install
 - Set up database:
     - Install PostgreSQL
-    - Launch the SQL scripts in src/main/resources/database-initialization in the predefined order. It does those operations in order:
-       - Drop and create a new schema to prepare the database
-       - Insert static data such as regions, claimbuild types etc.
-       - (Optional) Insert development test data (only for development & testing purposes)
-- Get application-dev.properties and security-config.yml files from team lead in order to be able to launch the application with the necessary configuration.
+    - Launch the SQL scripts in src/main/resources/database-initialization in the predefined order. It does those
+      operations in order:
+        - Drop and create a new schema to prepare the database
+        - Insert static data such as regions, claimbuild types etc.
+        - (Optional) Insert development test data (only for development & testing purposes)
+- Get application-dev.properties and security-config.yml files from team lead in order to be able to launch the
+  application with the necessary configuration.
 - Launch application by running src/main/java/com/ardaslegends/Application.java
 
-*Note:* If you want to run the complete full-stack application and access the website, then head to the frontend repository and follow the provided installation instructions.
+*Note:* If you want to run the complete full-stack application and access the website, then head to the frontend
+repository and follow the provided installation instructions.
 
 ## Contributing
 
-**DISCLAIMER:** communication is key to success, to don't hesitate to communicate with the team lead if you have questions or need to coordinate on your tasks.
+**DISCLAIMER:** communication is key to success, to don't hesitate to communicate with the team lead if you have
+questions or need to coordinate on your tasks.
 
 The branches follow a typical feature-branch architecture, meaning that:
+
 - main branch is reserved for releases
 - develop branch is the main development branch and where all features, bugs and refactors are merged into
-- for each feature, bugfix etc. a separate branch MUST be created, prefixed with it's type. For example feature/feature-1, bug/bugfix-1. When the development of the specific element is done, then a Pull Request should be created, adding the team lead as the reviewer along with any other members you find suitable. After the feature is validated, the branch is squashed and merged with the develop branch.
+- for each feature, bugfix etc. a separate branch MUST be created, prefixed with it's type. For example
+  feature/feature-1, bug/bugfix-1. When the development of the specific element is done, then a Pull Request should be
+  created, adding the team lead as the reviewer along with any other members you find suitable. After the feature is
+  validated, the branch is squashed and merged with the develop branch.
 
-Each new branch must be linked to an issue, and the developer is responsible with keeping the linked issue up to date, notably checking tasklists.
+Each new branch must be linked to an issue, and the developer is responsible with keeping the linked issue up to date,
+notably checking tasklists.
 
-In the project board, when a new issue is being taken care of by a developper from the Current Spring, then he assigns himself and updates it's status to In-Progress.
+In the project board, when a new issue is being taken care of by a developper from the Current Spring, then he assigns
+himself and updates it's status to In-Progress.
 
 ## Technical Background
 
@@ -109,3 +119,43 @@ Contains all the Java source code and is organized as below:
 |      **repository**      | : |                                             Contains all code necessary to access the database.                                              |
 |       **service**        | : |                                       Contains all business logic and calculations of the application.                                       |
 
+## Process explanation
+
+### Movement
+
+A movement has several states:
+
+- creation: when we want to make a movement
+- in-progress: when time passes by and we wait specific times to move the entity to another region
+- resolution: we reached the timestamp we need, and we need to resolve a movement and update an entity's state
+
+Time can flow normally, but can be frozen when battles need to take place.
+During that time every action is suspended until the battle is resolved. So if a movement tries to be created when time
+is frozen then it's cancelled.
+
+#### Movement calculation steps
+
+**Preliminary checks:**
+
+- Verify that passed parameters exist (destination region, army/character etc.)
+- Verify if the entity is not already in that region
+- Verify if the entity is not already performing a movement
+- Verify if the entity was not created less than 24h ago
+- Verify if the player has necessary permissions. For an army movement, he must be of the same faction, be bound or have
+  lord/leader privileges.
+- Verify if the army is not currently healing.
+
+**Path and cost calculation:**
+
+- Apply each region type's movement cost
+- If it's an army move, it cannot move through those regions:
+    - Doesn't belong to ally or faction
+    - Doesn't belong to a faction at war with current faction
+
+**Movement cost resolution:**
+
+- Substract food from stockpile and check if faction has enough food
+- Calculate hours needed to complete movement
+- Calculate the time of arrival
+
+### Time scheduling and freezeing
