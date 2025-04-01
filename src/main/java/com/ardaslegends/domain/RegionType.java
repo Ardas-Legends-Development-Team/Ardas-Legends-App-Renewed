@@ -18,19 +18,31 @@ public enum RegionType {
 
     LAND("Land", 1),
 
+    FLATLAND("Flatland", 1),
+
+    DESERT("Desert", 1),
+
+    HALF_DESERT("Half-Desert", 1),
+
+    WASTELAND("Wasteland", 1),
+
     HILL("Hill", 2),
 
-    ICE("Ice", 2),
+    ICE_SHEET("Ice-Sheet", 2),
 
-    DESERT("Desert", 3),
+    FOREST("Forest", 2),
 
-    FOREST("Forest", 3),
+    TUNDRA("Tundra", 2),
 
-    SWAMP("Swamp", 4),
+    SWAMP("Swamp", 3),
 
-    JUNGLE("Jungle", 5),
+    JUNGLE("Jungle", 3),
 
-    MOUNTAIN("Mountain", 6);
+    FANGORN("Fangorn", 3),
+
+    MIRKWOOD("Mirkwood", 3),
+
+    MOUNTAIN("Mountain", 3);
 
     /**
      * The cost in days to move into the region.
