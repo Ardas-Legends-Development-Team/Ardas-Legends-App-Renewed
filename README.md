@@ -111,7 +111,7 @@ Contains all the Java source code and is organized as below:
 
 |           Path           | - |                                                                    Usage                                                                     |
 |:------------------------:|:-:|:--------------------------------------------------------------------------------------------------------------------------------------------:|
-|    **configuration**     | : |                           Holds all configuration classes for Spring, security, convertions, property loading etc.                           |
+|    **configuration**     | : |                           Holds all configuration classes for Spring, security, conversions, property loading etc.                           |
 |        **domain**        | : | Holds all entity data, which represents the data structures of the application. It is used to create the database schema from our Java code. |
 |     **presentation**     | : |                                         Contains all endpoints available to interact with the server                                         |
 |   **presentation/api**   | : |           Contains all REST API controllers that are used by the website. Those controllers then call upon service layer methods.            |
@@ -158,4 +158,4 @@ is frozen then it's cancelled.
 - Calculate hours needed to complete movement
 - Calculate the time of arrival
 
-### Time scheduling and freezeing
+### Time scheduling and freezing
